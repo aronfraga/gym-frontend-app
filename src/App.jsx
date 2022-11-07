@@ -1,11 +1,7 @@
-import React from 'react'
+import React from "react";
 
 function App() {
-  return (
-    <div>
-      APP GYM
-    </div>
-  )
+  return <div>APP GYM prueba</div>;
 }
 
-export default App
+export default App;
