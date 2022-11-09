@@ -3,6 +3,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 import Login from "../Login/Login";
 import { useDispatch } from "react-redux";
 import { setToken } from "../../redux/actions/defaultAction";
+import NavBar from "../NavBar/NavBar";
 
 const Home = () => {
 
