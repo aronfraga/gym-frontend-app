@@ -3,6 +3,8 @@ import Card from '@mui/material/Card';
 import { CardActionArea } from '@mui/material';
 import style from './CardPlan.module.css';
 
+const primaryColor = '#18a0fb';
+
 const CardPLan = ({ monts, price, benefits1, center }) => {
 	return (
 		<Card
@@ -10,7 +12,7 @@ const CardPLan = ({ monts, price, benefits1, center }) => {
 			sx={{
 				minWidth: '425px',
 				height: 'fit-content',
-				border: '1px solid #18A0FB',
+				border: `1px solid ${primaryColor}`,
 				borderRadius: '10px',
 			}}
 		>
@@ -39,7 +41,5 @@ const CardPLan = ({ monts, price, benefits1, center }) => {
 		</Card>
 	);
 };
+
 export default CardPLan;
-{
-	/* <font size='6'>50</font> */
-}
