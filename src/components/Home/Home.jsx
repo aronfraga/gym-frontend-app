@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { setToken } from "../../redux/actions/defaultAction";
 import NavBar from "../NavBar/NavBar";
 import Footer from "../Footer/Footer";
-
+import Carrusel from "../Carousel/Carrusel";
 
 const Home = () => {
 
@@ -20,7 +20,7 @@ const Home = () => {
     return (
       <div>
         <NavBar />
-        <h1>token test: {user.sub}</h1>
+        <Carrusel />
         <Footer />
       </div>
     )
@@ -41,5 +41,7 @@ const Home = () => {
     </div>
   )
 }
+
+
 
 export default Home;

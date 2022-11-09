@@ -1,0 +1,56 @@
+.cardPlan {
+	display: flex;
+	align-items: start;
+}
+
+.centerCard {
+	transform: scale(1.05, 1.1);
+}
+
+.containerText {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.textPrice {
+	margin: 24px 0px;
+	font-family: Roboto, 'Open Sans', sans-serif;
+	font-size: 24px;
+	color: #18a0fb;
+}
+
+.containerTextMons {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: 50px;
+	background: linear-gradient(90deg, #a0d9ff 0%, #4966ff 100%);
+}
+
+.textMons {
+	margin: 0px;
+	color: white;
+	font-size: 24px;
+}
+
+.containerBenefits {
+	margin: 24px 0px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 24px;
+}
+
+.containerBenefits h2 {
+	font-weight: 400;
+	color: #888888;
+	margin: 0px;
+}
+
+.containerBenefits hr {
+	margin: 0px;
+	width: 292px;
+	border: 1px solid #a0d9ff;
+}
