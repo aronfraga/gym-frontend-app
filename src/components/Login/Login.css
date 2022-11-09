@@ -1,0 +1,12 @@
+.loginText {
+  font-size: 2.6em;
+  font-family: 'Roboto', sans-serif;
+}
+
+.loginContainer {
+  height: 850px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
