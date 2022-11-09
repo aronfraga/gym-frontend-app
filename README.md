@@ -6,7 +6,7 @@
 
 This web app is our Henry final project. We make the decision to create an app for fitness centers administration improve and users experience.
 
-:sunglasses:
+:sunglasses: 
 
 ## Technologies Implemented 
 
