@@ -1,0 +1,32 @@
+:root {
+	--primary-blue: #18a0fb;
+}
+
+.mainContainer {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	max-width: 1440px;
+	margin: 0px auto;
+}
+
+.cardContainer {
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+	gap: 36px 48px;
+}
+
+.titleContainer {
+	width: 100%;
+	margin: 36px 0px;
+	padding-left: 36px;
+}
+
+.title {
+	display: flex;
+	font-family: Roboto, 'Open Sans', sans-serif;
+	font-size: 48px;
+	margin: 0px;
+	color: var(--primary-blue);
+}
