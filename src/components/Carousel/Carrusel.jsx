@@ -11,7 +11,8 @@ const Carrusel = () => {
         stopAutoPlayOnHover={true}
         animation={"slide"}
         indicators={true}
-        timeout={1000}
+        interval={8000}
+        duration={4000}
         cycleNavigation={true}
         navButtonsAlwaysVisible={true}
         height={300}
