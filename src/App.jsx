@@ -8,6 +8,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/home' element={<Home />} />
+        <Route path='/home/rutinas' element={<Home />} />
       </Routes>
     </BrowserRouter>
   )

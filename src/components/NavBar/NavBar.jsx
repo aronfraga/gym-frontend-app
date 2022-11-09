@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useAuth0 } from '@auth0/auth0-react';
 import styles from "../NavBar/NavBar.module.css"
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -12,24 +13,31 @@ import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-
 import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
+import { Link } from 'react-router-dom';
+
 
 
 
 const pages = ['Inicio', 'Tienda Virtual', 'Rutinas', 'Gym', 'Seguimiento', 'Clases', ' Feedback'];
-const settings = ['Perfil', 'Cerrar Sesion'];
+// const settings = ['Perfil', 'Cerrar Sesion'];
 
-const NavBar = ({ user, logout }) => {
+const NavBar = () => {
+
+    const { user, logout } = useAuth0();
+
     const [anchorElNav, setAnchorElNav] = React.useState();
     const [anchorElUser, setAnchorElUser] = React.useState();
-    console.log(anchorElUser)
+
 
     const handleOpenUserMenu = (event) => {
         setAnchorElUser(event.currentTarget);
     };
     const handleCloseUserMenu = () => {
-        setAnchorElUser();
+        logout({ returnTo: window.location.origin })
+    };
+    const handlerCloseUserMenu = () => {
+        setAnchorElUser()
     };
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
@@ -59,9 +67,11 @@ const NavBar = ({ user, logout }) => {
                                 fontWeight: 700,
                                 color: 'inherit',
                                 textDecoration: 'none',
+                                textTransform: 'capitalize'
                             }}
                         >
-                            App Gym
+                            app gym
+                            {/* {user.name} */}
                         </Typography>
                     </div>
 
@@ -95,9 +105,7 @@ const NavBar = ({ user, logout }) => {
                             }}
                         >
                             {pages.map((page) => (
-                                <MenuItem key={page}
-                                    onClick={handleCloseNavMenu}
-                                >
+                                <MenuItem key={page} onClick={handleCloseNavMenu}>
                                     <Typography textAlign="center">{page}</Typography>
                                 </MenuItem>
                             ))}
@@ -121,24 +129,21 @@ const NavBar = ({ user, logout }) => {
                     >
                         App Gym
                     </Typography>
-                    <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex', justifyContent: 'flex-end' } }}>
+                    <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex', justifyContent: 'flex-end', } }}>
                         {pages.map((page) => (
-                            <Button
-                                key={page}
-                                onClick={handleCloseNavMenu}
-                                sx={{ my: 2, color: 'white', display: 'block' }}
-                            >
-                                {page}
-                            </Button>
+
+                            <Link to={`/home/${page}`} style={{ textDecoration: 'none' }} key={page} >
+                                <Button key={page} onClick={handleCloseNavMenu} sx={{ my: 2, color: 'white', display: 'block' }}>
+                                    {page}
+                                </Button>
+                            </Link>
                         ))}
                     </Box>
 
                     <Box sx={{ flexGrow: 0 }}>
                         <Tooltip title="Open settings">
-                            <IconButton
-                                onClick={handleOpenUserMenu}
-                                sx={{ p: 0 }}>
-                                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                                <Avatar alt="Remy Sharp" src={user.picture} />
                             </IconButton>
                         </Tooltip>
                         <Menu
@@ -155,15 +160,15 @@ const NavBar = ({ user, logout }) => {
                                 horizontal: 'right',
                             }}
                             open={Boolean(anchorElUser)}
-                            onClose={handleCloseUserMenu}
+                            onClose={handlerCloseUserMenu}
+
                         >
-                            {settings.map((setting) => (
-                                <MenuItem key={setting}
-                                    onClick={handleCloseUserMenu}
-                                >
-                                    <Typography textAlign="center">{setting}</Typography>
-                                </MenuItem>
-                            ))}
+                            <MenuItem >
+                                <Typography textAlign="center">Perfil</Typography>
+                            </MenuItem>
+                            <MenuItem>
+                                <Typography onClick={handleCloseUserMenu} textAlign="center">Cerrar Sesion</Typography>
+                            </MenuItem>
                         </Menu>
                     </Box>
                     <Button sx={{
