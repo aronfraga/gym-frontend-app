@@ -1,7 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query';
 //import { ApiQuery } from '../query/api';
-import currentPage from '../slices/pagination';
 import currentPage from '../slices/defaultSlice';
 import accessToken from '../slices/defaultSlice';
 

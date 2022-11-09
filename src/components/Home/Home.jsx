@@ -7,7 +7,6 @@ import NavBar from "../NavBar/NavBar";
 import Footer from "../Footer/Footer";
 import Carrusel from "../Carousel/Carrusel";
 
-
 const Home = () => {
 
   const dispatch = useDispatch();
