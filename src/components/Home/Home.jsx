@@ -6,6 +6,7 @@ import { setToken } from "../../redux/actions/defaultAction";
 import NavBar from "../NavBar/NavBar";
 import Footer from "../Footer/Footer";
 
+
 const Home = () => {
 
   const dispatch = useDispatch();
