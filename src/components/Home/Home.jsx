@@ -4,6 +4,7 @@ import Login from "../Login/Login";
 import { useDispatch } from "react-redux";
 import { setToken } from "../../redux/actions/defaultAction";
 import NavBar from "../NavBar/NavBar";
+import Footer from "../Footer/Footer";
 
 const Home = () => {
 
@@ -17,7 +18,9 @@ const Home = () => {
   const renderisAuthenticated = () => {
     return (
       <div>
+        <NavBar />
         <h1>token test: {user.sub}</h1>
+        <Footer />
       </div>
     )
   }
