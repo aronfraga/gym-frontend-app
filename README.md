@@ -32,37 +32,37 @@ npm run dev - or better than this you can go to https://app-gym-frontend.vercel.
 * FT30A_PF_GROUP03:
 
 ```
-$ :bowtie: Pablo Lospennato
-          :large_blue_diamond: GITHUB: https://github.com/pablolospe
-          :large_blue_diamond: LINKEDIN: https://www.linkedin.com/in/pablo-xavier-lospennato-1065b4a2/
+* Pablo Lospennato
+          GITHUB: https://github.com/pablolospe
+          LINKEDIN: https://www.linkedin.com/in/pablo-xavier-lospennato-1065b4a2/
 
-$ :bowtie: Jose Manrique 
-          :large_blue_diamond: GITHUB: https://github.com/JoseManriqueBaena
-          :large_blue_diamond: LINKEDIN: https://www.linkedin.com/in/jose-manrique/
+* Jose Manrique 
+          GITHUB: https://github.com/JoseManriqueBaena
+          LINKEDIN: https://www.linkedin.com/in/jose-manrique/
 
-$ :bowtie: Agustin Reynoso 
-          :large_blue_diamond: GITHUB: https://github.com/AguRey96
-          :large_blue_diamond: LINKEDIN: https://www.linkedin.com/in/agustin-reynoso-5a339515a/
+* Agustin Reynoso 
+          GITHUB: https://github.com/AguRey96
+          LINKEDIN: https://www.linkedin.com/in/agustin-reynoso-5a339515a/
 
-$ :bowtie: Martin Galara 
-          :large_blue_diamond: GITHUB: https://github.com/MartinGalara
-          :large_blue_diamond: LINKEDIN: https://www.linkedin.com/in/martingalara/
+* Martin Galara 
+          GITHUB: https://github.com/MartinGalara
+          LINKEDIN: https://www.linkedin.com/in/martingalara/
 
-$ :bowtie: Alexsandro Gomez
-          :large_blue_diamond: GITHUB: https://github.com/JAlex2014
-          :large_blue_diamond: LINKEDIN: https://www.linkedin.com/in/alexsandro-gomez-913b3713b/
+* Alexsandro Gomez
+          GITHUB: https://github.com/JAlex2014
+          LINKEDIN: https://www.linkedin.com/in/alexsandro-gomez-913b3713b/
 
-$ :bowtie: Aaron Fraga
-          :large_blue_diamond: GITHUB: https://github.com/aronfraga
-          :large_blue_diamond: LINKEDIN: https://www.linkedin.com/in/aaron-fraga-4036a8244/
+* Aaron Fraga
+          GITHUB: https://github.com/aronfraga
+          LINKEDIN: https://www.linkedin.com/in/aaron-fraga-4036a8244/
 
-$ :bowtie: Gaston Schmitz
-          :large_blue_diamond: GITHUB: https://github.com/Schmitz0
-          :large_blue_diamond: LINKEDIN: https://www.linkedin.com/in/gaston-schmitz-76267645/
+* Gaston Schmitz
+          GITHUB: https://github.com/Schmitz0
+          LINKEDIN: https://www.linkedin.com/in/gaston-schmitz-76267645/
 
-$ :bowtie: Manuel Casanueva
-          :large_blue_diamond: GITHUB: https://github.com/ManuCasanueva
-          :large_blue_diamond: LINKEDIN: https://www.linkedin.com/in/manuel-casanueva-b243a224a/
+* Manuel Casanueva
+          GITHUB: https://github.com/ManuCasanueva
+          LINKEDIN: https://www.linkedin.com/in/manuel-casanueva-b243a224a/
 ```
 
 ## License
