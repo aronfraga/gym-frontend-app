@@ -1,75 +1,73 @@
-.footer{
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    background-color: rgba(247, 186, 137, 0.877);
-    color: white;
-    display:flex;
-    align-content:center;
-    flex-direction: column;
+.footer {
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	background-color: rgba(247, 186, 137, 0.877);
+	color: white;
+	display: flex;
+	align-content: center;
+	flex-direction: column;
 }
 
-.footerR1{
-    display:flex;
-    align-items: stretch;
-    flex-wrap: wrap;
-    flex-direction: row; 
-    justify-content: space-around;
-    
+.footerR1 {
+	display: flex;
+	align-items: stretch;
+	flex-wrap: wrap;
+	flex-direction: row;
+	justify-content: space-around;
 }
 
-.logo{
-    display:flex;
-    align-items: center;
-    margin: 15px;
-    padding: 5px;
-    flex-basis: 20%;
-    font-family: 'Montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+.logo {
+	display: flex;
+	align-items: center;
+	margin: 15px;
+	padding: 5px;
+	flex-basis: 20%;
+	font-family: 'Montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .containerfooterLinks {
-    display:flex;
-    padding: 20px;
-    margin-left: 65px;
-    justify-content: flex-start;
-    flex-direction: column;
-    flex-basis: 25%;
+	display: flex;
+	padding: 20px;
+	margin-left: 65px;
+	justify-content: flex-start;
+	flex-direction: column;
+	flex-basis: 25%;
 }
 
-.Links{
-    text-decoration: none;
-    font-family: 'Montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 18px;
-    line-height: 22px;
-    display: flex;
-    align-items: center;
-    text-align: center;
-    letter-spacing: -0.015em;
-    color: #000000;
+.Links {
+	text-decoration: none;
+	font-family: 'Montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	font-style: normal;
+	font-weight: 400;
+	font-size: 18px;
+	line-height: 22px;
+	display: flex;
+	align-items: center;
+	text-align: center;
+	letter-spacing: -0.015em;
+	color: #000000;
 }
 
-.googlemap{
-    max-width: 250px;
-    align-items: center;
-    margin-right: 5px;
-    padding: 10px;
-    flex-basis: 30%;
+.googlemap {
+	max-width: 250px;
+	align-items: center;
+	margin-right: 5px;
+	padding: 10px;
+	flex-basis: 30%;
 }
 
-.footerR2{
-    display:flex;
-    align-items: center;
-    justify-content: center;
+.footerR2 {
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
-.footerR3{
-    display:flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-style: normal;
-    font-weight: 300;
+.footerR3 {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-family: 'Montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	font-style: normal;
+	font-weight: 300;
 }
