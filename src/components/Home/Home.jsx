@@ -13,8 +13,8 @@ const Home = () => {
   const { user, isAuthenticated, logout } = useAuth0();
 
   useEffect(() => {
-    if(isAuthenticated) dispatch(setToken(user.sub));
-  },[dispatch]);
+    if (isAuthenticated) dispatch(setToken(user.sub));
+  }, [dispatch]);
 
   const renderisAuthenticated = () => {
     return (
@@ -36,8 +36,8 @@ const Home = () => {
 
   return (
     <div>
-      {isAuthenticated?renderisAuthenticated():renderisNotAuthenticated()}
-      <button onClick={() => logout({ returnTo: window.location.origin })} type='button'>Log Out</button>
+      {isAuthenticated ? renderisAuthenticated() : renderisNotAuthenticated()}
+
     </div>
   )
 }
