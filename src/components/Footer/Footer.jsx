@@ -29,10 +29,10 @@ const Footer = () => {
                         width="220" 
                         height="210" 
                         loading="lazy"
-                        frameborder="0"
-                        marginheight="0"
-                        marginwidth="0"
-                        referrerpolicy="no-referrer-when-downgrade" >
+                        frameBorder="0"
+                        marginHeight="0"
+                        marginWidth="0"
+                        referrerPolicy="no-referrer-when-downgrade" >
                 </iframe>
             </div>
         </div>
