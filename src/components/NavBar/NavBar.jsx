@@ -14,17 +14,19 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
+import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
 
 
 
-const pages = ['Inicio', 'Tienda Virtual', 'Rutinas', 'Gym', 'Seguimiento', 'Clases', ' Feedback'];
+const pages = ['tienda', 'rutinas', 'instalaciones', 'seguimiento', 'clases', 'feedback'];
 // const settings = ['Perfil', 'Cerrar Sesion'];
 
 const NavBar = () => {
 
     const { user, logout } = useAuth0();
+    const { id } = useParams()
 
     const [anchorElNav, setAnchorElNav] = React.useState();
     const [anchorElUser, setAnchorElUser] = React.useState();
@@ -130,9 +132,14 @@ const NavBar = () => {
                         App Gym
                     </Typography>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex', justifyContent: 'flex-end', } }}>
+                        <Link to={'/'} style={{ textDecoration: 'none' }}  >
+                            <Button sx={{ my: 2, color: 'white', display: 'block' }}>
+                                INICIO
+                            </Button>
+                        </Link>
                         {pages.map((page) => (
 
-                            <Link to={`/home/${page}`} style={{ textDecoration: 'none' }} key={page} >
+                            <Link to={`/${page}`} style={{ textDecoration: 'none' }} key={page} >
                                 <Button key={page} onClick={handleCloseNavMenu} sx={{ my: 2, color: 'white', display: 'block' }}>
                                     {page}
                                 </Button>
@@ -143,7 +150,7 @@ const NavBar = () => {
                     <Box sx={{ flexGrow: 0 }}>
                         <Tooltip title="Open settings">
                             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                <Avatar alt="Remy Sharp" src={user.picture} />
+                                <Avatar alt="Remy Sharp" src={user?.picture} />
                             </IconButton>
                         </Tooltip>
                         <Menu
@@ -163,25 +170,29 @@ const NavBar = () => {
                             onClose={handlerCloseUserMenu}
 
                         >
-                            <MenuItem >
-                                <Typography textAlign="center">Perfil</Typography>
-                            </MenuItem>
+                            <Link to={`/${id}`} >
+                                <MenuItem >
+                                    <Typography textAlign="center">Perfil</Typography>
+                                </MenuItem>
+                            </Link>
                             <MenuItem>
                                 <Typography onClick={handleCloseUserMenu} textAlign="center">Cerrar Sesion</Typography>
                             </MenuItem>
                         </Menu>
                     </Box>
-                    <Button sx={{
-                        paddingRight: '25px',
-                        paddingLeft: '25px',
-                        color: 'white',
-                        display: 'flex',
-                        borderRadius: '6px',
-                        background: '#000FFF',
-                        alignItems: "center",
-                        "&:hover": { backgroundColor: '#5151519c', transition: "1s" }
-                    }}
-                    > Mi Plan </Button>
+                    <Link to="/home/planes" style={{ textDecoration: 'none' }} >
+                        <Button sx={{
+                            paddingRight: '25px',
+                            paddingLeft: '25px',
+                            color: 'white',
+                            display: 'flex',
+                            borderRadius: '6px',
+                            background: '#000FFF',
+                            alignItems: "center",
+                            "&:hover": { backgroundColor: '#5151519c', transition: "1s" }
+                        }}
+                        > Mi Plan </Button>
+                    </Link>
                 </Toolbar>
             </Container>
         </AppBar>

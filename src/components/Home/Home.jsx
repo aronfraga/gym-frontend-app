@@ -19,6 +19,7 @@ const Home = () => {
   const renderisAuthenticated = () => {
     return (
       <div>
+
         <NavBar />
         <Carrusel />
         <Footer />
