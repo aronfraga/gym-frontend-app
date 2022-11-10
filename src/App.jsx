@@ -16,7 +16,7 @@ function App() {
         <Route path='/seguimiento' element={<Home />} />
         <Route path='/clases' element={<Home />} />
         <Route path='/feedback' element={<Home />} />
-        <Route path='/planes' element={<Planes />} />
+        <Route path='/planes' element={<Home />} />
       </Routes>
     </BrowserRouter>
   );
