@@ -168,7 +168,6 @@ const NavBar = () => {
                             }}
                             open={Boolean(anchorElUser)}
                             onClose={handlerCloseUserMenu}
-
                         >
                             <Link to={`/${id}`} >
                                 <MenuItem >
@@ -180,7 +179,7 @@ const NavBar = () => {
                             </MenuItem>
                         </Menu>
                     </Box>
-                    <Link to="/home/planes" style={{ textDecoration: 'none' }} >
+                    <Link to="/planes" style={{ textDecoration: 'none' }} >
                         <Button sx={{
                             paddingRight: '25px',
                             paddingLeft: '25px',
