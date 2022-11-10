@@ -4,8 +4,16 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
+import { useGetAllRoutinesQuery } from "../../redux/query/api";
+import Loading from "../Loading/Loading";
 
 const Routine = () => {
+
+  const { data, isLoading, error  } = useGetAllRoutinesQuery();
+
+console.log(data)
+
+const renderRoutines = () => {
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardActionArea>
@@ -27,6 +35,17 @@ const Routine = () => {
       </CardActionArea>
     </Card>
   );
+}
+
+const renderSpinner = () => {
+  return <Loading />
+}
+
+return (
+  <div>
+    {isLoading ? renderSpinner() : renderRoutines()}
+  </div>
+  )
 }
 
 export default Routine;
