@@ -1,13 +1,18 @@
 import React from "react";
+import { useGetAllRoutinesQuery } from "../../redux/query/api";
+import Loading from "../Loading/Loading";
 import Routine from "../Routine/Routine";
 
 const AllRoutines = () => {
 
-  const test = [1,2,3,4,5,6,7,8,9,10]
+  const { data: routines, isLoading, error  } = useGetAllRoutinesQuery();
 
-  return (
-    <div>
-      {test.map((data) => <Routine key={data}/>)}
+  if(isLoading) return <Loading />
+    return (
+      <div>
+        {routines?.map((data, idx) => (
+          <Routine key={idx} name={data.name} difficulty={data.difficulty}/> 
+        ))}
     </div>
   )
 }

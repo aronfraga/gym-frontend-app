@@ -4,16 +4,8 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
-import { useGetAllRoutinesQuery } from "../../redux/query/api";
-import Loading from "../Loading/Loading";
 
-const Routine = () => {
-
-  const { data, isLoading, error  } = useGetAllRoutinesQuery();
-
-console.log(data)
-
-const renderRoutines = () => {
+const Routine = ({ name, difficulty }) => {
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardActionArea>
@@ -25,27 +17,15 @@ const renderRoutines = () => {
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
-            Lizard
+            {name}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            Lizards are a widespread group of squamate reptiles, with over 6,000
-            species, ranging across all continents except Antarctica
+            {difficulty}
           </Typography>
         </CardContent>
       </CardActionArea>
     </Card>
   );
-}
-
-const renderSpinner = () => {
-  return <Loading />
-}
-
-return (
-  <div>
-    {isLoading ? renderSpinner() : renderRoutines()}
-  </div>
-  )
 }
 
 export default Routine;

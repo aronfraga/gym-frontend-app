@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 export const ApiQuery = createApi({
   reducerPath: 'ApiQuery',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://localhost:3001'
+    baseUrl: 'https://appgymbackend-production.up.railway.app'
   }),
   endpoints: (builder) => ({
     getAllRoutines: builder.query({
