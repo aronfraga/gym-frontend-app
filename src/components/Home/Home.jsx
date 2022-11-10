@@ -19,28 +19,15 @@ const Home = () => {
     if (isAuthenticated) dispatch(setToken(user.sub));
   }, [dispatch]);
 
-  const renderisAuthenticated = () => {
-    return (
-      <div>
-        <NavBar />
-        <Carrusel />
-        <Planes />
-        <Footer />
-      </div>
-    )
-  }
-
-  const renderisNotAuthenticated = () => {
-    return <Login />
-  }
-
-  const renderSpinner = () => {
-    return <Loading />
-  }
+  if(isLoading) return <Loading />
+  if(!isAuthenticated) return <Login />
 
   return (
     <div>
-      {isLoading ? renderSpinner() : isAuthenticated ? renderisAuthenticated() : renderisNotAuthenticated()}
+      <NavBar />
+      <Carrusel />
+      <Planes />
+      <Footer />
     </div>
   )
 }
