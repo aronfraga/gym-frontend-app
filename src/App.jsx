@@ -1,10 +1,13 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./components/Home/Home";
+import Planes from "./components/Planes/Planes"
 import NoMatch from "./components/NoMatch/NoMatch";
 import Routines from "./components/Routines/Routines";
 
+
 function App() {
+
   return (
     <BrowserRouter>
       <Routes>
@@ -16,11 +19,13 @@ function App() {
         <Route path='/seguimiento' element={<Home />} />
         <Route path='/clases' element={<Home />} />
         <Route path='/feedback' element={<Home />} />
-        <Route path='/planes' element={<Home />} />
+        <Route path='/planes' element={<Planes />} />
+        <Route path='/:id' element={<Home />} />
       </Routes>
     </BrowserRouter>
   );
 }
+
 
 export default App;
 

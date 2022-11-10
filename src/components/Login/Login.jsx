@@ -10,7 +10,7 @@ const Landing = () => {
   return (
     <div className="loginContainer">
       <h1 className="loginText">Unete a la comunidad del App Gym</h1>
-      <Button variant="contained" onClick={() => loginWithRedirect()}>Iniciar Sesion</Button>  
+      <Button variant="contained" onClick={() => loginWithRedirect()}>Iniciar Sesion</Button>
     </div>
   )
 }
