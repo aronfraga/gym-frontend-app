@@ -8,6 +8,7 @@ import Footer from "../Footer/Footer";
 import Loading from "../Loading/Loading";
 import Carrusel from "../Carousel/Carrusel";
 import Login from "../Login/Login";
+import Planes from "../Planes/Planes";
 
 const Home = () => {
 
@@ -24,6 +25,7 @@ const Home = () => {
 
         <NavBar />
         <Carrusel />
+        <Planes />
         <Footer />
       </div>
     )
@@ -40,10 +42,6 @@ const Home = () => {
   return (
     <div>
       {isLoading ? renderSpinner() : isAuthenticated ? renderisAuthenticated() : renderisNotAuthenticated()}
-      <Link to='home/routines'>
-        <button>routines</button>
-      </Link>
-      
     </div>
   )
 }
