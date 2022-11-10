@@ -1,8 +1,6 @@
 import React from 'react';
-import Grid from '@mui/material/Grid';
 import CardPLan from '../CardPlan/CardPlan';
 import style from './Planes.module.css';
-import { Box } from '@mui/system';
 
 export default function Planes() {
 	return (
