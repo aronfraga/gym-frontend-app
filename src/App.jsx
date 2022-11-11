@@ -4,6 +4,7 @@ import Home from "./components/Home/Home";
 import Planes from "./components/Planes/Planes";
 import NoMatch from "./components/NoMatch/NoMatch";
 import Routines from "./components/Routines/Routines";
+import FeedBack from "./components/FeedBack/FeedBack";
 import FormRoutines from "./components/FormRoutines/FormRoutines";
 
 function App() {
