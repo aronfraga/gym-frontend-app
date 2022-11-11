@@ -3,23 +3,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import style from './Filters.module.css';
 
-const aquiVanLosFiltros = [
-	//Estado/props/query o lo que sea que le mande lo que debe filtrar
-	'Label 1',
-	'Label 2',
-	'Label 3',
-	'Label 4',
-	'Label 5',
-	'Label 6',
-	'Label 7',
-	'Label 8',
-	'Label 9',
-	'Label 10',
-];
-
-const title = 'Titulo filtro';
-
-const Filters = () => {
+const Filters = ({ title, filters }) => {
 	const handlerCheck = (event) => {
 		let checked = event.target.checked;
 		let value = event.target.value;
@@ -33,7 +17,7 @@ const Filters = () => {
 				<h3>{title}</h3>
 			</div>
 			<div className={style.checksContainer}>
-				{aquiVanLosFiltros?.map((checkboxes, i) => (
+				{filters?.map((checkboxes, i) => (
 					<FormControlLabel
 						key={i}
 						control={
