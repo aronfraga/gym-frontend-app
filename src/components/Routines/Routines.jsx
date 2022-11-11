@@ -1,18 +1,19 @@
-import React from "react";
-import NavBar from "../NavBar/NavBar";
-import Footer from "../Footer/Footer";
-import Routine from "../Routine/Routine";
-import AllRoutines from "../AllRoutines/AllRoutines";
+import React from 'react';
+import NavBar from '../NavBar/NavBar';
+import AllRoutines from '../AllRoutines/AllRoutines';
+import ContainerFilters from '../ContainerFilters/ContainerFilters';
+import style from './Routines.module.css';
 
 const Routines = () => {
-
-  return (
-    <div>
-      <NavBar />
-        <AllRoutines />
-      <Footer />
-    </div>
-  )
-}
+	return (
+		<div>
+			<NavBar />
+			<div className={style.mainContainer}>
+				<ContainerFilters />
+				<AllRoutines />
+			</div>
+		</div>
+	);
+};
 
 export default Routines;
