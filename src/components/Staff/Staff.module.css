@@ -2,11 +2,16 @@
     background-color: white;
 }
 
+.divisionline{
+    background-color: #18A0FB;
+    height: 3px;
+}
+
 .stafftittle{
     width: 309px;
     height: 59px;
     left: 60px;
-    top: 90px;
+    top: 0px;
     font-family: 'Montserrat';
     font-style: normal;
     font-weight: 700;
