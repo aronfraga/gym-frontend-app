@@ -4,7 +4,7 @@ import Home from "./components/Home/Home";
 import Planes from "./components/Planes/Planes"
 import NoMatch from "./components/NoMatch/NoMatch";
 import Routines from "./components/Routines/Routines";
-
+import Staff from "./components/Staff/Staff";
 
 function App() {
 
@@ -15,7 +15,7 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='/tienda' element={<Home />} />
         <Route path='/rutinas' element={<Routines />} />
-        <Route path='/instalaciones' element={<Home />} />
+        <Route path='/instalaciones' element={<Staff />} />
         <Route path='/seguimiento' element={<Home />} />
         <Route path='/clases' element={<Home />} />
         <Route path='/feedback' element={<Home />} />
