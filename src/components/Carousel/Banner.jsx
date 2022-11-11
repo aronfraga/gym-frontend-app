@@ -42,7 +42,7 @@ const Banner = (props) => {
       <Grid item xs={12 / totalItems} key={item.Name}>
         <CardMedia
           component="img"
-          height="300"
+          height="360"
           image={item.Image}
           title={item.Name}
         ></CardMedia>

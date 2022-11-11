@@ -1,0 +1,51 @@
+:root {
+	--primary-color: #18a0fb;
+	--secondary-color: #a0d9ff;
+	--tertiary-color: #4966ff;
+	--white-color: #f0f0f0;
+}
+
+.mainContainer {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	position: relative;
+	margin: 0px auto;
+	padding: 0px 12px 12px 12px;
+	border: 2px solid var(--primary-color);
+	background-color: var(--white-color);
+	height: fit-content;
+	max-height: 220px;
+	max-width: 150px;
+	border-radius: 6px;
+	overflow-y: scroll;
+}
+/* Quitar la scrollBar */
+.mainContainer::-webkit-scrollbar {
+	display: none;
+}
+
+.checksContainer {
+	margin-top: 50px;
+}
+
+.titleContainer {
+	display: flex;
+	position: absolute;
+	justify-content: center;
+	align-items: center;
+	margin-left: -12px;
+	/* width: 174px; */
+	width: 100%;
+	border-radius: 4px 4px 0 0;
+	height: 50px;
+	background-color: var(--white-color);
+	z-index: 1;
+}
+
+.titleContainer h3 {
+	margin: 0 0 6px 0;
+	font-size: 20px;
+	text-align: center;
+	color: var(--primary-color);
+}

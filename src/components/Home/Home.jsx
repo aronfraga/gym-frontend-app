@@ -8,6 +8,7 @@ import Footer from "../Footer/Footer";
 import Loading from "../Loading/Loading";
 import Carrusel from "../Carousel/Carrusel";
 import Login from "../Login/Login";
+import Planes from "../Planes/Planes";
 
 const Home = () => {
 
@@ -18,32 +19,15 @@ const Home = () => {
     if (isAuthenticated) dispatch(setToken(user.sub));
   }, [dispatch]);
 
-  const renderisAuthenticated = () => {
-    return (
-      <div>
-
-        <NavBar />
-        <Carrusel />
-        <Footer />
-      </div>
-    )
-  }
-
-  const renderisNotAuthenticated = () => {
-    return <Login />
-  }
-
-  const renderSpinner = () => {
-    return <Loading />
-  }
+  if(isLoading) return <Loading />
+  if(!isAuthenticated) return <Login />
 
   return (
     <div>
-      {isLoading ? renderSpinner() : isAuthenticated ? renderisAuthenticated() : renderisNotAuthenticated()}
-      <Link to='home/routines'>
-        <button>routines</button>
-      </Link>
-      
+      <NavBar />
+      <Carrusel />
+      <Planes />
+      <Footer />
     </div>
   )
 }

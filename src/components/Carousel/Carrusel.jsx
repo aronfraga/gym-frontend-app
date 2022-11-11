@@ -12,10 +12,10 @@ const Carrusel = () => {
         animation={"slide"}
         indicators={true}
         interval={8000}
-        duration={4000}
+        duration={1000}
         cycleNavigation={true}
         navButtonsAlwaysVisible={true}
-        height={300}
+        height={360}
       >
         {items.map((item, index) => (
           <Banner
