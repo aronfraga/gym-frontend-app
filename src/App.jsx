@@ -21,7 +21,7 @@ function App() {
         <Route path="/instalaciones" element={<Staff />} />
         <Route path="/seguimiento" element={<Home />} />
         <Route path="/clases" element={<Home />} />
-        <Route path="/feedback" element={<Home />} />
+        <Route path="/feedback" element={<FeedBack />} />
         <Route path="/planes" element={<Planes />} />
         <Route path="/:id" element={<Home />} />
       </Routes>
