@@ -17,10 +17,10 @@ const pruebaFiltros1 = [
 const title1 = 'Musculos';
 
 const pruebaFiltros2 = [
-	'15 min - 30 min',
-	'30 min - 45 min',
-	'45 min - 60 min',
-	'60 min - 90 min',
+	'15 - 30 min',
+	'30 - 45 min',
+	'45 - 60 min',
+	'60 - 90 min',
 	'Más de 90 min',
 ];
 const title2 = 'Tiempo';
