@@ -1,33 +1,21 @@
 import {
   Typography,
   Rating,
-  FormGroup,
   TextField,
   Box,
   Button,
-  FormControl,
+  Grid,
+  FormControlLabel,
+  FormLabel,
+  RadioGroup,
+  Radio,
+  InputLabel,
+  Slider,
 } from "@mui/material";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useAddNewRoutinesMutation } from "../../redux/query/api";
-import OutlinedInput from "@mui/material/OutlinedInput";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import ListItemText from "@mui/material/ListItemText";
-import Select from "@mui/material/Select";
-import Checkbox from "@mui/material/Checkbox";
-import Slider from "@mui/material/Slider";
-import Loading from "../Loading/Loading";
-
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
-const MenuProps = {
-  PaperProps: {
-    style: {
-      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 250,
-    },
-  },
-};
+import NavBar from "../NavBar/NavBar";
 
 const categorias = [
   "Cardio/Resistencia",
@@ -61,17 +49,19 @@ const marks = [
 ];
 
 const FormRoutines = () => {
+  const navigate = useNavigate();
   const [value, setValue] = useState({
     name: "",
     createdBy: "",
     duration: 0,
     difficulty: 0,
-    category: "Masa Muscular",
+    category: "",
   });
 
   const [createRoutines, { isLoading }] = useAddNewRoutinesMutation();
 
   const handelSubmit = async (e) => {
+    console.log(e);
     e.preventDefault();
     await createRoutines({
       name: value.name,
@@ -85,8 +75,10 @@ const FormRoutines = () => {
       createdBy: "",
       duration: 0,
       difficulty: 0,
-      category: "Masa Muscular",
+      category: "",
     });
+    alert("Rutina Creada");
+    navigate("/rutinas");
   };
 
   const handleChange = (event) => {
@@ -104,23 +96,109 @@ const FormRoutines = () => {
   };
 
   return (
-    <form sx={{ border: 1, width: { xl: 300 } }} onSubmit={handelSubmit}>
-      <TextField
-        id="standard-name"
-        label="Nombre de la rutina"
-        name="name"
-        value={value.name}
-        onChange={handleChange}
-      />
-      <TextField
-        id="standard-name"
-        label="Creado por"
-        name="createdBy"
-        value={value.createdBy}
-        onChange={handleChange}
-      />
+    <>
+      <NavBar />
+      <div>
+        <Grid container>
+          <form>
+            <Grid item>
+              <TextField
+                sx={{ width: 300 }}
+                id="standard-name"
+                label="Nombre de la rutina"
+                name="name"
+                value={value.name}
+                onChange={handleChange}
+              />
+            </Grid>
+            <Grid item>
+              <TextField
+                sx={{ width: 300 }}
+                id="standard-name"
+                label="Creado por"
+                name="createdBy"
+                value={value.createdBy}
+                onChange={handleChange}
+              />
+            </Grid>
+            <Grid item></Grid>
 
-      {/* <InputLabel>Categoria</InputLabel>
+            <FormLabel id="row-radio-buttons-group-label">Categoria</FormLabel>
+            <RadioGroup
+              row
+              aria-labelledby="demo-row-radio-buttons-group-label"
+              name="row-radio-buttons-group"
+            >
+              {categorias.map((cate) => (
+                <FormControlLabel
+                  name="category"
+                  value={cate}
+                  control={<Radio />}
+                  label={cate}
+                  onChange={handleChange}
+                />
+              ))}
+            </RadioGroup>
+
+            <Grid item>
+              <Box sx={{ width: 300 }}>
+                <InputLabel id="duracion">Duracion</InputLabel>
+                <Slider
+                  name="duration"
+                  max={120}
+                  defaultValue={0}
+                  getAriaValueText={(value) => auxDuration(value)}
+                  value={auxDuration()}
+                  onChange={handleChange}
+                  step={null}
+                  valueLabelDisplay="off"
+                  marks={marks}
+                />
+              </Box>
+            </Grid>
+            <Grid item>
+              <Typography component="legend">Dificultad</Typography>
+              <Rating
+                name="difficulty"
+                id="difficultyId"
+                value={value.difficulty}
+                onChange={handleChange}
+              />
+            </Grid>
+            <Box>
+              <Button
+                variant="contained"
+                onClick={handelSubmit}
+                disabled={isLoading ? true : false}
+              >
+                Submit
+              </Button>
+            </Box>
+          </form>
+        </Grid>
+      </div>
+    </>
+  );
+};
+
+export default FormRoutines;
+
+const auxDuration = (value) => value;
+
+// DEJO ESTO COSAS COMENTADAS
+
+// const ITEM_HEIGHT = 48;
+// const ITEM_PADDING_TOP = 8;
+// const MenuProps = {
+//   PaperProps: {
+//     style: {
+//       maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+//       width: 250,
+//     },
+//   },
+// };
+
+/* <InputLabel>Categoria</InputLabel>
       <Select
         name="category"
         id="categoryId"
@@ -137,43 +215,4 @@ const FormRoutines = () => {
             <ListItemText primary={cate} />
           </MenuItem>
         ))}
-      </Select> */}
-      <Box sx={{ width: 300 }}>
-        <InputLabel id="duracion">Duracion</InputLabel>
-        <Slider
-          name="duration"
-          max={120}
-          defaultValue={30}
-          getAriaValueText={(value) => auxDuration(value)}
-          value={auxDuration()}
-          onChange={handleChange}
-          step={null}
-          valueLabelDisplay="off"
-          marks={marks}
-        />
-      </Box>
-      <Typography component="legend">Dificultad</Typography>
-      <Rating
-        name="difficulty"
-        id="difficultyId"
-        value={value.difficulty}
-        onChange={handleChange}
-      />
-
-      <button type="submit">
-        {isLoading ? (
-          <>
-            <p>"Submit"</p>
-            <Loading />
-          </>
-        ) : (
-          <p>"Submit"</p>
-        )}
-      </button>
-    </form>
-  );
-};
-
-export default FormRoutines;
-
-const auxDuration = (value) => value;
+      </Select> */
