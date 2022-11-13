@@ -20,60 +20,74 @@ const Routine = ({ duration, name, difficulty }) => {
 	};
 
 	return (
-		<Card sx={{ maxWidth: 345 }}>
-			<CardActionArea>
+		<Card sx={{ maxWidth: 345, position: 'relative' }}>
+			<CardActionArea onClick={handlerCardAction}>
 				<div className={style.titleContainer}>
 					<h1>{name}</h1>
 					<h2>Grupo muscular o musculo</h2>
 				</div>
 				<CardMedia
-					onClick={handlerCardAction}
 					component='img'
 					height='200'
 					width='auto'
 					image='https://wrmx00.epimg.net/radio/imagenes/2017/08/22/sociedad/1503421462_805587_1503430567_noticia_normal.jpg'
 					alt='Rutine'
 				/>
+
 				<div className={style.timeContainer}>
-					<h2>{duration}</h2>
-					<div className={style.iconsContainer}>
-						<div className={style.bolitasContainer}>
-							<div
-								className={`${style.bolitas} ${
-									difficulty >= 1 ? style.bolitasActive : style.bolitasDesactive
-								}`}
-							></div>
-							<div
-								className={`${style.bolitas} ${
-									difficulty >= 2 ? style.bolitasActive : style.bolitasDesactive
-								}`}
-							></div>
-							<div
-								className={`${style.bolitas} ${
-									difficulty >= 3 ? style.bolitasActive : style.bolitasDesactive
-								}`}
-							></div>
-							<div
-								className={`${style.bolitas} ${
-									difficulty >= 4 ? style.bolitasActive : style.bolitasDesactive
-								}`}
-							></div>
-							<div
-								className={`${style.bolitas} ${
-									difficulty >= 5 ? style.bolitasActive : style.bolitasDesactive
-								}`}
-							></div>
+					<div>
+						<h2>{duration}</h2>
+						<div className={style.iconsContainer}>
+							<div className={style.bolitasContainer}>
+								<div
+									className={`${style.bolitas} ${
+										difficulty >= 1
+											? style.bolitasActive
+											: style.bolitasDesactive
+									}`}
+								></div>
+								<div
+									className={`${style.bolitas} ${
+										difficulty >= 2
+											? style.bolitasActive
+											: style.bolitasDesactive
+									}`}
+								></div>
+								<div
+									className={`${style.bolitas} ${
+										difficulty >= 3
+											? style.bolitasActive
+											: style.bolitasDesactive
+									}`}
+								></div>
+								<div
+									className={`${style.bolitas} ${
+										difficulty >= 4
+											? style.bolitasActive
+											: style.bolitasDesactive
+									}`}
+								></div>
+								<div
+									className={`${style.bolitas} ${
+										difficulty >= 5
+											? style.bolitasActive
+											: style.bolitasDesactive
+									}`}
+								></div>
+							</div>
 						</div>
-						<IconButton
-							aria-label='star'
-							onClick={handlerFavorite}
-							sx={{ color: '#f0f0f0', padding: '0px', 'margin-right': '6px' }}
-						>
-							{favorite ? <StarIcon /> : <StarBorderIcon />}
-						</IconButton>
 					</div>
 				</div>
 			</CardActionArea>
+			<div className={style.iconFavorite}>
+				<IconButton
+					aria-label='star'
+					onClick={handlerFavorite}
+					sx={{ color: '#f0f0f0', padding: '0px' }}
+				>
+					{favorite ? <StarIcon /> : <StarBorderIcon />}
+				</IconButton>
+			</div>
 		</Card>
 	);
 };
