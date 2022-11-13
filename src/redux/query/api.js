@@ -8,11 +8,23 @@ export const ApiQuery = createApi({
   }),
   endpoints: (builder) => ({
     //************************************** */
-    //*********** G E T ' S **************** */
+    //********* G E T ' S ****************** */
     //************************************** */
 
     getAllRoutines: builder.query({
-      query: () => "/routines",
+      query: () => ({
+        url: "/routines",
+        method: "post",
+        body: { filters: {} },
+      }),
+    }),
+
+    getFilterRoutines: builder.query({
+      query: (data) => ({
+        url: "/routines",
+        method: "post",
+        body: { filters: data },
+      }),
     }),
 
     getRoutinesById: builder.query({
@@ -28,7 +40,7 @@ export const ApiQuery = createApi({
     }),
 
     //************************************** */
-    //*********** P O S T ' S ************** */
+    //********* P O S T ' S **************** */
     //************************************** */
 
     addNewRoutines: builder.mutation({
@@ -38,13 +50,28 @@ export const ApiQuery = createApi({
         body: newRoutines,
       }),
     }),
+
+    //************************************** */
+    //************** PUT ******************* */
+    //************************************** */
+
+    putLogin: builder.mutation({
+      query() {
+        return {
+          url: "/login",
+          method: "PUT",
+        };
+      },
+    }),
   }),
 });
 
 export const {
   useGetAllRoutinesQuery,
+  useGetFilterRoutinesQuery,
   useGetRoutinesByIdQuery,
   useGetAllClassesQuery,
   useGetAllUsersQuery,
   useAddNewRoutinesMutation,
+  usePutLoginMutation,
 } = ApiQuery;
