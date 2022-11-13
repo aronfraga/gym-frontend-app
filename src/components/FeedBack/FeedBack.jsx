@@ -14,16 +14,17 @@ import Select from '@mui/material/Select';
 import Chip from '@mui/material/Chip';
 import Rating from '@mui/material/Rating';
 import Stack from '@mui/material/Stack';
+import { TextField } from "@mui/material"
 
 
 
-// const ITEM_HEIGHT = 48;
-// const ITEM_PADDING_TOP = 8;
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
 const MenuProps = {
     PaperProps: {
         style: {
-            // maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-            // width: 250,
+            maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+            width: 250,
         },
     },
 };
@@ -32,7 +33,8 @@ const dataGym = [
     "Intalaciones",
     'Maquinas',
     'Staff',
-    'Servicios'
+    'Servicios',
+    'Otros...'
 ];
 function getStyles(name, infoGym, theme) {
     return {
@@ -65,19 +67,22 @@ const FeedBack = () => {
             <div className={style.mainContainer} >
                 <div className={style.mainContainerForm} >
                     <FormControl sx={{ m: 1, width: 300 }} >
-                        <img className={style.logoGym} src="https://cms-assets.tutsplus.com/cdn-cgi/image/width=850/uploads/users/2660/posts/32516/image/online-logo-generator-for-a-power-fitness-gym-2457j-93-el.jpg" />
-                        <Typography textAlign="center" sx={{
-                            m: 3,
-                            display: { xs: 'none', md: 'flex' },
-                            fontFamily: 'roboto',
-                            fontWeight: 700,
-                            color: 'inherit',
-                            textDecoration: 'none',
-
-
-                        }}>¿Qué te parecio el servicio brindado?</Typography>
-
-                        <InputLabel className={style.inputlabel} id="demo-multiple-chip-label"  >Seleciona un apartado </InputLabel>
+                        <div>
+                            <img className={style.logoGym} src="https://cms-assets.tutsplus.com/cdn-cgi/image/width=850/uploads/users/2660/posts/32516/image/online-logo-generator-for-a-power-fitness-gym-2457j-93-el.jpg" />
+                        </div>
+                        <div>
+                            <Typography textAlign="center" sx={{
+                                m: 3,
+                                display: { xs: 'none', md: 'flex' },
+                                fontFamily: 'roboto',
+                                fontWeight: 700,
+                                color: 'inherit',
+                                textDecoration: 'none',
+                            }}>¿Qué te parecio el servicio brindado?</Typography>
+                        </div>
+                        <div>
+                            <InputLabel className={style.inputlabel} id="demo-multiple-chip-label"  >Seleciona un apartado </InputLabel>
+                        </div>
                         <Select className={style.select}
                             labelId="demo-multiple-chip-label"
                             id="demo-multiple-chip"
@@ -104,6 +109,24 @@ const FeedBack = () => {
                         <Stack className={style.rating} spacing={1}>
                             <Rating name="size-large" defaultValue={0} size="large" />
                         </Stack>
+                        <div className={style.textField} >
+
+                            <Typography textAlign="center" sx={{
+                                m: 3,
+                                display: { xs: 'none', md: 'flex' },
+                                fontFamily: 'roboto',
+                                fontWeight: 700,
+                                color: 'inherit',
+                                textDecoration: 'none',
+                            }}>Dejanos tu comentario para poder mejorar</Typography>
+                            <TextField sx={{ m: 1, width: 300 }}
+                                variant="outlined"
+                                placeholder="Comparti tu experiencia"
+                                multiline
+                                rows={2}
+                                rowsMax={10}
+                            />
+                        </div>
 
                     </FormControl>
 
