@@ -12,6 +12,7 @@
 	width: 100%;
 	height: 80px;
 	color: var(--white-color);
+	z-index: 1;
 }
 
 .titleContainer h1 {
@@ -35,8 +36,9 @@
 .timeContainer {
 	background: linear-gradient(rgba(0, 0, 0, 0), rgb(26, 26, 26, 1));
 	display: flex;
-	justify-content: end;
-	flex-direction: column;
+	justify-content: space-between;
+	align-items: flex-end;
+	flex-direction: row;
 	position: absolute;
 	bottom: 0px;
 	width: 100%;
@@ -56,7 +58,6 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	margin-bottom: 6px;
 }
 
 .bolitasContainer {
@@ -80,4 +81,10 @@
 
 .bolitasDesactive {
 	border: 1px solid var(--white-color);
+}
+
+.iconFavorite {
+	position: absolute;
+	bottom: 6px;
+	right: 6px;
 }

@@ -169,7 +169,7 @@ const NavBar = () => {
                             open={Boolean(anchorElUser)}
                             onClose={handlerCloseUserMenu}
                         >
-                            <Link to={`/${id}`} >
+                            <Link to={`/${id}`} style={{ textDecoration: 'none' }} >
                                 <MenuItem >
                                     <Typography textAlign="center">Perfil</Typography>
                                 </MenuItem>
