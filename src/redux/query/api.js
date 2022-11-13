@@ -11,8 +11,12 @@ export const ApiQuery = createApi({
     //*********** G E T ' S **************** */
     //************************************** */
 
-    getAllRoutines: builder.query({
-      query: () => "/routines",
+    getRoutines: builder.query({
+      query: (data) => ({
+        url: "/routines",
+        method: "post",
+        body: { filters: data },
+      }),
     }),
 
     getRoutinesById: builder.query({
@@ -42,7 +46,7 @@ export const ApiQuery = createApi({
 });
 
 export const {
-  useGetAllRoutinesQuery,
+  useGetRoutinesQuery,
   useGetRoutinesByIdQuery,
   useGetAllClassesQuery,
   useGetAllUsersQuery,
