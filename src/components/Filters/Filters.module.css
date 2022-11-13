@@ -11,22 +11,25 @@
 	align-items: flex-start;
 	position: relative;
 	margin: 0px auto;
-	padding: 0px 12px 12px 12px;
 	border: 2px solid var(--primary-color);
 	background-color: var(--white-color);
 	height: fit-content;
 	max-height: 220px;
-	max-width: 150px;
+	width: 160px;
 	border-radius: 6px;
-	overflow-y: scroll;
 }
 /* Quitar la scrollBar */
-.mainContainer::-webkit-scrollbar {
+.checksContainer::-webkit-scrollbar {
 	display: none;
 }
 
 .checksContainer {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
 	margin-top: 50px;
+	overflow-y: scroll;
+	padding: 0px 12px 12px 12px;
 }
 
 .titleContainer {
@@ -34,8 +37,6 @@
 	position: absolute;
 	justify-content: center;
 	align-items: center;
-	margin-left: -12px;
-	/* width: 174px; */
 	width: 100%;
 	border-radius: 4px 4px 0 0;
 	height: 50px;

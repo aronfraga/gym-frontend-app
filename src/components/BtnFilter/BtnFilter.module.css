@@ -2,9 +2,10 @@
 	--primary-color: #18a0fb;
 }
 
-.btnMaster {
-	margin-left: 2px;
-	margin-right: 2px;
+.mainContainer {
+	display: flex;
+	column-gap: 12px;
+	max-height: 36px;
 }
 
 .subContainer {
