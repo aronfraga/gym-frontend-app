@@ -1,5 +1,12 @@
 :root {
 	--primary-color: #18a0fb;
+	--secondary-color: #a0d9ff;
+	--tertiary-color: #4966ff;
+	--white-color: #f0f0f0;
+	--white-color2: #fafafa;
+}
+.sectionMain {
+	background-color: var(--white-color2);
 }
 
 .mainContainer {
@@ -8,26 +15,27 @@
 	align-items: center;
 	max-width: 1440px;
 	margin: 0px auto;
-	margin-bottom: 60px;
+	padding: 0px 36px;
 }
 
 .cardContainer {
-	display: flex;
-	justify-content: center;
-	flex-wrap: wrap;
+	display: grid;
+	width: 100%;
+	grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
 	gap: 36px 48px;
+	justify-items: center;
+	margin-bottom: 60px;
 }
 
 .titleContainer {
 	width: 100%;
 	margin: 36px 0px;
-	padding-left: 36px;
 }
 
 .title {
 	display: flex;
 	font-family: Roboto, 'Open Sans', sans-serif;
-	font-size: 48px;
+	font-size: clamp(20px, 48px, 48px);
 	margin: 0px;
 	color: var(--primary-color);
 }

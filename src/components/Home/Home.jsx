@@ -9,6 +9,7 @@ import Loading from "../Loading/Loading";
 import Carrusel from "../Carousel/Carrusel";
 import Login from "../Login/Login";
 import Planes from "../Planes/Planes";
+import PrevRoutines from '../PrevRoutines/PrevRoutines';
 
 const Home = () => {
 
@@ -36,6 +37,7 @@ const Home = () => {
     <div>
       <NavBar /> 
       <Carrusel />
+      <PrevRoutines />
       <Planes />
       <Footer />
     </div>
@@ -43,4 +45,3 @@ const Home = () => {
 }
 
 export default Home;
-
