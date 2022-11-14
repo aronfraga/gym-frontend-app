@@ -1,0 +1,75 @@
+:root {
+	--primary-color: #18a0fb;
+	--secondary-color: #a0d9ff;
+	--tertiary-color: #4966ff;
+	--white-color: #f0f0f0;
+	--white-color2: #fafafa;
+}
+
+.mainContainer {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	background-color: var(--primary-color);
+	border-radius: 6px;
+	padding: 12px;
+	margin-bottom: 6px;
+}
+
+.gifClass {
+	max-width: 130px;
+	border-radius: 6px;
+}
+
+.infoContainer {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 12px;
+	color: var(--white-color2);
+}
+
+.infoContainer h1 {
+	margin: 0px;
+}
+
+.infoContainer h2 {
+	margin: 0px;
+}
+
+.titlesContainer {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 6px;
+}
+
+.titlesContainer h1 {
+	font-size: 24px;
+}
+
+.titlesContainer h2 {
+	font-size: 18px;
+}
+
+.subInfoContainer {
+	display: flex;
+	column-gap: 24px;
+	justify-content: center;
+	align-items: center;
+}
+
+.repsSeriesContainer {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 6px;
+}
+
+.repsSeriesContainer h1 {
+	font-size: 20px;
+}
+
+.repsSeriesContainer h2 {
+	font-size: 16px;
+}

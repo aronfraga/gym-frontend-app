@@ -7,6 +7,9 @@ import IconButton from '@mui/material/IconButton';
 import StarIcon from '@mui/icons-material/Star';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
+
+const idPrueba = 1;
 
 const Routine = ({ duration, name, difficulty }) => {
 	const [favorite, setFavorite] = useState(false);
@@ -21,64 +24,66 @@ const Routine = ({ duration, name, difficulty }) => {
 
 	return (
 		<Card sx={{ maxWidth: 345, position: 'relative' }}>
-			<CardActionArea onClick={handlerCardAction}>
-				<div className={style.titleContainer}>
-					<h1>{name}</h1>
-					<h2>Grupo muscular o musculo</h2>
-				</div>
-				<CardMedia
-					component='img'
-					height='200'
-					width='auto'
-					image='https://wrmx00.epimg.net/radio/imagenes/2017/08/22/sociedad/1503421462_805587_1503430567_noticia_normal.jpg'
-					alt='Rutine'
-				/>
+			<Link to={`/rutinas/:${idPrueba}`}>
+				<CardActionArea onClick={handlerCardAction}>
+					<div className={style.titleContainer}>
+						<h1>{name}</h1>
+						<h2>Grupo muscular o musculo</h2>
+					</div>
+					<CardMedia
+						component='img'
+						height='200'
+						width='auto'
+						image='https://wrmx00.epimg.net/radio/imagenes/2017/08/22/sociedad/1503421462_805587_1503430567_noticia_normal.jpg'
+						alt='Rutine'
+					/>
 
-				<div className={style.timeContainer}>
-					<div>
-						<h2>{duration}</h2>
-						<div className={style.iconsContainer}>
-							<div className={style.bolitasContainer}>
-								<div
-									className={`${style.bolitas} ${
-										difficulty >= 1
-											? style.bolitasActive
-											: style.bolitasDesactive
-									}`}
-								></div>
-								<div
-									className={`${style.bolitas} ${
-										difficulty >= 2
-											? style.bolitasActive
-											: style.bolitasDesactive
-									}`}
-								></div>
-								<div
-									className={`${style.bolitas} ${
-										difficulty >= 3
-											? style.bolitasActive
-											: style.bolitasDesactive
-									}`}
-								></div>
-								<div
-									className={`${style.bolitas} ${
-										difficulty >= 4
-											? style.bolitasActive
-											: style.bolitasDesactive
-									}`}
-								></div>
-								<div
-									className={`${style.bolitas} ${
-										difficulty >= 5
-											? style.bolitasActive
-											: style.bolitasDesactive
-									}`}
-								></div>
+					<div className={style.timeContainer}>
+						<div>
+							<h2>{duration}</h2>
+							<div className={style.iconsContainer}>
+								<div className={style.bolitasContainer}>
+									<div
+										className={`${style.bolitas} ${
+											difficulty >= 1
+												? style.bolitasActive
+												: style.bolitasDesactive
+										}`}
+									></div>
+									<div
+										className={`${style.bolitas} ${
+											difficulty >= 2
+												? style.bolitasActive
+												: style.bolitasDesactive
+										}`}
+									></div>
+									<div
+										className={`${style.bolitas} ${
+											difficulty >= 3
+												? style.bolitasActive
+												: style.bolitasDesactive
+										}`}
+									></div>
+									<div
+										className={`${style.bolitas} ${
+											difficulty >= 4
+												? style.bolitasActive
+												: style.bolitasDesactive
+										}`}
+									></div>
+									<div
+										className={`${style.bolitas} ${
+											difficulty >= 5
+												? style.bolitasActive
+												: style.bolitasDesactive
+										}`}
+									></div>
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-			</CardActionArea>
+				</CardActionArea>
+			</Link>
 			<div className={style.iconFavorite}>
 				<IconButton
 					aria-label='star'

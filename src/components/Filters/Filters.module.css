@@ -3,6 +3,7 @@
 	--secondary-color: #a0d9ff;
 	--tertiary-color: #4966ff;
 	--white-color: #f0f0f0;
+	--white-color2: #fafafa;
 }
 
 .mainContainer {
@@ -12,7 +13,7 @@
 	position: relative;
 	margin: 0px auto;
 	border: 2px solid var(--primary-color);
-	background-color: var(--white-color);
+	background-color: var(--white-color2);
 	height: fit-content;
 	max-height: 220px;
 	width: 160px;
@@ -40,7 +41,7 @@
 	width: 100%;
 	border-radius: 4px 4px 0 0;
 	height: 50px;
-	background-color: var(--white-color);
+	background-color: var(--white-color2);
 	z-index: 1;
 }
 

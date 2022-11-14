@@ -10,8 +10,9 @@
 	align-items: start;
 }
 
-.centerCard {
-	transform: scale(1.05, 1.1);
+.cardPlan:hover {
+	transition: all 0.2s ease-out;
+	transform: scale(1.06, 1.06);
 }
 
 .containerText {
