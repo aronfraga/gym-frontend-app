@@ -1,0 +1,76 @@
+.photos{
+    max-width: 350px;
+    max-height: 420px;
+    padding: 15px;
+}
+
+.tittle{
+    width: 500px;
+    height: 55px;
+    left: 60px;
+    top: 0px;
+    font-family: Roboto, 'Open Sans', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 48px;
+    line-height: 59px;
+    letter-spacing: -0.015em;
+    color: #18A0FB;
+}
+
+.imgPreview{
+    width: 325px;
+    height: 220px;
+    background-size: cover;
+    padding-right: 15px;
+}
+
+.UploadButton{
+    width: 130px;
+    height: 50px;
+    padding: 50px;
+}
+
+.titleButtonWrapper{
+    display: flex;
+    align-items: center;
+    align-content:flex-start;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.photoContainer{
+    position: relative;
+    display: inline-block;
+    text-align: center;
+}
+
+.folder:hover,.textboxdrop:hover{
+    cursor: pointer;
+}
+
+.facilitiename{
+    color: beige;
+    position: absolute;
+    bottom: 10px;
+    right
+    : 17px;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+.dropzone{
+    width: 500px;
+    height: 200px;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    margin: auto;
+    padding: 20px;
+    border: 3px dashed #eeeeee;
+    background-color: #fafafa;
+    color: #bdbdbd;
+    margin-bottom: 20px;
+}
+

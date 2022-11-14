@@ -23,7 +23,8 @@ const BtnFilter = () => {
 			<Button
 				variant='contained'
 				sx={{
-					padding: '8px 16px',
+					padding: '8px 12px',
+					minWidth: 'fit-content',
 					'& .css-1d6wzja-MuiButton-startIcon': {
 						margin: '0px',
 					},
@@ -31,7 +32,7 @@ const BtnFilter = () => {
 				onClick={handlerClick}
 				startIcon={favorite ? <StarIcon /> : <StarBorderIcon />}
 			/>
-			<ButtonGroup
+			{/* <ButtonGroup
 				variant='contained'
 				aria-label='outlined primary button group'
 			>
@@ -40,7 +41,7 @@ const BtnFilter = () => {
 				<Button>Las que no tengo</Button>
 			</ButtonGroup>
 
-			<Button variant='contained'>Crear rutina</Button>
+			<Button variant='contained'>Crear rutina</Button> */}
 		</div>
 	);
 };
