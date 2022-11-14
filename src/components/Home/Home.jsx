@@ -18,6 +18,7 @@ const Home = () => {
   const { tokenIsValid } = useSelector((state) => state.tokenIsValid);
 
   const usr = { //esto es para simular el inicio de sesion sera reemplazado por "user"
+    name: "aron",
     email: "aaronfrago@hotmail.com",
     password: "auth0|636d38848ad399282c11fafa"
   }

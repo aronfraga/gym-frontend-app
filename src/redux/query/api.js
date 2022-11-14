@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { getToken } from '../../services/cookies';
 
 export const ApiQuery = createApi({
   reducerPath: "ApiQuery",
@@ -6,8 +7,7 @@ export const ApiQuery = createApi({
     // baseUrl: 'https://appgymbackend-production.up.railway.app'
     baseUrl: "http://localhost:3001",
     prepareHeaders: (headers, { getState }) => {
-      const token = getState().accessToken.accessToken;
-
+      const token = getToken().token;
       // If we have a token set in state, let's assume that we should be passing it.
       if (token) headers.set("authorization", `Bearer ${token}`);
 
