@@ -32,7 +32,7 @@ export const fetchImages = () => {
           const results = await fetch('/api/v1_1/diapwgajv/resources/image', {
           mode: "no-cors",
           headers: {
-              "Authorization": `Basic ${Buffer.from(import.meta.env.CLOUDINARY_API_KEY + ':' + import.meta.env.CLOUDINARY_API_SECRET).toString('base64')}`
+              "Authorization": `Basic ${Buffer.from("528937882136667" + ':' + "H-WT2Ys7_qZb_A5KD2dW-HjtBkU").toString('base64')}`
           }}).then(res => res.json());
           const cloudinary_array =  await results.resources;
           const cloudinary_images = await cloudinary_array.filter(index =>  index.folder === "AppGym-facilities");
