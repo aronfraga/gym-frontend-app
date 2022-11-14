@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { setTokenDefault } from "../../redux/actions/defaultAction";
+import { destroyToken } from '../../services/cookies';
 import { useAuth0 } from '@auth0/auth0-react';
 import styles from "../NavBar/NavBar.module.css"
 import AppBar from '@mui/material/AppBar';
@@ -36,7 +38,9 @@ const NavBar = () => {
         setAnchorElUser(event.currentTarget);
     };
     const handleCloseUserMenu = () => {
-        logout({ returnTo: window.location.origin })
+        destroyToken();
+        setTokenDefault();
+        logout({ returnTo: window.location.origin });
     };
     const handlerCloseUserMenu = () => {
         setAnchorElUser()

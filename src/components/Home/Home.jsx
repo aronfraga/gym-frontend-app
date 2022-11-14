@@ -1,15 +1,14 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { useAuth0 } from '@auth0/auth0-react';
-import { tokenRequest, setTokenDefault } from "../../redux/actions/defaultAction";
-import { getToken, destroyToken } from '../../services/cookies';
+import { tokenRequest } from "../../redux/actions/defaultAction";
+import { getToken } from '../../services/cookies';
 import NavBar from "../NavBar/NavBar";
 import Footer from "../Footer/Footer";
 import Loading from "../Loading/Loading";
 import Carrusel from "../Carousel/Carrusel";
 import Login from "../Login/Login";
 import Planes from "../Planes/Planes";
-import { Button } from '@mui/material';
 
 const Home = () => {
 
@@ -32,19 +31,10 @@ const Home = () => {
 
   if(isLoading) return <Loading />
   if(!isAuthenticated) return <Login />
-  
-  //esta funcion va en la navbar de manu
-  function handlerClick(event) {
-    event.preventDefault();
-    destroyToken();
-    setTokenDefault();
-    logout();
-  }
-  // el boton lo saco cuando lo tengo en la navbar de manu
+
   return (
     <div>
-      <NavBar />
-      <Button onClick={(event) => handlerClick(event)}>CERRAR SESSION - SOY PROVISORIO </Button> 
+      <NavBar /> 
       <Carrusel />
       <Planes />
       <Footer />
