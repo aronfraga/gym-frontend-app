@@ -1,4 +1,6 @@
-import { setCurrentPage, setAccessToken } from '../slices/defaultSlice';
+import axios from 'axios';
+import { setCurrentPage, setTokenExpired } from '../slices/defaultSlice';
+import { setToken } from '../../services/cookies';
 
 export const setPage = (data) => {
   return (dispatch) => {
@@ -6,8 +8,19 @@ export const setPage = (data) => {
   }
 }
 
-export const setToken = (data) => {
+export const tokenRequest = (data) => {
+  return async (dispatch) => {  
+    try {
+      const response = await axios.post('http://localhost:3001/login', data);
+      return setToken(response.data);
+    } catch (error) {
+      dispatch(setTokenExpired(true))
+    }
+  }
+}
+
+export const setTokenDefault = () => {
   return (dispatch) => {
-    return dispatch(setAccessToken(data));
+    dispatch(setTokenExpired(false));
   }
 }

@@ -7,6 +7,7 @@ import ContainerFilters from '../ContainerFilters/ContainerFilters';
 import style from './Routines.module.css';
 
 const Routines = () => {
+
 	return (
 		<div>
 			<NavBar />

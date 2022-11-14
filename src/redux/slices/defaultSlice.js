@@ -4,13 +4,13 @@ export const defaultAction = createSlice({
   name: 'default',
   initialState: {
     currentPage: 0,
-    accessToken: '',
+    tokenIsValid: true,
   },
   reducers: {
     setCurrentPage: (state, action) => { state.currentPage = action.payload },
-    setAccessToken: (state, action) => { state.accessToken = action.payload }
+    setTokenExpired: (state, action) => { state.tokenIsValid = action.payload },
   }
 });
 
-export const { setCurrentPage, setAccessToken } = defaultAction.actions;
+export const { setCurrentPage, setTokenExpired } = defaultAction.actions;
 export default defaultAction.reducer;
