@@ -11,8 +11,13 @@ export const ApiQuery = createApi({
     //********* G E T ' S ****************** */
     //************************************** */
 
-    getAllRoutines: builder.query({
-      query: () => "/routines",
+
+    getRoutines: builder.query({
+      query: (data) => ({
+        url: "/routines",
+        method: "post",
+        body: { filters: data },
+      }),
     }),
 
     getRoutinesById: builder.query({
@@ -38,13 +43,28 @@ export const ApiQuery = createApi({
         body: newRoutines,
       }),
     }),
+
+    //************************************** */
+    //************** PUT ******************* */
+    //************************************** */
+
+    putLogin: builder.mutation({
+      query() {
+        return {
+          url: "/login",
+          method: "PUT",
+        };
+      },
+    }),
   }),
 });
 
 export const {
-  useGetAllRoutinesQuery,
+
+  useGetRoutinesQuery,
   useGetRoutinesByIdQuery,
   useGetAllClassesQuery,
   useGetAllUsersQuery,
   useAddNewRoutinesMutation,
+  usePutLoginMutation,
 } = ApiQuery;

@@ -1,5 +1,4 @@
 .mainContainer {
-	width: 90%;
 	display: grid;
 	grid-column-end: 4;
 	grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
