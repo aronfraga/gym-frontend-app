@@ -20,8 +20,8 @@ import { Link } from 'react-router-dom';
 
 
 
-const pages = ['tienda', 'rutinas', 'instalaciones', 'seguimiento', 'clases', 'feedback'];
-// const settings = ['Perfil', 'Cerrar Sesion'];
+const pages = ['rutinas', 'staff', 'feedback'];
+// const settings = [ 'tienda','seguimiento', 'clases',];
 
 const NavBar = () => {
 
@@ -169,11 +169,11 @@ const NavBar = () => {
                             open={Boolean(anchorElUser)}
                             onClose={handlerCloseUserMenu}
                         >
-                            <Link to={`/${id}`} style={{ textDecoration: 'none' }} >
+                            {/* <Link to={`/${id}`} style={{ textDecoration: 'none' }} >
                                 <MenuItem >
                                     <Typography textAlign="center">Perfil</Typography>
                                 </MenuItem>
-                            </Link>
+                            </Link> */}
                             <MenuItem>
                                 <Typography onClick={handleCloseUserMenu} textAlign="center">Cerrar Sesion</Typography>
                             </MenuItem>

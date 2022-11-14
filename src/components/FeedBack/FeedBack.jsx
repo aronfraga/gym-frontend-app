@@ -15,6 +15,8 @@ import Chip from '@mui/material/Chip';
 import Rating from '@mui/material/Rating';
 import Stack from '@mui/material/Stack';
 import { TextField } from "@mui/material"
+import Button from '@mui/material/Button';
+import { Link } from 'react-router-dom';
 
 
 
@@ -59,6 +61,10 @@ const FeedBack = () => {
             typeof value === 'string' ? value.split(',') : value,
         );
     };
+
+    const handlerClickSubmit = () => {
+        alert("Gracias por dejarnos tu Feedback")
+    }
 
     return (
         <>
@@ -129,7 +135,21 @@ const FeedBack = () => {
                         </div>
 
                     </FormControl>
-
+                    <Link to="/home" style={{ textDecoration: 'none' }} >
+                        <Button sx={{
+                            paddingRight: '25px',
+                            paddingLeft: '25px',
+                            marginBottom: '10px',
+                            color: 'white',
+                            display: 'flex',
+                            borderRadius: '6px',
+                            background: '#2779ff',
+                            alignItems: "center",
+                            "&:hover": { backgroundColor: '#5151519c', transition: "1s" }
+                        }}
+                            onClick={handlerClickSubmit}
+                        > Submit </Button>
+                    </Link>
                 </div>
             </div>
         </>
