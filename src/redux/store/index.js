@@ -9,7 +9,7 @@ export const store = configureStore({
   reducer: {
     currentPage: currentPage,
     accessToken: accessToken,
-    facilitiesImages,
+    facilitiesImages: facilitiesImages,
     [ ApiQuery.reducerPath ]: ApiQuery.reducer,
   },
   middleware: (getDefaultMiddleware) =>
