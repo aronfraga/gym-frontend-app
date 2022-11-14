@@ -11,6 +11,7 @@ import { useGetRoutinesQuery } from "../../redux/query/api";
 import Loading from "../Loading/Loading";
 
 const Routines = () => {
+
   const [input, setInput] = useState({
     muscles: [],
     difficulty: [],
