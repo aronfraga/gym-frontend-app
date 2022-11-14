@@ -5,19 +5,30 @@ export const ApiQuery = createApi({
   baseQuery: fetchBaseQuery({
     // baseUrl: 'https://appgymbackend-production.up.railway.app'
     baseUrl: "http://localhost:3001",
+    prepareHeaders: (headers, { getState }) => {
+      const token = getState().accessToken.accessToken;
+
+      // If we have a token set in state, let's assume that we should be passing it.
+      if (token) headers.set("authorization", `Bearer ${token}`);
+
+      return headers;
+    },
   }),
   endpoints: (builder) => ({
     //************************************** */
     //********* G E T ' S ****************** */
     //************************************** */
 
-
     getRoutines: builder.query({
       query: (data) => ({
-        url: "/routines",
+        url: "/routines/filter",
         method: "post",
         body: { filters: data },
       }),
+    }),
+
+    getFavoriteRoutines: builder.query({
+      query: (data) => `routines?favourite=${data}`,
     }),
 
     getRoutinesById: builder.query({
@@ -45,6 +56,17 @@ export const ApiQuery = createApi({
     }),
 
     //************************************** */
+    //************ PATCH ******************* */
+    //************************************** */
+
+    setFavorites: builder.mutation({
+      query: (id) => ({
+        url: `/routines/${id}`,
+        method: "PATCH",
+      }),
+    }),
+
+    //************************************** */
     //************** PUT ******************* */
     //************************************** */
 
@@ -60,11 +82,12 @@ export const ApiQuery = createApi({
 });
 
 export const {
-
   useGetRoutinesQuery,
+  useGetFavoriteRoutinesQuery,
   useGetRoutinesByIdQuery,
   useGetAllClassesQuery,
   useGetAllUsersQuery,
   useAddNewRoutinesMutation,
+  useSetFavoritesMutation,
   usePutLoginMutation,
 } = ApiQuery;

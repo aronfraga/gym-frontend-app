@@ -8,6 +8,7 @@ const AllRoutines = ({ routines }) => {
       {routines?.map((rutine, i) => (
         <Routine
           key={i}
+          id={rutine.id}
           duration={rutine.duration}
           name={rutine.name}
           difficulty={rutine.difficulty}
