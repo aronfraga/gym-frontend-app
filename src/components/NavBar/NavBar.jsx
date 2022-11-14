@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { setTokenDefault } from "../../redux/actions/defaultAction";
+import { destroyToken } from '../../services/cookies';
 import { useAuth0 } from '@auth0/auth0-react';
 import styles from "../NavBar/NavBar.module.css"
 import AppBar from '@mui/material/AppBar';
@@ -20,8 +22,8 @@ import { Link } from 'react-router-dom';
 
 
 
-const pages = ['tienda', 'rutinas', 'instalaciones', 'seguimiento', 'clases', 'feedback'];
-// const settings = ['Perfil', 'Cerrar Sesion'];
+const pages = ['rutinas', 'staff', 'feedback'];
+// const settings = [ 'tienda','seguimiento', 'clases',];
 
 const NavBar = () => {
 
@@ -36,7 +38,9 @@ const NavBar = () => {
         setAnchorElUser(event.currentTarget);
     };
     const handleCloseUserMenu = () => {
-        logout({ returnTo: window.location.origin })
+        destroyToken();
+        setTokenDefault();
+        logout({ returnTo: window.location.origin });
     };
     const handlerCloseUserMenu = () => {
         setAnchorElUser()
@@ -169,11 +173,11 @@ const NavBar = () => {
                             open={Boolean(anchorElUser)}
                             onClose={handlerCloseUserMenu}
                         >
-                            <Link to={`/${id}`} >
+                            {/* <Link to={`/${id}`} style={{ textDecoration: 'none' }} >
                                 <MenuItem >
                                     <Typography textAlign="center">Perfil</Typography>
                                 </MenuItem>
-                            </Link>
+                            </Link> */}
                             <MenuItem>
                                 <Typography onClick={handleCloseUserMenu} textAlign="center">Cerrar Sesion</Typography>
                             </MenuItem>

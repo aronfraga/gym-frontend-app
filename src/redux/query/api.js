@@ -1,18 +1,34 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { getToken } from '../../services/cookies';
 
 export const ApiQuery = createApi({
   reducerPath: "ApiQuery",
   baseQuery: fetchBaseQuery({
     // baseUrl: 'https://appgymbackend-production.up.railway.app'
     baseUrl: "http://localhost:3001",
+    prepareHeaders: (headers, { getState }) => {
+      const token = getToken().token;
+      // If we have a token set in state, let's assume that we should be passing it.
+      if (token) headers.set("authorization", `Bearer ${token}`);
+
+      return headers;
+    },
   }),
   endpoints: (builder) => ({
     //************************************** */
     //********* G E T ' S ****************** */
     //************************************** */
 
-    getAllRoutines: builder.query({
-      query: () => "/routines",
+    getRoutines: builder.query({
+      query: (data) => ({
+        url: "/routines/filter",
+        method: "post",
+        body: { filters: data },
+      }),
+    }),
+
+    getFavoriteRoutines: builder.query({
+      query: (data) => `routines?favourite=${data}`,
     }),
 
     getRoutinesById: builder.query({
@@ -38,13 +54,40 @@ export const ApiQuery = createApi({
         body: newRoutines,
       }),
     }),
+
+    //************************************** */
+    //************ PATCH ******************* */
+    //************************************** */
+
+    setFavorites: builder.mutation({
+      query: (id) => ({
+        url: `/routines/${id}`,
+        method: "PATCH",
+      }),
+    }),
+
+    //************************************** */
+    //************** PUT ******************* */
+    //************************************** */
+
+    putLogin: builder.mutation({
+      query() {
+        return {
+          url: "/login",
+          method: "PUT",
+        };
+      },
+    }),
   }),
 });
 
 export const {
-  useGetAllRoutinesQuery,
+  useGetRoutinesQuery,
+  useGetFavoriteRoutinesQuery,
   useGetRoutinesByIdQuery,
   useGetAllClassesQuery,
   useGetAllUsersQuery,
   useAddNewRoutinesMutation,
+  useSetFavoritesMutation,
+  usePutLoginMutation,
 } = ApiQuery;

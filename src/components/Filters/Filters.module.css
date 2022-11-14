@@ -19,18 +19,19 @@
 	width: 160px;
 	border-radius: 6px;
 }
+
 /* Quitar la scrollBar */
 .checksContainer::-webkit-scrollbar {
-	display: none;
+  display: none;
 }
 
 .checksContainer {
-	display: flex;
-	flex-direction: column;
-	width: 100%;
-	margin-top: 50px;
-	overflow-y: scroll;
-	padding: 0px 12px 12px 12px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 50px;
+  overflow-y: scroll;
+  padding: 0px 12px 12px 12px;
 }
 
 .titleContainer {
@@ -46,8 +47,15 @@
 }
 
 .titleContainer h3 {
-	margin: 0 0 6px 0;
-	font-size: 20px;
-	text-align: center;
-	color: var(--primary-color);
+  margin: 0 0 6px 0;
+  font-size: 20px;
+  text-align: center;
+  color: var(--primary-color);
+}
+
+.allContainer {
+  display: flex;
+  flex-direction: column;
+  row-gap: 12px;
+  max-width: fit-content;
 }
