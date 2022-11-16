@@ -4,110 +4,165 @@ import style from './DetailRoutine.module.css';
 import Excercise from '../Excercise/Excercise';
 import HourglassFullIcon from '@mui/icons-material/HourglassFull';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
+import { useGetRoutinesByIdQuery } from '../../redux/query/api';
+import { useMatch } from 'react-router-dom';
+import Loading from '../Loading/Loading';
 
-const prueba = {
-	id: 2,
-	name: 'Intensivo piernas 2',
-	createdBy: 'Gaston Schmitz',
-	duration: 45,
-	difficulty: 3,
-	category: 'Masa Muscular',
-	flag: false,
-	excercises: [
-		{
-			id: 1,
-			day: 1,
-			name: 'Press de banca',
-			gif: 'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/bench-press-1568117208.gif',
-			series: 4,
-			repetitions: 10,
-			muscleId: 1,
-			Routine_Excercise: {
-				routineId: 2,
-				excerciseId: 1,
-			},
-			muscle: {
-				id: 1,
-				name: 'Pectorales',
-			},
-		},
-		{
-			id: 2,
-			day: 1,
-			name: 'Press de banca',
-			gif: 'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/bench-press-1568117208.gif',
-			series: 4,
-			repetitions: 10,
-			muscleId: 1,
-			Routine_Excercise: {
-				routineId: 2,
-				excerciseId: 1,
-			},
-			muscle: {
-				id: 1,
-				name: 'Pectorales',
-			},
-		},
-		{
-			id: 3,
-			day: 1,
-			name: 'Press de banca',
-			gif: 'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/bench-press-1568117208.gif',
-			series: 4,
-			repetitions: 10,
-			muscleId: 1,
-			Routine_Excercise: {
-				routineId: 2,
-				excerciseId: 1,
-			},
-			muscle: {
-				id: 1,
-				name: 'Pectorales',
-			},
-		},
-		{
-			id: 4,
-			day: 2,
-			name: 'Press de banca',
-			gif: 'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/bench-press-1568117208.gif',
-			series: 4,
-			repetitions: 10,
-			muscleId: 1,
-			Routine_Excercise: {
-				routineId: 2,
-				excerciseId: 1,
-			},
-			muscle: {
-				id: 1,
-				name: 'Pectorales',
-			},
-		},
-		{
-			id: 5,
-			day: 2,
-			name: 'Press de banca',
-			gif: 'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/bench-press-1568117208.gif',
-			series: 4,
-			repetitions: 10,
-			muscleId: 1,
-			Routine_Excercise: {
-				routineId: 2,
-				excerciseId: 1,
-			},
-			muscle: {
-				id: 1,
-				name: 'Pectorales',
-			},
-		},
-	],
-};
-
-let auxDay;
-
-auxDay = prueba.excercises.map((exercise) => exercise.day);
-auxDay = auxDay.filter((day, i) => auxDay.indexOf(day) === i);
+// const routineDetail = {
+// 	id: 4,
+// 	name: 'Alto rendimiento',
+// 	createdBy: 'Gaston Schmitz',
+// 	duration: 90,
+// 	difficulty: 1,
+// 	category: 'Fuerza',
+// 	flag: false,
+// 	favByUser: false,
+// 	excercises: [
+// 		{
+// 			id: 5,
+// 			day: 1,
+// 			name: 'Triceps',
+// 			series: 4,
+// 			repetitions: 10,
+// 			muscleId: 4,
+// 			Routine_Excercise: {
+// 				routineId: 4,
+// 				excerciseId: 5,
+// 			},
+// 			muscle: {
+// 				id: 4,
+// 				name: 'Triceps',
+// 			},
+// 		},
+// 		{
+// 			id: 6,
+// 			day: 2,
+// 			name: 'Mancuernas',
+// 			series: 4,
+// 			repetitions: 12,
+// 			muscleId: 5,
+// 			Routine_Excercise: {
+// 				routineId: 4,
+// 				excerciseId: 6,
+// 			},
+// 			muscle: {
+// 				id: 5,
+// 				name: 'Biceps',
+// 			},
+// 		},
+// 		{
+// 			id: 7,
+// 			day: 3,
+// 			name: 'Abdominales Laterales',
+// 			series: 4,
+// 			repetitions: 10,
+// 			muscleId: 2,
+// 			Routine_Excercise: {
+// 				routineId: 4,
+// 				excerciseId: 7,
+// 			},
+// 			muscle: {
+// 				id: 2,
+// 				name: 'Abdominales',
+// 			},
+// 		},
+// 		{
+// 			id: 9,
+// 			day: 4,
+// 			name: 'Abdomianles bajos',
+// 			series: 4,
+// 			repetitions: 10,
+// 			muscleId: 2,
+// 			Routine_Excercise: {
+// 				routineId: 4,
+// 				excerciseId: 9,
+// 			},
+// 			muscle: {
+// 				id: 2,
+// 				name: 'Abdominales',
+// 			},
+// 		},
+// 		{
+// 			id: 12,
+// 			day: 5,
+// 			name: 'Patada trasera mancuerna',
+// 			series: 4,
+// 			repetitions: 10,
+// 			muscleId: 6,
+// 			Routine_Excercise: {
+// 				routineId: 4,
+// 				excerciseId: 12,
+// 			},
+// 			muscle: {
+// 				id: 6,
+// 				name: 'Gluteos',
+// 			},
+// 		},
+// 		{
+// 			id: 14,
+// 			day: 6,
+// 			name: 'Peso muerto',
+// 			series: 4,
+// 			repetitions: 15,
+// 			muscleId: 4,
+// 			Routine_Excercise: {
+// 				routineId: 4,
+// 				excerciseId: 14,
+// 			},
+// 			muscle: {
+// 				id: 4,
+// 				name: 'Triceps',
+// 			},
+// 		},
+// 		{
+// 			id: 17,
+// 			day: 7,
+// 			name: 'Gemelos',
+// 			series: 4,
+// 			repetitions: 15,
+// 			muscleId: 7,
+// 			Routine_Excercise: {
+// 				routineId: 4,
+// 				excerciseId: 17,
+// 			},
+// 			muscle: {
+// 				id: 7,
+// 				name: 'Gemelos',
+// 			},
+// 		},
+// 		{
+// 			id: 174,
+// 			day: 1,
+// 			name: 'Gemelos',
+// 			series: 4,
+// 			repetitions: 15,
+// 			muscleId: 7,
+// 			Routine_Excercise: {
+// 				routineId: 4,
+// 				excerciseId: 17,
+// 			},
+// 			muscle: {
+// 				id: 7,
+// 				name: 'Gemelos',
+// 			},
+// 		},
+// 	],
+// };
 
 const DetailRoutine = () => {
+	const match = useMatch('/rutinas/:id');
+	const routineId = match.params.id;
+
+	const { data: routineDetail, isLoading } = useGetRoutinesByIdQuery(routineId);
+	console.log(routineDetail);
+
+	let excerciseDays;
+
+	excerciseDays = routineDetail?.excercises?.map((exercise) => exercise.day);
+	excerciseDays = excerciseDays?.filter(
+		(day, i) => excerciseDays.indexOf(day) === i
+	);
+	if (isLoading) return <Loading />;
 	return (
 		<div>
 			<NavBar />
@@ -120,46 +175,46 @@ const DetailRoutine = () => {
 							alt='press banca'
 						/>
 						<div className={style.titlesContainer}>
-							<h1>{prueba.name}</h1>
-							<h2>{prueba.category}</h2>
+							<h1>{routineDetail?.name}</h1>
+							<h2>{routineDetail?.category}</h2>
 							<div className={style.icons}>
 								<HourglassFullIcon sx={{ fontSize: '1.7rem' }} />
-								<h2>{prueba.duration} Minutos</h2>
+								<h2>{routineDetail?.duration} Minutos</h2>
 							</div>
 							<div className={style.icons}>
 								<TrendingUpIcon sx={{ fontSize: '1.7rem' }} />
 								<div className={style.bolitasContainer}>
 									<div
 										className={`${style.bolitas} ${
-											prueba.difficulty >= 1
+											routineDetail?.difficulty >= 1
 												? style.bolitasActive
 												: style.bolitasDesactive
 										}`}
 									></div>
 									<div
 										className={`${style.bolitas} ${
-											prueba.difficulty >= 2
+											routineDetail?.difficulty >= 2
 												? style.bolitasActive
 												: style.bolitasDesactive
 										}`}
 									></div>
 									<div
 										className={`${style.bolitas} ${
-											prueba.difficulty >= 3
+											routineDetail?.difficulty >= 3
 												? style.bolitasActive
 												: style.bolitasDesactive
 										}`}
 									></div>
 									<div
 										className={`${style.bolitas} ${
-											prueba.difficulty >= 4
+											routineDetail?.difficulty >= 4
 												? style.bolitasActive
 												: style.bolitasDesactive
 										}`}
 									></div>
 									<div
 										className={`${style.bolitas} ${
-											prueba.difficulty >= 5
+											routineDetail?.difficulty >= 5
 												? style.bolitasActive
 												: style.bolitasDesactive
 										}`}
@@ -170,16 +225,19 @@ const DetailRoutine = () => {
 					</div>
 					<div className={style.execerciseContainer}>
 						{/* Dia 1 */}
-						{auxDay.includes(1) && (
-							<div>
+						{excerciseDays?.includes(1) && (
+							<div className={style.execercises}>
 								<h2>Día 1</h2>
-								{prueba?.excercises?.map((excercise) => {
+								{routineDetail?.excercises?.map((excercise) => {
 									if (excercise.day === 1) {
 										return (
 											<Excercise
 												key={excercise.id}
 												name={excercise.name}
-												gif={excercise.gif}
+												// gif={excercise.gif}
+												gif={
+													'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/bench-press-1568117208.gif'
+												}
 												series={excercise.series}
 												repetitions={excercise.repetitions}
 												muscle={excercise.muscle}
@@ -190,16 +248,19 @@ const DetailRoutine = () => {
 							</div>
 						)}
 						{/* Dia 2 */}
-						{auxDay.includes(2) && (
-							<div>
+						{excerciseDays?.includes(2) && (
+							<div className={style.execercises}>
 								<h2>Día 2</h2>
-								{prueba?.excercises?.map((excercise) => {
+								{routineDetail?.excercises?.map((excercise) => {
 									if (excercise.day === 2) {
 										return (
 											<Excercise
 												key={excercise.id}
 												name={excercise.name}
-												gif={excercise.gif}
+												// gif={excercise.gif}
+												gif={
+													'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/bench-press-1568117208.gif'
+												}
 												series={excercise.series}
 												repetitions={excercise.repetitions}
 												muscle={excercise.muscle}
@@ -210,16 +271,19 @@ const DetailRoutine = () => {
 							</div>
 						)}
 						{/* Dia 3 */}
-						{auxDay.includes(3) && (
-							<div>
+						{excerciseDays?.includes(3) && (
+							<div className={style.execercises}>
 								<h2>Día 3</h2>
-								{prueba?.excercises?.map((excercise) => {
+								{routineDetail?.excercises?.map((excercise) => {
 									if (excercise.day === 3) {
 										return (
 											<Excercise
 												key={excercise.id}
 												name={excercise.name}
-												gif={excercise.gif}
+												// gif={excercise.gif}
+												gif={
+													'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/bench-press-1568117208.gif'
+												}
 												series={excercise.series}
 												repetitions={excercise.repetitions}
 												muscle={excercise.muscle}
@@ -230,16 +294,19 @@ const DetailRoutine = () => {
 							</div>
 						)}
 						{/* Dia 4 */}
-						{auxDay.includes(4) && (
-							<div>
+						{excerciseDays?.includes(4) && (
+							<div className={style.execercises}>
 								<h2>Día 4</h2>
-								{prueba?.excercises?.map((excercise) => {
+								{routineDetail?.excercises?.map((excercise) => {
 									if (excercise.day === 4) {
 										return (
 											<Excercise
 												key={excercise.id}
 												name={excercise.name}
-												gif={excercise.gif}
+												// gif={excercise.gif}
+												gif={
+													'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/bench-press-1568117208.gif'
+												}
 												series={excercise.series}
 												repetitions={excercise.repetitions}
 												muscle={excercise.muscle}
@@ -250,16 +317,19 @@ const DetailRoutine = () => {
 							</div>
 						)}
 						{/* Dia 5 */}
-						{auxDay.includes(5) && (
-							<div>
+						{excerciseDays?.includes(5) && (
+							<div className={style.execercises}>
 								<h2>Día 5</h2>
-								{prueba?.excercises?.map((excercise) => {
+								{routineDetail?.excercises?.map((excercise) => {
 									if (excercise.day === 5) {
 										return (
 											<Excercise
 												key={excercise.id}
 												name={excercise.name}
-												gif={excercise.gif}
+												// gif={excercise.gif}
+												gif={
+													'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/bench-press-1568117208.gif'
+												}
 												series={excercise.series}
 												repetitions={excercise.repetitions}
 												muscle={excercise.muscle}
@@ -270,16 +340,19 @@ const DetailRoutine = () => {
 							</div>
 						)}
 						{/* Dia 6 */}
-						{auxDay.includes(6) && (
-							<div>
+						{excerciseDays?.includes(6) && (
+							<div className={style.execercises}>
 								<h2>Día 6</h2>
-								{prueba?.excercises?.map((excercise) => {
+								{routineDetail?.excercises?.map((excercise) => {
 									if (excercise.day === 6) {
 										return (
 											<Excercise
 												key={excercise.id}
 												name={excercise.name}
-												gif={excercise.gif}
+												// gif={excercise.gif}
+												gif={
+													'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/bench-press-1568117208.gif'
+												}
 												series={excercise.series}
 												repetitions={excercise.repetitions}
 												muscle={excercise.muscle}
@@ -290,16 +363,19 @@ const DetailRoutine = () => {
 							</div>
 						)}
 						{/* Dia 7 */}
-						{auxDay.includes(7) && (
-							<div>
+						{excerciseDays?.includes(7) && (
+							<div className={style.execercises}>
 								<h2>Día 7</h2>
-								{prueba?.excercises?.map((excercise) => {
+								{routineDetail?.excercises?.map((excercise) => {
 									if (excercise.day === 7) {
 										return (
 											<Excercise
 												key={excercise.id}
 												name={excercise.name}
-												gif={excercise.gif}
+												// gif={excercise.gif}
+												gif={
+													'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/bench-press-1568117208.gif'
+												}
 												series={excercise.series}
 												repetitions={excercise.repetitions}
 												muscle={excercise.muscle}
