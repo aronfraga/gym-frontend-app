@@ -55,6 +55,15 @@ export const ApiQuery = createApi({
       }),
     }),
 
+    addFeedback: builder.mutation({
+      query: (newFeedback) => ({
+        url: "/feedbacks",
+        method: "post",
+        body: newFeedback,
+      }),
+    }),
+
+
     //************************************** */
     //************ PATCH ******************* */
     //************************************** */
@@ -90,4 +99,5 @@ export const {
   useAddNewRoutinesMutation,
   useSetFavoritesMutation,
   usePutLoginMutation,
+  useAddFeedbackMutation,
 } = ApiQuery;
