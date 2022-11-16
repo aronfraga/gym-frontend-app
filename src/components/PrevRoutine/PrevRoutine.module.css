@@ -19,7 +19,7 @@
 	margin: 0px;
 	margin-left: 6px;
 	margin-top: 6px;
-	font-size: 20px;
+	font-size: 30px;
 	font-weight: 700;
 	text-shadow: 2px 2px 8px #2a2a2a;
 }
@@ -28,7 +28,7 @@
 	margin: 0px;
 	margin-left: 6px;
 	margin-top: 6px;
-	font-size: 16px;
+	font-size: 20px;
 	font-weight: 500;
 	text-shadow: 2px 2px 8px #2a2a2a;
 }
@@ -49,7 +49,7 @@
 .timeContainer h2 {
 	margin: 0px;
 	margin-left: 6px;
-	font-size: 16px;
+	font-size: 20px;
 	font-weight: 500;
 	text-shadow: 2px 2px 8px #2a2a2a;
 }
@@ -70,9 +70,9 @@
 }
 
 .bolitas {
-	width: 20px;
-	height: 20px;
-	border-radius: 10px;
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
 }
 
 .bolitasActive {

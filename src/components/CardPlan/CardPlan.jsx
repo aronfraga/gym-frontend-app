@@ -5,15 +5,17 @@ import style from './CardPlan.module.css';
 
 const primaryColor = '#18a0fb';
 
-const CardPLan = ({ monts, price, benefits1, center }) => {
+const CardPLan = ({ monts, price, benefits1 }) => {
 	return (
 		<Card
-			className={`${style.cardPlan} ${center ? style.centerCard : null}`}
+			className={style.cardPlan}
 			sx={{
-				minWidth: '425px',
+				width: '100%',
+				maxWidth: '400px',
 				height: 'fit-content',
 				border: `1px solid ${primaryColor}`,
 				borderRadius: '10px',
+				transition: 'all 0.2s ease-out',
 			}}
 		>
 			<CardActionArea>

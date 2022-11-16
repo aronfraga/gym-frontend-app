@@ -1,4 +1,7 @@
-import { setCurrentPage, setAccessToken, getcloudImages, deletecloudImages} from '../slices/defaultSlice';
+import axios from 'axios';
+import { setCurrentPage, setTokenExpired, getcloudImages, deletecloudImages} from '../slices/defaultSlice';
+import { setToken } from '../../services/cookies';
+
 import { Buffer } from "buffer";
 
 const CLOUDINARY_API_KEY= import.meta.env.VITE_CLOUDINARY_API_KEY;
@@ -10,14 +13,26 @@ export const setPage = (data) => {
   }
 }
 
-export const setToken = (data) => {
+export const tokenRequest = (data) => {
+  return async (dispatch) => {  
+    try {
+      const response = await axios.post('http://localhost:3001/login', data);
+      return setToken(response.data);
+    } catch (error) {
+      dispatch(setTokenExpired(true))
+    }
+  }
+}
+
+export const setTokenDefault = () => {
   return (dispatch) => {
-    return dispatch(setAccessToken(data));
+    dispatch(setTokenExpired(false));
   }
 }
 
 export const fetchGetImages = () => {
   return async function(dispatch){
+
       try{ 
           const results = await fetch('/api/v1_1/diapwgajv/resources/search', {
           headers: {
@@ -26,11 +41,9 @@ export const fetchGetImages = () => {
 
           const cloudinary_array =  await results.resources;
           const cloudinary_images = await cloudinary_array.filter(index =>  index.folder === "AppGym-facilities");
-          
           return dispatch(getcloudImages(cloudinary_images));
-      
-      }catch(error){
-              console.log(error.message)
+      } catch(error) {
+              console.log(error.message) // este console log hay que sacarlo ale
       }
   }
 };

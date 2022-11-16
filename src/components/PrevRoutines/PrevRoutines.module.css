@@ -1,0 +1,34 @@
+:root {
+	--primary-color: #18a0fb;
+}
+
+.mainContainer {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	max-width: 1440px;
+	margin: 0px auto;
+	margin-bottom: 60px;
+	padding: 0px 36px;
+}
+
+.titleContainer {
+	width: 100%;
+	margin: 36px 0px;
+}
+
+.title {
+	display: flex;
+	font-family: Roboto, 'Open Sans', sans-serif;
+	font-size: 48px;
+	margin: 0px;
+	color: var(--primary-color);
+}
+
+.cardContainer {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+	gap: 24px;
+	width: 100%;
+	justify-items: center;
+}

@@ -18,9 +18,9 @@ const items = [
     ],
   },
   {
-    Name: "Nuesto Gym",
-    Caption: "Imagenes de nuestras instalaciones",
-    Routing: "instalaciones",
+    Name: "Staff",
+    Caption: "Imagenes de nuestro Staff",
+    Routing: "staff",
     contentPosition: "middle",
     Items: [
       {
