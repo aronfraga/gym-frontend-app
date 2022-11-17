@@ -50,6 +50,10 @@ margin-top: 420px;
 box-shadow: 0px 7px 14px 0px rgba(128, 128, 128, 0.75);
 
 }
+
+.selectStaff{
+    margin-top: 10px;
+}
 .textField{
     display: flex;
     position: relative;
@@ -76,3 +80,9 @@ box-shadow: 0px 7px 14px 0px rgba(128, 128, 128, 0.75);
     justify-content: center;
     width: 100%;
 }
+
+.danger{
+    color: red;
+    display: flex;
+    justify-content: center;
+ }

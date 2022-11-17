@@ -22,7 +22,7 @@ import { Link } from 'react-router-dom';
 
 
 
-const pages = ['rutinas', 'staff', 'feedback'];
+const pages = ['rutinas', 'instalaciones', 'staff', 'feedback'];
 // const settings = [ 'tienda','seguimiento', 'clases',];
 
 const NavBar = () => {

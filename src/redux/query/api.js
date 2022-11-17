@@ -31,6 +31,10 @@ export const ApiQuery = createApi({
       query: (data) => `routines?favourite=${data}`,
     }),
 
+    getAllStaff: builder.query({
+      query: () => `/users?role=staff`,
+    }),
+
     getRoutinesById: builder.query({
       query: (id) => `/routines/${id}`,
     }),
@@ -100,4 +104,5 @@ export const {
   useSetFavoritesMutation,
   usePutLoginMutation,
   useAddFeedbackMutation,
+  useGetAllStaffQuery,
 } = ApiQuery;

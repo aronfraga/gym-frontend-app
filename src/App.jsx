@@ -8,7 +8,7 @@ import Staff from './components/Staff/Staff';
 import FeedBack from './components/FeedBack/FeedBack';
 import FormRoutines from './components/FormRoutines/FormRoutines';
 import DetailRoutine from './components/DetailRoutine/DetailRoutine';
-//import Facilities from "./components/Facilities/Facilities";
+import Facilities from "./components/Facilities/Facilities";
 
 function App() {
   return (
@@ -18,10 +18,10 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/tienda" element={<Home />} />
         <Route path="/rutinas" element={<Routines />} />
-         <Route path='/rutinas/:id' element={<DetailRoutine />} />
+        <Route path='/rutinas/:id' element={<DetailRoutine />} />
         <Route path="/rutinas/crear" element={<FormRoutines />} />
         <Route path="/staff" element={<Staff />} />
-        {/* <Route path="/instalaciones" element={<Facilities />} /> */}
+        <Route path="/instalaciones" element={<Facilities />} />
         <Route path="/seguimiento" element={<Home />} />
         <Route path="/clases" element={<Home />} />
         <Route path="/feedback" element={<FeedBack />} />

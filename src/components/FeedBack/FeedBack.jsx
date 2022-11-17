@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import FormControl from '@mui/material/FormControl';
 import { useState } from "react";
 import style from "../FeedBack/FeedBack.module.css";
@@ -13,10 +13,13 @@ import Select from '@mui/material/Select';
 import Chip from '@mui/material/Chip';
 import Rating from '@mui/material/Rating';
 import StarIcon from '@mui/icons-material/Star';
-import { TextField } from "@mui/material"
+import { FormGroup, TextField } from "@mui/material"
 import Button from '@mui/material/Button';
-import { Link, useNavigate } from 'react-router-dom';
-import { useAddFeedbackMutation } from "../../redux/query/api";
+import { useNavigate } from 'react-router-dom';
+import { useAddFeedbackMutation, useGetAllStaffQuery } from "../../redux/query/api";
+// import { getAllStaff } from "../../redux/actions/defaultAction"
+// import { useDispatch, useSelector } from "react-redux";
+
 
 
 
@@ -49,10 +52,22 @@ const labels = {
 const dataGym = [
     "Intalaciones",
     'Maquinas',
-    'Staff',
     'Servicios',
+    'Staff',
     'Otros...'
 ];
+
+// const staff = [
+//     'Martin Galara',
+//     'Gaston Schmitz',
+//     'Aaron Fraga',
+//     'Agustin Reynoso', 
+//     'Jose Manrique',
+//     'Manuel Casanueva',
+//     'Pablo Lospennato',
+//     'Alexsandro Gomez'
+// ]
+
 function getStyles(name, infoGym, theme) {
     return {
         fontWeight:
@@ -64,19 +79,27 @@ function getStyles(name, infoGym, theme) {
 
 
 const FeedBack = () => {
+
+    // const dispatch = useDispatch()
+    // const { staff } = useSelector((state) => state.staff);
+    const { data: staff, isLoading } = useGetAllStaffQuery()
+    console.log(staff)
     const [addFeedback, { data }] = useAddFeedbackMutation()
     const navigate = useNavigate()
     const theme = useTheme();
     const [input, setInput] = useState({
         title: [],
+        staff: "",
         description: "",
         score: 0
     });
 
+    // useEffect(() => {
+    //     dispatch(getAllStaff())
 
+    // }, [dispatch])
 
     const handleChange = (event) => {
-
         if (event.target.name === "score") {
             const number = Number(event.target.value)
             setInput({
@@ -92,19 +115,19 @@ const FeedBack = () => {
 
     };
 
-    const handlerCloseFeedback = () => {
-        setInput()
-    };
+
 
     const HandleSubmit = async (e) => {
         e.preventDefault()
         await addFeedback({
             title: input.title,
+            staff: input.staff,
             description: input.description,
             score: input.score
         }).unwrap();
         setInput({
             title: [],
+            staff: "",
             description: "",
             score: 0
         })
@@ -112,12 +135,10 @@ const FeedBack = () => {
         navigate("/home")
     }
 
-    // const handlerClickSubmit = () => {
-    //     alert("Gracias por dejarnos tu Feedback")
-    // }
     function getLabelText(value) {
         return `${value} Star${value !== 1 ? 's' : ''}, ${labels[value]}`;
     }
+
     return (
         <>
 
@@ -141,17 +162,16 @@ const FeedBack = () => {
                                     textDecoration: 'none',
                                 }}>¿Qué te parecio el servicio brindado?</Typography>
                             </div>
-                            <div  >
-                                <InputLabel sx={{ m: 0.3, width: 300, marginTop: 52.5 }} id="demo-multiple-chip-label"  >Seleciona un apartado </InputLabel>
-                            </div>
+
+                            <InputLabel sx={{ m: 0.3, width: 300, marginTop: 52.5 }} id="demo-multiple-chip-label"  >Seleciona un apartado </InputLabel>
+
                             <Select className={style.select}
+                                required
                                 labelId="demo-multiple-chip-label"
                                 id="demo-multiple-chip"
                                 name="title"
-                                // multiple
                                 value={input.title}
                                 onChange={handleChange}
-
                                 input={<OutlinedInput label="Seleciona un apartado" />}
                                 renderValue={(value) => (
                                     <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
@@ -166,7 +186,44 @@ const FeedBack = () => {
                                     </MenuItem>
                                 ))}
                             </Select>
-                            <Box sx={{
+
+                            {(input.title === "Staff") &&
+                                <>
+                                    <InputLabel sx={{ m: 0.3, width: 300, marginTop: 52.5 }} id="demo-multiple-chip-label"  >Seleciona un apartado </InputLabel>
+                                    <FormGroup>
+                                        <Select className={style.selectStaff}
+
+                                            id="input-base"
+                                            name="staff"
+                                            // displayEmpty
+                                            value={input.staff}
+                                            onChange={handleChange}
+                                            input={<OutlinedInput />}
+                                            renderValue={(selected) => {
+                                                if (selected.length === 0) {
+                                                    return <em>Staff</em>;
+                                                }
+                                                return selected
+                                            }}
+                                            MenuProps={MenuProps}
+                                            inputProps={{ 'aria-label': 'Without label' }}
+                                        >
+                                            <MenuItem disabled value="">
+                                                <em>Staff</em>
+                                            </MenuItem>
+                                            {staff?.map((value, i) => (
+                                                <MenuItem value={value.name} key={i} >
+                                                    {value.name}
+                                                </MenuItem>
+                                            )
+                                            )}
+                                        </Select>
+                                    </FormGroup>
+
+                                </>
+                            }
+
+                            <Box required sx={{
                                 width: 300,
                                 display: 'flex',
                                 justifyContent: "center",
@@ -174,6 +231,7 @@ const FeedBack = () => {
                                 marginTop: 3
                             }}>
                                 <Rating
+                                    required
                                     size="large"
                                     name="score"
                                     value={input.score}
@@ -182,6 +240,7 @@ const FeedBack = () => {
                                     onChange={handleChange}
                                     emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />} />
                             </Box>
+                            {/* {errors.score && <p className={style.danger} >{errors.score}</p>} */}
                             <div className={style.textField} >
                                 <Typography textAlign="center" sx={{
                                     m: 3,
@@ -192,6 +251,7 @@ const FeedBack = () => {
                                     textDecoration: 'none',
                                 }}>Dejanos tu comentario para poder mejorar</Typography>
                                 <TextField sx={{ m: 1, width: 300 }}
+                                    required
                                     name="description"
                                     variant="outlined"
                                     placeholder="Comparti tu experiencia"
@@ -212,9 +272,7 @@ const FeedBack = () => {
                                     background: '#2779ff',
                                     alignItems: "center",
                                     "&:hover": { backgroundColor: '#5151519c', transition: "1s" }
-                                }}
-
-                                > Submit </Button>
+                                }}> Submit </Button>
                             </div>
 
                         </FormControl>
