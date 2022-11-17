@@ -6,6 +6,8 @@ import NavBar from "../NavBar/NavBar";
 import Footer from "../Footer/Footer";
 import Loading from "../Loading/Loading";
 import {Button} from "@mui/material";
+import { FormControl, Input } from '@mui/material';
+import InputLabel from '@mui/material/InputLabel';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Dropzone from "react-dropzone";
 import axios from "axios";
@@ -15,6 +17,13 @@ const Facilities = () => {
     const dispatch = useDispatch();
     const {facilitiesImages} = useSelector(state => state.facilitiesImages);
     const [image,setImage] = useState({array: []});
+
+    const [input,setInput] = useState({
+        name_1: "",
+      /*   name_2: "",
+        name_3: "", */
+    })
+
     const [loading,setLoading] = useState("");
     const [isShown, setIsShown] = useState(false);
     const [activeUpload, setActiveUpload]= useState(false);
@@ -27,7 +36,6 @@ const Facilities = () => {
 
     const handlerUpLoadbutton = (event) => {
         setActiveUpload(current => !current)
-        
     };
 
     const handlerGoBackButton = (event) => {
@@ -37,15 +45,20 @@ const Facilities = () => {
     const handlerDeletebutton = (event) => {
         dispatch(fetchDeleteImages(event.target.value));
         alert(`La imagen ${event.target.value.split('/')[1]} fue eliminada correctamente`);
-    }
+    };
+    
+    const handlerInputChange = (event) =>{
+        setInput({...input,[event.target.name]: event.target.value})
+    };
 
     const handlerDrop = (files) =>{
-        const upLoaders = files.map((file)=>{
+            const upLoaders = files.map((file,index)=>{
             const formData = new FormData();
             formData.append("file", file);
             formData.append("tags",`codeinfuse, medium, gist`);
             formData.append("upload_preset", "AppGym-facilities");
             formData.append("api_key","528937882136667");
+            formData.append("public_id", `${input[`name_${index+1}`]}`)
             formData.append("timestamp", (Date.now()/1000)|0);
             setLoading("true");
             return axios.post("https://api.cloudinary.com/v1_1/diapwgajv/image/upload", formData, {
@@ -57,8 +70,8 @@ const Facilities = () => {
                 specificArrinObj.push(fileURL);
                 const newobj = {...image, specificArrinObj};
                 setImage(newobj)});
-        });
-        axios.all(upLoaders).then(()=>{setLoading("false")});
+            });
+            axios.all(upLoaders).then(()=>{setLoading("false")}); 
     };
 
     function imagePreview(){
@@ -118,21 +131,33 @@ const Facilities = () => {
                     </div>   
                 ):activeUpload?
                     <div>
-                        <Dropzone  
-                            classname={Style.dropzone}
-                            onDrop={handlerDrop}
-                            onChange={(e)=>setImage(e.target.value)}
-                            value={image}>
-                            {({getRootProps,getInputProps})=>(
-                                <section>
-                                    <div {...getRootProps({className:Style.dropzone})}>
-                                        <input {...getInputProps()}/>
-                                        <span className={Style.folder}>📁</span>
-                                        <p className={Style.textboxdrop}>Arrastra o haz click para subir imágenes</p>
-                                    </div>
-                                </section>
-                            )}
-                        </Dropzone>
+                        <div className={Style.wrapperDropnInput}>
+                            <div>
+                                <Dropzone  
+                                    disabled={!input.name_1}
+                                    classname={Style.dropzone}
+                                    onDrop={handlerDrop}
+                                    onChange={(e)=>setImage(e.target.value)}
+                                    value={image}>
+                                    {({getRootProps,getInputProps})=>(
+                                        <section>
+                                            <div {...getRootProps({className:Style.dropzone})}>
+                                                <input {...getInputProps()}/>
+                                                <span className={Style.folder}>📁</span>
+                                                <p className={Style.textboxdrop}>Arrastra o haz click para subir imágenes</p>
+                                            </div>
+                                        </section>
+                                    )}
+                                </Dropzone>
+                            </div>
+                            <div className={Style.wrapperForm}> 
+                            <FormControl>
+                            <InputLabel htmlFor="my-input">Image Name</InputLabel>
+                            <Input id="my-input" aria-describedby="my-helper-text" name="name_1" onChange={handlerInputChange} value={input.name_1}/>
+                            </FormControl>
+                            {!input.name_1 &&<p className={Style.error}>Ingresa el nombre de la imagen para poder usar el Dropzone</p>   } 
+                            </div>
+                        </div>
                         <div>{imagePreview()}</div>
                     </div>
                 :<Loading/>}  

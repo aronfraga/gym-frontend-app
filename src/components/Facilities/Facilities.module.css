@@ -135,3 +135,19 @@
     color: #bdbdbd;
 }
 
+.wrapperDropnInput{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    /* align-items: center; */
+}
+
+.wrapperForm{
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content:first baseline
+}
+.error{
+    color: red;
+}

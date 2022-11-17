@@ -1,8 +1,8 @@
 import axios from 'axios';
-import { setCurrentPage, setTokenExpired, getcloudImages, deletecloudImages} from '../slices/defaultSlice';
+import { setCurrentPage, setTokenExpired, getcloudImages, deletecloudImages, getAllStaff} from '../slices/defaultSlice';
 import { setToken } from '../../services/cookies';
-
 import { Buffer } from "buffer";
+import { getToken } from '../../services/cookies';
 
 const CLOUDINARY_API_KEY= import.meta.env.VITE_CLOUDINARY_API_KEY;
 const CLOUDINARY_API_SECRET= import.meta.env.VITE_CLOUDINARY_API_SECRET;
@@ -32,25 +32,18 @@ export const setTokenDefault = () => {
 
 export const fetchGetImages = () => {
   return async function(dispatch){
-
-      try{ 
-          const results = await fetch('/api/v1_1/diapwgajv/resources/search', {
-          headers: {
-               Authorization: `Basic ${Buffer.from(CLOUDINARY_API_KEY + ':' + CLOUDINARY_API_SECRET).toString('base64')}`, 
-          }}).then(res => res.json());
-
-          const cloudinary_array =  await results.resources;
-          const cloudinary_images = await cloudinary_array.filter(index =>  index.folder === "AppGym-facilities");
-          return dispatch(getcloudImages(cloudinary_images));
-      } catch(error) {
-              console.log(error.message) // este console log hay que sacarlo ale
-      }
+      const results = await fetch('/api/v1_1/diapwgajv/resources/search', {
+      headers: {
+        Authorization: `Basic ${Buffer.from(CLOUDINARY_API_KEY + ':' + CLOUDINARY_API_SECRET).toString('base64')}`, 
+      }}).then(res => res.json());
+      const cloudinary_array =  await results.resources;
+      const cloudinary_images = await cloudinary_array.filter(index =>  index.folder === "AppGym-facilities");
+      return dispatch(getcloudImages(cloudinary_images));
   }
 };
 
 export const fetchDeleteImages = (value) => {
   return async function(dispatch){
-    try{ 
       await fetch('/api/v1_1/diapwgajv/resources/image/upload', {
       body: `public_ids[]=${value}`, 
       method: 'delete',
@@ -58,9 +51,18 @@ export const fetchDeleteImages = (value) => {
           "Content-Type": "application/x-www-form-urlencoded",
            Authorization: `Basic ${Buffer.from(CLOUDINARY_API_KEY + ':' + CLOUDINARY_API_SECRET).toString('base64')}`, 
       }});
-      return dispatch(deletecloudImages(value))
-    }catch(error){
-      console.log(error.message)
-    }
+      return dispatch(deletecloudImages(value));
+  }
+};
+
+export const fetchGetallStaff = () => {
+  const token = getToken().token;
+  return async function(dispatch){
+    let staff = await fetch("http://localhost:3001/users?role=Staff",{
+      headers: {
+        Authorization: `Bearer ${token}`,
+      }
+    }).then(res => res.json());
+    return dispatch(getAllStaff(staff));
   }
 };
