@@ -1,12 +1,12 @@
 import React from 'react';
 import BtnFilter from '../BtnFilter/BtnFilter';
-import style from './BtnRoutines.module.css';
+import style from './HeaderBtn.module.css';
 
-const BtnRoutines = () => {
+const HeaderBtn = ({ title }) => {
 	return (
 		<div className={style.mainContainer}>
 			<div className={style.infoContainer}>
-				<h1 className={style.title}>Rutinas</h1>
+				<h1 className={style.title}>{title}</h1>
 				<BtnFilter />
 			</div>
 			<hr />
@@ -14,4 +14,4 @@ const BtnRoutines = () => {
 	);
 };
 
-export default BtnRoutines;
+export default HeaderBtn;
