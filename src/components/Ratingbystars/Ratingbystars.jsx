@@ -21,7 +21,7 @@ function getLabelText(value) {
 }
 
 export default function Ratingbystars() {
-  const [value, setValue] = React.useState(2);
+  const [value, setValue] = React.useState(0);
   const [hover, setHover] = React.useState(-1);
 
   return (
@@ -33,6 +33,7 @@ export default function Ratingbystars() {
       }}
     >
       <Rating
+
         name="hover-feedback"
         value={value}
         precision={0.5}
@@ -40,7 +41,7 @@ export default function Ratingbystars() {
         onChange={(event, newValue) => {
           setValue(newValue);
         }}
-        onClick={(event)=>{event.target.value && console.log(event.target.value)} }
+        onClick={(event) => { event.target.value && console.log(event.target.value) }}
         onChangeActive={(event, newHover) => {
           setHover(newHover);
         }}

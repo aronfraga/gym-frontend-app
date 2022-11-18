@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import NavBar from "../NavBar/NavBar";
 import AllRoutines from "../AllRoutines/AllRoutines";
@@ -40,12 +41,20 @@ const Routines = () => {
     }
   };
 
-  const handlerCheck = (event) => {
-    let checked = event.target.checked;
-    let value = event.target.value;
-    let name = event.target.name;
 
-    if (name !== "muscles") value = parseInt(value);
+		if (name !== 'muscles') value = parseInt(value);
+
+		checked
+			? setInput({
+					...input,
+					[name]: [...new Set([...input[name], value])],
+			  })
+			: setInput({
+					...input,
+					[name]: input[name].filter((f) => f !== value),
+			  });
+	};
+
 
     checked
       ? setInput({
@@ -78,7 +87,38 @@ const Routines = () => {
     if (input[a].length > 0) aux[a] = [...input[a]];
   }
 
-  const { data, isLoading } = useGetRoutinesQuery(aux);
+
+	if (isLoading) return <Loading />;
+	return (
+		<div>
+			<NavBar />
+			<div className={style2.mainContainer}>
+				{/* FILTROS */}
+				<div className={style.allContainer}>
+					{/* FILTRO DE MUSCULOS*/}
+					<div className={style.mainContainer}>
+						<div className={style.titleContainer}>
+							<h3>{muscles.title}</h3>
+						</div>
+						<div className={style.checksContainer}>
+							{muscles.value.map((checkboxes, i) => (
+								<FormControlLabel
+									key={i}
+									control={
+										<Checkbox
+											sx={{ padding: '6px' }}
+											value={checkboxes}
+											onChange={handlerCheck}
+										/>
+									}
+									label={checkboxes}
+									name={muscles.name}
+									sx={{ marginRight: '0px', marginLeft: '-10px' }}
+								/>
+							))}
+						</div>
+					</div>
+
 
   if (isLoading) return <Loading />;
   return (
@@ -204,6 +244,7 @@ const Routines = () => {
       </div>
     </div>
   );
+
 };
 
 export default Routines;

@@ -1,3 +1,4 @@
+
 import React from "react";
 import NavBar from "../NavBar/NavBar";
 import style from "./DetailRoutine.module.css";
@@ -250,6 +251,7 @@ const DetailRoutine = () => {
       </div>
     </div>
   );
+
 };
 
 export default DetailRoutine;

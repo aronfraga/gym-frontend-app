@@ -1,3 +1,4 @@
+
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
@@ -10,20 +11,25 @@ import FeedBack from "./components/FeedBack/FeedBack";
 import FormRoutines from "./components/FormRoutines/FormRoutines";
 import DetailRoutine from "./components/DetailRoutine/DetailRoutine";
 import Landing from "./components/Login/Login";
-//import Facilities from "./components/Facilities/Facilities";
+import ThankYou from './components/ThankYou/ThankYou';
+import Facilities from "./components/Facilities/Facilities";
+import Shop from './components/Shop/Shop';
+
 
 function App() {
+
   return (
     <BrowserRouter>
       <Routes>
         <Route path="*" element={<NoMatch />} />
+
         <Route path="/" element={<Landing />} />
-        <Route path="/tienda" element={<Home />} />
+        <Route path="/tienda" element={<Shop />} />
         <Route path="/rutinas" element={<Routines />} />
-        <Route path="/rutinas/:id" element={<DetailRoutine />} />
+        <Route path='/rutinas/:id' element={<DetailRoutine />} />
         <Route path="/rutinas/crear" element={<FormRoutines />} />
         <Route path="/staff" element={<Staff />} />
-        {/* <Route path="/instalaciones" element={<Facilities />} /> */}
+        <Route path="/instalaciones" element={<Facilities />} />
         <Route path="/seguimiento" element={<Home />} />
         <Route path="/clases" element={<Home />} />
         <Route path="/feedback" element={<FeedBack />} />
