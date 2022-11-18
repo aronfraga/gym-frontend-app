@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { getToken } from '../../services/cookies';
+import { getToken } from "../../services/cookies";
 
 export const ApiQuery = createApi({
   reducerPath: "ApiQuery",
@@ -14,6 +14,7 @@ export const ApiQuery = createApi({
       return headers;
     },
   }),
+  keepUnusedDataFor: 30,
   endpoints: (builder) => ({
     //************************************** */
     //********* G E T ' S ****************** */
@@ -25,6 +26,7 @@ export const ApiQuery = createApi({
         method: "post",
         body: { filters: data },
       }),
+      keepUnusedDataFor: 2,
     }),
 
     getFavoriteRoutines: builder.query({
@@ -67,7 +69,6 @@ export const ApiQuery = createApi({
       }),
     }),
 
-
     //************************************** */
     //************ PATCH ******************* */
     //************************************** */
@@ -76,6 +77,7 @@ export const ApiQuery = createApi({
       query: (id) => ({
         url: `/routines/${id}`,
         method: "PATCH",
+        keepUnusedDataFor: 0,
       }),
     }),
 
