@@ -16,9 +16,5 @@ export const defaultAction = createSlice({
   }
 });
 
-export const { setCurrentPage, 
-  setTokenExpired, 
-  getcloudImages, 
-  deletecloudImages } = defaultAction.actions;
-
+export const { setCurrentPage, setTokenExpired, getcloudImages, deletecloudImages } = defaultAction.actions;
 export default defaultAction.reducer;
