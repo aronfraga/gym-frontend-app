@@ -7,6 +7,7 @@ import { getToken } from '../../services/cookies';
 const CLOUDINARY_API_KEY= import.meta.env.VITE_CLOUDINARY_API_KEY;
 const CLOUDINARY_API_SECRET= import.meta.env.VITE_CLOUDINARY_API_SECRET;
 
+
 export const setPage = (data) => {
   return (dispatch) => {
     return dispatch(setCurrentPage(data));
