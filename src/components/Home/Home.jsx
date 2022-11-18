@@ -10,6 +10,7 @@ import Carrusel from "../Carousel/Carrusel";
 import Login from "../Login/Login";
 import Planes from "../Planes/Planes";
 import PrevRoutines from '../PrevRoutines/PrevRoutines';
+import { Link } from 'react-router-dom'; // ya me voy estoy de prueba 
 
 const Home = () => {
 
@@ -36,6 +37,9 @@ const Home = () => {
   return (
     <div>
       <NavBar /> 
+      <Link to='/tienda'>
+        <button>Tienda</button>
+      </Link> 
       <Carrusel />
       <PrevRoutines />
       <Planes />

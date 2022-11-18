@@ -8,10 +8,12 @@ import Staff from './components/Staff/Staff';
 import FeedBack from './components/FeedBack/FeedBack';
 import FormRoutines from './components/FormRoutines/FormRoutines';
 import DetailRoutine from './components/DetailRoutine/DetailRoutine';
+import ThankYou from './components/ThankYou/ThankYou';
 import Facilities from "./components/Facilities/Facilities";
 import Shop from './components/Shop/Shop';
 
 function App() {
+
   return (
     <BrowserRouter>
       <Routes>

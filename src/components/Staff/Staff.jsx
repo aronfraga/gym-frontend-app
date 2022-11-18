@@ -1,17 +1,11 @@
 import React, {useEffect} from "react";
-import {useSelector, useDispatch} from "react-redux";
 import { staticstaff } from "./Helpers.js";
-import { fetchGetallStaff } from "../../redux/actions/defaultAction";
 import CardStaff from "../CardStaff/CardStaff.jsx";
 import Style from "./Staff.module.css";
 import NavBar from "../NavBar/NavBar.jsx";
 import Footer from "../Footer/Footer.jsx";
 
 const Staff = () => {
-
-    const dispatch = useDispatch();
-    const {staff} = useSelector(state => state.staff);
-    useEffect(() => {dispatch(fetchGetallStaff())},[dispatch]);
 
     return (
         <>
