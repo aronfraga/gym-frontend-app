@@ -1,8 +1,7 @@
-
 import React, { useState } from "react";
 import NavBar from "../NavBar/NavBar";
 import AllRoutines from "../AllRoutines/AllRoutines";
-import BtnRoutines from "../BtnRoutines/BtnRoutines";
+// import BtnRoutines from "../BtnRoutines/BtnRoutines";
 import style2 from "./Routines.module.css";
 import style3 from "./Fav.module.css";
 import style4 from "./BtnRoutines.module.css";
@@ -17,7 +16,6 @@ import StarIcon from "@mui/icons-material/Star";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import { useFilter } from "./FiltersContex";
 import { useLocation } from "react-router-dom";
-
 const Routines = () => {
   const location = useLocation().state;
   const { routinesFilters, setRoutinesFilters } = useFilter();
@@ -30,7 +28,6 @@ const Routines = () => {
         favourite: 0,
       };
   const [input, setInput] = useState(baseFilter);
-
   const handlerClick = (event) => {
     if (input.favourite || routinesFilters.favourite) {
       setInput({ ...input, favourite: 0 });
@@ -41,20 +38,12 @@ const Routines = () => {
     }
   };
 
+  const handlerCheck = (event) => {
+    let checked = event.target.checked;
+    let value = event.target.value;
+    let name = event.target.name;
 
-		if (name !== 'muscles') value = parseInt(value);
-
-		checked
-			? setInput({
-					...input,
-					[name]: [...new Set([...input[name], value])],
-			  })
-			: setInput({
-					...input,
-					[name]: input[name].filter((f) => f !== value),
-			  });
-	};
-
+    if (name !== "muscles") value = parseInt(value);
 
     checked
       ? setInput({
@@ -86,39 +75,7 @@ const Routines = () => {
     if (a === "favourite" && input[a]) aux[a] = input[a];
     if (input[a].length > 0) aux[a] = [...input[a]];
   }
-
-
-	if (isLoading) return <Loading />;
-	return (
-		<div>
-			<NavBar />
-			<div className={style2.mainContainer}>
-				{/* FILTROS */}
-				<div className={style.allContainer}>
-					{/* FILTRO DE MUSCULOS*/}
-					<div className={style.mainContainer}>
-						<div className={style.titleContainer}>
-							<h3>{muscles.title}</h3>
-						</div>
-						<div className={style.checksContainer}>
-							{muscles.value.map((checkboxes, i) => (
-								<FormControlLabel
-									key={i}
-									control={
-										<Checkbox
-											sx={{ padding: '6px' }}
-											value={checkboxes}
-											onChange={handlerCheck}
-										/>
-									}
-									label={checkboxes}
-									name={muscles.name}
-									sx={{ marginRight: '0px', marginLeft: '-10px' }}
-								/>
-							))}
-						</div>
-					</div>
-
+  const { data, isLoading } = useGetRoutinesQuery(aux);
 
   if (isLoading) return <Loading />;
   return (
@@ -153,7 +110,6 @@ const Routines = () => {
               ))}
             </div>
           </div>
-
           {/* FILTRO DE TIEMPO*/}
           <div className={style.mainContainer}>
             <div className={style.titleContainer}>
@@ -180,7 +136,6 @@ const Routines = () => {
               ))}
             </div>
           </div>
-
           {/* FILTRO DE DIFICULTAD*/}
           <div className={style.mainContainer}>
             <div className={style.titleContainer}>
@@ -244,7 +199,5 @@ const Routines = () => {
       </div>
     </div>
   );
-
 };
-
 export default Routines;
