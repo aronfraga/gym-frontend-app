@@ -2,7 +2,6 @@ import React from 'react';
 import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
-import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import Collapse from '@mui/material/Collapse';
 import IconButton from '@mui/material/IconButton';
@@ -26,7 +25,8 @@ const ExpandMore = styled((props) => {
 	}),
 }));
 
-const ProductCard = () => {
+const ProductCard = ({ id, title, unit_price, description, picture_url }) => {
+	
 	const [expanded, setExpanded] = useState(false);
 	const [favorite, setFavorite] = useState(false);
 
@@ -38,6 +38,18 @@ const ProductCard = () => {
 	const handleExpandClick = () => {
 		setExpanded(!expanded);
 	};
+
+	const handlerSaveInCheckOut = (event) => {
+		event.preventDefault()
+		localStorage.setItem(`item_${title}`, JSON.stringify({
+			id: id,
+			title: title,
+			unit_price: unit_price,
+			description: description,
+			picture_url: picture_url,
+			quantity: 1, // agregar la cantidad 
+		}));
+	}
 
 	return (
 		<Card
@@ -51,15 +63,16 @@ const ProductCard = () => {
 		>
 			<CardMedia
 				component='img'
-				image='https://copservir.vtexassets.com/arquivos/ids/760267-1200-auto?v=637928621257630000&width=1200&height=auto&aspect=true'
+				image={picture_url}
 				alt='Paella dish'
 				sx={{ maxHeight: '200px', margin: '0px auto', width: 'auto' }}
 			/>
 			<hr className={style.line} />
 			<div className={style.priceContainer}>
-				<h1>$500.000</h1>
+				<h1>{unit_price}</h1>
 				<CardActions sx={{ padding: '0px' }}>
 					<Button
+						onClick={(event) => handlerSaveInCheckOut(event)}
 						variant='outlined'
 						startIcon={<ShoppingCartIcon />}
 						sx={{
@@ -79,7 +92,7 @@ const ProductCard = () => {
 				</CardActions>
 			</div>
 			<div className={style.nameContainer}>
-				<h2>Nombre del producto</h2>
+				<h2>{title}</h2>
 				<CardActions sx={{ padding: '0px' }}>
 					<ExpandMore
 						expand={expanded}
@@ -105,18 +118,11 @@ const ProductCard = () => {
 					)}
 				</IconButton>
 			</div>
-
 			<Collapse in={expanded} timeout='auto' unmountOnExit sx={{}}>
 				<Typography
 					paragraph
 					sx={{ padding: '0px 12px 12px', marginBottom: '0px' }}
-				>
-					Heat oil in a (14- to 16-inch) paella pan or a large, deep skillet
-					over medium-high heat. Add chicken, shrimp and chorizo, and cook,
-					stirring occasionally until lightly browned, 6 to 8 minutes. Transfer
-					shrimp to a large plate and set aside, leaving chicken and chorizo in
-					the pan.
-				</Typography>
+				>{description}</Typography>
 			</Collapse>
 		</Card>
 	);

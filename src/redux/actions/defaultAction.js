@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { setCurrentPage, setTokenExpired, getcloudImages, deletecloudImages, getAllStaff} from '../slices/defaultSlice';
+import { setCurrentPage, setTokenExpired, getcloudImages, deletecloudImages } from '../slices/defaultSlice';
 import { setToken } from '../../services/cookies';
 import { Buffer } from "buffer";
 import { getToken } from '../../services/cookies';
@@ -55,14 +55,9 @@ export const fetchDeleteImages = (value) => {
   }
 };
 
-export const fetchGetallStaff = () => {
-  const token = getToken().token;
-  return async function(dispatch){
-    let staff = await fetch("http://localhost:3001/users?role=Staff",{
-      headers: {
-        Authorization: `Bearer ${token}`,
-      }
-    }).then(res => res.json());
-    return dispatch(getAllStaff(staff));
+export const productToPay = (data) => {
+  return async () => {  
+      const response = await axios.post('http://localhost:3001/payment', data);
+      return window.location.assign(`${response.data.init_point}`);
   }
-};
+}

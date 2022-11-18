@@ -1,76 +1,13 @@
 import React from 'react';
+import { useGetAllProductsQuery } from '../../redux/query/ApiEcommerce';
 import HeaderBtn from '../HeaderBtn/HeaderBtn';
 import ContainerFilters from '../ContainerFilters/ContainerFilters';
 import NavBar from '../NavBar/NavBar';
 import Products from '../Products/Products';
 import style from './Shop.module.css';
-
-const products = [
-	{
-		id: 1,
-		name: 'Proteían xy',
-		price: '50.00',
-		description:
-			'Lorem ipsum dolor sit amet consectetur. Sit pellentesque viverra dui tortor et. In mauris tempor amet facilisi a enim vel nec. Pellentesque porta sapien quam ornare dolor tellus id consectetur.Lorem ipsum dolor sit amet consectetur. Sit pellentesque viverra dui tortor et. In mauris tempor amet facilisi a enim vel nec. Pellentesque porta sapien quam ornare dolor tellus id consectetur.',
-		img: 'https://copservir.vtexassets.com/arquivos/ids/760267-1200-auto?v=637928621257630000&width=1200&height=auto&aspect=true',
-	},
-	{
-		id: 2,
-		name: 'Proteían xy',
-		price: '50.00',
-		description:
-			'Lorem ipsum dolor sit amet consectetur. Sit pellentesque viverra dui tortor et. In mauris tempor amet facilisi a enim vel nec. Pellentesque porta sapien quam ornare dolor tellus id consectetur.Lorem ipsum dolor sit amet consectetur. Sit pellentesque viverra dui tortor et. In mauris tempor amet facilisi a enim vel nec. Pellentesque porta sapien quam ornare dolor tellus id consectetur.',
-		img: 'https://copservir.vtexassets.com/arquivos/ids/760267-1200-auto?v=637928621257630000&width=1200&height=auto&aspect=true',
-	},
-	{
-		id: 3,
-		name: 'Proteían xy',
-		price: '50.00',
-		description:
-			'Lorem ipsum dolor sit amet consectetur. Sit pellentesque viverra dui tortor et. In mauris tempor amet facilisi a enim vel nec. Pellentesque porta sapien quam ornare dolor tellus id consectetur.Lorem ipsum dolor sit amet consectetur. Sit pellentesque viverra dui tortor et. In mauris tempor amet facilisi a enim vel nec. Pellentesque porta sapien quam ornare dolor tellus id consectetur.',
-		img: 'https://copservir.vtexassets.com/arquivos/ids/760267-1200-auto?v=637928621257630000&width=1200&height=auto&aspect=true',
-	},
-	{
-		id: 4,
-		name: 'Proteían xy',
-		price: '50.00',
-		description:
-			'Lorem ipsum dolor sit amet consectetur. Sit pellentesque viverra dui tortor et. In mauris tempor amet facilisi a enim vel nec. Pellentesque porta sapien quam ornare dolor tellus id consectetur.Lorem ipsum dolor sit amet consectetur. Sit pellentesque viverra dui tortor et. In mauris tempor amet facilisi a enim vel nec. Pellentesque porta sapien quam ornare dolor tellus id consectetur.',
-		img: 'https://copservir.vtexassets.com/arquivos/ids/760267-1200-auto?v=637928621257630000&width=1200&height=auto&aspect=true',
-	},
-	{
-		id: 5,
-		name: 'Proteían xy',
-		price: '50.00',
-		description:
-			'Lorem ipsum dolor sit amet consectetur. Sit pellentesque viverra dui tortor et. In mauris tempor amet facilisi a enim vel nec. Pellentesque porta sapien quam ornare dolor tellus id consectetur.Lorem ipsum dolor sit amet consectetur. Sit pellentesque viverra dui tortor et. In mauris tempor amet facilisi a enim vel nec. Pellentesque porta sapien quam ornare dolor tellus id consectetur.',
-		img: 'https://copservir.vtexassets.com/arquivos/ids/760267-1200-auto?v=637928621257630000&width=1200&height=auto&aspect=true',
-	},
-	{
-		id: 6,
-		name: 'Proteían xy',
-		price: '50.00',
-		description:
-			'Lorem ipsum dolor sit amet consectetur. Sit pellentesque viverra dui tortor et. In mauris tempor amet facilisi a enim vel nec. Pellentesque porta sapien quam ornare dolor tellus id consectetur.Lorem ipsum dolor sit amet consectetur. Sit pellentesque viverra dui tortor et. In mauris tempor amet facilisi a enim vel nec. Pellentesque porta sapien quam ornare dolor tellus id consectetur.',
-		img: 'https://copservir.vtexassets.com/arquivos/ids/760267-1200-auto?v=637928621257630000&width=1200&height=auto&aspect=true',
-	},
-	{
-		id: 7,
-		name: 'Proteían xy',
-		price: '50.00',
-		description:
-			'Lorem ipsum dolor sit amet consectetur. Sit pellentesque viverra dui tortor et. In mauris tempor amet facilisi a enim vel nec. Pellentesque porta sapien quam ornare dolor tellus id consectetur.Lorem ipsum dolor sit amet consectetur. Sit pellentesque viverra dui tortor et. In mauris tempor amet facilisi a enim vel nec. Pellentesque porta sapien quam ornare dolor tellus id consectetur.',
-		img: 'https://copservir.vtexassets.com/arquivos/ids/760267-1200-auto?v=637928621257630000&width=1200&height=auto&aspect=true',
-	},
-	{
-		id: 8,
-		name: 'Proteían xy',
-		price: '50.00',
-		description:
-			'Lorem ipsum dolor sit amet consectetur. Sit pellentesque viverra dui tortor et. In mauris tempor amet facilisi a enim vel nec. Pellentesque porta sapien quam ornare dolor tellus id consectetur.Lorem ipsum dolor sit amet consectetur. Sit pellentesque viverra dui tortor et. In mauris tempor amet facilisi a enim vel nec. Pellentesque porta sapien quam ornare dolor tellus id consectetur.',
-		img: 'https://copservir.vtexassets.com/arquivos/ids/760267-1200-auto?v=637928621257630000&width=1200&height=auto&aspect=true',
-	},
-];
+import Loading from '../Loading/Loading';
+import { productToPay } from "../../redux/actions/defaultAction";
+import { useDispatch } from 'react-redux';
 
 const allFilters = [
 	{
@@ -89,6 +26,47 @@ const allFilters = [
 ];
 
 const Shop = () => {
+	const dispatch = useDispatch();
+	const { data, isLoading } = useGetAllProductsQuery();
+
+	function handlerCheckOutBuy(event) {
+		event.preventDefault();
+		let items = [];
+			let keys = Object.keys(localStorage);
+			let index = keys.length;
+		while( index-- ) {
+			items.push(JSON.parse(localStorage.getItem(keys[index])));
+		}
+		const checkOut = { // array no puede ser vacio, reveer notification, pagina thankyou
+			items: items,
+			auto_return:"approved",
+			notification_url: "https://www.success.com/",
+				back_urls: {
+				success: "http://127.0.0.1:5173/approve",
+				failure: "http://www.facebook.com/",
+				pending: "http://www.pending.com/"
+			}
+		}
+		dispatch(productToPay(checkOut))
+	}
+	
+	function handlerDirectBuy(event, data) {
+		event.preventDefault();
+		const checkOut = {
+			items: [ data[0] ],
+			auto_return:"approved",
+			notification_url: "https://www.success.com/",
+				back_urls: {
+				success: "http://127.0.0.1:5173/approve",
+				failure: "http://www.facebook.com/",
+				pending: "http://www.pending.com/"
+			}
+		}
+		dispatch(productToPay(checkOut))
+	}
+
+	if(isLoading) return <Loading />
+
 	return (
 		<div>
 			<NavBar />
@@ -96,9 +74,11 @@ const Shop = () => {
 				<ContainerFilters filters={allFilters} />
 				<div className={style.cardsContainer}>
 					<HeaderBtn title={'Tienda virtual'} />
-					<Products products={products} />
+					<Products products={data} />
 				</div>
 			</div>
+			<button onClick={(event) => handlerCheckOutBuy(event)}>Carrito</button>
+			<button onClick={(event) => handlerDirectBuy(event, data)}>Compra Directa</button>
 		</div>
 	);
 };
