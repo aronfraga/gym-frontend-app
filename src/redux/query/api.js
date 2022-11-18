@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { getToken } from '../../services/cookies';
+import { getToken } from "../../services/cookies";
 
 export const ApiQuery = createApi({
   reducerPath: "ApiQuery",
@@ -14,6 +14,7 @@ export const ApiQuery = createApi({
       return headers;
     },
   }),
+  keepUnusedDataFor: 30,
   endpoints: (builder) => ({
     //************************************** */
     //********* G E T ' S ****************** */
@@ -25,10 +26,15 @@ export const ApiQuery = createApi({
         method: "post",
         body: { filters: data },
       }),
+      keepUnusedDataFor: 2,
     }),
 
     getFavoriteRoutines: builder.query({
       query: (data) => `routines?favourite=${data}`,
+    }),
+
+    getAllStaff: builder.query({
+      query: () => `/users?role=staff`,
     }),
 
     getRoutinesById: builder.query({
@@ -55,6 +61,14 @@ export const ApiQuery = createApi({
       }),
     }),
 
+    addFeedback: builder.mutation({
+      query: (newFeedback) => ({
+        url: "/feedbacks",
+        method: "post",
+        body: newFeedback,
+      }),
+    }),
+
     //************************************** */
     //************ PATCH ******************* */
     //************************************** */
@@ -63,6 +77,7 @@ export const ApiQuery = createApi({
       query: (id) => ({
         url: `/routines/${id}`,
         method: "PATCH",
+        keepUnusedDataFor: 0,
       }),
     }),
 
@@ -90,4 +105,6 @@ export const {
   useAddNewRoutinesMutation,
   useSetFavoritesMutation,
   usePutLoginMutation,
+  useAddFeedbackMutation,
+  useGetAllStaffQuery,
 } = ApiQuery;

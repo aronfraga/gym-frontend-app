@@ -14,21 +14,29 @@ import Loading from "../Loading/Loading";
 import { Button } from "@mui/material";
 import StarIcon from "@mui/icons-material/Star";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
+import { useFilter } from "./FiltersContex";
+import { useLocation } from "react-router-dom";
 
 const Routines = () => {
-
-  const [input, setInput] = useState({
-    muscles: [],
-    difficulty: [],
-    duration: [],
-    favourite: 0,
-  });
+  const location = useLocation().state;
+  const { routinesFilters, setRoutinesFilters } = useFilter();
+  const baseFilter = location
+    ? routinesFilters
+    : {
+        muscles: [],
+        difficulty: [],
+        duration: [],
+        favourite: 0,
+      };
+  const [input, setInput] = useState(baseFilter);
 
   const handlerClick = (event) => {
-    if (input.favourite) {
+    if (input.favourite || routinesFilters.favourite) {
       setInput({ ...input, favourite: 0 });
+      setRoutinesFilters({ ...routinesFilters, favourite: 0 });
     } else {
       setInput({ ...input, favourite: 1 });
+      setRoutinesFilters({ ...routinesFilters, favourite: 1 });
     }
   };
 
@@ -48,9 +56,23 @@ const Routines = () => {
           ...input,
           [name]: input[name].filter((f) => f !== value),
         });
+
+    checked
+      ? setRoutinesFilters({
+          ...routinesFilters,
+          [name]: [...new Set([...routinesFilters[name], value])],
+        })
+      : setRoutinesFilters({
+          ...routinesFilters,
+          [name]: routinesFilters[name].filter((f) => f !== value),
+        });
   };
 
   const aux = {};
+  for (const a in routinesFilters) {
+    if (a === "favourite" && routinesFilters[a]) aux[a] = routinesFilters[a];
+    if (routinesFilters[a].length > 0) aux[a] = [...routinesFilters[a]];
+  }
   for (const a in input) {
     if (a === "favourite" && input[a]) aux[a] = input[a];
     if (input[a].length > 0) aux[a] = [...input[a]];
@@ -81,6 +103,9 @@ const Routines = () => {
                       onChange={handlerCheck}
                     />
                   }
+                  checked={
+                    input.muscles.find((f) => f === checkboxes) ? true : false
+                  }
                   label={checkboxes}
                   name={muscles.name}
                   sx={{ marginRight: "0px", marginLeft: "-10px" }}
@@ -105,6 +130,9 @@ const Routines = () => {
                       onChange={handlerCheck}
                     />
                   }
+                  checked={
+                    input.duration.find((f) => f === checkboxes) ? true : false
+                  }
                   label={duration.label[i]}
                   name={duration.name}
                   sx={{ marginRight: "0px", marginLeft: "-10px" }}
@@ -128,6 +156,11 @@ const Routines = () => {
                       value={parseInt(checkboxes)}
                       onChange={handlerCheck}
                     />
+                  }
+                  checked={
+                    input.difficulty.find((f) => f === checkboxes)
+                      ? true
+                      : false
                   }
                   label={difficulty.label[i]}
                   name={difficulty.name}
@@ -155,7 +188,11 @@ const Routines = () => {
                   }}
                   onClick={handlerClick}
                   startIcon={
-                    input.favourite ? <StarIcon /> : <StarBorderIcon />
+                    input.favourite || routinesFilters.favourite ? (
+                      <StarIcon />
+                    ) : (
+                      <StarBorderIcon />
+                    )
                   }
                 />
               </div>

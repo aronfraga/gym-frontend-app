@@ -12,6 +12,7 @@ const AllRoutines = ({ routines }) => {
           duration={rutine.duration}
           name={rutine.name}
           difficulty={rutine.difficulty}
+          flagFav={rutine.favByUser}
         />
       ))}
     </div>
