@@ -9,10 +9,10 @@ const Products = ({ products }) => {
 				<ProductCard
 					key={i}
 					id={product.id}
-					name={product.name}
-					price={product.price}
+					title={product.title}
+					unit_price={product.unit_price}
 					description={product.description}
-					img={product.img}
+					picture_url={product.imgUrl}
 				/>
 			))}
 		</div>

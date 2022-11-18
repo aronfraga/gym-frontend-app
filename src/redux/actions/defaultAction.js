@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { setCurrentPage, setTokenExpired, getcloudImages, deletecloudImages} from '../slices/defaultSlice';
+import { setCurrentPage, setTokenExpired, getcloudImages, deletecloudImages } from '../slices/defaultSlice';
 import { setToken } from '../../services/cookies';
 
 import { Buffer } from "buffer";
@@ -64,3 +64,10 @@ export const fetchDeleteImages = (value) => {
     }
   }
 };
+
+export const productToPay = (data) => {
+  return async () => {  
+      const response = await axios.post('http://localhost:3001/payment', data);
+      return window.location.assign(`${response.data.init_point}`);
+  }
+}
