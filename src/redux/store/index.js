@@ -5,7 +5,8 @@ import { ApiEcommerce } from '../query/ApiEcommerce';
 import currentPage from '../slices/defaultSlice';
 import tokenIsValid from '../slices/defaultSlice';
 import facilitiesImages from '../slices/defaultSlice';
-import staff from '../slices/defaultSlice'
+import staff from '../slices/defaultSlice';
+import cart_count from '../slices/defaultSlice';
 
 export const store = configureStore({
   reducer: {
@@ -13,6 +14,7 @@ export const store = configureStore({
     tokenIsValid: tokenIsValid,
     facilitiesImages: facilitiesImages,
     staff: staff,
+    cart_count: cart_count,
     [ ApiQuery.reducerPath ]: ApiQuery.reducer,
     [ ApiEcommerce.reducerPath ]: ApiEcommerce.reducer,
   },
