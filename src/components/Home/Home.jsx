@@ -9,27 +9,23 @@ import Loading from "../Loading/Loading";
 import Carrusel from "../Carousel/Carrusel";
 import Login from "../Login/Login";
 import Planes from "../Planes/Planes";
-import PrevRoutines from '../PrevRoutines/PrevRoutines';
-import { Link } from 'react-router-dom'; // ya me voy estoy de prueba 
-
-
+import PrevRoutines from "../PrevRoutines/PrevRoutines";
+import { Link } from "react-router-dom";
 const Home = () => {
   const dispatch = useDispatch();
   const { user, isAuthenticated, isLoading, logout } = useAuth0();
   const { tokenIsValid } = useSelector((state) => state.tokenIsValid);
 
-  const usr = {
-    //esto es para simular el inicio de sesion sera reemplazado por "user"
-    name: "Gaston Schmitz",
-    email: "1@hotmail.com",
-    password: "auth0|636d38848ad399282c11fafa",
-  };
-
   useEffect(() => {
     if (isAuthenticated) {
       if (!getToken() && tokenIsValid) {
-        dispatch(tokenRequest(usr));
-        console.log("holas");
+        dispatch(
+          tokenRequest({
+            name: user.given_name || user.nickname,
+            email: user.email,
+            password: user.sub,
+          })
+        );
       }
       if (!tokenIsValid) logout();
     }
