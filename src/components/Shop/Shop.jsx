@@ -75,7 +75,6 @@ const Shop = () => {
 				<div className={style.cardsContainer}>
 					<HeaderBtn title={'Tienda virtual'} />
 					<Products products={data} />
-					<h1>Hola</h1>
 				</div>
 			</div>
 			<button onClick={(event) => handlerCheckOutBuy(event)}>Carrito</button>
