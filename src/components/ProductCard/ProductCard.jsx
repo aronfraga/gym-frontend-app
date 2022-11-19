@@ -13,6 +13,8 @@ import StarBorderIcon from '@mui/icons-material/StarBorder';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useState } from 'react';
 import style from './ProductCard.module.css';
+import { setCartCount } from '../../redux/slices/defaultSlice';
+import {useSelector, useDispatch} from "react-redux";
 
 const ExpandMore = styled((props) => {
 	const { expand, ...other } = props;
@@ -27,6 +29,8 @@ const ExpandMore = styled((props) => {
 
 const ProductCard = ({ id, title, unit_price, description, picture_url }) => {
 	
+	const dispatch = useDispatch();
+	const {cart_count} = useSelector(state => state.cart_count);
 	const [expanded, setExpanded] = useState(false);
 	const [favorite, setFavorite] = useState(false);
 
@@ -49,6 +53,7 @@ const ProductCard = ({ id, title, unit_price, description, picture_url }) => {
 			picture_url: picture_url,
 			quantity: 1, // agregar la cantidad 
 		}));
+		dispatch(setCartCount());
 	}
 
 	return (
