@@ -40,10 +40,7 @@ const Home = () => {
 
   return (
     <div>
-      <NavBar /> 
-      <Link to='/tienda'>
-        <button>Tienda</button>
-      </Link> 
+      <NavBar />
       <Carrusel />
       <PrevRoutines />
       <Planes />
