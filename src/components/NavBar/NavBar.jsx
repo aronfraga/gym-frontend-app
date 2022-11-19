@@ -18,11 +18,12 @@ import MenuItem from '@mui/material/MenuItem';
 import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 
 
 
-const pages = ['rutinas', 'instalaciones', 'staff', 'feedback'];
+const pages = ['tienda', 'rutinas', 'instalaciones', 'staff', 'feedback'];
 // const settings = [ 'tienda','seguimiento', 'clases',];
 
 const NavBar = () => {
@@ -61,24 +62,26 @@ const NavBar = () => {
                 <Toolbar className={styles.toolBar} sx={{ gap: '20px' }} >
                     <div className={styles.appGym} >
                         <FitnessCenterIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
-                        <Typography
-                            variant="h6"
-                            noWrap
-                            component="a"
-                            href="/"
-                            sx={{
-                                mr: 2,
-                                display: { xs: 'none', md: 'flex' },
-                                fontFamily: 'monospace',
-                                fontWeight: 700,
-                                color: 'inherit',
-                                textDecoration: 'none',
-                                textTransform: 'capitalize'
-                            }}
-                        >
-                            app gym
-                            {/* {user.name} */}
-                        </Typography>
+                        <Link to={"/home"} style={{ textDecoration: 'none' }} >
+                            <Typography
+                                variant="h6"
+                                noWrap
+                                component="a"
+                                href="/"
+                                sx={{
+                                    mr: 2,
+                                    display: { xs: 'none', md: 'flex' },
+                                    fontFamily: 'monospace',
+                                    fontWeight: 700,
+                                    color: 'white',
+                                    textDecoration: 'none',
+                                    textTransform: 'capitalize'
+                                }}
+                            >
+                                app gym
+                                {/* {user.name} */}
+                            </Typography>
+                        </Link>
                     </div>
 
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -136,7 +139,7 @@ const NavBar = () => {
                         App Gym
                     </Typography>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex', justifyContent: 'flex-end', } }}>
-                        <Link to={'/'} style={{ textDecoration: 'none' }}  >
+                        <Link to={'/home'} style={{ textDecoration: 'none' }}  >
                             <Button sx={{ my: 2, color: 'white', display: 'block' }}>
                                 INICIO
                             </Button>
@@ -183,6 +186,7 @@ const NavBar = () => {
                             </MenuItem>
                         </Menu>
                     </Box>
+                    <ShoppingCartIcon />
                     <Link to="/planes" style={{ textDecoration: 'none' }} >
                         <Button sx={{
                             paddingRight: '25px',
