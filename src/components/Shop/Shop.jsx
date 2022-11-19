@@ -32,31 +32,16 @@ const Shop = () => {
 	function handlerCheckOutBuy(event) {
 		event.preventDefault();
 		let items = [];
-			let keys = Object.keys(localStorage);
-			let index = keys.length;
-		while( index-- ) {
+		let keys = Object.keys(localStorage);
+		let index = keys.length;
+		while (index--) {
 			items.push(JSON.parse(localStorage.getItem(keys[index])));
 		}
 		const checkOut = { // array no puede ser vacio, reveer notification, pagina thankyou
 			items: items,
-			auto_return:"approved",
+			auto_return: "approved",
 			notification_url: "https://www.success.com/",
-				back_urls: {
-				success: "http://127.0.0.1:5173/approve",
-				failure: "http://www.facebook.com/",
-				pending: "http://www.pending.com/"
-			}
-		}
-		dispatch(productToPay(checkOut))
-	}
-	
-	function handlerDirectBuy(event, data) {
-		event.preventDefault();
-		const checkOut = {
-			items: [ data[0] ],
-			auto_return:"approved",
-			notification_url: "https://www.success.com/",
-				back_urls: {
+			back_urls: {
 				success: "http://127.0.0.1:5173/approve",
 				failure: "http://www.facebook.com/",
 				pending: "http://www.pending.com/"
@@ -65,7 +50,22 @@ const Shop = () => {
 		dispatch(productToPay(checkOut))
 	}
 
-	if(isLoading) return <Loading />
+	function handlerDirectBuy(event, data) {
+		event.preventDefault();
+		const checkOut = {
+			items: [data[0]],
+			auto_return: "approved",
+			notification_url: "https://www.success.com/",
+			back_urls: {
+				success: "http://127.0.0.1:5173/approve",
+				failure: "http://www.facebook.com/",
+				pending: "http://www.pending.com/"
+			}
+		}
+		dispatch(productToPay(checkOut))
+	}
+
+	if (isLoading) return <Loading />
 
 	return (
 		<div>

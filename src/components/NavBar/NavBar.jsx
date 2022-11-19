@@ -67,7 +67,7 @@ const NavBar = () => {
                                 variant="h6"
                                 noWrap
                                 component="a"
-                                href="/"
+
                                 sx={{
                                     mr: 2,
                                     display: { xs: 'none', md: 'flex' },
@@ -115,7 +115,9 @@ const NavBar = () => {
                         >
                             {pages.map((page) => (
                                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                                    <Typography textAlign="center">{page}</Typography>
+                                    <Link to={`/${page}`} style={{ textDecoration: 'none' }}>
+                                        <Typography textAlign="center">{page.toUpperCase()}</Typography>
+                                    </Link>
                                 </MenuItem>
                             ))}
                         </Menu>
@@ -125,7 +127,7 @@ const NavBar = () => {
                         variant="h5"
                         noWrap
                         component="a"
-                        href=""
+
                         sx={{
                             mr: 2,
                             display: { xs: 'flex', md: 'none' },
@@ -157,7 +159,7 @@ const NavBar = () => {
                     <Box sx={{ flexGrow: 0 }}>
                         <Tooltip title="Open settings">
                             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                <Avatar alt="Remy Sharp" src={user?.picture} />
+                                <Avatar alt="" src={user?.picture} />
                             </IconButton>
                         </Tooltip>
                         <Menu

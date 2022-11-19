@@ -10,7 +10,7 @@ import Carrusel from "../Carousel/Carrusel";
 import Login from "../Login/Login";
 import Planes from "../Planes/Planes";
 import PrevRoutines from "../PrevRoutines/PrevRoutines";
-import { Link } from "react-router-dom";
+
 const Home = () => {
   const dispatch = useDispatch();
   const { user, isAuthenticated, isLoading, logout } = useAuth0();
