@@ -66,7 +66,7 @@ const NavBar = () => {
                             <Typography
                                 variant="h6"
                                 noWrap
-                                component="a"
+
 
                                 sx={{
                                     mr: 2,
@@ -126,7 +126,7 @@ const NavBar = () => {
                     <Typography
                         variant="h5"
                         noWrap
-                        component="a"
+
 
                         sx={{
                             mr: 2,
@@ -188,7 +188,7 @@ const NavBar = () => {
                             </MenuItem>
                         </Menu>
                     </Box>
-                    <ShoppingCartIcon />
+
                     <Link to="/planes" style={{ textDecoration: 'none' }} >
                         <Button sx={{
                             paddingRight: '25px',
