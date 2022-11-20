@@ -77,8 +77,8 @@ export const ApiQuery = createApi({
       query: (id) => ({
         url: `/routines/${id}`,
         method: "PATCH",
-        keepUnusedDataFor: 0,
       }),
+      keepUnusedDataFor: 0,
     }),
 
     //************************************** */
