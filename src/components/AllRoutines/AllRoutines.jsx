@@ -3,6 +3,7 @@ import Routine from "../Routine/Routine";
 import style from "./AllRoutines.module.css";
 
 const AllRoutines = ({ routines }) => {
+  console.log(routines);
   return (
     <div className={style.mainContainer}>
       {routines?.map((rutine, i) => (
@@ -12,6 +13,8 @@ const AllRoutines = ({ routines }) => {
           duration={rutine.duration}
           name={rutine.name}
           difficulty={rutine.difficulty}
+          category={rutine.category}
+          imgUrl={rutine.imgUrl}
           flagFav={rutine.favByUser}
         />
       ))}

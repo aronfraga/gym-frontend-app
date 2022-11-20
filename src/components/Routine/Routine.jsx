@@ -1,4 +1,3 @@
-
 import React from "react";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
@@ -10,10 +9,18 @@ import StarBorderIcon from "@mui/icons-material/StarBorder";
 import { useState } from "react";
 import { useSetFavoritesMutation } from "../../redux/query/api";
 import { Link } from "react-router-dom";
-
-const Routine = ({ duration, name, difficulty, id, flagFav }) => {
+//"https://wrmx00.epimg.net/radio/imagenes/2017/08/22/sociedad/1503421462_805587_1503430567_noticia_normal.jpg"
+const Routine = ({
+  duration,
+  name,
+  difficulty,
+  id,
+  flagFav,
+  category,
+  imgUrl,
+}) => {
   const [addToFavorite] = useSetFavoritesMutation();
-  const [favorite, setFavorite] = useState(false);
+  const [favorite, setFavorite] = useState(flagFav);
 
   console.log(name, flagFav);
 
@@ -30,13 +37,13 @@ const Routine = ({ duration, name, difficulty, id, flagFav }) => {
         <CardActionArea onClick={handlerCardAction}>
           <div className={style.titleContainer}>
             <h1>{name}</h1>
-            <h2>Grupo muscular o musculo</h2>
+            <h2>{category.name}</h2>
           </div>
           <CardMedia
             component="img"
             height="200"
             width="auto"
-            image="https://wrmx00.epimg.net/radio/imagenes/2017/08/22/sociedad/1503421462_805587_1503430567_noticia_normal.jpg"
+            image={imgUrl}
             alt="Rutine"
           />
 
@@ -97,7 +104,6 @@ const Routine = ({ duration, name, difficulty, id, flagFav }) => {
       </div>
     </Card>
   );
-
 };
 
 export default Routine;
