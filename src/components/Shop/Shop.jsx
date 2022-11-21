@@ -28,7 +28,7 @@ const allFilters = [
 const Shop = () => {
 	const dispatch = useDispatch();
 	const { data, isLoading } = useGetAllProductsQuery();
-
+	
 	function handlerCheckOutBuy(event) {
 		event.preventDefault();
 		let items = [];
@@ -62,6 +62,7 @@ const Shop = () => {
 				pending: "http://www.pending.com/"
 			}
 		}
+		console.log(data[0])
 		dispatch(productToPay(checkOut))
 	}
 

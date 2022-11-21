@@ -110,18 +110,6 @@ const ProductCard = ({ id, title, unit_price, description, picture_url }) => {
 				</CardActions>
 			</div>
 			<div className={style.iconFavorite}>
-				<IconButton
-					size='large'
-					aria-label='star'
-					onClick={handlerFavorite}
-					sx={{ color: '#18a0fb', padding: '0px' }}
-				>
-					{favorite ? (
-						<StarIcon sx={{ fontSize: '1.8rem' }} />
-					) : (
-						<StarBorderIcon sx={{ fontSize: '1.8rem' }} />
-					)}
-				</IconButton>
 			</div>
 			<Collapse in={expanded} timeout='auto' unmountOnExit sx={{}}>
 				<Typography
