@@ -1,9 +1,8 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-
 import Home from './components/Home/Home';
 import Planes from './components/Planes/Planes';
-import NoMatch from './components/NoMatch/NoMatch';
+import PageNotFound from './components/PageNotFound/PageNotFound';
 import Routines from './components/Routines/Routines';
 import Staff from './components/Staff/Staff';
 import FeedBack from './components/FeedBack/FeedBack';
@@ -19,8 +18,8 @@ function App() {
 	return (
 		<BrowserRouter>
 			<Routes>
-				<Route path='*' element={<NoMatch />} />
-				<Route path='/' element={<Landing />} />
+				<Route path='*' element={<PageNotFound />} />
+				<Route exact path='/' element={<Landing />} />
 				<Route path='/home' element={<Home />} />
 				<Route path='/tienda' element={<Shop />} />
 				<Route path='/tienda/carrito' element={<Shopping />} />
@@ -29,11 +28,11 @@ function App() {
 				<Route path='/rutinas/crear' element={<FormRoutines />} />
 				<Route path='/staff' element={<Staff />} />
 				<Route path='/instalaciones' element={<Facilities />} />
-				<Route path='/seguimiento' element={<Home />} />
-				<Route path='/clases' element={<Home />} />
+				{/* <Route path='/seguimiento' element={<Home />} />
+				<Route path='/clases' element={<Home />} /> */}
 				<Route path='/feedback' element={<FeedBack />} />
 				<Route path='/planes' element={<Planes />} />
-				<Route path='/:id' element={<Home />} />
+				{/* <Route path='/:id' element={<Home />} /> */}
 			</Routes>
 		</BrowserRouter>
 	);
