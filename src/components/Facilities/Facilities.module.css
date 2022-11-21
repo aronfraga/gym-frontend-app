@@ -1,0 +1,153 @@
+.photos1{
+    padding: 15px;
+    height: 300px;
+    width: 300px;
+    object-fit: cover;
+}
+.photos1:hover{
+    scale: 1.08;
+    transition: all 0.5s ease-in-out ;
+}
+
+.photos2{
+    padding: 15px;
+    height: 300px;
+    width: 300px;
+    object-fit: cover;
+}
+
+.tittlePreview{
+    text-align:center;
+    height: 30px;
+    left: 60px;
+    top: 0px;
+    font-family: Roboto, 'Open Sans', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 30px;
+    line-height: 59px;
+    letter-spacing: -0.015em;
+    color: #18A0FB;
+}
+
+.tittle{
+    width: 500px;
+    height: 55px;
+    left: 60px;
+    top: 0px;
+    font-family: Roboto, 'Open Sans', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 48px;
+    line-height: 59px;
+    letter-spacing: -0.015em;
+    color: #18A0FB;
+}
+
+.divisionline{
+    background-color: #18A0FB;
+    height: 3px;
+}
+
+.allcardsPreview{
+    display: flex;
+    margin: 15px;
+    flex-wrap: wrap;
+    align-content: center;
+    align-items: center;
+    position: relative;
+    justify-content: space-around;
+}
+
+.imgPreview{
+    width: 325px;
+    height: 220px;
+    background-size: cover;
+    padding: 15px;
+    margin: auto;
+}
+
+.UploadButton{
+    width: 130px;
+    height: 50px;
+    padding: 50px;
+}
+
+.titleButtonWrapper{
+    display: flex;
+    align-items: center;
+    align-content:flex-start;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.deleteButton{
+    position: absolute;
+    top: -290px;
+    right: 125px;
+   
+}
+
+.photoContainer{
+    position: relative;
+    display: inline-block;
+    text-align: center;
+    margin-left: 30px;
+
+}
+
+.folder:hover,.textboxdrop:hover{
+    cursor: pointer;
+}
+
+.facilitiename1{
+    z-index: 1;
+    color: beige;
+    position: absolute;
+    bottom: 15px;
+    right: 17px;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+.facilitiename2{
+    z-index: 1;
+    color: beige;
+    position: absolute;
+    bottom: 15px;
+    right: 125px;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+.dropzone{
+    width: 500px;
+    height: 200px;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    margin: auto;
+    margin-top: 50px;
+    margin-bottom: 150px;
+    padding: 20px;
+    border: 3px dashed #eeeeee;
+    background-color: #fafafa;
+    color: #bdbdbd;
+}
+
+.wrapperDropnInput{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    /* align-items: center; */
+}
+
+.wrapperForm{
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content:first baseline
+}
+.error{
+    color: red;
+}

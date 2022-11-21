@@ -1,0 +1,74 @@
+.mainContainer {
+	position: relative;
+	display: flex;
+	gap: 24px;
+	justify-content: space-between;
+	color: var(--black-color);
+}
+
+.imgContainer {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100px;
+	width: 100px;
+}
+
+.imgContainer img {
+	max-width: 100px;
+	max-height: 100px;
+}
+
+.infoContainer {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+	width: 170px;
+	justify-content: center;
+}
+
+.infoContainer h1 {
+	margin: 0px;
+	font-size: 24px;
+	font-weight: 600;
+}
+
+.infoContainer h3 {
+	margin: 0px;
+	font-size: 16px;
+	font-weight: 400;
+}
+
+.quantitySelectorContainer {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 6px;
+}
+
+.quantitySelectorContainer h3 {
+	margin: 0px;
+	font-size: 14px;
+	font-weight: 400;
+}
+
+.priceContainer {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 110px;
+}
+
+.priceContainer h2 {
+	margin: 0px;
+	font-size: 20px;
+	font-weight: 600;
+}
+
+.closeIcon {
+	position: absolute;
+	right: 0px;
+	top: 0px;
+}

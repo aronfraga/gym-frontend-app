@@ -1,0 +1,61 @@
+:root {
+	--primary-color: #18a0fb;
+	--secondary-color: #a0d9ff;
+	--tertiary-color: #4966ff;
+	--white-color: #f0f0f0;
+	--white-color2: #fafafa;
+}
+
+.mainContainer {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	position: relative;
+	margin: 0px auto;
+	border: 2px solid var(--primary-color);
+	background-color: var(--white-color2);
+	height: fit-content;
+	max-height: 220px;
+	width: 160px;
+	border-radius: 6px;
+}
+
+/* Quitar la scrollBar */
+.checksContainer::-webkit-scrollbar {
+  display: none;
+}
+
+.checksContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 50px;
+  overflow-y: scroll;
+  padding: 0px 12px 12px 12px;
+}
+
+.titleContainer {
+	display: flex;
+	position: absolute;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	border-radius: 4px 4px 0 0;
+	height: 50px;
+	background-color: var(--white-color2);
+	z-index: 1;
+}
+
+.titleContainer h3 {
+  margin: 0 0 6px 0;
+  font-size: 20px;
+  text-align: center;
+  color: var(--primary-color);
+}
+
+.allContainer {
+  display: flex;
+  flex-direction: column;
+  row-gap: 12px;
+  max-width: fit-content;
+}

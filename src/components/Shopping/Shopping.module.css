@@ -1,0 +1,62 @@
+.mainContainer {
+	margin-top: 24px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.shopCartContainer {
+	display: flex;
+	background-color: white;
+	box-shadow: 2px 2px 10px rgb(129, 129, 129);
+	border-radius: 10px;
+	gap: 24px;
+	padding: 24px;
+	width: fit-content;
+	height: fit-content;
+}
+
+.cardsContainer {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+	width: 600px;
+}
+
+.infoContainer {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+	width: fit-content;
+	height: fit-content;
+	color: var(--black-color);
+}
+
+.infoContainer h1 {
+	margin: 0px;
+	font-size: 24px;
+	font-weight: 600;
+}
+
+.priceContainer h2 {
+	margin: 0px;
+	font-size: 18px;
+	font-weight: 500;
+}
+
+.priceContainer hr {
+	border-radius: 10px;
+	background-color: var(--primary-color);
+	border-color: var(--primary-color);
+}
+
+.total {
+	font-size: 20px;
+	font-weight: 600;
+}
+
+.buttonContainer {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}

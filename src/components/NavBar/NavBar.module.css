@@ -1,0 +1,22 @@
+.logo {
+    height: 50px;
+    width: 50px;
+}
+
+.mainContainer{
+    padding-left: 0px;
+    padding-right: 0px;
+}
+.toolBar {
+    
+    width: 97.5%;
+   padding-left: 0px;
+}
+
+.appGym {
+    display: flex;
+    align-items: center;
+    left: 0px;
+    
+}
+

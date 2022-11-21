@@ -1,0 +1,119 @@
+:root {
+    --primary-blue: #18a0fb;
+}
+
+.footer {
+    margin: 0;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	background-color: var(--primary-blue);
+	color: white;
+	display: flex;
+	align-content: center;
+	flex-direction: column;
+}
+
+.footerR1 {
+	display: flex;
+	align-items: stretch;
+	flex-wrap: wrap;
+	flex-direction: row;
+	justify-content: space-around;
+}
+
+.logo {
+	display: flex;
+	align-items: center;
+	margin: 15px;
+	padding: 5px;
+	flex-basis: 20%;
+	font-family: Roboto, 'Open Sans', sans-serif;
+}
+
+.containerfooterLinks {
+	display: flex;
+	padding: 20px;
+	margin-left: 65px;
+	justify-content: flex-start;
+	flex-direction: column;
+	flex-basis: 25%;
+}
+
+.Links {
+	text-decoration: none;
+	font-family: Roboto, 'Open Sans', sans-serif;
+	font-style: normal;
+	font-weight: 400;
+	font-size: 20px;
+	line-height: 22px;
+    max-width: 150px;
+	display: flex;
+	align-items: center;
+	text-align: center;
+	letter-spacing: -0.015em;
+	color: white;
+}
+.Links:hover{
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+.googlemap {
+	max-width: 350px;
+	align-items: center;
+	margin-right: 5px;
+	padding: 10px;
+	flex-basis: 33%;
+}
+.googlemapbox{
+    border-radius: 5px;
+}
+
+.footerR2 {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.icons{
+    margin: 5px;
+}
+.icons:hover{
+    transform: scale(1.15);
+}
+
+.footerR3 {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-family: Roboto, 'Open Sans', sans-serif;
+	font-style: normal;
+	font-weight: 300;
+}
+
+@media screen and (max-width: 450px) {
+    .googlemap {
+       display: none;
+    }
+    .logo {
+        display: none;
+    }
+    .containerfooterLinks {
+        margin-left: 0px;
+        display: flex;
+	    align-items: center;
+        justify-content: center;
+        
+    }
+    .Links{
+        font-weight: 400;
+        font-size: 22px;
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+    .footerR3{
+        display: flex;
+	    align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+  }

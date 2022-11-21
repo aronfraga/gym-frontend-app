@@ -1,0 +1,16 @@
+:root {
+	--primary-color: #18a0fb;
+	--hover-primary: #2785c3;
+	--secondary-color: #a0d9ff;
+	--tertiary-color: #4966ff;
+	--white-color: #f0f0f0;
+	--white-color2: #fafafa;
+	--gray-color: #dadada;
+	--black-color: #2d2d2d;
+}
+
+body {
+	margin: 0px;
+	background-color: var(--white-color2);
+	font-family: Roboto, 'Open Sans', sans-serif;
+}
