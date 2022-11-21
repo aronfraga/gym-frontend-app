@@ -17,30 +17,31 @@ import { setCartCount } from '../../redux/slices/defaultSlice';
 import { useSelector, useDispatch } from 'react-redux';
 
 const ExpandMore = styled((props) => {
-	const { expand, ...other } = props;
-	return <IconButton {...other} />;
+  const { expand, ...other } = props;
+  return <IconButton {...other} />;
 })(({ theme, expand }) => ({
-	transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
-	marginLeft: 'auto',
-	transition: theme.transitions.create('transform', {
-		duration: theme.transitions.duration.shortest,
-	}),
+  transform: !expand ? "rotate(0deg)" : "rotate(180deg)",
+  marginLeft: "auto",
+  transition: theme.transitions.create("transform", {
+    duration: theme.transitions.duration.shortest,
+  }),
 }));
 
 const ProductCard = ({ id, title, unit_price, description, picture_url }) => {
+
 	const dispatch = useDispatch();
 	const { cart_count } = useSelector((state) => state.cart_count);
 	const [expanded, setExpanded] = useState(false);
 	const [favorite, setFavorite] = useState(false);
 
-	const handlerFavorite = (event) => {
-		favorite ? setFavorite(false) : setFavorite(true);
-		console.log(favorite, 'favorite');
-	};
+  const handlerFavorite = (event) => {
+    favorite ? setFavorite(false) : setFavorite(true);
+    console.log(favorite, "favorite");
+  };
 
-	const handleExpandClick = () => {
-		setExpanded(!expanded);
-	};
+  const handleExpandClick = () => {
+    setExpanded(!expanded);
+  };
 
 	const handlerSaveInCheckOut = (event) => {
 		event.preventDefault();
