@@ -3,7 +3,6 @@ import Routine from "../Routine/Routine";
 import style from "./AllRoutines.module.css";
 
 const AllRoutines = ({ routines }) => {
-  console.log(routines);
   return (
     <div className={style.mainContainer}>
       {routines?.map((rutine, i) => (
