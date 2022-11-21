@@ -2,13 +2,13 @@ import React from 'react';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import style from './Filters.module.css';
-import { useGetFilteredByPriceMutation } from '../../redux/query/ApiEcommerce';
-import { useGetFilteredByCategoryQuery } from '../../redux/query/ApiEcommerce';
+//import { useGetFilteredByPriceMutation } from '../../redux/query/ApiEcommerce';
+//import { useGetFilteredByCategoryQuery } from '../../redux/query/ApiEcommerce';
 //import { useGetFilteredByCategoryMutation } from '../../redux/query/ApiEcommerce';
 
 const Filters = ({ title, filters, type }) => {
 
-	const [ filterByPrice ] = useGetFilteredByPriceMutation();
+	//const [ filterByPrice ] = useGetFilteredByPriceMutation();
 	
 	//const [ filterByCategory ] = useGetFilteredByCategoryMutation();
 

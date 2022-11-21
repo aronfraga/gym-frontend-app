@@ -31,4 +31,4 @@ export const ApiEcommerce = createApi({
   }),
 });
 
-export const { useGetAllProductsQuery } = ApiEcommerce;
+export const { useGetAllProductsQuery, useGetFilteredByCategoryQuery } = ApiEcommerce;
