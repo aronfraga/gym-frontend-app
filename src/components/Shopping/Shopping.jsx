@@ -29,7 +29,7 @@ const productsInCar = [
 	},
 	{
 		id: 3,
-		title: 'Remera Animal',
+		title: 'Remera Animal 2131234123 adsd d2dasd we adas',
 		unit_price: 2500,
 		quantity: 1,
 		category: 'Indumentaria',

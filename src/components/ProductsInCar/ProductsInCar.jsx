@@ -29,7 +29,7 @@ const ProductsInCar = ({
 			</div>
 
 			<div className={style.priceContainer}>
-				<h2>${price} ARS</h2>
+				<h2>${price}</h2>
 			</div>
 
 			<div className={style.closeIcon}>
