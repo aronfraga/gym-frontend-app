@@ -50,7 +50,7 @@ const labels = {
 
 
 const dataGym = [
-    "Intalaciones",
+    'Intalaciones',
     'Maquinas',
     'Servicios',
     'Staff',
@@ -83,7 +83,7 @@ const FeedBack = () => {
     // const dispatch = useDispatch()
     // const { staff } = useSelector((state) => state.staff);
     const { data: staff, isLoading } = useGetAllStaffQuery()
-    console.log(staff)
+
     const [addFeedback, { data }] = useAddFeedbackMutation()
     const navigate = useNavigate()
     const theme = useTheme();
@@ -91,16 +91,20 @@ const FeedBack = () => {
         title: [],
         staff: "",
         description: "",
-        score: 0
+        score: 0,
+        staffId: 0,
     });
 
-    // useEffect(() => {
-    //     dispatch(getAllStaff())
-
-    // }, [dispatch])
 
     const handleChange = (event) => {
-        if (event.target.name === "score") {
+        if (event.target.name === "staff") {
+            setInput({
+                ...input,
+                [event.target.name]: event.target.value.name,
+                staffId: event.target.value.id,
+            })
+
+        } else if (event.target.name === "score") {
             const number = Number(event.target.value)
             setInput({
                 ...input,
@@ -113,6 +117,7 @@ const FeedBack = () => {
             })
         }
 
+
     };
 
 
@@ -123,13 +128,15 @@ const FeedBack = () => {
             title: input.title,
             staff: input.staff,
             description: input.description,
-            score: input.score
+            score: input.score,
+            staffId: input.staffId
         }).unwrap();
         setInput({
             title: [],
             staff: "",
             description: "",
-            score: 0
+            score: 0,
+            staffId: 0,
         })
         alert("Gracias por dejarnos tu Feedback")
         navigate("/home")
@@ -188,40 +195,35 @@ const FeedBack = () => {
                             </Select>
 
                             {(input.title === "Staff") &&
-                                <>
-                                    <InputLabel sx={{ m: 0.3, width: 300, marginTop: 52.5 }} id="demo-multiple-chip-label"  >Seleciona un apartado </InputLabel>
-                                    <FormGroup>
-                                        <Select className={style.selectStaff}
+                                <Select className={style.selectStaff}
 
-                                            id="input-base"
-                                            name="staff"
-                                            // displayEmpty
-                                            value={input.staff}
-                                            onChange={handleChange}
-                                            input={<OutlinedInput />}
-                                            renderValue={(selected) => {
-                                                if (selected.length === 0) {
-                                                    return <em>Staff</em>;
-                                                }
-                                                return selected
-                                            }}
-                                            MenuProps={MenuProps}
-                                            inputProps={{ 'aria-label': 'Without label' }}
-                                        >
-                                            <MenuItem disabled value="">
-                                                <em>Staff</em>
-                                            </MenuItem>
-                                            {staff?.map((value) => (
-                                                <MenuItem value={value.name} key={value.id} >
-                                                    {value.name}
-                                                </MenuItem>
-                                            )
-                                            )}
-                                        </Select>
-                                    </FormGroup>
-
-                                </>
+                                    id="input-base"
+                                    name="staff"
+                                    // displayEmpty
+                                    value={input.staff}
+                                    onChange={handleChange}
+                                    renderValue={(selected) => {
+                                        if (selected.length === 0) {
+                                            return <em>Staff</em>;
+                                        }
+                                        return selected
+                                    }}
+                                    MenuProps={MenuProps}
+                                // inputProps={{ 'aria-label': 'Without label' }}
+                                >
+                                    <MenuItem disabled value="">
+                                        <em>Staff</em>
+                                    </MenuItem>
+                                    {staff?.map((value, i) => (
+                                        <MenuItem value={value} key={i} >
+                                            {value.name}
+                                        </MenuItem>
+                                    )
+                                    )}
+                                </Select>
                             }
+
+
 
                             <Box required sx={{
                                 width: 300,
