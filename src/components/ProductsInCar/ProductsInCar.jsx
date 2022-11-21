@@ -11,7 +11,16 @@ const ProductsInCar = ({
 	category,
 	description,
 	imgUrl,
+	render,
 }) => {
+
+	
+	function hendlerDelete(event) {
+		event.preventDefault();
+		console.log(title)
+		localStorage.removeItem(`item_${title}`);
+		render(title);
+	}
 	return (
 		<div className={style.mainContainer}>
 			<div className={style.imgContainer}>
@@ -32,7 +41,7 @@ const ProductsInCar = ({
 			</div>
 
 			<div className={style.closeIcon}>
-				<IconButton aria-label='close' size='small'>
+				<IconButton onClick={(event) => hendlerDelete(event)} aria-label='close' size='small'>
 					<CloseIcon sx={{ color: '#0d0d0d' }} fontSize='inherit' />
 				</IconButton>
 			</div>
