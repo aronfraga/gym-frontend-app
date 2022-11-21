@@ -57,9 +57,14 @@ export const fetchDeleteImages = (value) => {
 };
 
 export const productToPay = (data) => {
-  return async () => {  
-    console.log(data)
-      const response = await axios.post('http://localhost:3001/payment', data);
+  return async () => {   
+    const token = getToken().token;   
+    console.log(token);
+      const response = await axios.post('http://localhost:3001/payment', data, {
+        headers: {
+          authorization: `Bearer ${token}`
+        }
+      });
       return window.location.assign(`${response.data.init_point}`);
   }
 }
