@@ -1,19 +1,10 @@
-:root {
-	--primary-color: #18a0fb;
-	--secondary-color: #a0d9ff;
-	--tertiary-color: #4966ff;
-	--white-color: #f0f0f0;
-	--white-color2: #fafafa;
-	--gray-color: #dadada;
-}
-
 .mainContainer {
 	position: relative;
 	display: flex;
-	/* background-color: #ff5050; */
 	gap: 24px;
 	justify-content: space-between;
 	padding-right: 12px;
+	color: var(--black-color);
 }
 
 .imgContainer {
@@ -53,6 +44,7 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	gap: 6px;
 }
 
 .quantitySelectorContainer h3 {

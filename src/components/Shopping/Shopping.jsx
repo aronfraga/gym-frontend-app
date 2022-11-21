@@ -79,8 +79,25 @@ const Shopping = () => {
 							<h1 className={style.total}>Total: $ {total}</h1>
 						</div>
 						<div className={style.buttonContainer}>
-							<Button variant='contained'>Comprar</Button>
-							{/* <Button variant='outlined'>Vaciar carrito</Button> */}
+							<Button
+								variant='contained'
+								sx={{
+									backgroundColor: '#18a0fb',
+									'&:hover': {
+										background: '#2785c3',
+									},
+								}}
+							>
+								Comprar
+							</Button>
+							<Button
+								variant='outlined'
+								sx={{
+									borderColor: '#18a0fb',
+								}}
+							>
+								Vaciar carrito
+							</Button>
 						</div>
 					</div>
 				</div>

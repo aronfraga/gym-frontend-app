@@ -2,6 +2,7 @@ import React from 'react';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import style from './ProductsInCar.module.css';
+import QuantitySelector from '../QuantitySelector/QuantitySelector';
 
 const ProductsInCar = ({
 	id,
@@ -32,7 +33,7 @@ const ProductsInCar = ({
 			</div>
 
 			<div className={style.quantitySelectorContainer}>
-				<div>Selector</div>
+				<QuantitySelector stock={stock} />
 				<h3>Disponible: {stock}</h3>
 			</div>
 
