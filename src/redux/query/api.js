@@ -4,8 +4,8 @@ import { getToken } from "../../services/cookies";
 export const ApiQuery = createApi({
   reducerPath: "ApiQuery",
   baseQuery: fetchBaseQuery({
-    // baseUrl: 'https://appgymbackend-production.up.railway.app'
-    baseUrl: "http://localhost:3001",
+    baseUrl: 'https://appgymbackend-production.up.railway.app/',
+    //baseUrl: "http://localhost:3001",
     prepareHeaders: (headers, { getState }) => {
       const token = getToken().token;
       // If we have a token set in state, let's assume that we should be passing it.

@@ -4,8 +4,8 @@ import { getToken } from "../../services/cookies";
 export const ApiEcommerce = createApi({
   reducerPath: "ecommerce",
   baseQuery: fetchBaseQuery({
-    // baseUrl: 'https://appgymbackend-production.up.railway.app'
-    baseUrl: "http://localhost:3001",
+    baseUrl: 'https://appgymbackend-production.up.railway.app/',
+    //baseUrl: "http://localhost:3001",
     prepareHeaders: (headers) => {
       const token = getToken().token;
         if (token) headers.set("authorization", `Bearer ${token}`);
