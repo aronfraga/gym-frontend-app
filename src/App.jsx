@@ -21,17 +21,17 @@ function App() {
 				<Route path='*' element={<PageNotFound />} />
 				<Route exact path='/' element={<Landing />} />
 				<Route path='/home' element={<Home />} />
-{/* 				<Route path='/tienda' element={<Shop />} />
+				<Route path='/tienda' element={<Shop />} />
 				<Route path='/tienda/carrito' element={<Shopping />} />
 				<Route path='/rutinas' element={<Routines />} />
 				<Route path='/rutinas/:id' element={<DetailRoutine />} />
 				<Route path='/rutinas/crear' element={<FormRoutines />} />
 				<Route path='/staff' element={<Staff />} />
-				<Route path='/instalaciones' element={<Facilities />} /> */}
+				<Route path='/instalaciones' element={<Facilities />} />
 				{/* <Route path='/seguimiento' element={<Home />} />
 				<Route path='/clases' element={<Home />} /> */}
-{/* 				<Route path='/feedback' element={<FeedBack />} />
-				<Route path='/planes' element={<Planes />} /> */}
+				<Route path='/feedback' element={<FeedBack />} />
+				<Route path='/planes' element={<Planes />} />
 				{/* <Route path='/:id' element={<Home />} /> */}
 			</Routes>
 		</BrowserRouter>
