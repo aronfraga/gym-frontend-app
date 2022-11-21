@@ -18,6 +18,7 @@ export const ApiEcommerce = createApi({
         url: "/products",
         method: "get",
       }),
+      keepUnusedDataFor: 0,
     }),
     getFilteredByPrice: builder.mutation({ // agus esta es la que arme yo
       query: (dataMin, dataMax) => ({

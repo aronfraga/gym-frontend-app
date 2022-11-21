@@ -62,7 +62,6 @@ const Shop = () => {
 				pending: "http://www.pending.com/"
 			}
 		}
-		console.log(data[0])
 		dispatch(productToPay(checkOut))
 	}
 
