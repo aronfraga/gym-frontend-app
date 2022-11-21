@@ -6,7 +6,45 @@ import Button from '@mui/material/Button';
 import ProductsInCar from '../ProductsInCar/ProductsInCar';
 import style from './Shopping.module.css';
 
+
+const productsInCar = [
+	{
+		id: 1,
+		title: 'Remera Animal',
+		unit_price: 2200,
+		quantity: 5,
+		category: 'Indumentaria',
+		description:
+			'Remera fit con la cara del futuro del Bodybuilding Manu Casanueva',
+		imgUrl:
+			'https://http2.mlstatic.com/D_NQ_NP_780600-MLA51811641970_102022-O.webp',
+	},
+	{
+		id: 2,
+		title: 'Remera Animal',
+		unit_price: 2000,
+		quantity: 3,
+		category: 'Indumentaria',
+		description:
+			'Remera fit con la cara del futuro del Bodybuilding Manu Casanueva',
+		imgUrl:
+			'https://http2.mlstatic.com/D_NQ_NP_613482-MLA52418021813_112022-O.webp',
+	},
+	{
+		id: 3,
+		title: 'Remera Animal 2131234123 adsd d2dasd we adas',
+		unit_price: 2500,
+		quantity: 1,
+		category: 'Indumentaria',
+		description:
+			'Remera fit con la cara del futuro del Bodybuilding Manu Casanueva',
+		imgUrl:
+			'https://http2.mlstatic.com/D_NQ_NP_613482-MLA52418021813_112022-O.webp',
+	},
+];
+
 const Shopping = () => {
+
 
 	let total = 0;
 	const [ item, setItem ] = useState([]);
