@@ -6,7 +6,7 @@ const ContainerFilters = ({ filters }) => {
 	return (
 		<div className={style.mainContainer}>
 			{filters?.map((filter, i) => (
-				<Filters key={i} title={filter.title} filters={filter.filters} />
+				<Filters key={i} title={filter.title} filters={filter.filters} type={i}/>
 			))}
 		</div>
 	);

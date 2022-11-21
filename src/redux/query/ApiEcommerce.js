@@ -8,7 +8,7 @@ export const ApiEcommerce = createApi({
     baseUrl: "http://localhost:3001",
     prepareHeaders: (headers) => {
       const token = getToken().token;
-      if (token) headers.set("authorization", `Bearer ${token}`);
+        if (token) headers.set("authorization", `Bearer ${token}`);
       return headers;
     },
   }),
@@ -20,6 +20,13 @@ export const ApiEcommerce = createApi({
         body: { filters: data },
       }),
       keepUnusedDataFor: 0,
+    }),
+    getFilteredByCategory: builder.query({
+      query: (data) => ({
+        url: "/products/filter",
+        method: "post",
+        body: data,
+      }),
     }),
   }),
 });

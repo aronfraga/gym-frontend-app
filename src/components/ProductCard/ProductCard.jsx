@@ -57,7 +57,6 @@ const ProductCard = ({ id, title, unit_price, description, picture_url }) => {
     );
     dispatch(setCartCount());
   };
-
   return (
     <Card
       className={style.cardProduct}
@@ -121,6 +120,7 @@ const ProductCard = ({ id, title, unit_price, description, picture_url }) => {
       </Collapse>
     </Card>
   );
+
 };
 
 export default ProductCard;

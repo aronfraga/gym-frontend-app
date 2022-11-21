@@ -1,14 +1,25 @@
-import React, { useState } from 'react';
+import React from 'react';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import style from './Filters.module.css';
+import { useGetFilteredByPriceMutation } from '../../redux/query/ApiEcommerce';
+import { useGetFilteredByCategoryQuery } from '../../redux/query/ApiEcommerce';
+//import { useGetFilteredByCategoryMutation } from '../../redux/query/ApiEcommerce';
 
-const Filters = ({ title, filters }) => {
+const Filters = ({ title, filters, type }) => {
+
+	const [ filterByPrice ] = useGetFilteredByPriceMutation();
+	
+	//const [ filterByCategory ] = useGetFilteredByCategoryMutation();
+
+	//const [ filterByCategory ] = useGetFilteredByCategoryQuery()
+
 	const handlerCheck = (event) => {
 		let checked = event.target.checked;
 		let value = event.target.value;
-
-		checked && console.log(value);
+			//if(checked && type === 0) filterByCategory({ filters: { value } });
+			//if(checked && type === 0) filterByCategory({ filters: { value } });
+			//if(checked && type === 1) filterByPrice(valueMin, valueMax);
 	};
 
 	return (

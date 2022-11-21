@@ -20,6 +20,7 @@ import {
 import style2 from "./Filters.module.css";
 
 const Shop = () => {
+
   const dispatch = useDispatch();
 
   function handlerCheckOutBuy(event) {
@@ -95,6 +96,7 @@ const Shop = () => {
   };
 
   const aux = {};
+
 
   for (const a in input) {
     if (input[a].length > 0 || input[a] > 0) aux[a] = input[a];
