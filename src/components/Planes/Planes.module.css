@@ -5,8 +5,9 @@
 	--white-color: #f0f0f0;
 	--white-color2: #fafafa;
 }
+
 .sectionMain {
-	background-color: var(--white-color2);
+	background-color: white;
 }
 
 .mainContainer {

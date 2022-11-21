@@ -1,5 +1,14 @@
+:root {
+	--primary-color: #18a0fb;
+	--secondary-color: #a0d9ff;
+	--tertiary-color: #4966ff;
+	--white-color: #f0f0f0;
+	--white-color2: #fafafa;
+	--gray-color: #dadada;
+}
+
 body {
 	margin: 0px;
-	background-color: #ffffff;
+	background-color: var(--white-color2);
 	font-family: Roboto, 'Open Sans', sans-serif;
 }
