@@ -10,7 +10,7 @@ const ShoppingCart = () => {
 
     return (
         <div className={style.ShoppingCart}>
-            <Link style={{ color: "black" }}>
+            <Link to={'/tienda/carrito'} style={{ color: "#017FFE" }}>
                 <ShoppingCartIcon />
                 <span className={style.cartspan}>{cart_count}</span>
             </Link>

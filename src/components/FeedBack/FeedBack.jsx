@@ -211,8 +211,8 @@ const FeedBack = () => {
                                             <MenuItem disabled value="">
                                                 <em>Staff</em>
                                             </MenuItem>
-                                            {staff?.map((value, i) => (
-                                                <MenuItem value={value.name} key={i} >
+                                            {staff?.map((value) => (
+                                                <MenuItem value={value.name} key={value.id} >
                                                     {value.name}
                                                 </MenuItem>
                                             )
