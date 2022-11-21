@@ -29,8 +29,7 @@ const Shopping = () => {
 	function handlerCheckOutBuy(event) {
     event.preventDefault();
     const checkOut = {
-      // array no puede ser vacio, reveer notification, pagina thankyou
-      items: "items",
+      items: item,
       auto_return: "approved",
       notification_url: "https://www.success.com/",
       back_urls: {
@@ -41,7 +40,6 @@ const Shopping = () => {
     };
     dispatch(productToPay(checkOut));
   }
-
 	
 	for (var i = 0; i < item.length; i++) {
 		total = total + item[i].unit_price
@@ -80,6 +78,7 @@ const Shopping = () => {
 						</div>
 						<div className={style.buttonContainer}>
 							<Button
+								onClick={(event) => handlerCheckOutBuy(event)}
 								variant='contained'
 								sx={{
 									backgroundColor: '#18a0fb',
@@ -90,14 +89,14 @@ const Shopping = () => {
 							>
 								Comprar
 							</Button>
-							<Button
+							{/* <Button 
 								variant='outlined'
 								sx={{
 									borderColor: '#18a0fb',
 								}}
 							>
 								Vaciar carrito
-							</Button>
+							</Button> */}
 						</div>
 					</div>
 				</div>
