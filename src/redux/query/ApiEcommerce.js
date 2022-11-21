@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { getToken } from '../../services/cookies';
+import { getToken } from "../../services/cookies";
 
 export const ApiEcommerce = createApi({
   reducerPath: "ecommerce",
@@ -14,18 +14,12 @@ export const ApiEcommerce = createApi({
   }),
   endpoints: (builder) => ({
     getAllProducts: builder.query({
-      query: () => ({
-        url: "/products",
-        method: "get",
-      }),
-      keepUnusedDataFor: 0,
-    }),
-    getFilteredByPrice: builder.mutation({ // agus esta es la que arme yo
-      query: (dataMin, dataMax) => ({
+      query: (data) => ({
         url: "/products/filter",
         method: "post",
-        body: { filters: { min: dataMin, max: dataMax }},
+        body: { filters: data },
       }),
+      keepUnusedDataFor: 0,
     }),
     getFilteredByCategory: builder.query({
       query: (data) => ({
@@ -37,4 +31,4 @@ export const ApiEcommerce = createApi({
   }),
 });
 
-export const { useGetAllProductsQuery, useGetFilteredByPriceMutation, useGetFilteredByCategoryQuery } = ApiEcommerce;
+export const { useGetAllProductsQuery } = ApiEcommerce;

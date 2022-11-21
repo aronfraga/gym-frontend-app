@@ -22,8 +22,6 @@ const Routine = ({
   const [addToFavorite] = useSetFavoritesMutation();
   const [favorite, setFavorite] = useState(flagFav);
 
-  console.log(name, flagFav);
-
   const handlerFavorite = (event) => {
     favorite && flagFav ? setFavorite(false) : setFavorite(true);
     addToFavorite(id);

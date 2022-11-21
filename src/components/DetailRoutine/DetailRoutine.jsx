@@ -1,4 +1,3 @@
-
 import React from "react";
 import NavBar from "../NavBar/NavBar";
 import style from "./DetailRoutine.module.css";
@@ -13,7 +12,7 @@ import { Button } from "@mui/material";
 const DetailRoutine = () => {
   const { id } = useParams();
   const { data: routineDetail, isLoading } = useGetRoutinesByIdQuery(id);
-
+  console.log(routineDetail);
   let excerciseDays;
 
   excerciseDays = routineDetail?.excercises?.map((exercise) => exercise.day);
@@ -23,16 +22,22 @@ const DetailRoutine = () => {
   if (isLoading) return <Loading />;
   return (
     <div>
-      <NavBar />
       <div className={style.mainContainer}>
         <div className={style.cardContainer}>
           <div className={style.infoContainer}>
-            <Link to="/rutinas" state={{ keepFilter: true }}>
+            <Link
+              to="/rutinas"
+              state={{ keepFilter: true }}
+              style={{ textDecoration: "none" }}
+            >
               <Button variant="contained">Rutinas</Button>
+            </Link>
+            <Link to="/home" style={{ textDecoration: "none" }}>
+              <Button variant="contained">Inicio</Button>
             </Link>
             <img
               className={style.imgClass}
-              src="https://bestlifeonline.com/wp-content/uploads/sites/3/2017/07/shutterstock_401309230.jpg?quality=82&strip=all"
+              src={routineDetail?.imgUrl}
               alt="press banca"
             />
             <div className={style.titlesContainer}>
@@ -95,10 +100,7 @@ const DetailRoutine = () => {
                       <Excercise
                         key={excercise.id}
                         name={excercise.name}
-                        // gif={excercise.gif}
-                        gif={
-                          "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/bench-press-1568117208.gif"
-                        }
+                        gif={excercise.gifUrl}
                         series={excercise.series}
                         repetitions={excercise.repetitions}
                         muscle={excercise.muscle}
@@ -118,10 +120,7 @@ const DetailRoutine = () => {
                       <Excercise
                         key={excercise.id}
                         name={excercise.name}
-                        // gif={excercise.gif}
-                        gif={
-                          "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/bench-press-1568117208.gif"
-                        }
+                        gif={excercise.gifUrl}
                         series={excercise.series}
                         repetitions={excercise.repetitions}
                         muscle={excercise.muscle}
@@ -141,10 +140,7 @@ const DetailRoutine = () => {
                       <Excercise
                         key={excercise.id}
                         name={excercise.name}
-                        // gif={excercise.gif}
-                        gif={
-                          "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/bench-press-1568117208.gif"
-                        }
+                        gif={excercise.gifUrl}
                         series={excercise.series}
                         repetitions={excercise.repetitions}
                         muscle={excercise.muscle}
@@ -164,10 +160,7 @@ const DetailRoutine = () => {
                       <Excercise
                         key={excercise.id}
                         name={excercise.name}
-                        // gif={excercise.gif}
-                        gif={
-                          "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/bench-press-1568117208.gif"
-                        }
+                        gif={excercise.gifUrl}
                         series={excercise.series}
                         repetitions={excercise.repetitions}
                         muscle={excercise.muscle}
@@ -187,10 +180,7 @@ const DetailRoutine = () => {
                       <Excercise
                         key={excercise.id}
                         name={excercise.name}
-                        // gif={excercise.gif}
-                        gif={
-                          "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/bench-press-1568117208.gif"
-                        }
+                        gif={excercise.gifUrl}
                         series={excercise.series}
                         repetitions={excercise.repetitions}
                         muscle={excercise.muscle}
@@ -210,10 +200,7 @@ const DetailRoutine = () => {
                       <Excercise
                         key={excercise.id}
                         name={excercise.name}
-                        // gif={excercise.gif}
-                        gif={
-                          "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/bench-press-1568117208.gif"
-                        }
+                        gif={excercise.gifUrl}
                         series={excercise.series}
                         repetitions={excercise.repetitions}
                         muscle={excercise.muscle}
@@ -233,10 +220,7 @@ const DetailRoutine = () => {
                       <Excercise
                         key={excercise.id}
                         name={excercise.name}
-                        // gif={excercise.gif}
-                        gif={
-                          "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/bench-press-1568117208.gif"
-                        }
+                        gif={excercise.gifUrl}
                         series={excercise.series}
                         repetitions={excercise.repetitions}
                         muscle={excercise.muscle}
@@ -251,7 +235,6 @@ const DetailRoutine = () => {
       </div>
     </div>
   );
-
 };
 
 export default DetailRoutine;

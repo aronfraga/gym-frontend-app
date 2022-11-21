@@ -44,12 +44,15 @@ const items = [
       {
         Name: "Rutinas",
         Image:
-          "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/man-training-biceps-in-gym-royalty-free-image-1582219230.jpg?resize=480:*",
+          "https://mejorconsalud.as.com/fitness/wp-content/uploads/2018/09/rutina-3-dias-semana-para-mujeres.jpg",
+
+        // "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/man-training-biceps-in-gym-royalty-free-image-1582219230.jpg?resize=480:*",
       },
       {
         Name: "Rutinas2",
         Image:
-          "https://mejorconsalud.as.com/fitness/wp-content/uploads/2018/09/rutina-3-dias-semana-para-mujeres.jpg",
+          // "https://mejorconsalud.as.com/fitness/wp-content/uploads/2018/09/rutina-3-dias-semana-para-mujeres.jpg",
+          "          https://media.discordapp.net/attachments/1037733682099802113/1044045560199532654/unknown.png?width=723&height=482",
       },
     ],
   },
