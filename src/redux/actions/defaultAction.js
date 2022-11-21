@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { setCurrentPage, setTokenExpired, getcloudImages, deletecloudImages, getAllStaff } from '../slices/defaultSlice';
+import { setCurrentPage, setTokenExpired, getcloudImages, deletecloudImages, getAllStaff, setCheckOutProducts } from '../slices/defaultSlice';
 import { setToken } from '../../services/cookies';
 import { Buffer } from "buffer";
 import { getToken } from '../../services/cookies';
@@ -79,4 +79,10 @@ export const fetchGetAllStaff = () =>{
     return dispatch(getAllStaff(staffArray));
     }
   
+}
+
+export const checkOutProduct = (data) => {
+  return (dispatch) => {
+    dispatch(setCheckOutProducts(data));
+  }
 }

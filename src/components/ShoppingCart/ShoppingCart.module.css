@@ -10,7 +10,7 @@
 }
 
 .cartspan{
-	border-radius: 0.8em;
+	border-radius: 0.6em;
 	-moz-border-radius: 0.8em;
 	-webkit-border-radius: 0.8em;
 	color: white;
@@ -22,6 +22,6 @@
 	text-align: center;
 	width: 1.6em; 
 	-webkit-box-shadow: 4px 10px 15px -3px rgba(0,0,0,0.51);
--moz-box-shadow: 4px 10px 15px -3px rgba(0,0,0,0.51);
-box-shadow: 4px 10px 15px -3px rgba(0,0,0,0.51);
+	-moz-box-shadow: 4px 10px 15px -3px rgba(0,0,0,0.51);
+	box-shadow: 4px 10px 15px -3px rgba(0,0,0,0.51);
   }
