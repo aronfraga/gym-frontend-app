@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { useGetAllProductsQuery } from "../../redux/query/ApiEcommerce";
 import HeaderBtn from "../HeaderBtn/HeaderBtn";
 import ContainerFilters from "../ContainerFilters/ContainerFilters";
@@ -6,7 +7,7 @@ import NavBar from "../NavBar/NavBar";
 import Products from "../Products/Products";
 import style from "./Shop.module.css";
 import Loading from "../Loading/Loading";
-import { productToPay } from "../../redux/actions/defaultAction";
+import { productToPay, checkOutProduct } from "../../redux/actions/defaultAction";
 import { useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { Productos, Price } from "./DatosFilter";
@@ -101,7 +102,7 @@ const Shop = () => {
   for (const a in input) {
     if (input[a].length > 0 || input[a] > 0) aux[a] = input[a];
   }
-  console.log(aux);
+
   const { data, isLoading } = useGetAllProductsQuery(aux);
 
   if (isLoading) return <Loading />;
@@ -180,7 +181,10 @@ const Shop = () => {
       <br />
       <br />
       <br />
-      <button onClick={(event) => handlerCheckOutBuy(event)}>Carrito</button>
+      <Link to='/tienda/carrito'>
+      <button>Carrito</button>
+      </Link>
+        
       <button onClick={(event) => handlerDirectBuy(event, data)}>
         Compra Directa
       </button>
