@@ -17,7 +17,8 @@ export const setPage = (data) => {
 export const tokenRequest = (data) => {
   return async (dispatch) => {  
     try {
-      const response = await axios.post('http://localhost:3001/login', data);
+      //const response = await axios.post('http://localhost:3001/login', data);
+      const response = await axios.post('https://appgymbackend-production.up.railway.app/login', data);
       return setToken(response.data);
     } catch (error) {
       dispatch(setTokenExpired(true))
@@ -59,8 +60,8 @@ export const fetchDeleteImages = (value) => {
 export const productToPay = (data) => {
   return async () => {   
     const token = getToken().token;   
-    console.log(token);
-      const response = await axios.post('http://localhost:3001/payment', data, {
+      //const response = await axios.post('http://localhost:3001/payment', data, {
+      const response = await axios.post('https://appgymbackend-production.up.railway.app/payment', data, {
         headers: {
           authorization: `Bearer ${token}`
         }
@@ -72,7 +73,8 @@ export const productToPay = (data) => {
 export const fetchGetAllStaff = () =>{
   const token = getToken().token;
   return async function(dispatch){
-    const staffArray = await fetch("http://localhost:3001/users?role=Staff",{
+    //const staffArray = await fetch("http://localhost:3001/users?role=Staff",{
+    const staffArray = await fetch("https://appgymbackend-production.up.railway.app/users?role=Staff",{
         headers: {
           Authorization: `Bearer ${token}`,
       }}).then(res => res.json());

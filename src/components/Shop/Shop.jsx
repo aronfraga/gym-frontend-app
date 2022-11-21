@@ -180,11 +180,7 @@ const Shop = () => {
       <br />
       <br />
       <br />
-      <br />
-      <Link to='/tienda/carrito'>
-      <button>Carrito</button>
-      </Link>
-        
+      <br />    
       <button onClick={(event) => handlerDirectBuy(event, data)}>
         Compra Directa
       </button>
