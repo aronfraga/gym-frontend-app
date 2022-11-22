@@ -1,33 +1,35 @@
-.mainwrapper{
-    background-color: white;
+.mainwrapper {
+	max-width: 1440px;
+	margin: 0px auto;
+	padding: 0px 36px;
 }
 
-.divisionline{
-    margin-top: 50px;
-    background-color: #18A0FB;
-    height: 3px;
+.titleContainer {
+	margin-top: 36px;
 }
 
-.stafftittle{
-    width: 309px;
-    height: 59px;
-    left: 60px;
-    top: 0px;
-    font-family: 'Montserrat';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 48px;
-    line-height: 59px;
-    letter-spacing: -0.015em;
-    color: #18A0FB;
+.stafftittle {
+	margin: 0px;
+	left: 60px;
+	top: 0px;
+	font-weight: 700;
+	font-size: 48px;
+	line-height: 59px;
+	letter-spacing: -0.015em;
+	color: #18a0fb;
 }
 
-.cardswrapper{
-    display: flex;
-    margin: 15px;
-    flex-wrap: wrap;
-    align-content: center;
-    align-items: center;
-    position: relative;
-    justify-content: space-around;
+.divisionline {
+	margin: 0px;
+	border: 2px solid var(--primary-color);
+	background-color: var(--primary-color);
+	border-radius: 10px;
+}
+
+.cardswrapper {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+	justify-items: center;
+	margin-bottom: 36px;
+	margin-top: 24px;
 }
