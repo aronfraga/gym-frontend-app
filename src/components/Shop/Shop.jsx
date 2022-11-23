@@ -1,52 +1,49 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 import { useGetAllProductsQuery } from "../../redux/query/ApiEcommerce";
 import HeaderBtn from "../HeaderBtn/HeaderBtn";
-import ContainerFilters from "../ContainerFilters/ContainerFilters";
 import NavBar from "../NavBar/NavBar";
 import Products from "../Products/Products";
 import style from "./Shop.module.css";
 import Loading from "../Loading/Loading";
-import {
-  productToPay,
-  checkOutProduct,
-} from "../../redux/actions/defaultAction";
-import { useDispatch } from "react-redux";
+import { productToPay } from "../../redux/actions/defaultAction";
+import { setPurchase } from "../../redux/actions/defaultAction";
+import { seterItem } from "../../redux/actions/defaultAction";
+import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { Productos, Price } from "./DatosFilter";
-import {
-  Button,
-  Checkbox,
-  FormControlLabel,
-  Radio,
-  RadioGroup,
-} from "@mui/material";
+import { Button, Checkbox, FormControlLabel, Radio, RadioGroup } from "@mui/material";
 import style2 from "./Filters.module.css";
 
 const Shop = () => {
   const dispatch = useDispatch();
+  const { itemCheckOut } = useSelector((state) => state.itemCheckOut);
+  const [ renderShop, setRenderShop] = useState('');
 
-  function handlerCheckOutBuy(event) {
-    event.preventDefault();
-    let items = [];
-    let keys = Object.keys(localStorage);
-    let index = keys.length;
-    while (index--) {
-      items.push(JSON.parse(localStorage.getItem(keys[index])));
-    }
-    const checkOut = {
-      // array no puede ser vacio, reveer notification, pagina thankyou
-      items: items,
-      auto_return: "approved",
-      notification_url: "https://www.success.com/",
-      back_urls: {
-        success: "http://127.0.0.1:5173/approve",
-        failure: "http://www.facebook.com/",
-        pending: "http://www.pending.com/",
-      },
-    };
-    dispatch(productToPay(checkOut));
+  const urlChanged = window.location.search;
+  const urlParams = new URLSearchParams(urlChanged)
+  const purchaseStatus = {
+    payed: urlParams.get('status'),
+    paymentMethod: urlParams.get('payment_type'),
+    purchaseId: urlParams.get('preference_id'),
   }
+
+  useEffect(() => {
+    if(purchaseStatus.payed === 'approved') {
+      dispatch(setPurchase(purchaseStatus));
+      handlerClearCheckOut();
+    }
+  },[])
+
+  function handerRenderShop(data) {
+    setRenderShop(data);
+  }
+
+  function handlerClearCheckOut(){
+		for (var i = 0; i < itemCheckOut.length; i++) {
+			localStorage.removeItem(`item_${itemCheckOut[i].title}`);
+		}
+		dispatch(seterItem(localStorage));
+	}
 
   function handlerDirectBuy(event, data) {
     event.preventDefault();
@@ -55,13 +52,14 @@ const Shop = () => {
       auto_return: "approved",
       notification_url: "https://www.success.com/",
       back_urls: {
-        success: "http://127.0.0.1:5173/approve",
+        success: "http://127.0.0.1:5173/tienda/",
         failure: "http://www.facebook.com/",
         pending: "http://www.pending.com/",
       },
     };
     dispatch(productToPay(checkOut));
   }
+
 
   /* ACA EMPIEZAN LOS FILTROS, SORRY POR EL LIO*/
 
@@ -74,6 +72,7 @@ const Shop = () => {
     letra: "",
   });
 
+
   const handlerCheck = (event) => {
     let value = event.target.value;
     let name = event.target.name;
@@ -84,14 +83,6 @@ const Shop = () => {
       value === "c" && setInput({ ...input, min: 1500, max: 2000, letra: "c" });
       value === "d" && setInput({ ...input, min: 2000, max: 3000, letra: "d" });
       value === "e" && setInput({ ...input, min: 3000, letra: "e" });
-
-      /*
- Menos de 1000", a
-  "1000 - 1500", b
-  "1500 - 2000", c
-  "2000 - 3000", d
-  "Mas de 3000", e
-*/
     }
   };
 
@@ -102,7 +93,7 @@ const Shop = () => {
   }
 
   const { data, isLoading } = useGetAllProductsQuery(aux);
-
+  
   if (isLoading) return <Loading />;
 
   return (
@@ -180,7 +171,7 @@ const Shop = () => {
         </div>
         <div className={style.cardsContainer}>
           <HeaderBtn title={"Tienda virtual"} />
-          <Products products={data} />
+          <Products products={data} render={handerRenderShop} />
         </div>
       </div>
       <br />
