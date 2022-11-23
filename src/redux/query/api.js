@@ -13,7 +13,7 @@ export const ApiQuery = createApi({
         return headers;
       },
     }),
-    { maxRetries: 3 }
+    { maxRetries: 1 }
   ),
   keepUnusedDataFor: 30,
   endpoints: (builder) => ({
@@ -50,6 +50,13 @@ export const ApiQuery = createApi({
       query: () => "/users",
     }),
 
+    getCategory: builder.query({
+      query: () => "/category",
+    }),
+
+    getMuscles: builder.query({
+      query: () => "/muscles",
+    }),
     //************************************** */
     //********* P O S T ' S **************** */
     //************************************** */
@@ -103,6 +110,8 @@ export const {
   useGetRoutinesByIdQuery,
   useGetAllClassesQuery,
   useGetAllUsersQuery,
+  useGetCategoryQuery,
+  useGetMusclesQuery,
   useAddNewRoutinesMutation,
   useSetFavoritesMutation,
   usePutLoginMutation,

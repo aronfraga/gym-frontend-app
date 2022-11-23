@@ -7,7 +7,10 @@ import NavBar from "../NavBar/NavBar";
 import Products from "../Products/Products";
 import style from "./Shop.module.css";
 import Loading from "../Loading/Loading";
-import { productToPay, checkOutProduct } from "../../redux/actions/defaultAction";
+import {
+  productToPay,
+  checkOutProduct,
+} from "../../redux/actions/defaultAction";
 import { useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { Productos, Price } from "./DatosFilter";
@@ -21,7 +24,6 @@ import {
 import style2 from "./Filters.module.css";
 
 const Shop = () => {
-
   const dispatch = useDispatch();
 
   function handlerCheckOutBuy(event) {
@@ -64,16 +66,13 @@ const Shop = () => {
   /* ACA EMPIEZAN LOS FILTROS, SORRY POR EL LIO*/
 
   // const { routinesFilters, setRoutinesFilters } = useFilter();
-  const location = useLocation().state;
-  const baseFilter = location
-    ? routinesFilters
-    : {
-        category: "",
-        min: 0,
-        max: 0,
-        letra: "",
-      };
-  const [input, setInput] = useState(baseFilter);
+
+  const [input, setInput] = useState({
+    category: "",
+    min: 0,
+    max: 0,
+    letra: "",
+  });
 
   const handlerCheck = (event) => {
     let value = event.target.value;
@@ -97,7 +96,6 @@ const Shop = () => {
   };
 
   const aux = {};
-
 
   for (const a in input) {
     if (input[a].length > 0 || input[a] > 0) aux[a] = input[a];
@@ -166,9 +164,18 @@ const Shop = () => {
               </RadioGroup>
             </div>
           </div>
-          <Button variant="contained" onClick={() => setInput()}>
-            {" "}
-            Limpiar Filtros{" "}
+          <Button
+            variant="contained"
+            onClick={() =>
+              setInput({
+                category: "",
+                min: 0,
+                max: 0,
+                letra: "",
+              })
+            }
+          >
+            Limpiar Filtros
           </Button>
         </div>
         <div className={style.cardsContainer}>
@@ -180,7 +187,7 @@ const Shop = () => {
       <br />
       <br />
       <br />
-      <br />    
+      <br />
       <button onClick={(event) => handlerDirectBuy(event, data)}>
         Compra Directa
       </button>
