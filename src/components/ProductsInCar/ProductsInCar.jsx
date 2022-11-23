@@ -1,27 +1,32 @@
 import React from 'react';
+import { seterItem } from "../../redux/actions/defaultAction";
+import { useDispatch } from "react-redux";
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import style from './ProductsInCar.module.css';
 import QuantitySelector from '../QuantitySelector/QuantitySelector';
 
-const ProductsInCar = ({
-	id,
-	title,
-	price,
-	stock,
-	category,
-	description,
-	imgUrl,
-	render,
-}) => {
+const ProductsInCar = ({ id, title, price, stock, quantity, category, description, imgUrl, render }) => {
 
-	
+	const dispatch = useDispatch();
+
+	const item = {
+		id: id,
+		title: title,
+		unit_price: price,
+		description: description,
+		picture_url: imgUrl,
+		stock: stock,
+		quantity: quantity,
+	}
+
 	function hendlerDelete(event) {
 		event.preventDefault();
-		console.log(title)
 		localStorage.removeItem(`item_${title}`);
-		render(title);
+		dispatch(seterItem(localStorage))
+		render(`item_${title}`);
 	}
+
 	return (
 		<div className={style.mainContainer}>
 			<div className={style.imgContainer}>
@@ -33,12 +38,12 @@ const ProductsInCar = ({
 			</div>
 
 			<div className={style.quantitySelectorContainer}>
-				<QuantitySelector stock={stock} />
+				<QuantitySelector item={item} render={render}/>
 				<h3>Disponible: {stock}</h3>
 			</div>
 
 			<div className={style.priceContainer}>
-				<h2>${price}</h2>
+				<h2>${(price * quantity)}</h2>
 			</div>
 
 			<div className={style.closeIcon}>
