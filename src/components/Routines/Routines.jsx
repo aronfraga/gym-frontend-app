@@ -9,25 +9,22 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import style from "./Filters.module.css";
 import { muscles, duration, difficulty } from "./Datos.js";
-import { useGetRoutinesQuery } from "../../redux/query/api";
+import { ApiQuery, useGetRoutinesQuery } from "../../redux/query/api";
 import Loading from "../Loading/Loading";
 import { Button } from "@mui/material";
 import StarIcon from "@mui/icons-material/Star";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import { useFilter } from "./FiltersContex";
 import { useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
 const Routines = () => {
-  const location = useLocation().state;
   const { routinesFilters, setRoutinesFilters } = useFilter();
-  const baseFilter = location
-    ? routinesFilters
-    : {
-        muscles: [],
-        difficulty: [],
-        duration: [],
-        favourite: 0,
-      };
-  const [input, setInput] = useState(baseFilter);
+  const [input, setInput] = useState({
+    muscles: [],
+    difficulty: [],
+    duration: [],
+    favourite: 0,
+  });
   const handlerClick = (event) => {
     if (input.favourite || routinesFilters.favourite) {
       setInput({ ...input, favourite: 0 });
@@ -75,7 +72,22 @@ const Routines = () => {
     if (a === "favourite" && input[a]) aux[a] = input[a];
     if (input[a].length > 0) aux[a] = [...input[a]];
   }
+
   const { data, isLoading } = useGetRoutinesQuery(aux);
+  const { originalArgs, isSuccess } = useSelector(
+    ApiQuery.endpoints.getRoutines.select(aux)
+  );
+  if (isSuccess) {
+    if (originalArgs.duration) {
+      var durationF = originalArgs.duration.map((e) => e);
+    }
+    if (originalArgs.muscles) {
+      var musclesF = originalArgs.muscles.map((e) => e);
+    }
+    if (originalArgs.difficulty) {
+      var difficultyF = originalArgs.difficulty.map((e) => e);
+    }
+  }
 
   if (isLoading) return <Loading />;
   return (
@@ -101,7 +113,10 @@ const Routines = () => {
                     />
                   }
                   checked={
-                    input.muscles.find((f) => f === checkboxes) ? true : false
+                    musclesF?.find((f) => f === checkboxes) ||
+                    routinesFilters.muscles?.find((f) => f === checkboxes)
+                      ? true
+                      : false
                   }
                   label={checkboxes}
                   name={muscles.name}
@@ -127,7 +142,10 @@ const Routines = () => {
                     />
                   }
                   checked={
-                    input.duration.find((f) => f === checkboxes) ? true : false
+                    durationF?.find((f) => f === checkboxes) ||
+                    routinesFilters.duration.find((f) => f === checkboxes)
+                      ? true
+                      : false
                   }
                   label={duration.label[i]}
                   name={duration.name}
@@ -153,7 +171,8 @@ const Routines = () => {
                     />
                   }
                   checked={
-                    input.difficulty.find((f) => f === checkboxes)
+                    difficultyF?.find((f) => f === checkboxes) ||
+                    routinesFilters.difficulty.find((f) => f === checkboxes)
                       ? true
                       : false
                   }

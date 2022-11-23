@@ -15,7 +15,7 @@ const CardPLan = ({ monts, price, benefits1 }) => {
 				height: 'fit-content',
 				border: `1px solid ${primaryColor}`,
 				borderRadius: '10px',
-				backgroundColor: '#fafafa',
+				backgroundColor: 'white',
 				transition: 'all 0.2s ease-out',
 			}}
 		>

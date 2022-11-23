@@ -1,12 +1,11 @@
 import axios from 'axios';
-import { setCurrentPage, setTokenExpired, getcloudImages, deletecloudImages, getAllStaff, setCheckOutProducts } from '../slices/defaultSlice';
+import { setCurrentPage, setTokenExpired, getcloudImages, deletecloudImages, getAllStaff, setItemCheckOut, setqtyItem , setAdminPreferences} from '../slices/defaultSlice';
 import { setToken } from '../../services/cookies';
 import { Buffer } from "buffer";
 import { getToken } from '../../services/cookies';
 
 const CLOUDINARY_API_KEY= import.meta.env.VITE_CLOUDINARY_API_KEY;
 const CLOUDINARY_API_SECRET= import.meta.env.VITE_CLOUDINARY_API_SECRET;
-
 
 export const setPage = (data) => {
   return (dispatch) => {
@@ -70,7 +69,7 @@ export const productToPay = (data) => {
   }
 }
 
-export const fetchGetAllStaff = () =>{
+export const fetchGetAllStaff = () => {
   const token = getToken().token;
   return async function(dispatch){
     //const staffArray = await fetch("http://localhost:3001/users?role=Staff",{
@@ -79,12 +78,50 @@ export const fetchGetAllStaff = () =>{
           Authorization: `Bearer ${token}`,
       }}).then(res => res.json());
     return dispatch(getAllStaff(staffArray));
-    }
-  
-}
-
-export const checkOutProduct = (data) => {
-  return (dispatch) => {
-    dispatch(setCheckOutProducts(data));
   }
 }
+
+export const fetchGetAdmins = (email) =>{
+  const token = getToken().token;
+  return async function(dispatch){
+    const adminsArray = await fetch("https://appgymbackend-production.up.railway.app/users?role=Admin",{
+        headers: {
+          Authorization: `Bearer ${token}`,
+      }}).then(res => res.json());
+    const filteredAdmin =  adminsArray.find(admin => admin.email === email);
+   /*  let aux = Object.entries(filteredAdmin).length === 0?false:true; */
+    let aux = filteredAdmin === undefined?false:true;
+    return dispatch(setAdminPreferences(aux));
+  }
+}
+
+export const seterItem = (data) => {
+  return (dispatch) => {
+    let items = [];
+		let keys = Object.keys(data);
+		let index = keys.length;
+		while (index--) { 
+      items.push(JSON.parse(data.getItem(keys[index]))) ;
+    }
+    dispatch(setItemCheckOut(items));
+  }
+}
+
+export const setItem = (data) => {
+  return (dispatch) => {
+    dispatch(setqtyItem(data));
+  }
+}
+
+export const setPurchase = (data) => {
+  return async (dispatch) => {
+    const token = getToken().token;
+      //const response = await axios.put('http://localhost:3001/payment', data, {
+      await axios.put('https://appgymbackend-production.up.railway.app/payment', data, {
+        headers: {
+          authorization: `Bearer ${token}`
+        }
+    });
+  }
+}
+

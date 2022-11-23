@@ -16,6 +16,10 @@
     object-fit: cover;
 }
 
+.photosWrapper{
+    min-height: 700px;
+}
+
 .tittlePreview{
     text-align:center;
     height: 30px;

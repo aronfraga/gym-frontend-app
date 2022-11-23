@@ -12,7 +12,6 @@ import { Button } from "@mui/material";
 const DetailRoutine = () => {
   const { id } = useParams();
   const { data: routineDetail, isLoading } = useGetRoutinesByIdQuery(id);
-  console.log(routineDetail);
   let excerciseDays;
 
   excerciseDays = routineDetail?.excercises?.map((exercise) => exercise.day);
@@ -22,19 +21,10 @@ const DetailRoutine = () => {
   if (isLoading) return <Loading />;
   return (
     <div>
+      <NavBar />
       <div className={style.mainContainer}>
         <div className={style.cardContainer}>
           <div className={style.infoContainer}>
-            <Link
-              to="/rutinas"
-              state={{ keepFilter: true }}
-              style={{ textDecoration: "none" }}
-            >
-              <Button variant="contained">Rutinas</Button>
-            </Link>
-            <Link to="/home" style={{ textDecoration: "none" }}>
-              <Button variant="contained">Inicio</Button>
-            </Link>
             <img
               className={style.imgClass}
               src={routineDetail?.imgUrl}

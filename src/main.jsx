@@ -12,8 +12,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <Auth0Provider
       domain="dev-whzziz8z5264izvj.us.auth0.com"
       clientId="1Cumcs4UOcjpGYzsin8CpBNfxLgM9gnN"
-      redirectUri={`${window.location.origin}/home`}
-    >
+      redirectUri={window.location.origin}>
       <FilterProvider>
         <Provider store={store}>
           <App />
