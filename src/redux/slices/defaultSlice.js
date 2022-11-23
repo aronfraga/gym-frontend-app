@@ -8,7 +8,8 @@ export const defaultAction = createSlice({
     facilitiesImages: [],
     staff: [],
     cart_count: 0,
-    checkOutProducts: []
+    checkOutProducts: [],
+    isAdminLogged: false,
   },
   reducers: {
     setCurrentPage: (state, action) => { state.currentPage = action.payload },
@@ -19,8 +20,9 @@ export const defaultAction = createSlice({
     getAllStaff: (state, action) => {state.staff = action.payload},
     setCartCount: (state) => {state.cart_count += 1},
     setCheckOutProducts: (state, action) => { state.checkOutProducts = action.payload },
+    setAdminPreferences: (state, action) => { state.isAdminLogged = action.payload?true:false},
   }
 });
 
-export const { setCurrentPage, setTokenExpired, getcloudImages, deletecloudImages, getAllStaff, setCartCount, setCheckOutProducts } = defaultAction.actions;
+export const { setCurrentPage, setTokenExpired, getcloudImages, deletecloudImages, getAllStaff, setCartCount, setCheckOutProducts, setAdminPreferences } = defaultAction.actions;
 export default defaultAction.reducer;

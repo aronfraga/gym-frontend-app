@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from "react";
+import {useAuth0} from "@auth0/auth0-react";
 import {useSelector, useDispatch} from "react-redux";
-import {fetchGetImages, fetchDeleteImages} from  "../../redux/actions/defaultAction";
+import {fetchGetImages, fetchDeleteImages, fetchGetAdmins} from "../../redux/actions/defaultAction";
 import Style from "./Facilities.module.css";
 import NavBar from "../NavBar/NavBar";
 import Footer from "../Footer/Footer";
 import Loading from "../Loading/Loading";
-import {Button} from "@mui/material";
-import { FormControl, Input } from '@mui/material';
+import {Button, FormControl, Input} from '@mui/material';
 import InputLabel from '@mui/material/InputLabel';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Dropzone from "react-dropzone";
@@ -15,13 +15,13 @@ import axios from "axios";
 const Facilities = () => {
 
     const dispatch = useDispatch();
+    const {user} = useAuth0();
     const {facilitiesImages} = useSelector(state => state.facilitiesImages);
+    const {isAdminLogged} = useSelector(state => state.isAdminLogged);
     const [image,setImage] = useState({array: []});
 
     const [input,setInput] = useState({
         name_1: "",
-      /*   name_2: "",
-        name_3: "", */
     })
 
     const [loading,setLoading] = useState("");
@@ -29,6 +29,9 @@ const Facilities = () => {
     const [activeUpload, setActiveUpload]= useState(false);
   
     useEffect(() => {dispatch(fetchGetImages())},[dispatch]);
+    useEffect(() => {dispatch(fetchGetAdmins("tony@gmail.com"))},[dispatch]);
+    /* Esto se descomentará para la entrega final
+    useEffect(() => {dispatch(fetchGetAdmins(user.email))},[dispatch]); */
 
     const handlerbutton = (event) => {
         setIsShown(current => !current)
@@ -100,14 +103,14 @@ const Facilities = () => {
             <NavBar/>
             <div className={Style.titleButtonWrapper}>
                 <h2 className={Style.tittle}>Nuestras Instalaciones</h2>
-                <Button disabled={isShown} onClick={handlerbutton} className={Style.UploadButton} variant="contained">EDITAR</Button>
+                {isAdminLogged && <Button disabled={isShown} onClick={handlerbutton} className={Style.UploadButton} variant="contained">EDITAR</Button>}
                 {isShown && <Button disabled={activeUpload} onClick={handlerUpLoadbutton} className={Style.UploadButton} variant="outlined">SUBIR FOTOS</Button>}
                 {isShown && <Button onClick={handlerGoBackButton} className={Style.UploadButton} variant="outlined">VOLVER ATRÁS</Button>}
             </div>
             <hr className={Style.divisionline}></hr>
-            <div>
+            <div className={Style.photosWrapper}>
                 {(facilitiesImages.length && !activeUpload)?
-                    facilitiesImages.map(image=>
+                    facilitiesImages.map(image =>
                     <div className={Style.photoContainer} key={image.asset_id}>
                         <p className={isShown?Style.facilitiename2:Style.facilitiename1}>
                             {image.public_id.split('/')[1]}
