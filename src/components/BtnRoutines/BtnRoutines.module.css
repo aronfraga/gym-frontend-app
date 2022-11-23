@@ -1,0 +1,32 @@
+:root {
+	--primary-color: #18a0fb;
+}
+
+.mainContainer {
+	margin-bottom: 24px;
+}
+.mainContainer hr {
+	margin: 0px;
+	border: 2px solid var(--primary-color);
+	border-radius: 10px;
+}
+
+.infoContainer {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.title {
+	display: flex;
+	font-family: Roboto, 'Open Sans', sans-serif;
+	font-size: 48px;
+	margin: 0px;
+	color: var(--primary-color);
+}
+
+.underLine {
+	height: 3px;
+	width: 100%;
+	background-color: var(--primary-color);
+}

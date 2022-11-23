@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { setCurrentPage, setTokenExpired, getcloudImages, deletecloudImages, getAllStaff, setItemCheckOut, setqtyItem } from '../slices/defaultSlice';
+import { setCurrentPage, setTokenExpired, getcloudImages, deletecloudImages, getAllStaff, setItemCheckOut, setqtyItem , setAdminPreferences} from '../slices/defaultSlice';
 import { setToken } from '../../services/cookies';
 import { Buffer } from "buffer";
 import { getToken } from '../../services/cookies';
@@ -78,8 +78,21 @@ export const fetchGetAllStaff = () => {
           Authorization: `Bearer ${token}`,
       }}).then(res => res.json());
     return dispatch(getAllStaff(staffArray));
-    }
-  
+  }
+}
+
+export const fetchGetAdmins = (email) =>{
+  const token = getToken().token;
+  return async function(dispatch){
+    const adminsArray = await fetch("https://appgymbackend-production.up.railway.app/users?role=Admin",{
+        headers: {
+          Authorization: `Bearer ${token}`,
+      }}).then(res => res.json());
+    const filteredAdmin =  adminsArray.find(admin => admin.email === email);
+   /*  let aux = Object.entries(filteredAdmin).length === 0?false:true; */
+    let aux = filteredAdmin === undefined?false:true;
+    return dispatch(setAdminPreferences(aux));
+  }
 }
 
 export const seterItem = (data) => {
@@ -111,3 +124,4 @@ export const setPurchase = (data) => {
     });
   }
 }
+
