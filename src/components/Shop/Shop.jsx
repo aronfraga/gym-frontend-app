@@ -15,7 +15,6 @@ import { Button, Checkbox, FormControlLabel, Radio, RadioGroup } from "@mui/mate
 import style2 from "./Filters.module.css";
 
 const Shop = () => {
-
   const dispatch = useDispatch();
   const { itemCheckOut } = useSelector((state) => state.itemCheckOut);
   const [ renderShop, setRenderShop] = useState('');
@@ -61,16 +60,18 @@ const Shop = () => {
     dispatch(productToPay(checkOut));
   }
 
-  const location = useLocation().state;
-  const baseFilter = location
-    ? routinesFilters
-    : {
-        category: "",
-        min: 0,
-        max: 0,
-        letra: "",
-      };
-  const [input, setInput] = useState(baseFilter);
+
+  /* ACA EMPIEZAN LOS FILTROS, SORRY POR EL LIO*/
+
+  // const { routinesFilters, setRoutinesFilters } = useFilter();
+
+  const [input, setInput] = useState({
+    category: "",
+    min: 0,
+    max: 0,
+    letra: "",
+  });
+
 
   const handlerCheck = (event) => {
     let value = event.target.value;
@@ -154,9 +155,18 @@ const Shop = () => {
               </RadioGroup>
             </div>
           </div>
-          <Button variant="contained" onClick={() => setInput()}>
-            {" "}
-            Limpiar Filtros{" "}
+          <Button
+            variant="contained"
+            onClick={() =>
+              setInput({
+                category: "",
+                min: 0,
+                max: 0,
+                letra: "",
+              })
+            }
+          >
+            Limpiar Filtros
           </Button>
         </div>
         <div className={style.cardsContainer}>
@@ -168,7 +178,7 @@ const Shop = () => {
       <br />
       <br />
       <br />
-      <br />    
+      <br />
       <button onClick={(event) => handlerDirectBuy(event, data)}>
         Compra Directa
       </button>
