@@ -18,7 +18,7 @@ function App() {
 		<BrowserRouter>
 			<Routes>
 				<Route path='*' element={<PageNotFound />} />
-				<Route exact path='/' element={<Landing />} />
+				<Route path='/' element={<Home />} />
 				<Route path='/home' element={<Home />} />
 				<Route path='/tienda' element={<Shop />} />
 				<Route path='/tienda/:status' element={<Shop />} />
