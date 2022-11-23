@@ -18,7 +18,7 @@
 	margin: 24px 0px;
 	font-family: Roboto, 'Open Sans', sans-serif;
 	font-size: 24px;
-	color: var(--primary-color);
+	color: var(--secondary-color);
 }
 
 .containerTextMons {
@@ -29,8 +29,8 @@
 	height: 50px;
 	background: linear-gradient(
 		90deg,
-		var(--secondary-color) 0%,
-		var(--tertiary-color) 100%
+		var(--primary-color) 0%,
+		var(--light-blue) 100%
 	);
 }
 
@@ -57,5 +57,5 @@
 .containerBenefits hr {
 	margin: 0px;
 	width: 292px;
-	border: 1px solid var(--primary-color);
+	border: 1px solid var(--secondary-color);
 }

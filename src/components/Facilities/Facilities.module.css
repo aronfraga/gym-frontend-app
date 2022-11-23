@@ -1,153 +1,162 @@
-.photos1{
-    padding: 15px;
-    height: 300px;
-    width: 300px;
-    object-fit: cover;
-}
-.photos1:hover{
-    scale: 1.08;
-    transition: all 0.5s ease-in-out ;
+.mainContainer {
+	max-width: 1440px;
+	margin: 0px auto;
+	padding: 0px 36px;
 }
 
-.photos2{
-    padding: 15px;
-    height: 300px;
-    width: 300px;
-    object-fit: cover;
+.titleContainer {
+	margin-top: 36px;
 }
 
-.tittlePreview{
-    text-align:center;
-    height: 30px;
-    left: 60px;
-    top: 0px;
-    font-family: Roboto, 'Open Sans', sans-serif;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 30px;
-    line-height: 59px;
-    letter-spacing: -0.015em;
-    color: #18A0FB;
+.titleContainer hr {
+	margin: 0px;
+	border: 2px solid var(--secondary-color);
+	background-color: var(--secondary-color);
+	border-radius: 10px;
 }
 
-.tittle{
-    width: 500px;
-    height: 55px;
-    left: 60px;
-    top: 0px;
-    font-family: Roboto, 'Open Sans', sans-serif;
-    font-style: normal;
-    font-weight: 700;
-    font-size: 48px;
-    line-height: 59px;
-    letter-spacing: -0.015em;
-    color: #18A0FB;
+.titleButtonWrapper {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 }
 
-.divisionline{
-    background-color: #18A0FB;
-    height: 3px;
+.tittle {
+	margin: 0px;
+	font-weight: 700;
+	font-size: 48px;
+	color: var(--secondary-color);
 }
 
-.allcardsPreview{
-    display: flex;
-    margin: 15px;
-    flex-wrap: wrap;
-    align-content: center;
-    align-items: center;
-    position: relative;
-    justify-content: space-around;
+.buttonsContainer {
+	display: flex;
+	gap: 24px;
 }
 
-.imgPreview{
-    width: 325px;
-    height: 220px;
-    background-size: cover;
-    padding: 15px;
-    margin: auto;
+.UploadButton {
+	width: 140px;
+	height: 40px;
 }
 
-.UploadButton{
-    width: 130px;
-    height: 50px;
-    padding: 50px;
+.photosContainer {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+	row-gap: 24px;
+	justify-items: center;
+	margin-bottom: 36px;
+	margin-top: 24px;
 }
 
-.titleButtonWrapper{
-    display: flex;
-    align-items: center;
-    align-content:flex-start;
-    flex-direction: row;
-    justify-content: space-evenly;
+.photoContainer {
+	position: relative;
+	display: inline-block;
+	width: fit-content;
+	transition: all 0.4s ease-in-out;
 }
 
-.deleteButton{
-    position: absolute;
-    top: -290px;
-    right: 125px;
-   
+.photoContainer:hover {
+	scale: 1.04;
+	transition: all 0.4s ease-in-out;
 }
 
-.photoContainer{
-    position: relative;
-    display: inline-block;
-    text-align: center;
-    margin-left: 30px;
-
+.facilitiename1 {
+	margin: 0px;
+	z-index: 1;
+	color: var(--white-color);
+	position: absolute;
+	bottom: 24px;
+	right: 24px;
+	text-shadow: 2px 2px 10px black;
 }
 
-.folder:hover,.textboxdrop:hover{
-    cursor: pointer;
+.facilitiename2 {
+	margin: 0px;
+	z-index: 1;
+	color: var(--white-color);
+	position: absolute;
+	bottom: 24px;
+	right: 24px;
+	text-shadow: 2px 2px 10px black;
 }
 
-.facilitiename1{
-    z-index: 1;
-    color: beige;
-    position: absolute;
-    bottom: 15px;
-    right: 17px;
-    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+.imgContainer {
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 300px;
+	height: 300px;
+	overflow: hidden;
 }
 
-.facilitiename2{
-    z-index: 1;
-    color: beige;
-    position: absolute;
-    bottom: 15px;
-    right: 125px;
-    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+.photos1 {
+	max-width: 500px;
+	max-height: 500px;
 }
 
-.dropzone{
-    width: 500px;
-    height: 200px;
-    display: flex;
-    text-align: center;
-    align-items: center;
-    align-content: center;
-    justify-content: center;
-    margin: auto;
-    margin-top: 50px;
-    margin-bottom: 150px;
-    padding: 20px;
-    border: 3px dashed #eeeeee;
-    background-color: #fafafa;
-    color: #bdbdbd;
+.photos2 {
+	max-width: 500px;
+	max-height: 500px;
 }
 
-.wrapperDropnInput{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    /* align-items: center; */
+.deleteButton {
+	top: 12px;
+	right: 12px;
 }
 
-.wrapperForm{
-    margin-top: 50px;
-    display: flex;
-    flex-direction: column;
-    justify-content:first baseline
+.allcardsPreview {
+	display: flex;
+	margin: 15px;
+	flex-wrap: wrap;
+	align-content: center;
+	align-items: center;
+	position: relative;
+	justify-content: space-around;
 }
-.error{
-    color: red;
+
+.imgPreview {
+	width: 325px;
+	height: 220px;
+	background-size: cover;
+	padding: 15px;
+	margin: auto;
+}
+
+.folder:hover,
+.textboxdrop:hover {
+	cursor: pointer;
+}
+
+.dropzone {
+	width: 500px;
+	height: 200px;
+	display: flex;
+	text-align: center;
+	align-items: center;
+	align-content: center;
+	justify-content: center;
+	margin: auto;
+	margin-top: 50px;
+	margin-bottom: 150px;
+	padding: 20px;
+	border: 3px dashed #eeeeee;
+	background-color: #fafafa;
+	color: #bdbdbd;
+}
+
+.wrapperDropnInput {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	/* align-items: center; */
+}
+
+.wrapperForm {
+	margin-top: 50px;
+	display: flex;
+	flex-direction: column;
+	justify-content: first baseline;
+}
+.error {
+	color: red;
 }

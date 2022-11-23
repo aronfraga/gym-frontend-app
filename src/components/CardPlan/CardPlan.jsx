@@ -3,7 +3,7 @@ import Card from '@mui/material/Card';
 import { CardActionArea } from '@mui/material';
 import style from './CardPlan.module.css';
 
-const primaryColor = '#18a0fb';
+const tertiaryColor = '#62629f';
 
 const CardPLan = ({ monts, price, benefits1 }) => {
 	return (
@@ -13,7 +13,7 @@ const CardPLan = ({ monts, price, benefits1 }) => {
 				width: '100%',
 				maxWidth: '400px',
 				height: 'fit-content',
-				border: `1px solid ${primaryColor}`,
+				border: `1px solid ${tertiaryColor}`,
 				borderRadius: '10px',
 				backgroundColor: 'white',
 				transition: 'all 0.2s ease-out',
