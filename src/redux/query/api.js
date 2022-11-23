@@ -6,7 +6,7 @@ export const ApiQuery = createApi({
   baseQuery: retry(
     fetchBaseQuery({
       baseUrl: "https://appgymbackend-production.up.railway.app",
-      // baseUrl: "http://localhost:3001",
+      //baseUrl: "http://localhost:3001",
       prepareHeaders: (headers) => {
         const token = getToken().token;
         if (token) headers.set("authorization", `Bearer ${token}`);

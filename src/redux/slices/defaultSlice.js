@@ -7,8 +7,7 @@ export const defaultAction = createSlice({
     tokenIsValid: true,
     facilitiesImages: [],
     staff: [],
-    cart_count: 0,
-    checkOutProducts: []
+    itemCheckOut: [],
   },
   reducers: {
     setCurrentPage: (state, action) => { state.currentPage = action.payload },
@@ -17,10 +16,10 @@ export const defaultAction = createSlice({
     deletecloudImages: (state, action) => { state.facilitiesImages = state.facilitiesImages.filter((image) => 
       image["public_id"] !== action.payload)},
     getAllStaff: (state, action) => {state.staff = action.payload},
-    setCartCount: (state) => {state.cart_count += 1},
-    setCheckOutProducts: (state, action) => { state.checkOutProducts = action.payload },
+    setItemCheckOut: (state, action) => {state.itemCheckOut = action.payload},
+    setqtyItem: (state, action) => {state.qtyItem = action.payload},
   }
 });
 
-export const { setCurrentPage, setTokenExpired, getcloudImages, deletecloudImages, getAllStaff, setCartCount, setCheckOutProducts } = defaultAction.actions;
+export const { setCurrentPage, setTokenExpired, getcloudImages, deletecloudImages, getAllStaff, setItemCheckOut, setqtyItem } = defaultAction.actions;
 export default defaultAction.reducer;
