@@ -15,6 +15,6 @@
 }
 
 .contentwrapper:hover {
-	background-color: #64b2cd;
+	background-color: var(--light-blue2);
 	transition: all 0.3s ease;
 }

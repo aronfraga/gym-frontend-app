@@ -16,13 +16,13 @@
 	font-size: 48px;
 	line-height: 59px;
 	letter-spacing: -0.015em;
-	color: #18a0fb;
+	color: var(--secondary-color);
 }
 
 .divisionline {
 	margin: 0px;
-	border: 2px solid var(--primary-color);
-	background-color: var(--primary-color);
+	border: 2px solid var(--secondary-color);
+	background-color: var(--secondary-color);
 	border-radius: 10px;
 }
 

@@ -1,15 +1,10 @@
-:root {
-    /* --primary-blue: #18a0fb; */
-	--primary-blue: #18a0fb;
-}
-
 .footer {
-    margin: 0;
+	margin: 0;
 	left: 0;
 	bottom: 0;
 	width: 100%;
 	padding: 5px;
-	background-color: var(--primary-blue);
+	background-color: var(--primary-color);
 	color: white;
 	display: flex;
 	align-content: center;
@@ -51,7 +46,7 @@
 	font-weight: 400;
 	font-size: 20px;
 	line-height: 22px;
-    max-width: 150px;
+	max-width: 150px;
 	display: flex;
 	align-items: center;
 	text-align: center;
@@ -70,8 +65,8 @@
 	padding: 10px;
 	flex-basis: 33%;
 }
-.googlemapbox{
-    border-radius: 5px;
+.googlemapbox {
+	border-radius: 5px;
 }
 
 .footerR2 {
@@ -79,13 +74,16 @@
 	align-items: center;
 	justify-content: center;
 }
-.icons{
-    margin: 5px;
+.icons {
+	margin: 5px;
 }
-/* .icons:hover{
+
+/*
+.icons:hover{
     transform: scale(1.15);
 }
- */
+*/
+
 .footerR3 {
 	display: flex;
 	align-items: center;
