@@ -1,6 +1,6 @@
 {
   "rewrites": [
-      { "source": "https://api.cloudinary.com/(.*)", "destination": "https://api.cloudinary.com/" },
-      { "source": "/(.*)", "destination": "/index.html" }
+    { "source": "/api/:path(.*)", "destination": "https://api.cloudinary.com/:path" },
+    { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
