@@ -21,7 +21,7 @@ import { Link } from 'react-router-dom';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import logo from '../../Images/Logo.png';
 
-const pages = ['tienda', 'rutinas', 'instalaciones', 'staff', 'feedback'];
+const pages = ['tienda', 'rutinas', 'instalaciones', 'staff', 'calendario', 'feedback'];
 // const settings = [ 'tienda','seguimiento', 'clases',];
 
 const NavBar = () => {
