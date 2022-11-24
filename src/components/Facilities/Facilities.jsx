@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import {useAuth0} from 'auth0/auth0-react'
 import { useSelector, useDispatch } from 'react-redux';
 import {fetchGetImages, fetchDeleteImages, fetchGetAdmins} from '../../redux/actions/defaultAction';
 import Style from './Facilities.module.css';
@@ -14,14 +13,11 @@ import Dropzone from 'react-dropzone';
 import axios from 'axios';
 
 const Facilities = () => {
-	const dispatch = useDispatch();
-	const { facilitiesImages } = useSelector((state) => state.facilitiesImages);
-	const [image, setImage] = useState({ array: [] });
-    const dispatch = useDispatch();
+		const dispatch = useDispatch();
+		const [image, setImage] = useState({ array: [] });
     const {user} = useAuth0();
     const {facilitiesImages} = useSelector(state => state.facilitiesImages);
     const {isAdminLogged} = useSelector(state => state.isAdminLogged);
-    const [image,setImage] = useState({array: []});
 
     const [input,setInput] = useState({
         name_1: "",
