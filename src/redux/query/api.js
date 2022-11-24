@@ -6,14 +6,14 @@ export const ApiQuery = createApi({
   baseQuery: retry(
     fetchBaseQuery({
       baseUrl: "https://appgymbackend-production.up.railway.app",
-      // baseUrl: "http://localhost:3001",
+      //baseUrl: "http://localhost:3001",
       prepareHeaders: (headers) => {
         const token = getToken().token;
         if (token) headers.set("authorization", `Bearer ${token}`);
         return headers;
       },
     }),
-    { maxRetries: 3 }
+    { maxRetries: 1 }
   ),
   keepUnusedDataFor: 30,
   endpoints: (builder) => ({
@@ -50,6 +50,13 @@ export const ApiQuery = createApi({
       query: () => "/users",
     }),
 
+    getCategory: builder.query({
+      query: () => "/category",
+    }),
+
+    getMuscles: builder.query({
+      query: () => "/muscles",
+    }),
     //************************************** */
     //********* P O S T ' S **************** */
     //************************************** */
@@ -103,6 +110,8 @@ export const {
   useGetRoutinesByIdQuery,
   useGetAllClassesQuery,
   useGetAllUsersQuery,
+  useGetCategoryQuery,
+  useGetMusclesQuery,
   useAddNewRoutinesMutation,
   useSetFavoritesMutation,
   usePutLoginMutation,

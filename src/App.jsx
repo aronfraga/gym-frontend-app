@@ -9,7 +9,6 @@ import FeedBack from './components/FeedBack/FeedBack';
 import FormRoutines from './components/FormRoutines/FormRoutines';
 import DetailRoutine from './components/DetailRoutine/DetailRoutine';
 import Landing from './components/Login/Login';
-import ThankYou from './components/ThankYou/ThankYou';
 import Facilities from './components/Facilities/Facilities';
 import Shop from './components/Shop/Shop';
 import Shopping from './components/Shopping/Shopping';
@@ -19,9 +18,10 @@ function App() {
 		<BrowserRouter>
 			<Routes>
 				<Route path='*' element={<PageNotFound />} />
-				<Route exact path='/' element={<Landing />} />
+				<Route path='/' element={<Home />} />
 				<Route path='/home' element={<Home />} />
 				<Route path='/tienda' element={<Shop />} />
+				<Route path='/tienda/:status' element={<Shop />} />
 				<Route path='/tienda/carrito' element={<Shopping />} />
 				<Route path='/rutinas' element={<Routines />} />
 				<Route path='/rutinas/:id' element={<DetailRoutine />} />

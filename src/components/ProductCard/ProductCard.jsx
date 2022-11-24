@@ -1,4 +1,6 @@
 import React from 'react';
+import { seterItem } from "../../redux/actions/defaultAction";
+import { useDispatch } from "react-redux";
 import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
@@ -8,13 +10,9 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import StarIcon from '@mui/icons-material/Star';
-import StarBorderIcon from '@mui/icons-material/StarBorder';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useState } from 'react';
 import style from './ProductCard.module.css';
-import { setCartCount } from '../../redux/slices/defaultSlice';
-import { useSelector, useDispatch } from 'react-redux';
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -27,18 +25,10 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-const ProductCard = ({ id, title, unit_price, description, picture_url }) => {
+const ProductCard = ({ id, title, unit_price, description, picture_url, stock, quantity, render }) => {
 
-	const dispatch = useDispatch();
-	const { cart_count } = useSelector((state) => state.cart_count);
 	const [expanded, setExpanded] = useState(false);
-	const [favorite, setFavorite] = useState(false);
-
-  const handlerFavorite = (event) => {
-    favorite ? setFavorite(false) : setFavorite(true);
-    console.log(favorite, "favorite");
-  };
-
+	const dispatch = useDispatch();
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
@@ -53,10 +43,12 @@ const ProductCard = ({ id, title, unit_price, description, picture_url }) => {
 				unit_price: unit_price,
 				description: description,
 				picture_url: picture_url,
-				quantity: 1, // agregar la cantidad
+				stock: stock,
+				quantity: quantity,
 			})
 		);
-		dispatch(setCartCount());
+		dispatch(seterItem(localStorage))
+		render(`item_${title}`);
 	};
 
 	return (

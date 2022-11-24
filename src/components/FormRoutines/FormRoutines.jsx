@@ -11,19 +11,19 @@ import {
   Radio,
   InputLabel,
   Slider,
+  FormControl,
 } from "@mui/material";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAddNewRoutinesMutation } from "../../redux/query/api";
+import {
+  useAddNewRoutinesMutation,
+  useGetCategoryQuery,
+  useGetMusclesQuery,
+} from "../../redux/query/api";
 import NavBar from "../NavBar/NavBar";
-
-const categorias = [
-  "Cardio/Resistencia",
-  "Masa Muscular",
-  "Postura",
-  "Bajada de Peso",
-  "Definición",
-];
+import style from "../FeedBack/FeedBack.module.css";
+import Loading from "../Loading/Loading";
+import FormEjer from "./FormEjer";
 
 const marks = [
   {
@@ -50,39 +50,59 @@ const marks = [
 
 const FormRoutines = () => {
   const navigate = useNavigate();
+  const { data: category, isLoading: load } = useGetCategoryQuery();
+  const { data: muscles, isLoading: loadM } = useGetMusclesQuery();
+
   const [value, setValue] = useState({
     name: "",
-    createdBy: "",
     duration: 0,
     difficulty: 0,
-    category: "",
+    categoryId: 0,
+    page: 0,
+    nEje: 1,
+    auxNEje: 1,
+    aux: [],
+  });
+
+  const [ejercicio, setEjercicio] = useState({
+    day: 0,
+    name: "",
+    series: 0,
+    repetitions: 0,
+    gifUrl: "",
+    muscleId: 0,
   });
 
   const [createRoutines, { isLoading }] = useAddNewRoutinesMutation();
 
   const handelSubmit = async (e) => {
-    console.log(e);
     e.preventDefault();
     await createRoutines({
       name: value.name,
-      createdBy: value.createdBy,
       duration: value.duration,
       difficulty: value.difficulty,
-      category: value.category,
+      categoryId: value.categoryId,
+      excercises: value.aux,
     }).unwrap();
     setValue({
       name: "",
-      createdBy: "",
       duration: 0,
       difficulty: 0,
-      category: "",
+      categoryId: 0,
+      page: 0,
+      nEje: 1,
+      auxNEje: 1,
+      aux: [],
     });
     alert("Rutina Creada");
     navigate("/rutinas");
   };
 
   const handleChange = (event) => {
-    if (event.target.name === "difficulty") {
+    if (
+      event.target.name === "difficulty" ||
+      event.target.name === "categoryId"
+    ) {
       const number = Number(event.target.value);
       setValue({
         ...value,
@@ -95,54 +115,128 @@ const FormRoutines = () => {
       });
   };
 
-  return (
-    <>
-      <NavBar />
-      <div>
-        <Grid container>
-          <form>
-            <Grid item>
-              <TextField
-                sx={{ width: 300 }}
-                id="standard-name"
-                label="Nombre de la rutina"
-                name="name"
-                value={value.name}
-                onChange={handleChange}
-              />
-            </Grid>
-            <Grid item>
-              <TextField
-                sx={{ width: 300 }}
-                id="standard-name"
-                label="Creado por"
-                name="createdBy"
-                value={value.createdBy}
-                onChange={handleChange}
-              />
-            </Grid>
-            <Grid item></Grid>
+  const handleChange2 = (e) => {
+    let name = e.target.name;
+    let value = e.target.value;
+    if (name === "repetitions" || name === "series" || name === "muscleId") {
+      const number = Number(value);
+      setEjercicio({
+        ...ejercicio,
+        [name]: number,
+      });
+    } else {
+      setEjercicio({
+        ...ejercicio,
+        [name]: value,
+      });
+    }
+  };
 
-            <FormLabel id="row-radio-buttons-group-label">Categoria</FormLabel>
-            <RadioGroup
-              row
-              aria-labelledby="demo-row-radio-buttons-group-label"
-              name="row-radio-buttons-group"
-            >
-              {categorias.map((cate) => (
-                <FormControlLabel
-                  name="category"
-                  value={cate}
-                  control={<Radio />}
-                  label={cate}
+  const handelNext = (e) => {
+    let pagina = value.page;
+    pagina++;
+    setValue({
+      ...value,
+      page: pagina,
+      nEje: 1,
+    });
+    if (pagina > 1) {
+      value.aux.push(ejercicio);
+    }
+    setEjercicio({
+      day: pagina,
+      name: "",
+      series: 0,
+      repetitions: 0,
+      gifUrl: "",
+      muscleId: 0,
+    });
+  };
+
+  const handelPrev = (e) => {
+    let pagina = value.page;
+    pagina--;
+    setValue({
+      ...value,
+      page: pagina,
+      nEje: value.auxNEje,
+    });
+    setEjercicio(value.aux.pop());
+  };
+
+  const handelNextEjer = (e) => {
+    let numeroEje = value.nEje;
+    let auxN = value.auxNEje;
+    numeroEje++;
+    auxN++;
+    setValue({
+      ...value,
+      nEje: numeroEje,
+      auxNEje: auxN,
+    });
+    if (numeroEje > 1) {
+      value.aux.push(ejercicio);
+    }
+    setEjercicio({
+      day: value.page,
+      name: "",
+      series: 0,
+      repetitions: 0,
+      gifUrl: "",
+      muscleId: 0,
+    });
+  };
+
+  const handelPrevEjer = (e) => {
+    let numeroEje = value.nEje;
+    numeroEje--;
+    setValue({
+      ...value,
+      nEje: numeroEje,
+    });
+
+    setEjercicio(value.aux.pop());
+  };
+
+  if (load || loadM) return <Loading />;
+  if (value.page === 0) {
+    return (
+      <>
+        <div className={style.mainContainer}>
+          <div className={style.mainContainerForm}>
+            <form>
+              <FormControl>
+                <TextField
+                  sx={{ width: 300 }}
+                  key="standard-name"
+                  label="Nombre de la rutina"
+                  name="name"
+                  value={value.name}
                   onChange={handleChange}
                 />
-              ))}
-            </RadioGroup>
 
-            <Grid item>
-              <Box sx={{ width: 300 }}>
-                <InputLabel id="duracion">Duracion</InputLabel>
+                <FormLabel id="row-radio-buttons-group-label">
+                  Categoria
+                </FormLabel>
+                <RadioGroup
+                  row
+                  aria-labelledby="demo-row-radio-buttons-group-label"
+                >
+                  {category.map((cate) => (
+                    <FormControlLabel
+                      name="categoryId"
+                      key={cate.id}
+                      value={cate.id}
+                      control={<Radio />}
+                      label={cate.name}
+                      onChange={handleChange}
+                    />
+                  ))}
+                </RadioGroup>
+
+                <InputLabel id="duracion" sx={{ position: "relative" }}>
+                  Duracion
+                </InputLabel>
                 <Slider
                   name="duration"
                   max={120}
@@ -154,65 +248,86 @@ const FormRoutines = () => {
                   valueLabelDisplay="off"
                   marks={marks}
                 />
-              </Box>
-            </Grid>
-            <Grid item>
-              <Typography component="legend">Dificultad</Typography>
-              <Rating
-                name="difficulty"
-                id="difficultyId"
-                value={value.difficulty}
-                onChange={handleChange}
-              />
-            </Grid>
-            <Box>
-              <Button
-                variant="contained"
-                onClick={handelSubmit}
-                disabled={isLoading ? true : false}
-              >
-                Submit
-              </Button>
-            </Box>
-          </form>
-        </Grid>
-      </div>
-    </>
-  );
+
+                <Typography component="legend">Dificultad</Typography>
+                <Rating
+                  name="difficulty"
+                  id="difficultyId"
+                  value={value.difficulty}
+                  onChange={handleChange}
+                />
+
+                <Button variant="contained" onClick={handelNext}>
+                  Siguiente
+                </Button>
+              </FormControl>
+            </form>
+          </div>
+        </div>
+      </>
+    );
+  } else {
+    return (
+      /* DIAS */
+      <>
+        <div className={style.mainContainer}>
+          <div className={style.mainContainerForm}>
+            <div>
+              <h2>Dia {value.page}</h2>
+
+              <form>
+                <FormControl>
+                  <Button variant="contained" onClick={handelPrevEjer}>
+                    Ejercicio {value.nEje - 1}
+                  </Button>
+                  <Button variant="contained" onClick={handelNextEjer}>
+                    Ejercicio {value.nEje + 1}
+                  </Button>
+                  <h3>Ejercicio {value.nEje}</h3>
+                  <FormEjer
+                    ejercicio={ejercicio}
+                    muscles={muscles}
+                    handleChange2={handleChange2}
+                  />
+
+                  <div>
+                    <div>
+                      {/* <Button variant="contained" onClick={handelAdd}>
+                        Añadir Ejercicio
+                      </Button> */}
+                    </div>
+                    <Button variant="contained" onClick={handelPrev}>
+                      Dia {value.page - 1}
+                    </Button>
+                    <Button
+                      variant="contained"
+                      onClick={handelSubmit}
+                      disabled={isLoading ? true : false}
+                    >
+                      Submit
+                    </Button>
+                    <Button variant="contained" onClick={handelNext}>
+                      Dia {value.page + 1}
+                    </Button>
+                  </div>
+                </FormControl>
+              </form>
+            </div>
+          </div>
+        </div>
+      </>
+    );
+  }
 };
 
 export default FormRoutines;
 
 const auxDuration = (value) => value;
 
-// DEJO ESTO COSAS COMENTADAS
-
-// const ITEM_HEIGHT = 48;
-// const ITEM_PADDING_TOP = 8;
-// const MenuProps = {
-//   PaperProps: {
-//     style: {
-//       maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-//       width: 250,
-//     },
-//   },
-// };
-
-/* <InputLabel>Categoria</InputLabel>
-      <Select
-        name="category"
-        id="categoryId"
-        multiple
-        value={value.category}
-        onChange={handleChange}
-        input={<OutlinedInput label="Tag" />}
-        renderValue={(selected) => selected.join(", ")}
-        MenuProps={MenuProps}
-      >
-        {categorias.map((cate) => (
-          <MenuItem key={cate} value={cate}>
-            <Checkbox checked={value.category.indexOf(cate) > -1} />
-            <ListItemText primary={cate} />
-          </MenuItem>
-        ))}
-      </Select> */
+//  <Button
+//    variant="contained"
+//    onClick={handelSubmit}
+//    disabled={isLoading ? true : false}
+//  >
+//    Submit
+//  </Button>;
