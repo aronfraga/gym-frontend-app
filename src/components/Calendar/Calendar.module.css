@@ -1,0 +1,144 @@
+/* body { font: 1em sans-serif;} */
+
+/* GRID SETUP */
+.calendar {
+    display: grid;    
+    background-color: #eee;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    padding: 5px;
+  }
+  .tittle{
+    width: 500px;
+    height: 55px;
+    left: 60px;
+    top: 0px;
+    font-family: Roboto, 'Open Sans', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 59px;
+    letter-spacing: -0.015em;
+    color: #0d0d6b;
+  }
+  
+  .divisionline{
+    background-color: #0d0d6b;
+    height: 3px;
+  }
+  
+  .container{
+    position: absolute;
+    width: 95%;
+    height:fit-content;
+  
+  }
+  .cuadros{
+    border: 1px  solid black;
+  }
+  
+  .weeklyByhour {
+    display: grid;
+   
+    
+    position: relative;
+    width: 100%;
+    height: 100%;
+  /*   padding: 5px; */
+    /* NAMED LINE NUMBERS (between tracks): 
+          COLS: hour markers + 7 days
+          ROWS: day markers + 24 hours */
+    grid-template-columns: 
+      [time] auto [mon] 1fr [tue] 1fr [wed] 1fr [thu] 1fr [fri] 1fr [sat] 1fr [end-col];
+    grid-template-rows:
+      [day]  auto
+      
+      [h07]  1fr 
+      [h08]  1fr
+      [h09]  1fr
+      [h10]  1fr 
+      [h11]  1fr 
+      [h12]  1fr 
+      [h13]  1fr 
+      [h14]  1fr 
+      [h15]  1fr 
+      [h16]  1fr 
+      [h17]  1fr 
+      [h18]  1fr 
+      [h19]  1fr 
+      [h20]  1fr 
+      [h21]  1fr 
+      [h22]  1fr 
+      [h23]  1fr 
+      [h00]  1fr 
+      [h01]  1fr 
+      [h02]  1fr 
+      [h03]  1fr 
+      [h04]  1fr 
+      [end-row];
+  }
+  
+  /* GENERAL ITEM SETUP */
+  .calendar li {
+    background-color: rgba(217, 217, 217, 0.569);
+    padding: 0.5em;
+    display: flex;
+  }
+  
+  /* ITEM TYPES */
+  li.day, li.time, li.corner { background-color: #f5f5f5; }
+  li.day { text-align: center; }
+  li.time { text-align: right; vertical-align: bottom; }
+  li.event { background-color: #82caaf; position: absolute; height: 100%; width: 100%; }
+  
+  /* CATEGORIES */
+  .eventWork { background-color: #fecf6a; }
+  .eventPersonal { background-color: #82caaf; }
+  
+  /* DAY HEADINGS   row / col */
+  .sun { grid-area: day / sun;border: 1px solid black; justify-content: center;border-radius: 4px;}
+  .mon { grid-area: day / mon;border: 1px solid black; justify-content: center;border-radius: 4px; }
+  .tue { grid-area: day / tue;border: 1px solid black; justify-content: center; border-radius: 4px;}
+  .wed { grid-area: day / wed; border: 1px solid black; justify-content: center;border-radius: 4px;}
+  .thu { grid-area: day / thu; border: 1px solid black; justify-content: center;border-radius: 4px;}
+  .fri { grid-area: day / fri; border: 1px solid black; justify-content: center;border-radius: 4px;}
+  .sat { grid-area: day / sat; border: 1px solid black; justify-content: center;border-radius: 4px;}
+  
+  /* TIME HEADINGS  row / col */
+  .h00 { grid-area: h00 / time; border: 1px solid black;border-radius: 4px;}
+  .h01 { grid-area: h01 / time; border: 1px solid black;border-radius: 4px;}
+  .h02 { grid-area: h02 / time; border: 1px solid black;border-radius: 4px;}
+  .h03 { grid-area: h03 / time; border: 1px solid black;border-radius: 4px;}
+  .h04 { grid-area: h04 / time; border: 1px solid black;border-radius: 4px;}
+  .h05 { grid-area: h05 / time; border: 1px solid black;border-radius: 4px;}
+  .h06 { grid-area: h06 / time; border: 1px solid black;border-radius: 4px;}
+  .h07 { grid-area: h07 / time; border: 1px solid black;border-radius: 4px;}
+  .h08 { grid-area: h08 / time; border: 1px solid black;border-radius: 4px;}
+  .h09 { grid-area: h09 / time; border: 1px solid black;border-radius: 4px;}
+  .h10 { grid-area: h10 / time; border: 1px solid black;border-radius: 4px;}
+  .h11 { grid-area: h11 / time; border: 1px solid black;border-radius: 4px;}
+  .h12 { grid-area: h12 / time; border: 1px solid black;border-radius: 4px;}
+  .h13 { grid-area: h13 / time; border: 1px solid black;border-radius: 4px;}
+  .h14 { grid-area: h14 / time; border: 1px solid black;border-radius: 4px;}
+  .h15 { grid-area: h15 / time; border: 1px solid black;border-radius: 4px;}
+  .h16 { grid-area: h16 / time; border: 1px solid black;border-radius: 4px;}
+  .h17 { grid-area: h17 / time; border: 1px solid black;border-radius: 4px;}
+  .h18 { grid-area: h18 / time; border: 1px solid black;border-radius: 4px;}
+  .h19 { grid-area: h19 / time; border: 1px solid black;border-radius: 4px;}
+  .h20 { grid-area: h20 / time; border: 1px solid black;border-radius: 4px;}
+  .h21 { grid-area: h21 / time; border: 1px solid black;border-radius: 4px;}
+  .h22 { grid-area: h22 / time; border: 1px solid black;border-radius: 4px;}
+  .h23 { grid-area: h23 / time; border: 1px solid black;border-radius: 4px;}
+  
+  
+  .linea{
+    color: black;
+  }
+
+  .lis{
+    border: 0.1px solid black;
+    background-color: rgba(128, 128, 128, 0.486);
+  }
+
+  

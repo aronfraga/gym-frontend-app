@@ -12,6 +12,7 @@ import Landing from './components/Login/Login';
 import Facilities from './components/Facilities/Facilities';
 import Shop from './components/Shop/Shop';
 import Shopping from './components/Shopping/Shopping';
+import Calendar from './components/Calendar/Calendar';
 
 function App() {
 	return (
@@ -28,6 +29,7 @@ function App() {
 				<Route path='/rutinas/crear' element={<FormRoutines />} />
 				<Route path='/staff' element={<Staff />} />
 				<Route path='/instalaciones' element={<Facilities />} />
+				<Route path='/calendario' element={<Calendar />} />
 				{/* <Route path='/seguimiento' element={<Home />} />
 				<Route path='/clases' element={<Home />} /> */}
 				<Route path='/feedback' element={<FeedBack />} />
