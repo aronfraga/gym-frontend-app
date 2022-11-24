@@ -6,11 +6,13 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy:{
-     '/api/': {
+      '/foo': 'https://app-gym-frontend.vercel.app/',
+      '/api/': {
       target: 'https://api.cloudinary.com/',
       changeOrigin: true,
-      rewrite: (path) => path.replace(/^\/api/, '')
+      rewrite: path => path.replace(/^\/api/, '')
       },  
     }
   }
 })
+
