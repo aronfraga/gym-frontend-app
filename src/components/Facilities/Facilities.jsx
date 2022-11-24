@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useAuth0 } from "@auth0/auth0-react";
 import {fetchGetImages, fetchDeleteImages, fetchGetAdmins} from '../../redux/actions/defaultAction';
 import Style from './Facilities.module.css';
 import NavBar from '../NavBar/NavBar';
@@ -13,25 +14,28 @@ import Dropzone from 'react-dropzone';
 import axios from 'axios';
 
 const Facilities = () => {
-		const dispatch = useDispatch();
-		const [image, setImage] = useState({ array: [] });
+
+	const dispatch = useDispatch();
+	const [image, setImage] = useState({ array: [] });
     const {user} = useAuth0();
+	const email = user?.email.toString();
     const {facilitiesImages} = useSelector(state => state.facilitiesImages);
     const {isAdminLogged} = useSelector(state => state.isAdminLogged);
-
     const [input,setInput] = useState({
         name_1: "",
     })
-
     const [loading,setLoading] = useState("");
     const [isShown, setIsShown] = useState(false);
     const [activeUpload, setActiveUpload]= useState(false);
   
     useEffect(() => {dispatch(fetchGetImages())},[dispatch]);
     useEffect(() => {dispatch(fetchGetAdmins("tony@gmail.com"))},[dispatch]);
-    /* Esto se descomentará para la entrega final
-    useEffect(() => {dispatch(fetchGetAdmins(user.email))},[dispatch]); */
+    /* Esto se descomentará para la entrega final*/
+    /* useEffect(() => {dispatch(fetchGetAdmins(email))},[dispatch]);  */
 
+	const handlerbutton = (event) => {
+        setIsShown(current => !current)
+    };
 
 	const handlerUpLoadbutton = (event) => {
 		setActiveUpload((current) => !current);
