@@ -4,6 +4,7 @@ import { useState } from 'react';
 import style from '../FeedBack/FeedBack.module.css';
 import Typography from '@mui/material/Typography';
 import NavBar from '../NavBar/NavBar.jsx';
+import swal from 'sweetalert';
 import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import OutlinedInput from '@mui/material/OutlinedInput';
@@ -123,7 +124,8 @@ const FeedBack = () => {
 			score: 0,
 			staffId: 0,
 		});
-		alert('Gracias por dejarnos tu Feedback');
+		swal("Gracias!", "Hemos recibido tu Feedback!", "success");
+		/* alert('Gracias por dejarnos tu Feedback'); */
 		navigate('/home');
 	};
 

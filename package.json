@@ -29,6 +29,7 @@
     "react-router-dom": "^6.4.3",
     "reactstrap": "^9.1.5",
     "styled-components": "^5.3.6",
+    "sweetalert": "^2.1.2",
     "universal-cookie": "^4.0.4"
   },
   "devDependencies": {
