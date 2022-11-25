@@ -5,12 +5,12 @@
 	gap: 6px;
 	padding: 6px;
 	border-radius: 6px;
-	background-color: var(--white-color2);
+	background-color: white;
 	box-shadow: 1px 1px 4px rgb(164, 164, 164);
 }
 
 .mainContainer h1 {
-	color: var(--black-color);
+	color: var(--primary-color);
 	margin: 0px;
 	font-size: 18px;
 }

@@ -21,7 +21,7 @@ import { Link } from 'react-router-dom';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import logo from '../../Images/Logo.png';
 
-const pages = ['tienda', 'rutinas', 'instalaciones', 'staff', 'feedback'];
+const pages = ['tienda', 'rutinas', 'instalaciones', 'staff', 'calendario', 'feedback'];
 // const settings = [ 'tienda','seguimiento', 'clases',];
 
 const NavBar = () => {
@@ -52,9 +52,9 @@ const NavBar = () => {
 	//#fafafa
 	return (
 		<AppBar
-			style={{
+			sx={{
 				margin: 0,
-				backgroundColor: '#a4a4d42f',
+				backgroundColor: 'var(--secondary-color)',
 			}}
 			position='static'
 		>
@@ -64,75 +64,74 @@ const NavBar = () => {
 				maxWidth={false}
 				width='100%'
 			>
-				<Toolbar className={styles.toolBar} sx={{ gap: '20px' }}>
-					<Link to={'/home'} style={{ textDecoration: 'none' }}>
-						<div className={styles.appGym}>
-							{/* <FitnessCenterIcon
-							sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }}
-						/> */}
-							<img src={logo} alt='Logo' />
-							<Typography
-								variant='h6'
-								noWrap
+				<Toolbar
+					className={styles.toolBar}
+					sx={{
+						display: 'flex',
+						// paddingLeft: '0px',
+						// paddingRight: '0px',
+						'&.MuiToolbar-root': {
+							paddingLeft: '12px',
+							paddingRight: '12px',
+						},
+					}}
+				>
+					{/* <Link to={'/home'} style={{ textDecoration: 'none' }}> */}
+					<div className={styles.appGym}>
+						<img src={logo} alt='Logo' />
+
+						<Box
+							sx={{
+								flexGrow: 1,
+								display: { xs: 'flex', md: 'none' },
+							}}
+						>
+							<IconButton
+								size='large'
+								aria-label='account of current user'
+								aria-controls='menu-appbar'
+								aria-haspopup='true'
+								onClick={handleOpenNavMenu}
+								sx={{ color: 'var(--tertiary-color)' }}
+							>
+								<MenuIcon />
+							</IconButton>
+							<Menu
+								id='menu-appbar'
+								anchorEl={anchorElNav}
+								anchorOrigin={{
+									vertical: 'bottom',
+									horizontal: 'left',
+								}}
+								keepMounted
+								transformOrigin={{
+									vertical: 'top',
+									horizontal: 'left',
+								}}
+								open={Boolean(anchorElNav)}
+								onClose={handleCloseNavMenu}
 								sx={{
-									display: { xs: 'none', md: 'flex' },
-									fontWeight: 600,
-									fontSize: 24,
-									color: '#0d0d6b',
+									display: { xs: 'block', md: 'none' },
 								}}
 							>
-								GYM FIT
-							</Typography>
-						</div>
-					</Link>
+								{pages.map((page) => (
+									<MenuItem key={page} onClick={handleCloseNavMenu}>
+										<Link to={`/${page}`} style={{ textDecoration: 'none' }}>
+											<Typography
+												textAlign='center'
+												sx={{ color: 'var(--black-color)' }}
+											>
+												{page.toUpperCase()}
+											</Typography>
+										</Link>
+									</MenuItem>
+								))}
+							</Menu>
+						</Box>
+					</div>
+					{/* </Link> */}
 
-					<Box
-						sx={{
-							flexGrow: 1,
-							display: { xs: 'flex', md: 'none' },
-						}}
-					>
-						<IconButton
-							size='large'
-							aria-label='account of current user'
-							aria-controls='menu-appbar'
-							aria-haspopup='true'
-							onClick={handleOpenNavMenu}
-							sx={{ color: '#0d0d6b' }}
-						>
-							<MenuIcon />
-						</IconButton>
-						<Menu
-							id='menu-appbar'
-							anchorEl={anchorElNav}
-							anchorOrigin={{
-								vertical: 'bottom',
-								horizontal: 'left',
-							}}
-							keepMounted
-							transformOrigin={{
-								vertical: 'top',
-								horizontal: 'left',
-							}}
-							open={Boolean(anchorElNav)}
-							onClose={handleCloseNavMenu}
-							sx={{
-								display: { xs: 'block', md: 'none' },
-							}}
-						>
-							{pages.map((page) => (
-								<MenuItem key={page} onClick={handleCloseNavMenu}>
-									<Link to={`/${page}`}>
-										<Typography textAlign='center' sx={{ color: '#0d0d6b' }}>
-											{page.toUpperCase()}
-										</Typography>
-									</Link>
-								</MenuItem>
-							))}
-						</Menu>
-					</Box>
-
-					<Typography
+					{/* <Typography
 						variant='h5'
 						noWrap
 						sx={{
@@ -141,19 +140,32 @@ const NavBar = () => {
 							flexGrow: 1,
 							fontWeight: 600,
 							fontSize: 30,
-							color: '#0d0d6b',
+							color: 'var(--primary-color)',
 						}}
 					>
 						GYM FIT
-					</Typography>
+					</Typography> */}
 					<Box
 						sx={{
 							flexGrow: 1,
-							display: { xs: 'none', md: 'flex', justifyContent: 'flex-end' },
+
+							display: {
+								xs: 'none',
+								md: 'flex',
+								justifyContent: 'center',
+								gap: '6px',
+								width: 'fit-content',
+							},
 						}}
 					>
 						<Link to={'/home'} style={{ textDecoration: 'none' }}>
-							<Button sx={{ my: 2, color: '#0d0d6b', display: 'block' }}>
+							<Button
+								sx={{
+									color: 'var(--white-color)',
+									display: 'block',
+									fontSize: '15px',
+								}}
+							>
 								INICIO
 							</Button>
 						</Link>
@@ -166,18 +178,26 @@ const NavBar = () => {
 								<Button
 									key={page}
 									onClick={handleCloseNavMenu}
-									sx={{ my: 2, color: '#0d0d6b', display: 'block' }}
+									sx={{
+										color: 'var(--white-color)',
+										display: 'block',
+										fontSize: '15px',
+									}}
 								>
 									{page}
 								</Button>
 							</Link>
 						))}
 					</Box>
-
-					<Box sx={{ flexGrow: 0 }}>
+					{/* Carita + boton*/}
+					<div className={styles.caritaContainer}>
 						<Tooltip title='Open settings'>
 							<IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-								<Avatar alt='avatar' src={user?.picture} />
+								<Avatar
+									alt='avatar'
+									src={user?.picture}
+									sx={{ border: '1px solid var(--white-color)' }}
+								/>
 							</IconButton>
 						</Tooltip>
 						<Menu
@@ -207,24 +227,29 @@ const NavBar = () => {
 								</Typography>
 							</MenuItem>
 						</Menu>
-					</Box>
 
-					<Link to='/planes' style={{ textDecoration: 'none' }}>
-						<Button
-							sx={{
-								paddingRight: '25px',
-								paddingLeft: '25px',
-								color: 'white',
-								display: 'flex',
-								borderRadius: '6px',
-								background: '#0d0d6b',
-								alignItems: 'center',
-								'&:hover': { backgroundColor: '#62629f', transition: '0.4s' },
-							}}
-						>
-							Mi Plan
-						</Button>
-					</Link>
+						<Link to='/planes' style={{ textDecoration: 'none' }}>
+							<Button
+								variant='outlined'
+								sx={{
+									paddingRight: '25px',
+									paddingLeft: '25px',
+									color: 'white',
+									display: 'flex',
+									borderRadius: '6px',
+									borderColor: 'var(--white-color)',
+									alignItems: 'center',
+									'&:hover': {
+										backgroundColor: 'var(--tertiary-color)',
+										transition: '0.4s',
+										borderColor: 'var(--white-color)',
+									},
+								}}
+							>
+								Mi Plan
+							</Button>
+						</Link>
+					</div>
 				</Toolbar>
 			</Container>
 		</AppBar>

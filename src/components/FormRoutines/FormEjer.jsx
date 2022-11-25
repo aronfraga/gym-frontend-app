@@ -42,6 +42,7 @@ const FormEjer = ({ ejercicio, muscles, id, handleChange2 }) => {
             inputProps: { min: 1 },
           }}
           onChange={handleChange2}
+          required
         />
       </Box>
       <RadioGroup row aria-labelledby="demo-row-radio-buttons-group-label">

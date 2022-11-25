@@ -45,6 +45,7 @@
 	justify-items: center;
 	margin-bottom: 36px;
 	margin-top: 24px;
+	min-height: 600px;
 }
 
 .photoContainer {
@@ -112,6 +113,7 @@
 	align-items: center;
 	position: relative;
 	justify-content: space-around;
+	
 }
 
 .imgPreview {
@@ -148,7 +150,14 @@
 	display: flex;
 	flex-direction: row;
 	justify-content: space-around;
+	min-height: 528px;
 	/* align-items: center; */
+}
+.wrapperDropandForm{
+	display: flex;
+	flex-direction: column;
+	padding-left: 50px;
+	padding-right: 50px;
 }
 
 .wrapperForm {
@@ -159,4 +168,13 @@
 }
 .error {
 	color: red;
+}
+.tittlePreview{
+	display: flex;
+	justify-content: center;
+}
+
+.wrapperpreview{
+	margin-top: 50px;
+	margin-left: 50px;
 }
