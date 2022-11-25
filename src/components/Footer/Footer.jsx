@@ -33,42 +33,6 @@ const Footer = () => {
   return (
     
     <footer className={Style.footer}>
-       {/*  <div className={Style.footerR1}>
-            <div className={Style.logo}>
-                <h1>GymApp Logo</h1>
-            </div>
-            <div className={Style.containerfooterLinks}>
-                <Link className={Style.Links} to="/home">Inicio</Link>
-                <Link className={Style.Links} to="/tiendavirtual">Tienda Virtual</Link>
-                <Link className={Style.Links} to="/rutinas">Rutinas</Link>
-                <Link className={Style.Links} to="/instalaciones">Gym</Link>
-                <Link className={Style.Links} to="/seguimiento">Seguimiento</Link>
-                <Link className={Style.Links} to="/clases">Clases</Link>
-                <Link className={Style.Links} to="/feedback">Feedback</Link>
-                <Link className={Style.Links} to="/perfil">Perfil</Link>
-                <Link className={Style.Links} to="/membresia">Tu plan</Link>
-            </div>
-            <div className={Style.googlemap}>
-                <iframe  className={Style.googlemapbox} src={googlemapurl} 
-                        width="350" 
-                        height="210" 
-                        loading="lazy"
-                        frameBorder="0"
-                        marginHeight="0"
-                        marginWidth="0"
-                        referrerPolicy="no-referrer-when-downgrade">
-                </iframe>
-            </div>
-        </div>
-        <div className={Style.footerR2}>
-            <a href="https://www.instagram.com" target="_blank" rel="noreferrer"><img className={Style.icons} src={instaimgurl} alt="img" width="40px"height="40px"/></a>
-            <a href="https://www.facebook.com" target="_blank" rel="noreferrer"><img className={Style.icons} src={fbimgurl} alt="img" width="40px"height="40px"/></a>
-            <a href="https://www.linkedin.com" target="_blank" rel="noreferrer"><img className={Style.icons} src={linkinimgurl} alt="img" width="40px"height="40px"/></a>
-            <a href="https://www.twitter.com" target="_blank" rel="noreferrer"><img className={Style.icons} src={twitterimgurl} alt="img" width="40px"height="40px"/></a>
-        </div>
-        <div className={Style.footerR3}>
-            <p>© Dracula team gym app todos los derechos reservados</p>
-        </div> */}
         <div className={Style.footerR1}>
             <img className={Style.ImgLogo} src={logo} alt='img'/>
             <div className={Style.linkswrapper}>
@@ -82,7 +46,7 @@ const Footer = () => {
                     aria-expanded={open ? 'true' : undefined}
                     onClick={handleClick}>GIT HUB
                 </Button>
-                <img className={Style.icons} src="https://seeklogo.com/images/G/github-logo-7880D80B8D-seeklogo.com.png" alt="img" width="30px"height="30px"/>
+                <img className={Style.icons} src="https://cdn-icons-png.flaticon.com/512/270/270798.png" alt="img" width="30px"height="30px"/>
                 <Menu 
                     id="basic-menu"
                     anchorEl={anchorEl}
@@ -133,8 +97,8 @@ const Footer = () => {
             </div>
             <div className={Style.altgooglemapgooglemap}>
                 <iframe className={Style.googlemapbox}  src={googlemapurl} 
-                        width="170" 
-                        height="140" 
+                        width="190" 
+                        height="150" 
                         loading="lazy"
                         frameBorder="0"
                         marginHeight="0"
