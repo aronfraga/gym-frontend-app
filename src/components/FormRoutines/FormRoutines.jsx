@@ -12,6 +12,7 @@ import {
   InputLabel,
   Slider,
   FormControl,
+  IconButton,
 } from "@mui/material";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -24,6 +25,8 @@ import NavBar from "../NavBar/NavBar";
 import style from "../FeedBack/FeedBack.module.css";
 import Loading from "../Loading/Loading";
 import FormEjer from "./FormEjer";
+import { PhotoCamera } from "@mui/icons-material";
+import { uploadImage } from "./uploadImage";
 
 const marks = [
   {
@@ -58,6 +61,7 @@ const FormRoutines = () => {
     duration: 0,
     difficulty: 0,
     categoryId: 0,
+    imgUrl: "",
     page: 0,
     nEje: 1,
     auxNEje: 1,
@@ -67,8 +71,8 @@ const FormRoutines = () => {
   const [ejercicio, setEjercicio] = useState({
     day: 0,
     name: "",
-    series: 0,
-    repetitions: 0,
+    series: Number,
+    repetitions: Number,
     gifUrl: "",
     muscleId: 0,
   });
@@ -77,12 +81,14 @@ const FormRoutines = () => {
 
   const handelSubmit = async (e) => {
     e.preventDefault();
+    value.aux.push(ejercicio);
     await createRoutines({
       name: value.name,
       duration: value.duration,
       difficulty: value.difficulty,
       categoryId: value.categoryId,
       excercises: value.aux,
+      imgUrl: value.imgUrl,
     }).unwrap();
     setValue({
       name: "",
@@ -113,6 +119,16 @@ const FormRoutines = () => {
         ...value,
         [event.target.name]: event.target.value,
       });
+  };
+
+  const handlerImage = async (e) => {
+    e.preventDefault();
+    const url = await uploadImage(e.target.files);
+    setValue({
+      ...value,
+      [e.target.name]: url,
+    });
+    console.log(url);
   };
 
   const handleChange2 = (e) => {
@@ -149,7 +165,7 @@ const FormRoutines = () => {
       series: 0,
       repetitions: 0,
       gifUrl: "",
-      muscleId: 0,
+      muscleId: ejercicio.muscleId,
     });
   };
 
@@ -183,21 +199,23 @@ const FormRoutines = () => {
       series: 0,
       repetitions: 0,
       gifUrl: "",
-      muscleId: 0,
+      muscleId: ejercicio.muscleId,
     });
   };
 
   const handelPrevEjer = (e) => {
     let numeroEje = value.nEje;
     numeroEje--;
+    let auxNejer = value.auxNEje;
+    auxNejer--;
     setValue({
       ...value,
       nEje: numeroEje,
+      auxNEje: auxNejer,
     });
 
     setEjercicio(value.aux.pop());
   };
-
   if (load || loadM) return <Loading />;
   if (value.page === 0) {
     return (
@@ -214,7 +232,24 @@ const FormRoutines = () => {
                   value={value.name}
                   onChange={handleChange}
                 />
-
+                <br />
+                <div>
+                  <IconButton
+                    color="primary"
+                    aria-label="upload picture"
+                    component="label"
+                  >
+                    <FormLabel id="img-label">Imagen</FormLabel>
+                    <input
+                      accept="image/*"
+                      type="file"
+                      name="imgUrl"
+                      onChange={handlerImage}
+                    />
+                    <PhotoCamera />
+                  </IconButton>
+                </div>
+                <br />
                 <FormLabel id="row-radio-buttons-group-label">
                   Categoria
                 </FormLabel>
@@ -277,7 +312,15 @@ const FormRoutines = () => {
 
               <form>
                 <FormControl>
-                  <Button variant="contained" onClick={handelPrevEjer}>
+                  <Button
+                    variant="contained"
+                    onClick={handelPrevEjer}
+                    sx={
+                      value.nEje === 1
+                        ? { display: "none" }
+                        : { display: "true" }
+                    }
+                  >
                     Ejercicio {value.nEje - 1}
                   </Button>
                   <Button variant="contained" onClick={handelNextEjer}>
@@ -296,9 +339,23 @@ const FormRoutines = () => {
                         Añadir Ejercicio
                       </Button> */}
                     </div>
-                    <Button variant="contained" onClick={handelPrev}>
-                      Dia {value.page - 1}
-                    </Button>
+                    {value.page !== 1 ? (
+                      <Button
+                        variant="contained"
+                        onClick={handelPrev}
+                        sx={
+                          value.page === 1 || value.nEje !== 1
+                            ? { display: "none" }
+                            : { display: "true" }
+                        }
+                      >
+                        Dia {value.page - 1}
+                      </Button>
+                    ) : (
+                      <Button variant="contained" onClick={handelPrev}>
+                        Volver
+                      </Button>
+                    )}
                     <Button
                       variant="contained"
                       onClick={handelSubmit}
