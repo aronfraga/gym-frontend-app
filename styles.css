@@ -11,6 +11,8 @@
 	--white-gray: #f0f0f0;
 	--white-color: #fafafa;
 	/* hover button outlined #62629f1b; */
+	/* --prueba-color: #0a1929; */
+	--hover-outlined-button: #acaccc64;
 }
 
 body {

@@ -1,6 +1,6 @@
 import React from 'react';
-import { seterItem } from "../../redux/actions/defaultAction";
-import { useDispatch } from "react-redux";
+import { seterItem } from '../../redux/actions/defaultAction';
+import { useDispatch } from 'react-redux';
 import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
@@ -15,23 +15,31 @@ import { useState } from 'react';
 import style from './ProductCard.module.css';
 
 const ExpandMore = styled((props) => {
-  const { expand, ...other } = props;
-  return <IconButton {...other} />;
+	const { expand, ...other } = props;
+	return <IconButton {...other} />;
 })(({ theme, expand }) => ({
-  transform: !expand ? "rotate(0deg)" : "rotate(180deg)",
-  marginLeft: "auto",
-  transition: theme.transitions.create("transform", {
-    duration: theme.transitions.duration.shortest,
-  }),
+	transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
+	marginLeft: 'auto',
+	transition: theme.transitions.create('transform', {
+		duration: theme.transitions.duration.shortest,
+	}),
 }));
 
-const ProductCard = ({ id, title, unit_price, description, picture_url, stock, quantity, render }) => {
-
+const ProductCard = ({
+	id,
+	title,
+	unit_price,
+	description,
+	picture_url,
+	stock,
+	quantity,
+	render,
+}) => {
 	const [expanded, setExpanded] = useState(false);
 	const dispatch = useDispatch();
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
+	const handleExpandClick = () => {
+		setExpanded(!expanded);
+	};
 
 	const handlerSaveInCheckOut = (event) => {
 		event.preventDefault();
@@ -47,7 +55,7 @@ const ProductCard = ({ id, title, unit_price, description, picture_url, stock, q
 				quantity: quantity,
 			})
 		);
-		dispatch(seterItem(localStorage))
+		dispatch(seterItem(localStorage));
 		render(`item_${title}`);
 	};
 
@@ -85,6 +93,13 @@ const ProductCard = ({ id, title, unit_price, description, picture_url, stock, q
 							'& .css-4tfxnd-MuiSvgIcon-root': {
 								fontSize: '18px',
 							},
+							color: 'var(--primary-color)',
+							borderColor: 'var(--primary-color)',
+							'&:hover': {
+								borderColor: 'var(--primary-color)',
+								backgroundColor: 'var(--hover-outlined-button)',
+								transition: '0.4s',
+							},
 						}}
 					>
 						Agregar
@@ -95,12 +110,23 @@ const ProductCard = ({ id, title, unit_price, description, picture_url, stock, q
 				<h2>{title}</h2>
 				<CardActions sx={{ padding: '0px' }}>
 					<ExpandMore
+						sx={{
+							'&:hover': {
+								borderColor: 'var(--primary-color)',
+								backgroundColor: 'var(--hover-outlined-button)',
+								transition: '0.4s ease-in-out',
+							},
+						}}
 						expand={expanded}
 						onClick={handleExpandClick}
 						aria-expanded={expanded}
 						aria-label='show more'
 					>
-						<ExpandMoreIcon />
+						<ExpandMoreIcon
+							sx={{
+								color: 'var(--primary-color)',
+							}}
+						/>
 					</ExpandMore>
 				</CardActions>
 			</div>

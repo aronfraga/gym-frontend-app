@@ -3,21 +3,26 @@
 	width: 50px;
 }
 
-.mainContainer {
-	padding-left: 0px;
-	padding-right: 0px;
-}
 .toolBar {
-	width: 97.5%;
-	padding-left: 0px;
+	display: flex;
+	justify-content: space-between;
 }
 
 .appGym {
 	display: flex;
 	align-items: center;
 	gap: 12px;
+	width: 170px;
 }
 
 .appGym img {
-	max-width: 60px;
+	max-width: 50px;
+}
+
+.caritaContainer {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	width: 170px;
+	gap: 12px;
 }

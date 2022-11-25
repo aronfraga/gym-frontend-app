@@ -183,9 +183,9 @@ const Shop = () => {
 							})
 						}
 						sx={{
-							background: '#0d0d6b',
+							background: 'var(--primary-color)',
 							'&:hover': {
-								backgroundColor: '#62629f',
+								backgroundColor: 'var(--secondary-color)',
 								transition: '0.4s',
 							},
 						}}
