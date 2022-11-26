@@ -16,3 +16,10 @@ export const Price = {
   ],
   value: ["a", "b", "c", "d", "e"],
 };
+
+export const Size = {
+  title: "Cantidad",
+  name: "size",
+  label: ["5 Productos", "10 Productos", "15 Productos", "20 Productos"],
+  value: [5, 10, 15, 20],
+};
