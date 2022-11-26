@@ -34,6 +34,8 @@ const ProductCard = ({
 	stock,
 	quantity,
 	render,
+	handlerAlertSuccess,
+	handlerAlertError,
 }) => {
 	const [expanded, setExpanded] = useState(false);
 	const dispatch = useDispatch();
@@ -57,6 +59,13 @@ const ProductCard = ({
 		);
 		dispatch(seterItem(localStorage));
 		render(`item_${title}`);
+		// if(producto está){
+		// 	handlerAlertError();
+		// }else{
+		//	handlerAlertSuccess();
+		// }
+		handlerAlertSuccess();
+		// handlerAlertError();
 	};
 
 	return (
