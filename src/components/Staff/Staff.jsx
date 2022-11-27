@@ -17,7 +17,6 @@ const Staff = () => {
 		<>
 			<NavBar />
 			<div className={Style.mainwrapper}>
-				{/* {console.log(staff)} */}
 				<div className={Style.titleContainer}>
 					<h1 className={Style.stafftittle}>Staff Técnico</h1>
 					<hr className={Style.divisionline}></hr>

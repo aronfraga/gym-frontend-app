@@ -45,27 +45,25 @@ const ProductCard = ({
 
 	const handlerSaveInCheckOut = (event) => {
 		event.preventDefault();
-		localStorage.setItem(
-			`item_${title}`,
-			JSON.stringify({
-				id: id,
-				title: title,
-				unit_price: unit_price,
-				description: description,
-				picture_url: picture_url,
-				stock: stock,
-				quantity: quantity,
-			})
-		);
-		dispatch(seterItem(localStorage));
-		render(`item_${title}`);
-		// if(producto está){
-		// 	handlerAlertError();
-		// }else{
-		//	handlerAlertSuccess();
-		// }
-		handlerAlertSuccess();
-		// handlerAlertError();
+		if(!(localStorage.getItem(`item_${title}`))) {
+			localStorage.setItem(
+				`item_${title}`,
+				JSON.stringify({
+					id: id,
+					title: title,
+					unit_price: unit_price,
+					description: description,
+					picture_url: picture_url,
+					stock: stock,
+					quantity: quantity,
+				})
+			);
+			dispatch(seterItem(localStorage));
+			render(`item_${title}`);
+			handlerAlertSuccess();
+		}	else {
+			handlerAlertError();
+		}
 	};
 
 	return (
