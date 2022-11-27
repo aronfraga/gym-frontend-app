@@ -41,7 +41,7 @@ export default function Ratingbystars() {
         onChange={(event, newValue) => {
           setValue(newValue);
         }}
-        onClick={(event) => { event.target.value && console.log(event.target.value) }}
+        onClick={(event) => { event.target.value && event.target.value }}
         onChangeActive={(event, newHover) => {
           setHover(newHover);
         }}

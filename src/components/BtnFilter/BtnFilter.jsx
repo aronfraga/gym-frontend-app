@@ -14,7 +14,6 @@ const BtnFilter = () => {
 			setFavorite(false);
 		} else {
 			setFavorite(true);
-			console.log('tratando de filtrar favoritos');
 		}
 	};
 
