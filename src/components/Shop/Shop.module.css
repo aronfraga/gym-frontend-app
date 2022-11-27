@@ -1,11 +1,19 @@
 .mainContainer {
-	display: flex;
-	justify-content: center;
-	column-gap: 24px;
-	margin-top: 36px;
-	padding: 0px 36px;
+  display: flex;
+  justify-content: center;
+  column-gap: 24px;
+  margin-top: 36px;
+  padding: 0px 36px;
 }
 
 .cardsContainer {
-	width: 100%;
+  width: 100%;
+}
+
+.pagintionContainer {
+  display: flex;
+  justify-content: center;
+  column-gap: 24px;
+  margin-top: 36px;
+  padding: 0px 36px;
 }
