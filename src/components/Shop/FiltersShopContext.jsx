@@ -20,7 +20,6 @@ const FilterShopProvider = ({ children }) => {
 
 export const useFilterShop = () => {
   const context = useContext(FilterContextShop);
-  console.log(context);
   return context;
 };
 
