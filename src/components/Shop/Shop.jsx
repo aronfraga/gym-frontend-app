@@ -25,7 +25,7 @@ import { useFilterShop } from "./FiltersShopContext";
 const Shop = () => {
   const dispatch = useDispatch();
   const { itemCheckOut } = useSelector((state) => state.itemCheckOut);
-  const [ renderShop, setRenderShop ] = useState("");
+  const [renderShop, setRenderShop] = useState("");
 
   const urlChanged = window.location.search;
   const urlParams = new URLSearchParams(urlChanged);
@@ -69,38 +69,74 @@ const Shop = () => {
   const handlerCheck = (event) => {
     let value = event.target.value;
     let name = event.target.name;
-    name === "category" && setInput({ ...input, [name]: value });
-    name === "category" && setShopFilters({ ...shopFilters, [name]: value });
+    name === "category" && setInput({ ...input, [name]: value, page: 1 });
+    name === "category" &&
+      setShopFilters({ ...shopFilters, [name]: value, page: 1 });
     if (name === "price") {
-      value === "a" && setInput({ ...input, max: 1000, letra: "a" });
-      value === "b" && setInput({ ...input, min: 1000, max: 1500, letra: "b" });
-      value === "c" && setInput({ ...input, min: 1500, max: 2000, letra: "c" });
-      value === "d" && setInput({ ...input, min: 2000, max: 3000, letra: "d" });
-      value === "e" && setInput({ ...input, min: 3000, letra: "e" });
+      value === "a" &&
+        setInput({ ...input, min: 0, max: 1000, page: 1, letra: "a" });
+      value === "b" &&
+        setInput({ ...input, min: 1000, max: 1500, page: 1, letra: "b" });
+      value === "c" &&
+        setInput({ ...input, min: 1500, max: 2000, page: 1, letra: "c" });
+      value === "d" &&
+        setInput({ ...input, min: 2000, max: 3000, page: 1, letra: "d" });
+      value === "e" &&
+        setInput({ ...input, min: 3000, max: Infinity, page: 1, letra: "e" });
       /********************** CONTEXT *****************************************/
       value === "a" &&
-        setShopFilters({ ...shopFilters, max: 1000, letra: "a" });
+        setShopFilters({
+          ...shopFilters,
+          min: 0,
+          max: 1000,
+          page: 1,
+          letra: "a",
+        });
       value === "b" &&
-        setShopFilters({ ...shopFilters, min: 1000, max: 1500, letra: "b" });
+        setShopFilters({
+          ...shopFilters,
+          min: 1000,
+          max: 1500,
+          page: 1,
+          letra: "b",
+        });
       value === "c" &&
-        setShopFilters({ ...shopFilters, min: 1500, max: 2000, letra: "c" });
+        setShopFilters({
+          ...shopFilters,
+          min: 1500,
+          max: 2000,
+          page: 1,
+          letra: "c",
+        });
       value === "d" &&
-        setShopFilters({ ...shopFilters, min: 2000, max: 3000, letra: "d" });
+        setShopFilters({
+          ...shopFilters,
+          min: 2000,
+          max: 3000,
+          page: 1,
+          letra: "d",
+        });
       value === "e" &&
-        setShopFilters({ ...shopFilters, min: 3000, letra: "e" });
+        setShopFilters({
+          ...shopFilters,
+          min: 3000,
+          max: Infinity,
+          page: 1,
+          letra: "e",
+        });
     }
   };
 
   const aux = {};
   for (const a in shopFilters) {
-    if (a === "page" || a === "size") {
+    if (a === "page" || a === "size" || a === "letra") {
       continue;
     } else if (shopFilters[a].length > 0 || shopFilters[a] > 0)
       aux[a] = shopFilters[a];
   }
 
   for (const a in input) {
-    if (a === "page" || a === "size") {
+    if (a === "page" || a === "size" || a === "letra") {
       continue;
     } else if (input[a].length > 0 || input[a] > 0) aux[a] = input[a];
   }
