@@ -8,13 +8,12 @@ import Staff from './components/Staff/Staff';
 import FeedBack from './components/FeedBack/FeedBack';
 import FormRoutines from './components/FormRoutines/FormRoutines';
 import DetailRoutine from './components/DetailRoutine/DetailRoutine';
-import Landing from './components/Login/Login';
 import Facilities from './components/Facilities/Facilities';
 import Shop from './components/Shop/Shop';
 import Shopping from './components/Shopping/Shopping';
 import Calendar from './components/Calendar/Calendar';
 import Dashboard from './components/Dashboard/Dashboard';
-import { ProductsDetail } from './components/ProductsDetail/ProductsDetail';
+import ProductsDetail from './components/ProductsDetail/ProductsDetail';
 
 function App() {
 	return (
@@ -34,11 +33,8 @@ function App() {
 				<Route path='/instalaciones' element={<Facilities />} />
 				<Route path='/calendario' element={<Calendar />} />
 				<Route path='/admdashboard' element={<Dashboard />} />
-				{/* <Route path='/seguimiento' element={<Home />} />
-				<Route path='/clases' element={<Home />} /> */}
 				<Route path='/feedback' element={<FeedBack />} />
 				<Route path='/planes' element={<Planes />} />
-				{/* <Route path='/:id' element={<Home />} /> */}
 			</Routes>
 		</BrowserRouter>
 	);

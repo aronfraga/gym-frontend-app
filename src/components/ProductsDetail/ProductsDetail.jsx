@@ -1,30 +1,68 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import NavBar from '../NavBar/NavBar';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useState } from 'react';
 import style from './ProductsDetail.module.css';
+import Loading from "../Loading/Loading";
 import QuantitySelector from '../QuantitySelector/QuantitySelector';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { productToPay, seterItem } from "../../redux/actions/defaultAction";
+import { useGetProductByIdQuery } from "../../redux/query/ApiEcommerce";
+import { ToastContainer, toast } from 'react-toastify';
+import { useDispatch } from 'react-redux';
 
-const prueba = {
-	id: 1,
-	title: 'Articulo de prueba',
-	unit_price: 100000,
-	description:
-		'Remera fit con la cara del futuro del Bodybuilding Manu Casanueva',
-	picture_url:
-		'https://http2.mlstatic.com/D_NQ_NP_613482-MLA52418021813_112022-O.webp',
-	stock: 5,
-	quantity: 0,
-};
+const ProductsDetail = () => {
 
-//!ARON, TE DEJE UN COMENTARIO IMPORTANTE MÁS ABAJOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO *****************************************
-
-export const ProductsDetail = () => {
-	const [render, setRender] = useState('');
+	const { id } = useParams();
+	const { data, isLoading } = useGetProductByIdQuery(id);
+	const [ item, setItem ] = useState({})
+	const [ render, setRender ] = useState('');
 	const navigate = useNavigate();
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		if(!isLoading) {
+			setItem({
+				id: data.id,
+				title: data.title,
+				unit_price: data.unit_price,
+				description: data.description,
+				picture_url: data.imgUrl,
+				stock: data.stock,
+				quantity: 1,
+			});
+		}
+	},[isLoading])
+
+	console.log(item)
+
+	const handlerAlertSuccess = () => {
+		toast.success('¡Producto agregado al carrito!', {
+			position: 'bottom-left',
+			autoClose: 3000,
+			hideProgressBar: false,
+			closeOnClick: true,
+			pauseOnHover: true,
+			draggable: true,
+			progress: undefined,
+			theme: 'colored',
+		});
+	};
+
+	const handlerAlertError = () => {
+		toast.error('El producto no se pudo agregar porque ya está en el carrito', {
+			position: 'bottom-left',
+			autoClose: 3000,
+			hideProgressBar: false,
+			closeOnClick: true,
+			pauseOnHover: true,
+			draggable: true,
+			progress: undefined,
+			theme: 'colored',
+		});
+	};
 
 	function handlerRender(data) {
 		setRender(data);
@@ -32,15 +70,48 @@ export const ProductsDetail = () => {
 
 	function handlerCheckOutBuy(event) {
 		event.preventDefault();
+    const checkOut = {
+      items: [item],
+      auto_return: "approved",
+      notification_url: "https://www.success.com/",
+      back_urls: {
+        success: "http://127.0.0.1:5173/tienda/",
+        failure: "http://www.facebook.com/",
+        pending: "http://www.pending.com/",
+      },
+    };
+    dispatch(productToPay(checkOut));
 	}
 
-	function handlerSaveInCheckOut(event) {
+	const handlerSaveInCheckOut = (event) => {
 		event.preventDefault();
-	}
+		if (!localStorage.getItem(`item_${data.title}`)) {
+			localStorage.setItem(
+				`item_${data.title}`,
+				JSON.stringify({
+					id: data.id,
+					title: data.title,
+					unit_price: data.unit_price,
+					description: data.description,
+					picture_url: data.imgUrl,
+					stock: data.stock,
+					quantity: 1,
+				})
+			);
+			dispatch(seterItem(localStorage));
+			setRender(`item_${data.title}`);
+			handlerAlertSuccess();
+		} else {
+			handlerAlertError();
+		}
+	};
 
 	function handlerClickBack() {
 		navigate(-1);
 	}
+	
+	if(isLoading) return <Loading />; 
+	
 	return (
 		<>
 			<NavBar />
@@ -62,19 +133,19 @@ export const ProductsDetail = () => {
 						</IconButton>
 					</div>
 					<div className={style.imgContainer}>
-						<img src={prueba.picture_url} alt='Producto' />
+						<img src={data.imgUrl} alt='Producto' />
 					</div>
 					<div className={style.infoContainer}>
-						<h1>{prueba.title}</h1>
-						<h2>$ {prueba.unit_price}</h2>
-						<p>{prueba.description}</p>
+						<h1>{data.title}</h1>
+						<h2>$ {data.unit_price}</h2>
+						<p>{data.description}</p>
 						<div className={style.quantityContainer}>
 							<h3>Cantidad:</h3>
 							{/* AAAAAAAAAARON, AQUI PASAN COSAS RARAS, le meti el quantity aqui también pero lo agrega al carrito al añadir
                             cantidad de producto, como no sé cómo funciona el local store lo dejé quiero pero para que sepa :D, si lo puedes
                             arreglar me avisas su no hago otro quantity para esta parte */}
-							<QuantitySelector item={prueba} render={handlerRender} />
-							<h4>Disponible: {prueba.stock}</h4>
+							<QuantitySelector item={item} render={handlerRender} />
+							<h4>Disponible: {data.stock}</h4>
 						</div>
 						<div className={style.buttonContainer}>
 							<Button
@@ -91,7 +162,7 @@ export const ProductsDetail = () => {
 								Comprar
 							</Button>
 							<Button
-								onClick={handlerSaveInCheckOut}
+								onClick={(event) => handlerSaveInCheckOut(event)}
 								variant='outlined'
 								sx={{
 									color: 'var(--primary-color)',
@@ -109,6 +180,20 @@ export const ProductsDetail = () => {
 					</div>
 				</div>
 			</div>
+			<ToastContainer
+				position='bottom-left'
+				autoClose={3000}
+				hideProgressBar={false}
+				newestOnTop={false}
+				closeOnClick
+				rtl={false}
+				pauseOnFocusLoss
+				draggable
+				pauseOnHover={false}
+				theme='colored'
+			/>
 		</>
 	);
 };
+
+export default ProductsDetail;

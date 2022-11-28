@@ -86,12 +86,11 @@ const ProductCard = ({
 						alt='Paella dish'
 						sx={{ maxHeight: '200px', margin: '0px auto', width: 'auto' }}
 					/>
-
 					<hr className={style.line} />
 				</Link>
 			</CardActionArea>
 			<div className={style.priceContainer}>
-				<h1>{unit_price}</h1>
+				<h1>$ {unit_price}</h1>
 				<CardActions sx={{ padding: '0px' }}>
 					<Button
 						onClick={(event) => handlerSaveInCheckOut(event)}
