@@ -7,6 +7,7 @@ import Button from '@mui/material/Button';
 import ProductsInCar from '../ProductsInCar/ProductsInCar';
 import style from './Shopping.module.css';
 import { ToastContainer, toast } from 'react-toastify';
+import swal from 'sweetalert';
 import 'react-toastify/dist/ReactToastify.css';
 
 const Shopping = () => {
@@ -74,10 +75,25 @@ const Shopping = () => {
 
 	function handlerClearCheckOut(event) {
 		event.preventDefault();
-		for (var i = 0; i < itemCheckOut.length; i++) {
-			localStorage.removeItem(`item_${itemCheckOut[i].title}`);
-		}
-		dispatch(seterItem(localStorage));
+		swal({
+			title: "Estás seguro?",
+			text: "Una vez vaciado, no podras recuperar tus articulos",
+			icon: "warning",
+			buttons: true,
+			dangerMode: true,
+		}).then((willDelete) => {
+			if (willDelete) {
+				for (var i = 0; i < itemCheckOut.length; i++) {
+					localStorage.removeItem(`item_${itemCheckOut[i].title}`);
+				}
+				dispatch(seterItem(localStorage));
+				swal("¡Poof! ¡El carrito ha sido vaciado!", {
+					icon: "success",
+				});
+			} else {
+				swal("¡Tus productos estan a salvo!");
+			}
+		});
 	}
 
 	return (

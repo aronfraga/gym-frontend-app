@@ -7,7 +7,7 @@ import { useGetAllClassesQuery } from '../../redux/query/api';
 
 export default function Calendar() {
 	const { data: classes, isLoading } = useGetAllClassesQuery();
-	console.log(classes)
+
 	if (isLoading) {
 		return (
 			<>
