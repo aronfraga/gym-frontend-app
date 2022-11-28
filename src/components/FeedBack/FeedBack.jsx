@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import FormControl from '@mui/material/FormControl';
 import { useState } from 'react';
 import style from '../FeedBack/FeedBack.module.css';
@@ -14,16 +14,11 @@ import Select from '@mui/material/Select';
 import Chip from '@mui/material/Chip';
 import Rating from '@mui/material/Rating';
 import StarIcon from '@mui/icons-material/Star';
-import { FormGroup, TextField } from '@mui/material';
+import { TextField } from '@mui/material';
 import Button from '@mui/material/Button';
-import { useNavigate } from 'react-router-dom';
-import {
-	useAddFeedbackMutation,
-	useGetAllStaffQuery,
-} from '../../redux/query/api';
+import { useAddFeedbackMutation, useGetAllStaffQuery, } from '../../redux/query/api';
 import logo from '../../Images/Logo.png';
-// import { getAllStaff } from "../../redux/actions/defaultAction"
-// import { useDispatch, useSelector } from "react-redux";
+
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -51,16 +46,6 @@ const labels = {
 
 const dataGym = ['Intalaciones', 'Maquinas', 'Servicios', 'Staff', 'Otros...'];
 
-// const staff = [
-//     'Martin Galara',
-//     'Gaston Schmitz',
-//     'Aaron Fraga',
-//     'Agustin Reynoso',
-//     'Jose Manrique',
-//     'Manuel Casanueva',
-//     'Pablo Lospennato',
-//     'Alexsandro Gomez'
-// ]
 
 function getStyles(name, infoGym, theme) {
 	return {
@@ -72,13 +57,21 @@ function getStyles(name, infoGym, theme) {
 }
 
 const FeedBack = () => {
-	// const dispatch = useDispatch()
-	// const { staff } = useSelector((state) => state.staff);
+	const validate = (input) => {
+
+		const errors = {}
+		if (input.score === 0) {
+			errors.score = "Agrega al menos una estrella"
+		}
+		return errors
+
+	}
+
 	const { data: staff, isLoading } = useGetAllStaffQuery();
 
 	const [addFeedback, { data }] = useAddFeedbackMutation();
-	const navigate = useNavigate();
 	const theme = useTheme();
+	const [errors, setError] = useState({})
 	const [input, setInput] = useState({
 		title: [],
 		staff: '',
@@ -105,7 +98,12 @@ const FeedBack = () => {
 				...input,
 				[event.target.name]: event.target.value,
 			});
+
 		}
+		setError(validate({
+			...input,
+			[event.target.name]: event.target.value
+		}))
 	};
 
 	const HandleSubmit = async (e) => {
@@ -125,8 +123,7 @@ const FeedBack = () => {
 			staffId: 0,
 		});
 		swal("Gracias!", "Hemos recibido tu Feedback!", "success");
-		/* alert('Gracias por dejarnos tu Feedback'); */
-		navigate('/home');
+
 	};
 
 	function getLabelText(value) {
@@ -206,7 +203,7 @@ const FeedBack = () => {
 										return selected;
 									}}
 									MenuProps={MenuProps}
-									// inputProps={{ 'aria-label': 'Without label' }}
+
 								>
 									<MenuItem disabled value=''>
 										<em>Staff</em>
@@ -220,7 +217,7 @@ const FeedBack = () => {
 							)}
 
 							<Box
-								required
+
 								sx={{
 									width: 300,
 									display: 'flex',
@@ -230,7 +227,7 @@ const FeedBack = () => {
 								}}
 							>
 								<Rating
-									required
+
 									size='large'
 									name='score'
 									value={input.score}
@@ -242,7 +239,7 @@ const FeedBack = () => {
 									}
 								/>
 							</Box>
-							{/* {errors.score && <p className={style.danger} >{errors.score}</p>} */}
+							{errors.score && <p className={style.danger} >{errors.score}</p>}
 							<div className={style.textField}>
 								<Typography
 									textAlign='center'

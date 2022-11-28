@@ -3,11 +3,13 @@ import React from 'react';
 import styles from '../Calendar/Calendar.module.css';
 import NavBar from '../NavBar/NavBar';
 import Loading from '../Loading/Loading';
+import Calendarli from './Calendarli';
 import { useGetAllClassesQuery } from '../../redux/query/api';
 
 export default function Calendar() {
+
 	const { data: classes, isLoading } = useGetAllClassesQuery();
-	console.log(classes)
+	// console.log(classes)
 	if (isLoading) {
 		return (
 			<>
@@ -16,6 +18,8 @@ export default function Calendar() {
 			</>
 		);
 	}
+
+
 
 	return (
 		<>
@@ -30,25 +34,15 @@ export default function Calendar() {
 					<div className={styles.container}>
 						<ul className={styles.weeklyByhour}>
 							{classes?.map((value, i) => (
-								<li
+								<Calendarli
+
 									key={i}
-									style={{
-										gridColumn: `${value.day}`,
-										gridRow: `${value.hour}`,
-										backgroundColor: 'var(--primary-color)',
-										color: 'var(--white-color)',
-										fontSize: '14px',
-										fontWeight: '500',
-										position: 'relative',
-										alignItems: 'center',
-										justifyContent: 'center',
-										// border: '1px solid black',
-										// borderRadius: '5px',
-									}}
-								>
-									{value.name}
-									<img className={styles.imagen} src={value.user.imgUrl} alt="fotico" />
-								</li>
+									name={value.name}
+									hour={value.hour}
+									day={value.day}
+									imgUrl={value.user.imgUrl}
+									staff={value.user.name}
+								/>
 							))}
 
 							<li className={styles.mon}>Lunes</li>
