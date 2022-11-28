@@ -25,7 +25,7 @@ import { useFilterShop } from "./FiltersShopContext";
 const Shop = () => {
   const dispatch = useDispatch();
   const { itemCheckOut } = useSelector((state) => state.itemCheckOut);
-  const [renderShop, setRenderShop] = useState("");
+  const [ renderShop, setRenderShop ] = useState("");
 
   const urlChanged = window.location.search;
   const urlParams = new URLSearchParams(urlChanged);
@@ -51,21 +51,6 @@ const Shop = () => {
       localStorage.removeItem(`item_${itemCheckOut[i].title}`);
     }
     dispatch(seterItem(localStorage));
-  }
-
-  function handlerDirectBuy(event, data) {
-    event.preventDefault();
-    const checkOut = {
-      items: [data[0]],
-      auto_return: "approved",
-      notification_url: "https://www.success.com/",
-      back_urls: {
-        success: "http://127.0.0.1:5173/tienda/",
-        failure: "http://www.facebook.com/",
-        pending: "http://www.pending.com/",
-      },
-    };
-    dispatch(productToPay(checkOut));
   }
 
   /* ACA EMPIEZAN LOS FILTROS, SORRY POR EL LIO*/
@@ -331,9 +316,6 @@ const Shop = () => {
       <br />
       <br />
       <br />
-      <button onClick={(event) => handlerDirectBuy(event, data)}>
-        Compra Directa
-      </button>
     </div>
   );
 };
@@ -346,4 +328,5 @@ const theme = createTheme({
     },
   },
 });
+
 export default Shop;
