@@ -101,7 +101,7 @@ export const seterItem = (data) => {
 		let keys = Object.keys(data);
 		let index = keys.length;
 		while (index--) { 
-      items.push(JSON.parse(data.getItem(keys[index]))) ;
+      if(keys[index].slice(0,5)==='item_') items.push(JSON.parse(data.getItem(keys[index]))) ;
     }
     dispatch(setItemCheckOut(items));
   }
