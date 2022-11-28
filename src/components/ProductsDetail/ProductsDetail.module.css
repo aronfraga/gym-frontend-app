@@ -1,0 +1,75 @@
+.mainContainer {
+	position: absolute;
+	display: flex;
+	width: 100%;
+	height: 80%;
+	justify-content: center;
+	align-items: center;
+}
+
+.goBack {
+	position: absolute;
+	top: 6px;
+	left: 6px;
+}
+
+.cardContainer {
+	display: flex;
+	position: relative;
+	padding: 24px;
+	gap: 24px;
+	background-color: white;
+	box-shadow: 2px 2px 10px rgb(129, 129, 129);
+	border-radius: 10px;
+}
+
+.imgContainer img {
+	max-width: 400px;
+	max-height: 400px;
+}
+
+.infoContainer {
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+	max-width: 350px;
+	color: var(--black-color);
+}
+
+.infoContainer h1 {
+	margin: 0px;
+}
+
+.infoContainer h2 {
+	margin: 0px;
+}
+
+.infoContainer p {
+	margin: 0px;
+}
+
+.quantityContainer {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	max-height: 50px;
+}
+
+.quantityContainer h3 {
+	margin: 0px;
+	font-size: 16px;
+	font-weight: 500;
+}
+
+.quantityContainer h4 {
+	margin: 0px;
+	font-size: 14px;
+	font-weight: 400;
+	color: var(--gray-color2);
+}
+
+.buttonContainer {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
