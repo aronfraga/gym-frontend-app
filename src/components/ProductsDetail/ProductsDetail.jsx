@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import NavBar from '../NavBar/NavBar';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
@@ -6,7 +6,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useState } from 'react';
 import style from './ProductsDetail.module.css';
 import Loading from "../Loading/Loading";
-import QuantitySelector from '../QuantitySelector/QuantitySelector';
+import QuantityDetailSelector from '../QuantityDetailSelector/QuantityDetailSelector';
 import { useNavigate, useParams } from 'react-router-dom';
 import { productToPay, seterItem } from "../../redux/actions/defaultAction";
 import { useGetProductByIdQuery } from "../../redux/query/ApiEcommerce";
@@ -17,26 +17,10 @@ const ProductsDetail = () => {
 
 	const { id } = useParams();
 	const { data, isLoading } = useGetProductByIdQuery(id);
-	const [ item, setItem ] = useState({})
 	const [ render, setRender ] = useState('');
+	const [ quantity, setQuantity ] = useState(1);
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
-
-	useEffect(() => {
-		if(!isLoading) {
-			setItem({
-				id: data.id,
-				title: data.title,
-				unit_price: data.unit_price,
-				description: data.description,
-				picture_url: data.imgUrl,
-				stock: data.stock,
-				quantity: 1,
-			});
-		}
-	},[isLoading])
-
-	console.log(item)
 
 	const handlerAlertSuccess = () => {
 		toast.success('¡Producto agregado al carrito!', {
@@ -68,8 +52,21 @@ const ProductsDetail = () => {
 		setRender(data);
 	}
 
+	function handlerQuantity(data) {
+		setQuantity(data)
+	}
+
 	function handlerCheckOutBuy(event) {
 		event.preventDefault();
+		const item = {
+			id: data.id,
+			title: data.title,
+			unit_price: data.unit_price,
+			description: data.description,
+			picture_url: data.imgUrl,
+			stock: data.stock,
+			quantity: quantity,
+		};
     const checkOut = {
       items: [item],
       auto_return: "approved",
@@ -95,7 +92,7 @@ const ProductsDetail = () => {
 					description: data.description,
 					picture_url: data.imgUrl,
 					stock: data.stock,
-					quantity: 1,
+					quantity: quantity,
 				})
 			);
 			dispatch(seterItem(localStorage));
@@ -141,10 +138,7 @@ const ProductsDetail = () => {
 						<p>{data.description}</p>
 						<div className={style.quantityContainer}>
 							<h3>Cantidad:</h3>
-							{/* AAAAAAAAAARON, AQUI PASAN COSAS RARAS, le meti el quantity aqui también pero lo agrega al carrito al añadir
-                            cantidad de producto, como no sé cómo funciona el local store lo dejé quiero pero para que sepa :D, si lo puedes
-                            arreglar me avisas su no hago otro quantity para esta parte */}
-							<QuantitySelector item={item} render={handlerRender} />
+							<QuantityDetailSelector stock={data.stock} quantity={quantity} setQuantity={handlerQuantity} render={handlerRender} />
 							<h4>Disponible: {data.stock}</h4>
 						</div>
 						<div className={style.buttonContainer}>

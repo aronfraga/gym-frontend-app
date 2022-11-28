@@ -10,6 +10,12 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const Shopping = () => {
+	
+	let total = 0;
+	const dispatch = useDispatch();
+	const [render, setRender] = useState('');
+	const { itemCheckOut } = useSelector((state) => state.itemCheckOut);
+
 	const handlerAlertStock0 = () => {
 		toast.error('Puedes comprar a partir de 1 item', {
 			position: 'bottom-left',
@@ -35,11 +41,6 @@ const Shopping = () => {
 			theme: 'colored',
 		});
 	};
-
-	let total = 0;
-	const dispatch = useDispatch();
-	const [render, setRender] = useState('');
-	const { itemCheckOut } = useSelector((state) => state.itemCheckOut);
 
 	useEffect(() => {
 		dispatch(seterItem(localStorage));
