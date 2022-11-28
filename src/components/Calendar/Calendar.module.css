@@ -40,7 +40,7 @@
 	display: grid;
 	position: relative;
 	width: 100%;
-	height: 100%;
+	/*height: 100%;*/
 	padding: 0px;
 	/* NAMED LINE NUMBERS (between tracks): 
           COLS: hour markers + 7 days

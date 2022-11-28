@@ -19,13 +19,11 @@ const Facilities = () => {
 
 	const dispatch = useDispatch();
 	const [image, setImage] = useState({ array: [] });
-    const {user} = useAuth0();
+  const {user} = useAuth0();
 	const email = user?.email.toString();
-    const {facilitiesImages} = useSelector(state => state.facilitiesImages);
-    const {isAdminLogged} = useSelector(state => state.isAdminLogged);
-    const [input,setInput] = useState({
-        name_1: "",
-    })
+  const {facilitiesImages} = useSelector(state => state.facilitiesImages);
+  const {isAdminLogged} = useSelector(state => state.isAdminLogged);
+  const [input,setInput] = useState({ name_1: "" });
     const [loading,setLoading] = useState("");
     const [isShown, setIsShown] = useState(false);
     const [activeUpload, setActiveUpload]= useState(false);
@@ -54,18 +52,16 @@ const Facilities = () => {
 			icon: "warning",
 			buttons: true,
 			dangerMode: true,
-		  }).then((willDelete) => {
+		}).then((willDelete) => {
 			if (willDelete) {
-				dispatch(fetchDeleteImages(event.target.value));
-			 	swal("Poof! Hemos borrado la imagen seleccionada!", {
+			dispatch(fetchDeleteImages(event.target.value));
+				swal("Poof! Hemos borrado la imagen seleccionada!", {
 					icon: "success",
-			  	});
+			});
 			} else {
-			  swal("Tu imagen está a salvo!");
+				swal("Tu imagen está a salvo!");
 			}
-		  });
-		/* dispatch(fetchDeleteImages(event.target.value));
-		alert(`La imagen ${event.target.value.split('/')[1]} fue eliminada correctamente`); */
+		});
 	};
 
 	const handlerInputChange = (event) => {
@@ -220,7 +216,6 @@ const Facilities = () => {
 				)}
 			</div>
 		</div>
-		<Footer />
 	</>
 );
 };

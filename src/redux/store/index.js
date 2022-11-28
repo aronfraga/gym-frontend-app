@@ -17,7 +17,7 @@ export const store = configureStore({
     facilitiesImages: facilitiesImages,
     staff: staff,
     itemCheckOut: itemCheckOut,
-     isAdminLogged: isAdminLogged,
+    isAdminLogged: isAdminLogged,
     [ ApiQuery.reducerPath ]: ApiQuery.reducer,
     [ ApiEcommerce.reducerPath ]: ApiEcommerce.reducer,
   },

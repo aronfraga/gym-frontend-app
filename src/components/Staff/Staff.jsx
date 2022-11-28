@@ -34,7 +34,6 @@ const Staff = () => {
 					))}
 				</div>
 			</div>
-			<Footer />
 		</>
 	);
 };
