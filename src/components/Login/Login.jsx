@@ -6,11 +6,21 @@ import "./Login.css";
 const Landing = () => {
   const { loginWithRedirect } = useAuth0();
   return (
+    // <div className="loginContainer">
+    //   <h1 className="loginText">Unete a la comunidad del App Gym</h1>
+    //   <Button variant="contained" onClick={() => loginWithRedirect()}>
+    //     Iniciar Sesion
+    //   </Button>
+    // </div>
     <div className="loginContainer">
-      <h1 className="loginText">Unete a la comunidad del App Gym</h1>
-      <Button variant="contained" onClick={() => loginWithRedirect()}>
-        Iniciar Sesion
-      </Button>
+      <div className="card transition">
+        <h2 className="transition">Gym Fit</h2>
+        <p className="parrafo" >Unete a nuestra comunidad.</p>
+        <div className="cta-container transition"><Button className="cta" variant="contained" onClick={() => loginWithRedirect()}>
+          Iniciar Sesion
+        </Button></div>
+        <div className="card_circle transition"></div>
+      </div>
     </div>
   );
 };
