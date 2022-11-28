@@ -25,7 +25,7 @@ npm install
 
 ## Usage
 
-npm run dev - or better than this you can go to https://app-gym-frontend.vercel.app
+npm run dev - or better than this you can go to https://app-gym-frontend.vercel.app/ 
 
 ## Contributing
 
