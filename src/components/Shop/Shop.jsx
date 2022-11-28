@@ -5,7 +5,6 @@ import NavBar from "../NavBar/NavBar";
 import Products from "../Products/Products";
 import style from "./Shop.module.css";
 import Loading from "../Loading/Loading";
-import { productToPay } from "../../redux/actions/defaultAction";
 import { setPurchase } from "../../redux/actions/defaultAction";
 import { seterItem } from "../../redux/actions/defaultAction";
 import { useDispatch, useSelector } from "react-redux";
