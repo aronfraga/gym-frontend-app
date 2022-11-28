@@ -6,8 +6,36 @@ import NavBar from '../NavBar/NavBar';
 import Button from '@mui/material/Button';
 import ProductsInCar from '../ProductsInCar/ProductsInCar';
 import style from './Shopping.module.css';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Shopping = () => {
+	const handlerAlertStock0 = () => {
+		toast.error('Puedes comprar a partir de 1 item', {
+			position: 'bottom-left',
+			autoClose: 3000,
+			hideProgressBar: false,
+			closeOnClick: true,
+			pauseOnHover: true,
+			draggable: true,
+			progress: undefined,
+			theme: 'colored',
+		});
+	};
+
+	const handlerAlertStockFull = () => {
+		toast.error('No hay stock suficiente', {
+			position: 'bottom-left',
+			autoClose: 3000,
+			hideProgressBar: false,
+			closeOnClick: true,
+			pauseOnHover: true,
+			draggable: true,
+			progress: undefined,
+			theme: 'colored',
+		});
+	};
+
 	let total = 0;
 	const dispatch = useDispatch();
 	const [render, setRender] = useState('');
@@ -70,6 +98,8 @@ const Shopping = () => {
 								description={product.description}
 								imgUrl={product.picture_url}
 								render={handlerRender}
+								handlerAlertStock0={handlerAlertStock0}
+								handlerAlertStockFull={handlerAlertStockFull}
 							/>
 						))}
 					</div>
@@ -116,6 +146,18 @@ const Shopping = () => {
 					</div>
 				</div>
 			</div>
+			<ToastContainer
+				position='bottom-left'
+				autoClose={3000}
+				hideProgressBar={false}
+				newestOnTop={false}
+				closeOnClick
+				rtl={false}
+				pauseOnFocusLoss
+				draggable
+				pauseOnHover={false}
+				theme='colored'
+			/>
 		</div>
 	);
 };

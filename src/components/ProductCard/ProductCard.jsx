@@ -5,6 +5,7 @@ import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
 import CardActions from '@mui/material/CardActions';
+import { CardActionArea } from '@mui/material';
 import Collapse from '@mui/material/Collapse';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
@@ -13,6 +14,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useState } from 'react';
 import style from './ProductCard.module.css';
+import { Link } from 'react-router-dom';
 
 const ExpandMore = styled((props) => {
 	const { expand, ...other } = props;
@@ -45,7 +47,7 @@ const ProductCard = ({
 
 	const handlerSaveInCheckOut = (event) => {
 		event.preventDefault();
-		if(!(localStorage.getItem(`item_${title}`))) {
+		if (!localStorage.getItem(`item_${title}`)) {
 			localStorage.setItem(
 				`item_${title}`,
 				JSON.stringify({
@@ -61,7 +63,7 @@ const ProductCard = ({
 			dispatch(seterItem(localStorage));
 			render(`item_${title}`);
 			handlerAlertSuccess();
-		}	else {
+		} else {
 			handlerAlertError();
 		}
 	};
@@ -76,13 +78,18 @@ const ProductCard = ({
 				transition: 'all 0.2s ease-out',
 			}}
 		>
-			<CardMedia
-				component='img'
-				image={picture_url}
-				alt='Paella dish'
-				sx={{ maxHeight: '200px', margin: '0px auto', width: 'auto' }}
-			/>
-			<hr className={style.line} />
+			<CardActionArea>
+				<Link to={`/tienda/producto/${id}`}>
+					<CardMedia
+						component='img'
+						image={picture_url}
+						alt='Paella dish'
+						sx={{ maxHeight: '200px', margin: '0px auto', width: 'auto' }}
+					/>
+
+					<hr className={style.line} />
+				</Link>
+			</CardActionArea>
 			<div className={style.priceContainer}>
 				<h1>{unit_price}</h1>
 				<CardActions sx={{ padding: '0px' }}>

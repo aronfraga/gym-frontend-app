@@ -8,7 +8,12 @@ import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import style from './QuantitySelector.module.css';
 
-const QuantitySelector = ({ item, render }) => {
+const QuantitySelector = ({
+	item,
+	render,
+	handlerAlertStock0,
+	handlerAlertStockFull,
+}) => {
 	const dispatch = useDispatch();
 	const [quantity, setQuantity] = useState(item.quantity);
 
@@ -33,7 +38,7 @@ const QuantitySelector = ({ item, render }) => {
 	}
 
 	const handlerClickMenos = () => {
-		if (quantity === 1) alert('Puedes comprar a partir de 1 item');
+		if (quantity === 1) handlerAlertStock0();
 		if (quantity > 1) {
 			setQuantity(quantity - 1);
 			render(`${quantity}`);
@@ -41,7 +46,7 @@ const QuantitySelector = ({ item, render }) => {
 	};
 
 	const handlerClickMas = () => {
-		if (quantity === item.stock) alert('No hay stock suficiente');
+		if (quantity === item.stock) handlerAlertStockFull();
 		if (quantity < item.stock) {
 			setQuantity(quantity + 1);
 			render(`${quantity}`);
