@@ -47,6 +47,7 @@ export default function Calendar() {
 									}}
 								>
 									{value.name}
+									<img className={styles.imagen} src={value.user.imgUrl} alt="fotico" />
 								</li>
 							))}
 

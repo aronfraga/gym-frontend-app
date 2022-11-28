@@ -3,7 +3,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 import style from './Loading.module.css';
 
-const primaryColor = '#18a0fb';
+const primaryColor = '#0d0d6b';
 
 const Loading = () => {
 	return (

@@ -28,8 +28,14 @@ export const ApiEcommerce = createApi({
         body: data,
       }),
     }),
+    getProductById: builder.query({
+      query: (id) => ({
+        url: `/products/${id}`,
+        method: "get",
+      }),
+    }),
   }),
 });
 
-export const { useGetAllProductsQuery, useGetFilteredByCategoryQuery } =
+export const { useGetAllProductsQuery, useGetFilteredByCategoryQuery, useGetProductByIdQuery } =
   ApiEcommerce;

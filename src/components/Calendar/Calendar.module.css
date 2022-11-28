@@ -40,7 +40,7 @@
 	display: grid;
 	position: relative;
 	width: 100%;
-	height: 100%;
+	/*height: 100%;*/
 	padding: 0px;
 	/* NAMED LINE NUMBERS (between tracks): 
           COLS: hour markers + 7 days
@@ -225,4 +225,12 @@ li.event {
 
 .lis {
 	border: 1px solid #62629f29;
+}
+
+
+.imagen{
+	width: 30px;
+	height: 30px;
+	border-radius: 15px;
+	margin-left: 10px;
 }

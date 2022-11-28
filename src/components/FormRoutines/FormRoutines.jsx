@@ -128,7 +128,6 @@ const FormRoutines = () => {
       ...value,
       [e.target.name]: url,
     });
-    console.log(url);
   };
 
   const handleChange2 = (e) => {

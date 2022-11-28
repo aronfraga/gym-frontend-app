@@ -5,7 +5,6 @@ import NavBar from "../NavBar/NavBar";
 import Products from "../Products/Products";
 import style from "./Shop.module.css";
 import Loading from "../Loading/Loading";
-import { productToPay } from "../../redux/actions/defaultAction";
 import { setPurchase } from "../../redux/actions/defaultAction";
 import { seterItem } from "../../redux/actions/defaultAction";
 import { useDispatch, useSelector } from "react-redux";
@@ -53,21 +52,6 @@ const Shop = () => {
     dispatch(seterItem(localStorage));
   }
 
-  function handlerDirectBuy(event, data) {
-    event.preventDefault();
-    const checkOut = {
-      items: [data[0]],
-      auto_return: "approved",
-      notification_url: "https://www.success.com/",
-      back_urls: {
-        success: "http://127.0.0.1:5173/tienda/",
-        failure: "http://www.facebook.com/",
-        pending: "http://www.pending.com/",
-      },
-    };
-    dispatch(productToPay(checkOut));
-  }
-
   /* ACA EMPIEZAN LOS FILTROS, SORRY POR EL LIO*/
 
   const { shopFilters, setShopFilters } = useFilterShop();
@@ -84,38 +68,74 @@ const Shop = () => {
   const handlerCheck = (event) => {
     let value = event.target.value;
     let name = event.target.name;
-    name === "category" && setInput({ ...input, [name]: value });
-    name === "category" && setShopFilters({ ...shopFilters, [name]: value });
+    name === "category" && setInput({ ...input, [name]: value, page: 1 });
+    name === "category" &&
+      setShopFilters({ ...shopFilters, [name]: value, page: 1 });
     if (name === "price") {
-      value === "a" && setInput({ ...input, max: 1000, letra: "a" });
-      value === "b" && setInput({ ...input, min: 1000, max: 1500, letra: "b" });
-      value === "c" && setInput({ ...input, min: 1500, max: 2000, letra: "c" });
-      value === "d" && setInput({ ...input, min: 2000, max: 3000, letra: "d" });
-      value === "e" && setInput({ ...input, min: 3000, letra: "e" });
+      value === "a" &&
+        setInput({ ...input, min: 0, max: 1000, page: 1, letra: "a" });
+      value === "b" &&
+        setInput({ ...input, min: 1000, max: 1500, page: 1, letra: "b" });
+      value === "c" &&
+        setInput({ ...input, min: 1500, max: 2000, page: 1, letra: "c" });
+      value === "d" &&
+        setInput({ ...input, min: 2000, max: 3000, page: 1, letra: "d" });
+      value === "e" &&
+        setInput({ ...input, min: 3000, max: Infinity, page: 1, letra: "e" });
       /********************** CONTEXT *****************************************/
       value === "a" &&
-        setShopFilters({ ...shopFilters, max: 1000, letra: "a" });
+        setShopFilters({
+          ...shopFilters,
+          min: 0,
+          max: 1000,
+          page: 1,
+          letra: "a",
+        });
       value === "b" &&
-        setShopFilters({ ...shopFilters, min: 1000, max: 1500, letra: "b" });
+        setShopFilters({
+          ...shopFilters,
+          min: 1000,
+          max: 1500,
+          page: 1,
+          letra: "b",
+        });
       value === "c" &&
-        setShopFilters({ ...shopFilters, min: 1500, max: 2000, letra: "c" });
+        setShopFilters({
+          ...shopFilters,
+          min: 1500,
+          max: 2000,
+          page: 1,
+          letra: "c",
+        });
       value === "d" &&
-        setShopFilters({ ...shopFilters, min: 2000, max: 3000, letra: "d" });
+        setShopFilters({
+          ...shopFilters,
+          min: 2000,
+          max: 3000,
+          page: 1,
+          letra: "d",
+        });
       value === "e" &&
-        setShopFilters({ ...shopFilters, min: 3000, letra: "e" });
+        setShopFilters({
+          ...shopFilters,
+          min: 3000,
+          max: Infinity,
+          page: 1,
+          letra: "e",
+        });
     }
   };
 
   const aux = {};
   for (const a in shopFilters) {
-    if (a === "page" || a === "size") {
+    if (a === "page" || a === "size" || a === "letra") {
       continue;
     } else if (shopFilters[a].length > 0 || shopFilters[a] > 0)
       aux[a] = shopFilters[a];
   }
 
   for (const a in input) {
-    if (a === "page" || a === "size") {
+    if (a === "page" || a === "size" || a === "letra") {
       continue;
     } else if (input[a].length > 0 || input[a] > 0) aux[a] = input[a];
   }
@@ -331,9 +351,6 @@ const Shop = () => {
       <br />
       <br />
       <br />
-      <button onClick={(event) => handlerDirectBuy(event, data)}>
-        Compra Directa
-      </button>
     </div>
   );
 };
@@ -346,4 +363,5 @@ const theme = createTheme({
     },
   },
 });
+
 export default Shop;

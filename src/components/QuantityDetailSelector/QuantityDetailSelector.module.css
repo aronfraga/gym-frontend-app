@@ -1,0 +1,16 @@
+.mainContainer {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 6px;
+	padding: 6px;
+	border-radius: 6px;
+	background-color: white;
+	box-shadow: 1px 1px 4px rgb(164, 164, 164);
+}
+
+.mainContainer h1 {
+	color: var(--primary-color);
+	margin: 0px;
+	font-size: 18px;
+}

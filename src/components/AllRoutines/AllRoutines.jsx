@@ -2,7 +2,7 @@ import React from "react";
 import Routine from "../Routine/Routine";
 import style from "./AllRoutines.module.css";
 
-const AllRoutines = ({ routines }) => {
+const AllRoutines = ({ routines, favFilter }) => {
   return (
     <div className={style.mainContainer}>
       {routines?.map((rutine, i) => (
@@ -14,7 +14,12 @@ const AllRoutines = ({ routines }) => {
           difficulty={rutine.difficulty}
           category={rutine.category}
           imgUrl={rutine.imgUrl}
-          flagFav={rutine.favByUser}
+          favFilter={favFilter}
+          flagFav={
+            rutine.User_Routine
+              ? rutine.User_Routine.favourite
+              : rutine.favByUser
+          }
         />
       ))}
     </div>
