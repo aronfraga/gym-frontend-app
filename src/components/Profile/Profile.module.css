@@ -1,0 +1,27 @@
+.img{
+    position: relative;
+	display: inline-block;
+	width: fit-content;
+	transition: all 0.4s ease-in-out;
+}
+
+.PhotoContainer{
+    position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 380px;
+	height: 380px;
+	overflow: hidden;
+    margin-right: 15px;
+}
+
+.InfoProfile{
+
+}
+
+.ProfileWrapper{
+    display: flex;
+	justify-content: center;
+    flex-direction: row;
+}

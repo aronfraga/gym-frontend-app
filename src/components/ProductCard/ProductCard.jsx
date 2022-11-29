@@ -48,6 +48,7 @@ const ProductCard = ({
 
 	const handlerSaveInCheckOut = (event) => {
 		event.preventDefault();
+		if(stock === 0) return swal("¡No hay stock suficiente!");
 		if (!localStorage.getItem(`item_${title}`)) {
 			localStorage.setItem(
 				`item_${title}`,
