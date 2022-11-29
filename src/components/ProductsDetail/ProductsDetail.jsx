@@ -55,9 +55,22 @@ const ProductsDetail = () => {
 	function handlerQuantity(data) {
 		setQuantity(data)
 	}
+	const handlerAlertStockFull = () => {
+		toast.error('No hay stock suficiente', {
+			position: 'bottom-left',
+			autoClose: 3000,
+			hideProgressBar: false,
+			closeOnClick: true,
+			pauseOnHover: true,
+			draggable: true,
+			progress: undefined,
+			theme: 'colored',
+		});
+	};
 
 	function handlerCheckOutBuy(event) {
 		event.preventDefault();
+		if(data.stock === 0) return handlerAlertStockFull();
 		const item = {
 			id: data.id,
 			title: data.title,
@@ -82,6 +95,7 @@ const ProductsDetail = () => {
 
 	const handlerSaveInCheckOut = (event) => {
 		event.preventDefault();
+		if(data.stock === 0) return handlerAlertStockFull();
 		if (!localStorage.getItem(`item_${data.title}`)) {
 			localStorage.setItem(
 				`item_${data.title}`,

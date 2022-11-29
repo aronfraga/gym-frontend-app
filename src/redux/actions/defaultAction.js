@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { setCurrentPage, setTokenExpired, getcloudImages, deletecloudImages, getAllStaff, setItemCheckOut, setqtyItem , setAdminPreferences} from '../slices/defaultSlice';
+import { setCurrentPage, setTokenExpired, getcloudImages, deletecloudImages, getAllStaff, setItemCheckOut, setqtyItem , setAdminPreferences, setAlertDelivery} from '../slices/defaultSlice';
 import { setToken } from '../../services/cookies';
 import { Buffer } from "buffer";
 import { getToken } from '../../services/cookies';
@@ -103,6 +103,7 @@ export const seterItem = (data) => {
 		while (index--) { 
       if(keys[index].slice(0,5)==='item_') items.push(JSON.parse(data.getItem(keys[index]))) ;
     }
+    if(data.length===0) dispatch(setItemCheckOut([]))
     dispatch(setItemCheckOut(items));
   }
 }
@@ -113,7 +114,7 @@ export const setItem = (data) => {
   }
 }
 
-export const setPurchase = (data) => {
+export const setPurchase = (data, localStorage) => {
   return async (dispatch) => {
     const token = getToken().token;
       //const response = await axios.put('http://localhost:3001/payment', data, {
@@ -122,6 +123,18 @@ export const setPurchase = (data) => {
           authorization: `Bearer ${token}`
         }
     });
+    let items = [];
+		let keys = Object.keys(localStorage);
+		let index = keys.length;
+		while (index--) { 
+      if(keys[index].slice(0,5)==='item_') items.push(localStorage.removeItem(keys[index])) ;
+    }
+    dispatch(setAlertDelivery(true));
   }
 }
 
+export const resetAlert = () => {
+  return (dispatch) => {
+    dispatch(setAlertDelivery(false));
+  }
+}
