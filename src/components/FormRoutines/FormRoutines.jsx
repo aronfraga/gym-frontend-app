@@ -219,6 +219,7 @@ const FormRoutines = () => {
   if (value.page === 0) {
     return (
       <>
+        <NavBar />
         <div className={style.mainContainer}>
           <div className={style.mainContainerForm}>
             <form>
@@ -230,6 +231,7 @@ const FormRoutines = () => {
                   name="name"
                   value={value.name}
                   onChange={handleChange}
+                  required
                 />
                 <br />
                 <div>
@@ -304,28 +306,13 @@ const FormRoutines = () => {
     return (
       /* DIAS */
       <>
+        <NavBar />
         <div className={style.mainContainer}>
           <div className={style.mainContainerForm}>
             <div>
               <h2>Dia {value.page}</h2>
-
               <form>
                 <FormControl>
-                  <Button
-                    variant="contained"
-                    onClick={handelPrevEjer}
-                    sx={
-                      value.nEje === 1
-                        ? { display: "none" }
-                        : { display: "true" }
-                    }
-                  >
-                    Ejercicio {value.nEje - 1}
-                  </Button>
-                  <Button variant="contained" onClick={handelNextEjer}>
-                    Ejercicio {value.nEje + 1}
-                  </Button>
-                  <h3>Ejercicio {value.nEje}</h3>
                   <FormEjer
                     ejercicio={ejercicio}
                     muscles={muscles}
@@ -333,11 +320,24 @@ const FormRoutines = () => {
                   />
 
                   <div>
+                    <br />
                     <div>
-                      {/* <Button variant="contained" onClick={handelAdd}>
-                        Añadir Ejercicio
-                      </Button> */}
+                      <Button
+                        variant="contained"
+                        onClick={handelPrevEjer}
+                        sx={
+                          value.nEje === 1
+                            ? { display: "none" }
+                            : { display: "true" }
+                        }
+                      >
+                        Ejercicio {value.nEje - 1}
+                      </Button>
+                      <Button variant="contained" onClick={handelNextEjer}>
+                        Ejercicio {value.nEje + 1}
+                      </Button>
                     </div>
+                    <br />
                     {value.page !== 1 ? (
                       <Button
                         variant="contained"
@@ -362,7 +362,15 @@ const FormRoutines = () => {
                     >
                       Submit
                     </Button>
-                    <Button variant="contained" onClick={handelNext}>
+                    <Button
+                      variant="contained"
+                      onClick={handelNext}
+                      sx={
+                        value.page === 7
+                          ? { display: "none" }
+                          : { display: "true" }
+                      }
+                    >
                       Dia {value.page + 1}
                     </Button>
                   </div>

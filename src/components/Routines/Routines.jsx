@@ -72,6 +72,19 @@ const Routines = () => {
     if (input[a].length > 0) aux[a] = [...input[a]];
   }
 
+  const clear = () => {
+    setInput({
+      muscles: [],
+      difficulty: [],
+      duration: [],
+    });
+    setRoutinesFilters({
+      muscles: [],
+      difficulty: [],
+      duration: [],
+    });
+  };
+
   const { data, isLoading, isSuccess: success } = useGetRoutinesQuery(aux);
   const { originalArgs, isSuccess } = useSelector(
     ApiQuery.endpoints.getRoutines.select(aux)
@@ -212,6 +225,19 @@ const Routines = () => {
               ))}
             </div>
           </div>
+          <Button
+            variant="contained"
+            onClick={clear}
+            sx={{
+              background: "#0d0d6b",
+              "&:hover": {
+                backgroundColor: "#62629f",
+                transition: "0.4s",
+              },
+            }}
+          >
+            Limpiar Filtros
+          </Button>
         </div>
         <div className={style2.cardsContainer}>
           {/* <BtnRoutines /> */}
@@ -220,6 +246,19 @@ const Routines = () => {
               <h1 className={style4.title}>Rutinas</h1>
               {/* <BtnFilter /> */}
               <div className={style3.mainContainer}>
+                <Button
+                  variant="contained"
+                  href="/rutinas/crear"
+                  sx={{
+                    background: "#0d0d6b",
+                    "&:hover": {
+                      backgroundColor: "#62629f",
+                      transition: "0.4s",
+                    },
+                  }}
+                >
+                  Nueva Rutina
+                </Button>
                 <Button
                   variant="contained"
                   sx={{
