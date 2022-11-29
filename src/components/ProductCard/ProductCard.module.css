@@ -3,6 +3,13 @@
 	transform: scale(1.04, 1.04);
 }
 
+.delete {
+	position: absolute;
+	top: 6px;
+	right: 6px;
+	z-index: 1;
+}
+
 .line {
 	margin: 0px;
 	border: 1px solid var(--gray-color);

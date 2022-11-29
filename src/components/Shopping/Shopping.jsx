@@ -5,16 +5,19 @@ import { useDispatch, useSelector } from 'react-redux';
 import NavBar from '../NavBar/NavBar';
 import Button from '@mui/material/Button';
 import ProductsInCar from '../ProductsInCar/ProductsInCar';
+import IconButton from '@mui/material/IconButton';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import style from './Shopping.module.css';
 import { ToastContainer, toast } from 'react-toastify';
 import swal from 'sweetalert';
 import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from 'react-router-dom';
 
 const Shopping = () => {
-	
 	let total = 0;
 	const dispatch = useDispatch();
 	const [render, setRender] = useState('');
+	const navigate = useNavigate();
 	const { itemCheckOut } = useSelector((state) => state.itemCheckOut);
 
 	const handlerAlertStock0 = () => {
@@ -78,9 +81,9 @@ const Shopping = () => {
 		event.preventDefault();
 		if(itemCheckOut.length===0) return swal("¡El carrito esta vacio!");
 		swal({
-			title: "Estás seguro?",
-			text: "Una vez vaciado, no podras recuperar tus articulos",
-			icon: "warning",
+			title: 'Estás seguro?',
+			text: 'Una vez vaciado, no podras recuperar tus articulos',
+			icon: 'warning',
 			buttons: true,
 			dangerMode: true,
 		}).then((willDelete) => {
@@ -89,14 +92,18 @@ const Shopping = () => {
 					localStorage.removeItem(`item_${itemCheckOut[i].title}`);
 				}
 				dispatch(seterItem(localStorage));
-				swal("¡Poof! ¡El carrito ha sido vaciado!", {
-					icon: "success",
+				swal('¡Poof! ¡El carrito ha sido vaciado!', {
+					icon: 'success',
 				});
 			} else {
-				swal("¡Tus productos estan a salvo!");
+				swal('¡Tus productos estan a salvo!');
 			}
 		});
 	}
+
+
+	function handlerClickBack() {
+		navigate(-1);
 
 	function handlerRender() {
 		if(itemCheckOut.length) {
@@ -128,6 +135,21 @@ const Shopping = () => {
 			<NavBar />
 			<div className={style.mainContainer}>
 				<div className={style.shopCartContainer}>
+					<div className={style.goBack}>
+						<IconButton
+							onClick={handlerClickBack}
+							sx={{
+								color: 'var(--black-color)',
+								'&:hover': {
+									borderColor: 'var(--black-color)',
+									backgroundColor: 'var(--hover-outlined-button)',
+									transition: '0.4s ease-in-out',
+								},
+							}}
+						>
+							<ArrowBackIcon />
+						</IconButton>
+					</div>
 					<div className={style.cardsContainer}>
 						{/* map productos en carrito */}
 						{handlerRender()}
@@ -190,5 +212,5 @@ const Shopping = () => {
 		</div>
 	);
 };
-
+};
 export default Shopping;
