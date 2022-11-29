@@ -5,20 +5,19 @@ import IconButton from '@mui/material/IconButton';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useState } from 'react';
 import style from './ProductsDetail.module.css';
-import Loading from "../Loading/Loading";
+import Loading from '../Loading/Loading';
 import QuantityDetailSelector from '../QuantityDetailSelector/QuantityDetailSelector';
 import { useNavigate, useParams } from 'react-router-dom';
-import { productToPay, seterItem } from "../../redux/actions/defaultAction";
-import { useGetProductByIdQuery } from "../../redux/query/ApiEcommerce";
+import { productToPay, seterItem } from '../../redux/actions/defaultAction';
+import { useGetProductByIdQuery } from '../../redux/query/ApiEcommerce';
 import { ToastContainer, toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
 
 const ProductsDetail = () => {
-
 	const { id } = useParams();
 	const { data, isLoading } = useGetProductByIdQuery(id);
-	const [ render, setRender ] = useState('');
-	const [ quantity, setQuantity ] = useState(1);
+	const [render, setRender] = useState('');
+	const [quantity, setQuantity] = useState(1);
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
@@ -53,7 +52,7 @@ const ProductsDetail = () => {
 	}
 
 	function handlerQuantity(data) {
-		setQuantity(data)
+		setQuantity(data);
 	}
 	const handlerAlertStockFull = () => {
 		toast.error('No hay stock suficiente', {
@@ -70,7 +69,7 @@ const ProductsDetail = () => {
 
 	function handlerCheckOutBuy(event) {
 		event.preventDefault();
-		if(data.stock === 0) return handlerAlertStockFull();
+		if (data.stock === 0) return handlerAlertStockFull();
 		const item = {
 			id: data.id,
 			title: data.title,
@@ -80,22 +79,22 @@ const ProductsDetail = () => {
 			stock: data.stock,
 			quantity: quantity,
 		};
-    const checkOut = {
-      items: [item],
-      auto_return: "approved",
-      notification_url: "https://www.success.com/",
-      back_urls: {
-        success: "https://app-gym-frontend.vercel.app/tienda",
-        failure: "http://www.facebook.com/",
-        pending: "http://www.pending.com/",
-      },
-    };
-    dispatch(productToPay(checkOut));
+		const checkOut = {
+			items: [item],
+			auto_return: 'approved',
+			notification_url: 'https://www.success.com/',
+			back_urls: {
+				success: 'https://app-gym-frontend.vercel.app/tienda',
+				failure: 'http://www.facebook.com/',
+				pending: 'http://www.pending.com/',
+			},
+		};
+		dispatch(productToPay(checkOut));
 	}
 
 	const handlerSaveInCheckOut = (event) => {
 		event.preventDefault();
-		if(data.stock === 0) return handlerAlertStockFull();
+		if (data.stock === 0) return handlerAlertStockFull();
 		if (!localStorage.getItem(`item_${data.title}`)) {
 			localStorage.setItem(
 				`item_${data.title}`,
@@ -120,9 +119,9 @@ const ProductsDetail = () => {
 	function handlerClickBack() {
 		navigate(-1);
 	}
-	
-	if(isLoading) return <Loading />; 
-	
+
+	if (isLoading) return <Loading />;
+
 	return (
 		<>
 			<NavBar />
@@ -133,11 +132,6 @@ const ProductsDetail = () => {
 							onClick={handlerClickBack}
 							sx={{
 								color: 'var(--black-color)',
-								'&:hover': {
-									borderColor: 'var(--black-color)',
-									backgroundColor: 'var(--hover-outlined-button)',
-									transition: '0.4s ease-in-out',
-								},
 							}}
 						>
 							<ArrowBackIcon />
@@ -152,7 +146,12 @@ const ProductsDetail = () => {
 						<p>{data.description}</p>
 						<div className={style.quantityContainer}>
 							<h3>Cantidad:</h3>
-							<QuantityDetailSelector stock={data.stock} quantity={quantity} setQuantity={handlerQuantity} render={handlerRender} />
+							<QuantityDetailSelector
+								stock={data.stock}
+								quantity={quantity}
+								setQuantity={handlerQuantity}
+								render={handlerRender}
+							/>
 							<h4>Disponible: {data.stock}</h4>
 						</div>
 						<div className={style.buttonContainer}>
