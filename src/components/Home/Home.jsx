@@ -12,6 +12,7 @@ import Carrusel from "../Carousel/Carrusel";
 import Login from "../Login/Login";
 import Planes from "../Planes/Planes";
 import PrevRoutines from "../PrevRoutines/PrevRoutines";
+import { PrevShop } from '../PrevShop/PrevShop';
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -57,6 +58,7 @@ const Home = () => {
       <NavBar />
       <Carrusel />
       <PrevRoutines />
+      <PrevShop />
       <Planes />
       <Footer />
       <ToastContainer

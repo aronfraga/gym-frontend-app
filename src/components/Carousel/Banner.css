@@ -1,9 +1,9 @@
 .BannerGrid {
-  background-color: wheat;
+	background-color: var(--white-gray);
 }
 
 .Grid-content {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
