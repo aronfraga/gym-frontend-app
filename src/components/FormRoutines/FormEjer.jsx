@@ -5,6 +5,7 @@ import {
   RadioGroup,
   TextField,
 } from "@mui/material";
+import { maxWidth } from "@mui/system";
 import React from "react";
 
 const FormEjer = ({ ejercicio, muscles, id, handleChange2 }) => {
@@ -57,6 +58,20 @@ const FormEjer = ({ ejercicio, muscles, id, handleChange2 }) => {
           />
         ))}
       </RadioGroup>
+
+      <div>
+        <TextField
+          key={`gif${id}`}
+          id="gif"
+          label="Gif del Ejercicio (URL)"
+          type="url"
+          name="gifUrl"
+          width={maxWidth}
+          value={ejercicio.gifUrl}
+          onChange={handleChange2}
+          required
+        />
+      </div>
     </div>
   );
 };
