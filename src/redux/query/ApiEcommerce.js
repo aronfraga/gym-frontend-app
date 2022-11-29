@@ -37,5 +37,8 @@ export const ApiEcommerce = createApi({
   }),
 });
 
-export const { useGetAllProductsQuery, useGetFilteredByCategoryQuery, useGetProductByIdQuery } =
-  ApiEcommerce;
+export const {
+  useGetAllProductsQuery,
+  useGetFilteredByCategoryQuery,
+  useGetProductByIdQuery,
+} = ApiEcommerce;

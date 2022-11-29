@@ -1,22 +1,23 @@
 :root {
-	--dark-blue: #040430;
-	--primary-color: #0d0d6b;
-	--secondary-color: #42428c;
-	--tertiary-color: #62629f;
-	--light-blue: #a4a4d4;
-	--light-blue2: #acaccc;
-	--black-color: #2d2d2d;
-	--gray-color: #dadada;
-	--gray-color2: #969696;
-	--white-gray: #f0f0f0;
-	--white-color: #fafafa;
-	/* hover button outlined #62629f1b; */
-	/* --prueba-color: #0a1929; */
-	--hover-outlined-button: #acaccc64;
+  --dark-blue: #040430;
+  --primary-color: #0d0d6b;
+  --secondary-color: #42428c;
+  --tertiary-color: #62629f;
+  --light-blue: #a4a4d4;
+  --light-blue2: #acaccc;
+  --black-color: #2d2d2d;
+  --gray-color: #dadada;
+  --gray-color2: #969696;
+  --white-gray: #f0f0f0;
+  --white-color: #fafafa;
+  --red-color: #e74646;
+  /* hover button outlined #62629f1b; */
+  /* --prueba-color: #0a1929; */
+  --hover-outlined-button: #acaccc64;
 }
 
 body {
-	margin: 0px;
-	background-color: var(--white-color);
-	font-family: Roboto, 'Open Sans', sans-serif;
+  margin: 0px;
+  background-color: var(--white-color);
+  font-family: Roboto, "Open Sans", sans-serif;
 }
