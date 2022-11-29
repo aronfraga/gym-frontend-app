@@ -19,7 +19,7 @@ export const ApiEcommerce = createApi({
         method: "post",
         body: { filters: data },
       }),
-      keepUnusedDataFor: 10,
+      keepUnusedDataFor: 1,
     }),
     getFilteredByCategory: builder.query({
       query: (data) => ({

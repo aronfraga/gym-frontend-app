@@ -5,7 +5,6 @@ import NavBar from "../NavBar/NavBar";
 import Products from "../Products/Products";
 import style from "./Shop.module.css";
 import Loading from "../Loading/Loading";
-import { productToPay } from "../../redux/actions/defaultAction";
 import { setPurchase } from "../../redux/actions/defaultAction";
 import { seterItem } from "../../redux/actions/defaultAction";
 import { useDispatch, useSelector } from "react-redux";
@@ -21,36 +20,31 @@ import {
 } from "@mui/material";
 import style2 from "./Filters.module.css";
 import { useFilterShop } from "./FiltersShopContext";
+import { useNavigate } from "react-router-dom";
 
 const Shop = () => {
   const dispatch = useDispatch();
-  const { itemCheckOut } = useSelector((state) => state.itemCheckOut);
-  const [renderShop, setRenderShop] = useState("");
-
+  const navigate = useNavigate();
+  const [ renderShop, setRenderShop ] = useState("");
   const urlChanged = window.location.search;
   const urlParams = new URLSearchParams(urlChanged);
+
   const purchaseStatus = {
-    payed: urlParams.get("status"),
+    payed: urlParams.get("status")==="approved"?true:false,
     paymentMethod: urlParams.get("payment_type"),
     purchaseId: urlParams.get("preference_id"),
   };
-
+  
   useEffect(() => {
-    if (purchaseStatus.payed === "approved") {
-      dispatch(setPurchase(purchaseStatus));
-      handlerClearCheckOut();
+    dispatch(seterItem(localStorage));
+    if(purchaseStatus.payed) {
+      dispatch(setPurchase(purchaseStatus, localStorage));
+      navigate('/home');
     }
   }, []);
 
   function handerRenderShop(data) {
     setRenderShop(data);
-  }
-
-  function handlerClearCheckOut() {
-    for (var i = 0; i < itemCheckOut.length; i++) {
-      localStorage.removeItem(`item_${itemCheckOut[i].title}`);
-    }
-    dispatch(seterItem(localStorage));
   }
 
   /* ACA EMPIEZAN LOS FILTROS, SORRY POR EL LIO*/
@@ -347,11 +341,6 @@ const Shop = () => {
           />
         </ThemeProvider>
       </div>
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
     </div>
   );
 };

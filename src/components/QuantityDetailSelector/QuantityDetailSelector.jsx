@@ -1,40 +1,37 @@
-import React, { useEffect } from 'react';
-import { useState } from 'react';
-import { seterItem } from '../../redux/actions/defaultAction';
-import { useDispatch } from 'react-redux';
+import React from 'react';
 import IconButton from '@mui/material/IconButton';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
-import style from './QuantitySelector.module.css';
+import style from './QuantityDetailSelector.module.css';
+import { ToastContainer, toast } from 'react-toastify';
 
-const QuantitySelector = ({
-	item,
-	render,
-	handlerAlertStock0,
-	handlerAlertStockFull,
-}) => {
-	const dispatch = useDispatch();
-	const [ quantity, setQuantity ] = useState(item.quantity);
+const QuantityDetailSelector = ({ stock, quantity, setQuantity , render }) => {
 
-	useEffect(() => {
-		handlerProductUpdate(quantity);
-	}, [quantity]);
+	const handlerAlertStock0 = () => {
+		toast.error('Puedes comprar a partir de 1 item', {
+			position: 'bottom-left',
+			autoClose: 3000,
+			hideProgressBar: false,
+			closeOnClick: true,
+			pauseOnHover: true,
+			draggable: true,
+			progress: undefined,
+			theme: 'colored',
+		});
+	};
 
-	function handlerProductUpdate(quantity) {
-		localStorage.setItem(
-			`item_${item.title}`,
-			JSON.stringify({
-				id: item.id,
-				title: item.title,
-				unit_price: item.unit_price,
-				description: item.description,
-				picture_url: item.picture_url,
-				stock: item.stock,
-				quantity: quantity,
-			})
-		);
-		dispatch(seterItem(localStorage));
-	}
+	const handlerAlertStockFull = () => {
+		toast.error('No hay stock suficiente', {
+			position: 'bottom-left',
+			autoClose: 3000,
+			hideProgressBar: false,
+			closeOnClick: true,
+			pauseOnHover: true,
+			draggable: true,
+			progress: undefined,
+			theme: 'colored',
+		});
+	};
 
 	const handlerClickMenos = () => {
 		if (quantity === 1) handlerAlertStock0();
@@ -45,8 +42,8 @@ const QuantitySelector = ({
 	};
 
 	const handlerClickMas = () => {
-		if (quantity === item.stock) handlerAlertStockFull();
-		if (quantity < item.stock) {
+		if (quantity === stock) handlerAlertStockFull();
+		if (quantity < stock) {
 			setQuantity(quantity + 1);
 			render(`${quantity}`);
 		}
@@ -87,8 +84,20 @@ const QuantitySelector = ({
 					<AddIcon fontSize='inherit' />
 				</IconButton>
 			</div>
+			<ToastContainer
+				position='bottom-left'
+				autoClose={3000}
+				hideProgressBar={false}
+				newestOnTop={false}
+				closeOnClick
+				rtl={false}
+				pauseOnFocusLoss
+				draggable
+				pauseOnHover={false}
+				theme='colored'
+			/>
 		</div>
 	);
 };
 
-export default QuantitySelector;
+export default QuantityDetailSelector;

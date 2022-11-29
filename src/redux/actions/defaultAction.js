@@ -1,15 +1,6 @@
-import axios from "axios";
-import {
-  setCurrentPage,
-  setTokenExpired,
-  getcloudImages,
-  deletecloudImages,
-  getAllStaff,
-  setItemCheckOut,
-  setqtyItem,
-  setAdminPreferences,
-} from "../slices/defaultSlice";
-import { setToken } from "../../services/cookies";
+import axios from 'axios';
+import { setCurrentPage, setTokenExpired, getcloudImages, deletecloudImages, getAllStaff, setItemCheckOut, setqtyItem , setAdminPreferences, setAlertDelivery} from '../slices/defaultSlice';
+import { setToken } from '../../services/cookies';
 import { Buffer } from "buffer";
 import { getToken } from "../../services/cookies";
 
@@ -66,15 +57,13 @@ export const fetchDeleteImages = (value) => {
       body: `public_ids[]=${value}`,
       method: "delete",
       headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-        Authorization: `Basic ${Buffer.from(
-          CLOUDINARY_API_KEY + ":" + CLOUDINARY_API_SECRET
-        ).toString("base64")}`,
-      },
-    });
-    return dispatch(deletecloudImages(value));
-  };
-};
+          "Content-Type": "application/x-www-form-urlencoded",
+           Authorization: `Basic ${Buffer.from(CLOUDINARY_API_KEY + ':' + CLOUDINARY_API_SECRET).toString('base64')}`, 
+      }});
+      return dispatch(deletecloudImages(value));
+  }
+}; 
+
 
 export const productToPay = (data) => {
   return async () => {
@@ -109,32 +98,35 @@ export const fetchGetAllStaff = () => {
   };
 };
 
-export const fetchGetAdmins = (email) => {
-  const token = getToken().token;
-  return async function (dispatch) {
-    const adminsArray = await fetch(
-      "https://appgymbackend-production.up.railway.app/users?role=Admin",
-      {
+
+export const fetchGetAdmins = (email) =>{
+  return async function(dispatch){
+    try{ 
+      const token = getToken().token; 
+      const adminsArray = await fetch("https://appgymbackend-production.up.railway.app/users?role=Admin",{
         headers: {
           Authorization: `Bearer ${token}`,
-        },
-      }
-    ).then((res) => res.json());
-    const filteredAdmin = adminsArray.find((admin) => admin.email === email);
-    /*  let aux = Object.entries(filteredAdmin).length === 0?false:true; */
-    let aux = filteredAdmin === undefined ? false : true;
-    return dispatch(setAdminPreferences(aux));
-  };
-};
+      }}).then(res => res.json());
+      const filteredAdmin =  adminsArray.find(admin => admin.email === email);
+      let aux = filteredAdmin === undefined?false:true;
+      return dispatch(setAdminPreferences(aux));
+    }catch(error){
+      console.log(error)
+    }
+  }
+}
+
 
 export const seterItem = (data) => {
   return (dispatch) => {
     let items = [];
-    let keys = Object.keys(data);
-    let index = keys.length;
-    while (index--) {
-      items.push(JSON.parse(data.getItem(keys[index])));
+		let keys = Object.keys(data);
+		let index = keys.length;
+		while (index--) { 
+      if(keys[index].slice(0,5)==='item_') items.push(JSON.parse(data.getItem(keys[index]))) ;
+
     }
+    if(data.length===0) dispatch(setItemCheckOut([]))
     dispatch(setItemCheckOut(items));
   };
 };
@@ -145,7 +137,7 @@ export const setItem = (data) => {
   };
 };
 
-export const setPurchase = (data) => {
+export const setPurchase = (data, localStorage) => {
   return async (dispatch) => {
     const token = getToken().token;
     //const response = await axios.put('http://localhost:3001/payment', data, {
@@ -154,9 +146,23 @@ export const setPurchase = (data) => {
       data,
       {
         headers: {
-          authorization: `Bearer ${token}`,
-        },
-      }
-    );
-  };
-};
+
+          authorization: `Bearer ${token}`
+        }
+    });
+    let items = [];
+		let keys = Object.keys(localStorage);
+		let index = keys.length;
+		while (index--) { 
+      if(keys[index].slice(0,5)==='item_') items.push(localStorage.removeItem(keys[index])) ;
+    }
+    dispatch(setAlertDelivery(true));
+  }
+}
+
+export const resetAlert = () => {
+  return (dispatch) => {
+    dispatch(setAlertDelivery(false));
+  }
+}
+

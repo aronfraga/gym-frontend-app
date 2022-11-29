@@ -216,11 +216,11 @@ const NavBar = () => {
 							open={Boolean(anchorElUser)}
 							onClose={handlerCloseUserMenu}
 						>
-							{/* <Link to={`/${id}`} style={{ textDecoration: 'none' }} >
+							<Link to={`/perfil`} style={{ textDecoration: 'none' }} >
                                 <MenuItem >
                                     <Typography textAlign="center">Perfil</Typography>
                                 </MenuItem>
-                            </Link> */}
+                            </Link>
 							<MenuItem>
 								<Typography onClick={handleCloseUserMenu} textAlign='center'>
 									Cerrar Sesion
