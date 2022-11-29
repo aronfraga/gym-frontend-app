@@ -8,6 +8,7 @@ import CardActions from '@mui/material/CardActions';
 import { CardActionArea } from '@mui/material';
 import Collapse from '@mui/material/Collapse';
 import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
@@ -89,6 +90,16 @@ const ProductCard = ({
 					<hr className={style.line} />
 				</Link>
 			</CardActionArea>
+			<div className={style.delete}>
+				<IconButton
+					// onClick={handlerClickBack}
+					sx={{
+						color: 'var(--red-color)',
+					}}
+				>
+					<DeleteIcon />
+				</IconButton>
+			</div>
 			<div className={style.priceContainer}>
 				<h1>$ {unit_price}</h1>
 				<CardActions sx={{ padding: '0px' }}>

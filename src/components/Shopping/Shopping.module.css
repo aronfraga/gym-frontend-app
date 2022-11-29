@@ -5,8 +5,16 @@
 	align-items: center;
 }
 
+.goBack {
+	position: absolute;
+	top: 6px;
+	left: 6px;
+	z-index: 1;
+}
+
 .shopCartContainer {
 	display: flex;
+	position: relative;
 	background-color: white;
 	box-shadow: 2px 2px 10px rgb(129, 129, 129);
 	border-radius: 10px;
