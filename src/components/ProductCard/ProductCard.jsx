@@ -46,9 +46,22 @@ const ProductCard = ({
 		setExpanded(!expanded);
 	};
 
+	const handlerAlertStockFull = () => {
+		toast.error('¡No hay stock suficiente!', {
+			position: 'bottom-left',
+			autoClose: 3000,
+			hideProgressBar: false,
+			closeOnClick: true,
+			pauseOnHover: true,
+			draggable: true,
+			progress: undefined,
+			theme: 'colored',
+		});
+	};
+
 	const handlerSaveInCheckOut = (event) => {
 		event.preventDefault();
-		if(stock === 0) return swal("¡No hay stock suficiente!");
+		if(stock === 0) return handlerAlertStockFull();
 		if (!localStorage.getItem(`item_${title}`)) {
 			localStorage.setItem(
 				`item_${title}`,
