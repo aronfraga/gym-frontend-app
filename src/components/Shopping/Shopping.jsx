@@ -212,5 +212,5 @@ const Shopping = () => {
 		</div>
 	);
 };
-
+};
 export default Shopping;
