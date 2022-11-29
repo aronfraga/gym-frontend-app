@@ -1,4 +1,3 @@
-
 import React, {useState} from "react";
 import {useGetSellProductsQuery} from "../../redux/query/api"
 import DoughnutGraph from "./DoughnutGraph";
@@ -21,15 +20,8 @@ const Dashboard = () => {
 		setState({ ...state, [property]: value });
 	};
 
-
     const {data} = useGetSellProductsQuery(state.year);
     
-    const handlerChange = (event) => {
-        const value = event.target.value;
-        const property = event.target.name;
-        setState({...state,[property]: value});
-    }
-
     return (
         <div>
         <NavBar/>
