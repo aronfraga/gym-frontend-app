@@ -1,14 +1,15 @@
 import {
   Box,
   FormControlLabel,
+  FormHelperText,
   Radio,
   RadioGroup,
   TextField,
 } from "@mui/material";
-import { maxWidth } from "@mui/system";
+
 import React from "react";
 
-const FormEjer = ({ ejercicio, muscles, id, handleChange2 }) => {
+const FormEjer = ({ ejercicio, muscles, id, handleChange2, errorValue }) => {
   return (
     <div>
       <Box>
@@ -19,6 +20,9 @@ const FormEjer = ({ ejercicio, muscles, id, handleChange2 }) => {
           name="name"
           value={ejercicio.name}
           onChange={handleChange2}
+          error={errorValue.name}
+          helperText={errorValue.name}
+          required
         />
         <TextField
           id="serie-number"
@@ -31,6 +35,8 @@ const FormEjer = ({ ejercicio, muscles, id, handleChange2 }) => {
             inputProps: { min: 1 },
           }}
           onChange={handleChange2}
+          error={errorValue.series ? true : false}
+          helperText={errorValue.series}
         />
         <TextField
           key={`repe${id}`}
@@ -44,9 +50,15 @@ const FormEjer = ({ ejercicio, muscles, id, handleChange2 }) => {
           }}
           onChange={handleChange2}
           required
+          error={errorValue.repetitions ? true : false}
+          helperText={errorValue.repetitions}
         />
       </Box>
-      <RadioGroup row aria-labelledby="demo-row-radio-buttons-group-label">
+      <RadioGroup
+        row
+        aria-labelledby="demo-row-radio-buttons-group-label"
+        sx={errorValue.muscleId && { color: "red" }}
+      >
         {muscles.map((musc) => (
           <FormControlLabel
             name="muscleId"
@@ -58,6 +70,9 @@ const FormEjer = ({ ejercicio, muscles, id, handleChange2 }) => {
           />
         ))}
       </RadioGroup>
+      <FormHelperText sx={{ color: "red" }}>
+        {errorValue.muscleId}
+      </FormHelperText>
 
       <div>
         <TextField
@@ -66,7 +81,6 @@ const FormEjer = ({ ejercicio, muscles, id, handleChange2 }) => {
           label="Gif del Ejercicio (URL)"
           type="url"
           name="gifUrl"
-          width={maxWidth}
           value={ejercicio.gifUrl}
           onChange={handleChange2}
           required

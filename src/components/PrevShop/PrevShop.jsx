@@ -6,6 +6,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useState } from 'react';
 import style from './PrevShop.module.css';
+import ShoppingCart from '../ShoppingCart/ShoppingCart';
 
 export const PrevShop = () => {
 	const { data, isLoading } = useGetAllProductsQuery({
@@ -52,6 +53,7 @@ export const PrevShop = () => {
 			<div className={style.mainContainer}>
 				<div className={style.titleContainer}>
 					<h1 className={style.title}>Tienda virtual</h1>
+					<ShoppingCart />
 				</div>
 				<div className={style.cardContainer}>
 					{data.products?.map((product, i) => (
