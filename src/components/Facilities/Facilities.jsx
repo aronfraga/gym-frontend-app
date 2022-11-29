@@ -5,7 +5,6 @@ import {fetchGetImages, fetchDeleteImages, fetchGetAdmins} from '../../redux/act
 import {postImages} from "./Helpers";
 import Style from './Facilities.module.css';
 import NavBar from '../NavBar/NavBar';
-import Footer from '../Footer/Footer';
 import Loading from '../Loading/Loading';
 import swal from 'sweetalert';
 import { Button } from '@mui/material';
@@ -19,20 +18,18 @@ const Facilities = () => {
 
 	const dispatch = useDispatch();
 	const [image, setImage] = useState({ array: [] });
-  const {user} = useAuth0();
-	const email = user?.email.toString();
-  const {facilitiesImages} = useSelector(state => state.facilitiesImages);
-  const {isAdminLogged} = useSelector(state => state.isAdminLogged);
-  const [input,setInput] = useState({ name_1: "" });
+  	const {user} = useAuth0();
+	const email = user?.email;
+  	const {facilitiesImages} = useSelector(state => state.facilitiesImages);
+  	const {isAdminLogged} = useSelector(state => state.isAdminLogged);
+  	const [input,setInput] = useState({ name_1: "" });
     const [loading,setLoading] = useState("");
     const [isShown, setIsShown] = useState(false);
     const [activeUpload, setActiveUpload]= useState(false);
   
     useEffect(() => {dispatch(fetchGetImages())},[dispatch]);
-    useEffect(() => {dispatch(fetchGetAdmins("tony@gmail.com"))},[dispatch]);
-    /* Esto se descomentará para la entrega final*/
-    /* useEffect(() => {dispatch(fetchGetAdmins(email))},[dispatch]);  */
-
+   	dispatch(fetchGetAdmins(email)); 
+	
 	const handlerbutton = (event) => {
         setIsShown(current => !current)
     };

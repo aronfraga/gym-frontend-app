@@ -1,11 +1,9 @@
 import React, { useEffect } from 'react';
-import { staticstaff } from './Helpers.js';
 import { fetchGetAllStaff } from '../../redux/actions/defaultAction.js';
 import { useSelector, useDispatch } from 'react-redux';
 import CardStaff from '../CardStaff/CardStaff.jsx';
 import Style from './Staff.module.css';
 import NavBar from '../NavBar/NavBar.jsx';
-import Footer from '../Footer/Footer.jsx';
 
 const Staff = () => {
 	const dispatch = useDispatch();
@@ -22,13 +20,12 @@ const Staff = () => {
 					<hr className={Style.divisionline}></hr>
 				</div>
 				<div className={Style.cardswrapper}>
-					{staticstaff?.map((staff) => (
+					{staff?.map((staff,index) => (
 						<CardStaff
-							key={staff.hashPassword}
+							key={index}
 							name={staff.name}
-							linkedin={staff.linkedin}
-							rating={staff.rating}
-							img={staff.picture}
+							rating={staff.averageScore}
+							img={staff.imgUrl}
 							mail={staff.email}
 						/>
 					))}

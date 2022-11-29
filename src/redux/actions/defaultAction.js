@@ -54,7 +54,7 @@ export const fetchDeleteImages = (value) => {
       }});
       return dispatch(deletecloudImages(value));
   }
-};
+}; 
 
 export const productToPay = (data) => {
   return async () => {   
@@ -82,16 +82,19 @@ export const fetchGetAllStaff = () => {
 }
 
 export const fetchGetAdmins = (email) =>{
-  const token = getToken().token;
   return async function(dispatch){
-    const adminsArray = await fetch("https://appgymbackend-production.up.railway.app/users?role=Admin",{
+    try{ 
+      const token = getToken().token; 
+      const adminsArray = await fetch("https://appgymbackend-production.up.railway.app/users?role=Admin",{
         headers: {
           Authorization: `Bearer ${token}`,
       }}).then(res => res.json());
-    const filteredAdmin =  adminsArray.find(admin => admin.email === email);
-   /*  let aux = Object.entries(filteredAdmin).length === 0?false:true; */
-    let aux = filteredAdmin === undefined?false:true;
-    return dispatch(setAdminPreferences(aux));
+      const filteredAdmin =  adminsArray.find(admin => admin.email === email);
+      let aux = filteredAdmin === undefined?false:true;
+      return dispatch(setAdminPreferences(aux));
+    }catch(error){
+      console.log(error)
+    }
   }
 }
 
