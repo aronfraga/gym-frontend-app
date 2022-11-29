@@ -1,3 +1,4 @@
+
 import React, {useState} from "react";
 import {useGetSellProductsQuery} from "../../redux/query/api"
 import DoughnutGraph from "./DoughnutGraph";
@@ -7,12 +8,19 @@ import LineGraph from "./LineGraph";
 import Style from "./Dashboard.module.css";
 import NavBar from "../NavBar/NavBar";
 
-const Dashboard = () => {
 
-    const [state,setState] = useState({
-        year: 2022,
-        month: "Agosto",
-    });
+const Dashboard = () => {
+	const [state, setState] = useState({
+		year: 2022,
+		month: 'Agosto',
+	});
+
+	const handlerChange = (event) => {
+		const value = event.target.value;
+		const property = event.target.name;
+		setState({ ...state, [property]: value });
+	};
+
 
     const {data} = useGetSellProductsQuery(state.year);
     
@@ -73,6 +81,7 @@ const Dashboard = () => {
         </div>
         
     );
+
 };
 
 export default Dashboard;

@@ -1,26 +1,35 @@
-.Doughnut, .Pie, .VerticalBar{
-    background-color:beige;
-    border-radius: 5px;
+.mainContainer {
+	max-width: 1440px;
+	margin: 0px auto;
+	margin-top: 36px;
+	padding: 0px 36px;
 }
 
-.VerticalBar{ 
-	background-color:beige;
-    border-radius: 5px;
+.Doughnut,
+.Pie,
+.VerticalBar {
+	background-color: beige;
+	border-radius: 5px;
+}
+
+.VerticalBar {
+	background-color: beige;
+	border-radius: 5px;
 	height: 450px;
 }
 
-.ChartWrapper{
-    height: 500px;
-    width: 450px;
+.ChartWrapper {
+	height: 500px;
+	width: 450px;
 	padding-left: 5px;
 	padding-top: 5px;
 }
 
-.botoneraTrim{
+.botoneraTrim {
 	margin-top: -71px;
 }
 
-.AllChartsWrapper{
+.AllChartsWrapper {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
 	justify-items: center;
@@ -29,10 +38,17 @@
 }
 
 .titleContainer {
-	margin-top: 20px;
+	margin-bottom: 36px;
 }
 
-.selectors{
+.titleContainer h1 {
+	margin: 0px;
+	font-weight: 700;
+	font-size: 48px;
+	color: var(--secondary-color);
+}
+
+.selectors {
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -40,7 +56,7 @@
 }
 
 .titleContainer hr {
-    margin-top: -18px;
+	margin: 0px;
 	border: 2px solid var(--secondary-color);
 	background-color: var(--secondary-color);
 	border-radius: 10px;
@@ -53,7 +69,7 @@
 	color: var(--secondary-color);
 }
 
-.subtittle{
+.subtittle {
 	margin-top: 0px;
 	font-size: 22px;
 	color: var(--secondary-color);
