@@ -30,6 +30,14 @@ export const ApiQuery = createApi({
       keepUnusedDataFor: 2,
     }),
 
+    getSellProducts: builder.query({
+      query: (data) => ({
+        url: "/products/filter/admin ",
+        method: "post",
+        body: { filters: {year: data} },
+      }),
+    }),
+
     getFavoriteRoutines: builder.query({
       query: (data) => `routines?favourite=${data}`,
     }),
@@ -106,6 +114,7 @@ export const ApiQuery = createApi({
 
 export const {
   useGetRoutinesQuery,
+  useGetSellProductsQuery,
   useGetFavoriteRoutinesQuery,
   useGetRoutinesByIdQuery,
   useGetAllClassesQuery,

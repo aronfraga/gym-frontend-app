@@ -56,12 +56,13 @@ const Shopping = () => {
 
 	function handlerCheckOutBuy(event) {
 		event.preventDefault();
+		if(itemCheckOut.length===0) return swal("¡El carrito esta vacio!");
 		const checkOut = {
 			items: itemCheckOut,
 			auto_return: 'approved',
 			notification_url: 'https://www.success.com/',
 			back_urls: {
-				success: 'https://app-gym-frontend.vercel.app/tienda',
+				success: "https://app-gym-frontend.vercel.app/tienda",
 				failure: 'http://www.facebook.com/',
 				pending: 'http://www.pending.com/',
 			},
@@ -78,6 +79,7 @@ const Shopping = () => {
 
 	function handlerClearCheckOut(event) {
 		event.preventDefault();
+		if(itemCheckOut.length===0) return swal("¡El carrito esta vacio!");
 		swal({
 			title: 'Estás seguro?',
 			text: 'Una vez vaciado, no podras recuperar tus articulos',
@@ -99,8 +101,33 @@ const Shopping = () => {
 		});
 	}
 
+
 	function handlerClickBack() {
 		navigate(-1);
+
+	function handlerRender() {
+		if(itemCheckOut.length) {
+			return (
+			itemCheckOut.map((product) => (
+				<ProductsInCar
+					key={product.id}
+					id={product.id}
+					title={product.title}
+					price={product.unit_price}
+					quantity={product.quantity}
+					stock={product.stock}
+					category={product.category}
+					description={product.description}
+					imgUrl={product.picture_url}
+					render={handlerRender}
+					handlerAlertStock0={handlerAlertStock0}
+					handlerAlertStockFull={handlerAlertStockFull}
+				/>
+			))
+			)
+		} else {
+			return <h1>PERRO</h1>
+		}
 	}
 
 	return (
@@ -125,22 +152,7 @@ const Shopping = () => {
 					</div>
 					<div className={style.cardsContainer}>
 						{/* map productos en carrito */}
-						{itemCheckOut?.map((product) => (
-							<ProductsInCar
-								key={product.id}
-								id={product.id}
-								title={product.title}
-								price={product.unit_price}
-								quantity={product.quantity}
-								stock={product.stock}
-								category={product.category}
-								description={product.description}
-								imgUrl={product.picture_url}
-								render={handlerRender}
-								handlerAlertStock0={handlerAlertStock0}
-								handlerAlertStockFull={handlerAlertStockFull}
-							/>
-						))}
+						{handlerRender()}
 					</div>
 					<div className={style.infoContainer}>
 						<h1>Carrito de compras</h1>

@@ -16,6 +16,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useState } from 'react';
 import style from './ProductCard.module.css';
 import { Link } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
 
 const ExpandMore = styled((props) => {
 	const { expand, ...other } = props;
@@ -48,6 +49,7 @@ const ProductCard = ({
 
 	const handlerSaveInCheckOut = (event) => {
 		event.preventDefault();
+		if(stock === 0) return swal("¡No hay stock suficiente!");
 		if (!localStorage.getItem(`item_${title}`)) {
 			localStorage.setItem(
 				`item_${title}`,
@@ -70,6 +72,7 @@ const ProductCard = ({
 	};
 
 	return (
+		<div>
 		<Card
 			className={style.cardProduct}
 			sx={{
@@ -163,6 +166,19 @@ const ProductCard = ({
 				</Typography>
 			</Collapse>
 		</Card>
+		<ToastContainer
+				position='bottom-left'
+				autoClose={3000}
+				hideProgressBar={false}
+				newestOnTop={false}
+				closeOnClick
+				rtl={false}
+				pauseOnFocusLoss
+				draggable
+				pauseOnHover={false}
+				theme='colored'
+			/>
+		</div>
 	);
 };
 
