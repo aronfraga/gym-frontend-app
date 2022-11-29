@@ -2,9 +2,7 @@ import {
   Typography,
   Rating,
   TextField,
-  Box,
   Button,
-  Grid,
   FormControlLabel,
   FormLabel,
   RadioGroup,
@@ -13,6 +11,7 @@ import {
   Slider,
   FormControl,
   IconButton,
+  FormHelperText,
 } from "@mui/material";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -27,6 +26,14 @@ import Loading from "../Loading/Loading";
 import FormEjer from "./FormEjer";
 import { PhotoCamera } from "@mui/icons-material";
 import { uploadImage } from "./uploadImage";
+import {
+  validatorCategory,
+  validatorDifficulty,
+  validatorMuscles,
+  validatorName,
+  validatorRepetitions,
+  validatorSerie,
+} from "./ValidatorForm";
 
 const marks = [
   {
@@ -71,13 +78,17 @@ const FormRoutines = () => {
   const [ejercicio, setEjercicio] = useState({
     day: 0,
     name: "",
-    series: Number,
-    repetitions: Number,
+    series: 1,
+    repetitions: 1,
     gifUrl: "",
     muscleId: 0,
   });
 
-  const [createRoutines, { isLoading }] = useAddNewRoutinesMutation();
+  const [errorValue, SetErrorValue] = useState({
+    name: "El nombre debe tener mas de 2 caracteres",
+  });
+
+  const [createRoutines, { isLoading, error }] = useAddNewRoutinesMutation();
 
   const handelSubmit = async (e) => {
     e.preventDefault();
@@ -114,11 +125,36 @@ const FormRoutines = () => {
         ...value,
         [event.target.name]: number,
       });
-    } else
+    } else {
       setValue({
         ...value,
         [event.target.name]: event.target.value,
       });
+    }
+
+    SetErrorValue(
+      validator({ ...value, [event.target.name]: event.target.value })
+    );
+  };
+
+  const validator = (data) => {
+    let error = {};
+    validatorName(data.name) && (error.name = validatorName(data.name));
+
+    validatorCategory(data.categoryId) &&
+      (error.categoryId = validatorCategory(data.categoryId));
+
+    validatorDifficulty(data.difficulty) &&
+      (error.difficulty = validatorDifficulty(data.difficulty));
+
+    validatorSerie(data.series) && (error.series = validatorSerie(data.series));
+
+    validatorRepetitions(data.repetitions) &&
+      (error.repetitions = validatorRepetitions(data.repetitions));
+
+    validatorMuscles(data.muscleId) &&
+      (error.muscleId = validatorMuscles(data.muscleId));
+    return error;
   };
 
   const handlerImage = async (e) => {
@@ -145,6 +181,7 @@ const FormRoutines = () => {
         [name]: value,
       });
     }
+    SetErrorValue(validator({ ...ejercicio, [name]: value }));
   };
 
   const handelNext = (e) => {
@@ -165,6 +202,11 @@ const FormRoutines = () => {
       repetitions: 0,
       gifUrl: "",
       muscleId: ejercicio.muscleId,
+    });
+    SetErrorValue({
+      name: "El nombre debe tener mas de 2 caracteres",
+      series: "Agregar cantidad de series",
+      repetitions: "Agregar cantidad de repeticiones",
     });
   };
 
@@ -200,6 +242,11 @@ const FormRoutines = () => {
       gifUrl: "",
       muscleId: ejercicio.muscleId,
     });
+    SetErrorValue({
+      name: "El nombre debe tener mas de 2 caracteres",
+      series: "Agregar cantidad de series",
+      repetitions: "Agregar cantidad de repeticiones",
+    });
   };
 
   const handelPrevEjer = (e) => {
@@ -231,6 +278,8 @@ const FormRoutines = () => {
                   name="name"
                   value={value.name}
                   onChange={handleChange}
+                  error={errorValue.name ? true : false}
+                  helperText={errorValue.name && errorValue.name}
                   required
                 />
                 <br />
@@ -251,24 +300,50 @@ const FormRoutines = () => {
                   </IconButton>
                 </div>
                 <br />
-                <FormLabel id="row-radio-buttons-group-label">
-                  Categoria
-                </FormLabel>
-                <RadioGroup
-                  row
-                  aria-labelledby="demo-row-radio-buttons-group-label"
-                >
-                  {category.map((cate) => (
-                    <FormControlLabel
-                      name="categoryId"
-                      key={cate.id}
-                      value={cate.id}
-                      control={<Radio />}
-                      label={cate.name}
-                      onChange={handleChange}
-                    />
-                  ))}
-                </RadioGroup>
+                <div>
+                  <FormLabel id="row-radio-buttons-group-label">
+                    Categoria
+                  </FormLabel>
+                  <RadioGroup
+                    row
+                    aria-labelledby="demo-row-radio-buttons-group-label"
+                    error={errorValue.categoryId ? true : false}
+                    required
+                    sx={errorValue.categoryId && { color: "red" }}
+                  >
+                    {category.map((cate) => (
+                      <FormControlLabel
+                        name="categoryId"
+                        key={cate.id}
+                        value={cate.id}
+                        control={<Radio />}
+                        label={cate.name}
+                        onChange={handleChange}
+                      />
+                    ))}
+                  </RadioGroup>
+                  <FormHelperText sx={{ color: "red" }}>
+                    {errorValue.categoryId && errorValue.categoryId}
+                  </FormHelperText>
+                  {/* {errorValue.categoryId && (
+                  <p>
+                    <small>{errorValue.categoryId}</small>
+                  </p>
+                )} */}
+                </div>
+
+                <Typography component="legend">Dificultad</Typography>
+
+                <Rating
+                  name="difficulty"
+                  id="difficultyId"
+                  value={value.difficulty}
+                  onChange={handleChange}
+                  error={errorValue.difficulty ? true : false}
+                />
+                <FormHelperText sx={{ color: "red" }}>
+                  {errorValue.difficulty && errorValue.difficulty}
+                </FormHelperText>
 
                 <InputLabel id="duracion" sx={{ position: "relative" }}>
                   Duracion
@@ -284,16 +359,14 @@ const FormRoutines = () => {
                   valueLabelDisplay="off"
                   marks={marks}
                 />
-
-                <Typography component="legend">Dificultad</Typography>
-                <Rating
-                  name="difficulty"
-                  id="difficultyId"
-                  value={value.difficulty}
-                  onChange={handleChange}
-                />
-
-                <Button variant="contained" onClick={handelNext}>
+                <br />
+                <Button
+                  variant="contained"
+                  onClick={handelNext}
+                  disabled={
+                    Object.entries(errorValue).length === 0 ? false : true
+                  }
+                >
                   Siguiente
                 </Button>
               </FormControl>
@@ -317,6 +390,7 @@ const FormRoutines = () => {
                     ejercicio={ejercicio}
                     muscles={muscles}
                     handleChange2={handleChange2}
+                    errorValue={errorValue}
                   />
 
                   <div>
@@ -333,7 +407,13 @@ const FormRoutines = () => {
                       >
                         Ejercicio {value.nEje - 1}
                       </Button>
-                      <Button variant="contained" onClick={handelNextEjer}>
+                      <Button
+                        variant="contained"
+                        onClick={handelNextEjer}
+                        disabled={
+                          Object.entries(errorValue).length === 0 ? false : true
+                        }
+                      >
                         Ejercicio {value.nEje + 1}
                       </Button>
                     </div>
@@ -358,7 +438,9 @@ const FormRoutines = () => {
                     <Button
                       variant="contained"
                       onClick={handelSubmit}
-                      disabled={isLoading ? true : false}
+                      disabled={
+                        Object.entries(errorValue).length === 0 ? false : true
+                      }
                     >
                       Submit
                     </Button>
@@ -370,12 +452,16 @@ const FormRoutines = () => {
                           ? { display: "none" }
                           : { display: "true" }
                       }
+                      disabled={
+                        Object.entries(errorValue).length === 0 ? false : true
+                      }
                     >
                       Dia {value.page + 1}
                     </Button>
                   </div>
                 </FormControl>
               </form>
+              {error && <section> {error.error}</section>}
             </div>
           </div>
         </div>
