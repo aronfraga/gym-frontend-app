@@ -12,7 +12,7 @@ export const ApiEcommerce = createApi({
       if (token) headers.set("authorization", `Bearer ${token}`);
       return headers;
     },
-  })
+  }),
   { maxRetries: 1 }
   ),
   endpoints: (builder) => ({
