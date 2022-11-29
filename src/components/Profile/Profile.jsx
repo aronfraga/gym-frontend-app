@@ -1,5 +1,6 @@
 import React from 'react';
 import NavBar from '../NavBar/NavBar';
+import {Link} from 'react-router-dom';
 import {useAuth0} from "@auth0/auth0-react";
 import {useGetAllUsersQuery} from '../../redux/query/api';
 import Loading from '../Loading/Loading';
@@ -42,7 +43,7 @@ const Profile = () => {
                 <div>
                     <p>Eres administrador, puedes acceder</p>
                     <p> a la siguiente funcionalidad</p>
-                    <button>Dashboard</button>
+                    <Link to={'/admdashboard'}><button>Dashboard</button></Link>
                     <button>Crear Rutina</button>
                 </div>)
         }
