@@ -23,6 +23,7 @@ import EditProduct from './components/FormProducts/EditProduct';
 import FormCalendar from './components/Calendar/FormCalendar';
 import GetFeedbacks from "./components/FeedBack/GetFeedbacks";
 import SelectPlan from './components/SelectPlan/SelectPlan';
+import SwitchRoles from "./components/SwitchRoles/SwitchRoles";
 
 function App() {
   const { isAuthenticated } = useAuth0();
@@ -58,6 +59,7 @@ function App() {
         <Route path='/admdashboard/products' element={<FormProducts />} />
         <Route path='/admdashboard/feedbacks' element={<GetFeedbacks />} />
         <Route path='/calendario/crear' element={<FormCalendar />} />
+        <Route path='/admdashboard/roles' element={<SwitchRoles />} />
         {/* </Route> */}
         {/* <Route
             element={

@@ -71,6 +71,24 @@ const Dashboard = () => {
                         <LineGraph datos={data} año={state.year} />
                     </div>
                 </div>
+                <Link to='/admdashboard/roles'>
+                    <Button
+                        variant="contained"
+                        sx={{
+                            position: 'absolute',
+                            right: 275,
+                            top: 150,
+                            background: "#0d0d6b",
+                            "&:hover": {
+                                backgroundColor: "#62629f",
+                                transition: "0.4s",
+                            },
+                        }}
+                    >
+                        Cambiar roles
+                    </Button>
+                </Link>
+                
                 <Link to='/admdashboard/feedbacks'>
                     <Button
                         variant="contained"

@@ -102,7 +102,7 @@ const ProductCard = ({
 		}
 	};
 
-	const handlerClickBack = (event) => {
+	const handlerDeleteProduct = (event) => {
 		event.preventDefault();
 		deleteProduct(id)
 		handlerDeleted()
@@ -111,10 +111,6 @@ const ProductCard = ({
 		}, 2000) //usar event.currentTarget
 		
 	};
-
-	const handlerEdit = (event) => {
-		event.preventDefault();
-	}
 
 	return (
 		<div>
@@ -140,7 +136,7 @@ const ProductCard = ({
 				</CardActionArea>
 				<div className={style.delete}>
 					<IconButton
-						onClick={handlerClickBack}
+						onClick={handlerDeleteProduct}
 						value={'hola'}
 						sx={{
 							color: 'var(--red-color)',
