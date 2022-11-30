@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Loading from '../Loading/Loading';
 import ProductCard from '../ProductCard/ProductCard';
 import { useGetAllProductsQuery } from '../../redux/query/ApiEcommerce';
