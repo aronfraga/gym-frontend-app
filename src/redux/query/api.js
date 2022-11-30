@@ -6,7 +6,7 @@ export const ApiQuery = createApi({
   baseQuery: retry(
     fetchBaseQuery({
       baseUrl: "https://appgymbackend-production.up.railway.app",
-      //baseUrl: "http://localhost:3001",
+      // baseUrl: "http://localhost:3001",
       prepareHeaders: (headers) => {
         const token = getToken().token;
         if (token) headers.set("authorization", `Bearer ${token}`);
@@ -16,6 +16,11 @@ export const ApiQuery = createApi({
     { maxRetries: 1 }
   ),
   keepUnusedDataFor: 30,
+
+  
+
+  tagTypes: ["Borrar"],
+
   endpoints: (builder) => ({
     //************************************** */
     //********* G E T ' S ****************** */
@@ -28,6 +33,15 @@ export const ApiQuery = createApi({
         body: { filters: data },
       }),
       keepUnusedDataFor: 2,
+      providesTags: ["Borrar"],
+    }),
+
+    getSellProducts: builder.query({
+      query: (data) => ({
+        url: "/products/filter/admin ",
+        method: "post",
+        body: { filters: {year: data} },
+      }),
     }),
 
     getFavoriteRoutines: builder.query({
@@ -35,7 +49,7 @@ export const ApiQuery = createApi({
     }),
 
     getAllStaff: builder.query({
-      query: () => `/users?role=staff`,
+      query: () => `/users?role=Admin`,
     }),
 
     getRoutinesById: builder.query({
@@ -44,6 +58,7 @@ export const ApiQuery = createApi({
 
     getAllClasses: builder.query({
       query: () => "/classes",
+      
     }),
 
     getAllUsers: builder.query({
@@ -77,6 +92,15 @@ export const ApiQuery = createApi({
       }),
     }),
 
+    addClass: builder.mutation({
+      query: (newClass) => ({
+        url: "/classes",
+        method: "post",
+        body: newClass,
+      }),
+    }),
+
+
     //************************************** */
     //************ PATCH ******************* */
     //************************************** */
@@ -90,22 +114,42 @@ export const ApiQuery = createApi({
     }),
 
     //************************************** */
-    //************** PUT ******************* */
+    //************** DELETE ******************* */
     //************************************** */
 
-    putLogin: builder.mutation({
-      query() {
+    deleteRoutines: builder.mutation({
+      query: (id) => ({
+        url: `/routines/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Borrar"],
+    }),
+
+    putClasses: builder.mutation({
+      query({ payload, id }) {
         return {
-          url: "/login",
+          url: `/classes/${id}`,
           method: "PUT",
+          body: payload,
         };
       },
+    }),
+
+    deleteClasses: builder.mutation({
+      query(id) {
+        return {
+          url: `/classes/${id}`,
+          method: "DELETE",
+        };
+      },
+      
     }),
   }),
 });
 
 export const {
   useGetRoutinesQuery,
+  useGetSellProductsQuery,
   useGetFavoriteRoutinesQuery,
   useGetRoutinesByIdQuery,
   useGetAllClassesQuery,
@@ -114,7 +158,13 @@ export const {
   useGetMusclesQuery,
   useAddNewRoutinesMutation,
   useSetFavoritesMutation,
-  usePutLoginMutation,
+
+  usePutClassesMutation,
+
+  useDeleteRoutinesMutation,
+
   useAddFeedbackMutation,
   useGetAllStaffQuery,
+  useAddClassMutation,
+  useDeleteClassesMutation,
 } = ApiQuery;

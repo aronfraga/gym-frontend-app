@@ -25,33 +25,26 @@ import { useNavigate } from "react-router-dom";
 const Shop = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { itemCheckOut } = useSelector((state) => state.itemCheckOut);
   const [ renderShop, setRenderShop ] = useState("");
   const urlChanged = window.location.search;
   const urlParams = new URLSearchParams(urlChanged);
+
   const purchaseStatus = {
     payed: urlParams.get("status")==="approved"?true:false,
     paymentMethod: urlParams.get("payment_type"),
     purchaseId: urlParams.get("preference_id"),
   };
-
+  
   useEffect(() => {
-    if (purchaseStatus.payed) {
-      dispatch(setPurchase(purchaseStatus));
-      handlerClearCheckOut();
-      navigate('/tienda')
+    dispatch(seterItem(localStorage));
+    if(purchaseStatus.payed) {
+      dispatch(setPurchase(purchaseStatus, localStorage));
+      navigate('/home');
     }
   }, []);
 
   function handerRenderShop(data) {
     setRenderShop(data);
-  }
-
-  function handlerClearCheckOut() {
-    for (var i = 0; i < itemCheckOut.length; i++) {
-      localStorage.removeItem(`item_${itemCheckOut[i].title}`);
-    }
-    dispatch(seterItem(localStorage));
   }
 
   /* ACA EMPIEZAN LOS FILTROS, SORRY POR EL LIO*/
@@ -348,11 +341,6 @@ const Shop = () => {
           />
         </ThemeProvider>
       </div>
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
     </div>
   );
 };

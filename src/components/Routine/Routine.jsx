@@ -1,13 +1,17 @@
 import React from "react";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
-import { CardActionArea } from "@mui/material";
+import { Button, CardActionArea } from "@mui/material";
 import style from "./Routine.module.css";
 import IconButton from "@mui/material/IconButton";
 import StarIcon from "@mui/icons-material/Star";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
+import DeleteIcon from "@mui/icons-material/Delete";
 import { useState } from "react";
-import { useSetFavoritesMutation } from "../../redux/query/api";
+import {
+  useDeleteRoutinesMutation,
+  useSetFavoritesMutation,
+} from "../../redux/query/api";
 import { Link } from "react-router-dom";
 
 const Routine = ({
@@ -21,10 +25,15 @@ const Routine = ({
   favFilter,
 }) => {
   const [addToFavorite] = useSetFavoritesMutation();
+  const [deleteRoutines] = useDeleteRoutinesMutation();
   const [favorite, setFavorite] = useState(favFilter ? true : flagFav);
   const handlerFavorite = (event) => {
     addToFavorite(id);
     favorite ? setFavorite(false) : setFavorite(true);
+  };
+
+  const handlerDelete = () => {
+    deleteRoutines(id);
   };
 
   const handlerCardAction = (event) => {};
@@ -91,6 +100,16 @@ const Routine = ({
           </div>
         </Link>
       </CardActionArea>
+      <div className={style.iconDelete}>
+        <IconButton
+          onClick={handlerDelete}
+          sx={{
+            color: "var(--red-color)",
+          }}
+        >
+          <DeleteIcon />
+        </IconButton>
+      </div>
       <div className={style.iconFavorite}>
         <IconButton
           aria-label="star"

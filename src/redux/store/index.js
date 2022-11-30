@@ -8,7 +8,7 @@ import facilitiesImages from '../slices/defaultSlice';
 import staff from '../slices/defaultSlice';
 import itemCheckOut from '../slices/defaultSlice';
 import isAdminLogged from '../slices/defaultSlice';
-
+import alertDelivery from '../slices/defaultSlice';
 
 export const store = configureStore({
   reducer: {
@@ -18,6 +18,7 @@ export const store = configureStore({
     staff: staff,
     itemCheckOut: itemCheckOut,
     isAdminLogged: isAdminLogged,
+    alertDelivery: alertDelivery,
     [ ApiQuery.reducerPath ]: ApiQuery.reducer,
     [ ApiEcommerce.reducerPath ]: ApiEcommerce.reducer,
   },
