@@ -146,7 +146,6 @@ export const setPurchase = (data, localStorage) => {
       data,
       {
         headers: {
-
           authorization: `Bearer ${token}`
         }
     });

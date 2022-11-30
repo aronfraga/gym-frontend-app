@@ -40,8 +40,8 @@ const Shop = () => {
   useEffect(() => {
     dispatch(seterItem(localStorage));
     if (purchaseStatus.payed) {
-      dispatch(setPurchase(purchaseStatus, localStorage));
-      navigate("/home");
+      dispatch(setPurchase(purchaseStatus, localStorage))
+      .then(navigate("/home"));
     }
   }, []);
 
