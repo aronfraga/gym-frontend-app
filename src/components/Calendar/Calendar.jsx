@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom';
 export default function Calendar() {
 
 	const { data: classes, isLoading } = useGetAllClassesQuery();
-	console.log(classes)
+
 	if (isLoading) {
 		return (
 			<>

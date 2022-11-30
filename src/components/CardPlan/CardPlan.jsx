@@ -24,13 +24,14 @@ const CardPLan = ({
 		unit_price: price,
 		quantity: 1,
 	};
+	console.log(id)
 	const handlerClickBuyPlan = () => {
 		const checkOut = {
 			items: [itemCheckOut],
 			auto_return: 'approved',
 			notification_url: 'https://www.success.com/',
 			back_urls: {
-				success: 'http://127.0.0.1:5173/perfil',
+				success: 'https://appgymbackend-production.up.railway.app/perfil',
 				failure: 'http://www.facebook.com/',
 				pending: 'http://www.pending.com/',
 			},

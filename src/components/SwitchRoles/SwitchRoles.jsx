@@ -14,8 +14,6 @@ export default function SwitchRoles(){
 
     const [setNewRole] = useSetNewRoleMutation()
 
-    console.log(data)
-
       if (isLoading) return <Loading />;
 
     const handlerChanged = () => {

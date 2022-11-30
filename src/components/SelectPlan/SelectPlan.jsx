@@ -13,7 +13,7 @@ const SelectPlan = () => {
 		useGetUserProfileQuery();
 	const { data: planes, isLoading } = useGetAllMembresiesQuery();
 	const fecha = new Date(profile?.membresyExpDate); // Formato de fecha iso 8601
-	console.log(planes);
+
 	if (isLoading || isLoadingProfile) return <Loading />;
 	return (
 		<>

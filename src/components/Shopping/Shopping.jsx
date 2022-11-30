@@ -62,7 +62,7 @@ const Shopping = () => {
 			auto_return: 'approved',
 			notification_url: 'https://www.success.com/',
 			back_urls: {
-				success: 'http://127.0.0.1:5173/tienda',
+				success: 'https://appgymbackend-production.up.railway.app/tienda',
 				failure: 'http://www.facebook.com/',
 				pending: 'http://www.pending.com/',
 			},
