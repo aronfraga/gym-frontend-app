@@ -13,14 +13,13 @@ import Login from "../Login/Login";
 import Planes from "../Planes/Planes";
 import PrevRoutines from "../PrevRoutines/PrevRoutines";
 import { PrevShop } from '../PrevShop/PrevShop';
+import { seterItem } from "../../redux/actions/defaultAction";
 
 const Home = () => {
   const dispatch = useDispatch();
   const { user, isAuthenticated, isLoading, logout } = useAuth0();
   const { tokenIsValid } = useSelector((state) => state.tokenIsValid);
   const { alertDelivery } = useSelector((state) => state.alertDelivery);
-
-  console.log(alertDelivery)
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -35,6 +34,7 @@ const Home = () => {
       }
       if (!tokenIsValid) logout();
     }
+    dispatch(seterItem(localStorage));
     if(alertDelivery) return handlerAlertSuccess();
   }, [dispatch, isAuthenticated, tokenIsValid, alertDelivery]);
 
