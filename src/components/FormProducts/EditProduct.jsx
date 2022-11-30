@@ -1,10 +1,15 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useGetProductByIdQuery, usePutProductMutation, useGetAllProductsQuery } from "../../redux/query/ApiEcommerce";
-import s from './FormProducts.module.css';
+import style from './FormProducts.module.css';
 import { Link, useNavigate } from "react-router-dom";
 import { uploadImage } from "../FormRoutines/uploadImage.js";
 import Loading from '../Loading/Loading';
+import FormControl from "@mui/material/FormControl";
+import { TextField } from '@mui/material';
+import { FormLabel,IconButton,} from "@mui/material";
+import { PhotoCamera } from "@mui/icons-material";
+import Button from "@mui/material/Button";
 
 
 export default function EditProduct(){
@@ -80,7 +85,7 @@ export default function EditProduct(){
 
         alert("Producto Modificado");
         
-        navigate("/admdashboard/products");
+        navigate("/tienda");
 
         window.location.reload();
       };
@@ -102,100 +107,143 @@ export default function EditProduct(){
       if (isLoading) return <Loading />;
     
     return (
-      <div>
+      <div className={style.mainContainer}>
       <br></br>
       <div>
-          <Link to="/admdashboard">
-            <button type="button">Back</button>
-          </Link>
+      <Link style={{ textDecoration: 'none'}} to='/tienda'>
+                    <Button
+                        variant="contained"
+                        sx={{
+                            background: "#0d0d6b",
+                            "&:hover": {
+                            backgroundColor: "#62629f",
+                                transition: "0.4s",
+                            },
+                        }}
+                    >
+                        Volver a tienda
+                    </Button>
+                </Link>
       </div>
-      <div>
+      <div className={style.mainContainerForm}>
       <form onSubmit={(e) => handleSubmit(e)}>
       <div>
+      <FormControl>
         
         <br/>
   
-        <div>
-        <label>Nombre del producto:</label>
-        <input
-          type="text"
-          name="title"
-          placeholder="Ingrese el nombre del producto"
-          value={input.title}
-          onChange={handleInputChange}
+        <div className={style.textField}>
+        <TextField
+        required
+        sx={{ width: 300 }}
+        key="standard-name"
+        label="Ingrese el nombre del producto"
+        name="title"
+        value={input.title}
+        onChange={handleInputChange}
         />
-        {errors.title && <p className={s.errors}>{errors.title}</p>}
         </div>
 
-        <div>
-        <label>Precio:</label>
-        <input
-          type="number"
-          name="unit_price"
-          min="0"
-          placeholder="Ingrese valor del producto"
-          value={input.unit_price}
-          onChange={handleInputChange}
-        />
-        <br></br>
-        {errors.unit_price && <p className={s.errors}>{errors.unit_price}</p>}
-        </div>
-
-        <div>
-        <label>Stock:</label>
-        <input
-          type="number"
-          name="stock"
-          min="0"
-          placeholder="Stock disponible"
-          value={input.stock}
-          onChange={handleInputChange}
+        <div className={style.textField}>
+        <TextField
+        required
+        sx={{ width: 300 }}
+        key="standard-name"
+        label="Ingrese valor del producto"
+        name="unit_price"
+        value={input.unit_price}
+        onChange={handleInputChange}
+        type="number"
+        InputProps={{
+          inputProps: { min: 0 }
+        }}
         />
         <br></br>
         </div>
 
-        <div>
-        <label>Categoria:</label>
-        <input
-          type="text"
-          name="category"
-          placeholder="Ingrese categoria"
-          value={input.category}
-          onChange={handleInputChange}
+        <div className={style.textField}>
+        <TextField
+        required
+        sx={{ width: 300 }}
+        key="standard-name"
+        label="Stock disponible"
+        name="stock"
+        min="0"
+        value={input.stock}
+        onChange={handleInputChange}
+        type="number"
+        InputProps={{
+          inputProps: { min: 0 }
+        }}
         />
         <br></br>
         </div>
 
-        <div>
-        <label>Descripcion:</label>
-        <input
-          type="text"
-          name="description"
-          placeholder="Descripcion del producto"
-          value={input.description}
-          onChange={handleInputChange}
+        <div className={style.textField}>
+        <TextField
+        sx={{ width: 300 }}
+        key="standard-name"
+        label="Ingrese categoria"
+        name="category"
+        value={input.category}
+        onChange={handleInputChange}
         />
         <br></br>
         </div>
 
-        <div>
-        <label>Imagen:</label>
-        <input
-          type="file"
-          name="imgUrl"
-          accept="image/png, image/jpeg"
-          onChange={handlerImage}
+        <div className={style.textField}>
+        <TextField
+        sx={{ width: 300 }}
+        key="standard-name"
+        label="Descripcion del producto"
+        name="description"
+        value={input.description}
+        onChange={handleInputChange}
         />
         <br></br>
         </div>
 
         <div>
-        <input
-          type="submit"
-          value="submit"
-          disabled={Object.entries(errors).length !== 0}
-        />
+        <IconButton
+                    color="primary"
+                    aria-label="upload picture"
+                    component="label"
+                  >
+                    <FormLabel id="img-label">Imagen</FormLabel>
+                    <input
+                      accept="image/*"
+                      type="file"
+                      name="imgUrl"
+                      onChange={handlerImage}
+                    />
+                    <PhotoCamera />
+                  </IconButton>
+        <br></br>
         </div>
+        <div className={style.textField}>
+        <Button
+                                type='submit' sx={{
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    paddingRight: '25px',
+                                    paddingLeft: '25px',
+                                    marginBottom: '10px',
+                                    marginLeft: '73px',
+                                    marginTop: '10px',
+                                    width: 150,
+                                    color: 'white',
+                                    borderRadius: '6px',
+                                    background: '#2779ff',
+                                    alignItems: 'center',
+                                    '&:hover': {
+                                        backgroundColor: '#5151519c',
+                                        transition: '1s',
+                                    },
+                                }}>
+                                Submit
+                            </Button>
+        </div>
+      </FormControl>
       </div>
     </form>
     

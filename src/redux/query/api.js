@@ -16,10 +16,7 @@ export const ApiQuery = createApi({
     { maxRetries: 1 }
   ),
   keepUnusedDataFor: 30,
-
-
-
-  tagTypes: ["Borrar"],
+  tagTypes: ["Borrar", "Img"],
 
   endpoints: (builder) => ({
     //************************************** */
@@ -38,7 +35,7 @@ export const ApiQuery = createApi({
 
     getSellProducts: builder.query({
       query: (data) => ({
-        url: "/products/filter/admin ",
+        url: "/membresies/admdashboard/monthsales ",
         method: "post",
         body: { filters: { year: data } },
       }),
@@ -67,6 +64,7 @@ export const ApiQuery = createApi({
 
     getAllUsers: builder.query({
       query: () => "/users",
+      providesTags: ["Img"]
     }),
 
     getCategory: builder.query({
@@ -123,6 +121,24 @@ export const ApiQuery = createApi({
       keepUnusedDataFor: 0,
     }),
 
+    setNewImg: builder.mutation({
+      query: (payload) => ({
+        url: `/users`,
+        method: "PATCH",
+        body: {
+          "newImage": payload
+        }
+      }),
+      keepUnusedDataFor: 0,
+      invalidatesTags: ["Img"],
+    }),
+    setNewRole: builder.mutation({
+      query: (payload) => ({
+        url: `/users?idUser=${payload.idUser}&newRole=${payload.newRole}`,
+        method: "PATCH",
+      }),
+      keepUnusedDataFor: 0,
+    }),
     //************************************** */
     //************** DELETE ******************* */
     //************************************** */
@@ -168,7 +184,7 @@ export const {
   useGetMusclesQuery,
   useAddNewRoutinesMutation,
   useSetFavoritesMutation,
-
+  useSetNewImgMutation,
   usePutClassesMutation,
   useGetClassesByIdQuery,
   useDeleteRoutinesMutation,
@@ -177,4 +193,5 @@ export const {
   useGetAllStaffQuery,
   useAddClassMutation,
   useDeleteClassesMutation,
+  useSetNewRoleMutation,
 } = ApiQuery;

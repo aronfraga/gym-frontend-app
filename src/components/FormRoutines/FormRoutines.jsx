@@ -34,6 +34,8 @@ import {
   validatorRepetitions,
   validatorSerie,
 } from "./ValidatorForm";
+import Styles from "./FormRoutines.module.css";
+import swal from "sweetalert";
 
 const marks = [
   {
@@ -111,8 +113,13 @@ const FormRoutines = () => {
       auxNEje: 1,
       aux: [],
     });
-    alert("Rutina Creada");
-    navigate("/rutinas");
+    swal({ title: "Hecho!", text: "Rutina Creada", type: "success" }).then(
+      (ok) => {
+        if (ok) {
+          navigate("/rutinas");
+        }
+      }
+    );
   };
 
   const handleChange = (event) => {
@@ -363,6 +370,13 @@ const FormRoutines = () => {
                 <Button
                   variant="contained"
                   onClick={handelNext}
+                  sx={{
+                    background: "#0d0d6b",
+                    "&:hover": {
+                      backgroundColor: "#62629f",
+                      transition: "0.4s",
+                    },
+                  }}
                   disabled={
                     Object.entries(errorValue).length === 0 ? false : true
                   }
@@ -383,7 +397,11 @@ const FormRoutines = () => {
         <div className={style.mainContainer}>
           <div className={style.mainContainerForm}>
             <div>
-              <h2>Dia {value.page}</h2>
+              <div className={Styles.titleContainer}>
+                <h2>Ejercicio {value.nEje}</h2>
+                <h2 className={Styles.dayContainer}>Dia {value.page}</h2>
+              </div>
+              <br />
               <form>
                 <FormControl>
                   <FormEjer
@@ -395,14 +413,28 @@ const FormRoutines = () => {
 
                   <div>
                     <br />
-                    <div>
+                    <div className={Styles.buttonsContainer}>
                       <Button
                         variant="contained"
                         onClick={handelPrevEjer}
                         sx={
                           value.nEje === 1
-                            ? { display: "none" }
-                            : { display: "true" }
+                            ? {
+                                background: "#0d0d6b",
+                                "&:hover": {
+                                  backgroundColor: "#62629f",
+                                  transition: "0.4s",
+                                },
+                                visibility: "hidden",
+                              }
+                            : {
+                                background: "#0d0d6b",
+                                "&:hover": {
+                                  backgroundColor: "#62629f",
+                                  transition: "0.4s",
+                                },
+                                display: "true",
+                              }
                         }
                       >
                         Ejercicio {value.nEje - 1}
@@ -410,6 +442,13 @@ const FormRoutines = () => {
                       <Button
                         variant="contained"
                         onClick={handelNextEjer}
+                        sx={{
+                          background: "#0d0d6b",
+                          "&:hover": {
+                            backgroundColor: "#62629f",
+                            transition: "0.4s",
+                          },
+                        }}
                         disabled={
                           Object.entries(errorValue).length === 0 ? false : true
                         }
@@ -418,46 +457,93 @@ const FormRoutines = () => {
                       </Button>
                     </div>
                     <br />
-                    {value.page !== 1 ? (
+                    <div className={Styles.buttonsContainer}>
+                      {value.page !== 1 ? (
+                        <Button
+                          variant="contained"
+                          onClick={handelPrev}
+                          sx={
+                            value.page === 1 || value.nEje !== 1
+                              ? {
+                                  background: "#0d0d6b",
+                                  "&:hover": {
+                                    backgroundColor: "#62629f",
+                                    transition: "0.4s",
+                                  },
+                                  display: "none",
+                                }
+                              : {
+                                  background: "#0d0d6b",
+                                  "&:hover": {
+                                    backgroundColor: "#62629f",
+                                    transition: "0.4s",
+                                  },
+                                  display: "true",
+                                }
+                          }
+                        >
+                          Dia {value.page - 1}
+                        </Button>
+                      ) : (
+                        <Button
+                          variant="contained"
+                          onClick={handelPrev}
+                          sx={{
+                            background: "#0d0d6b",
+                            "&:hover": {
+                              backgroundColor: "#62629f",
+                              transition: "0.4s",
+                            },
+                          }}
+                        >
+                          Volver
+                        </Button>
+                      )}
                       <Button
                         variant="contained"
-                        onClick={handelPrev}
-                        sx={
-                          value.page === 1 || value.nEje !== 1
-                            ? { display: "none" }
-                            : { display: "true" }
+                        onClick={handelSubmit}
+                        sx={{
+                          background: "#0d0d6b",
+                          "&:hover": {
+                            backgroundColor: "#62629f",
+                            transition: "0.4s",
+                          },
+                        }}
+                        disabled={
+                          Object.entries(errorValue).length === 0 ? false : true
                         }
                       >
-                        Dia {value.page - 1}
+                        Submit
                       </Button>
-                    ) : (
-                      <Button variant="contained" onClick={handelPrev}>
-                        Volver
+                      <Button
+                        variant="contained"
+                        onClick={handelNext}
+                        sx={
+                          value.page === 7
+                            ? {
+                                background: "#0d0d6b",
+                                "&:hover": {
+                                  backgroundColor: "#62629f",
+                                  transition: "0.4s",
+                                },
+                                visibility: "hidden",
+                              }
+                            : {
+                                background: "#0d0d6b",
+                                "&:hover": {
+                                  backgroundColor: "#62629f",
+                                  transition: "0.4s",
+                                },
+                                display: "true",
+                              }
+                        }
+                        disabled={
+                          Object.entries(errorValue).length === 0 ? false : true
+                        }
+                      >
+                        Dia {value.page + 1}
                       </Button>
-                    )}
-                    <Button
-                      variant="contained"
-                      onClick={handelSubmit}
-                      disabled={
-                        Object.entries(errorValue).length === 0 ? false : true
-                      }
-                    >
-                      Submit
-                    </Button>
-                    <Button
-                      variant="contained"
-                      onClick={handelNext}
-                      sx={
-                        value.page === 7
-                          ? { display: "none" }
-                          : { display: "true" }
-                      }
-                      disabled={
-                        Object.entries(errorValue).length === 0 ? false : true
-                      }
-                    >
-                      Dia {value.page + 1}
-                    </Button>
+                    </div>
                   </div>
                 </FormControl>
               </form>

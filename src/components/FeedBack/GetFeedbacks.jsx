@@ -8,7 +8,6 @@ import NavBar from "../NavBar/NavBar";
 export default function GetFeedbacks() {
 
     const { data: feedbacks } = useGetAllFeedbacksQuery();
-    // console.log(feedbacks)
 
     return (
         <div>
