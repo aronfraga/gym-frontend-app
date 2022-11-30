@@ -14,6 +14,7 @@ import Button from "@mui/material/Button";
 import Typography from '@mui/material/Typography';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
+import { WindowSharp } from "@mui/icons-material";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -109,9 +110,9 @@ export default function FormCalendar() {
 
     const [input, setInput] = useState({
         name: "",
-        staff: "",
         hour: "",
         day: "",
+        staff: "",
         staffId: 0,
 
     })
@@ -174,11 +175,11 @@ export default function FormCalendar() {
 
     const HandleSubmit = async (event) => {
         event.preventDefault()
-
         await addClass({
             name: input.name,
             hour: `h${hora.inicio}/h${hora.final}`,
             day: input.day,
+            staffId:input.staffId
         }).unwrap();
         setInput({
             name: "",
@@ -209,9 +210,8 @@ export default function FormCalendar() {
 
     }
 
-    const handlerClickDelete = (event) => {
-
-        deleteClasses(event.currentTarget.value)
+    const handlerClickDelete = async (event) => {
+        await deleteClasses(event.currentTarget.value)
         useGetAllClassesQuery()
     }
 
