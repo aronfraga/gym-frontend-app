@@ -21,7 +21,14 @@ import { Link } from 'react-router-dom';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import logo from '../../Images/Logo.png';
 
-const pages = ['tienda', 'rutinas', 'instalaciones', 'staff', 'calendario', 'feedback'];
+const pages = [
+	'tienda',
+	'rutinas',
+	'instalaciones',
+	'staff',
+	'calendario',
+	'feedback',
+];
 // const settings = [ 'tienda','seguimiento', 'clases',];
 
 const NavBar = () => {
@@ -216,13 +223,20 @@ const NavBar = () => {
 							open={Boolean(anchorElUser)}
 							onClose={handlerCloseUserMenu}
 						>
-							<Link to={`/perfil`} style={{ textDecoration: 'none' }} >
-                                <MenuItem >
-                                    <Typography textAlign="center">Perfil</Typography>
-                                </MenuItem>
-                            </Link>
+							<Link
+								to={`/perfil`}
+								style={{ textDecoration: 'none', color: 'var(--black-color)' }}
+							>
+								<MenuItem>
+									<Typography textAlign='center'>Perfil</Typography>
+								</MenuItem>
+							</Link>
 							<MenuItem>
-								<Typography onClick={handleCloseUserMenu} textAlign='center'>
+								<Typography
+									onClick={handleCloseUserMenu}
+									textAlign='center'
+									sx={{ color: 'var(--black-color)' }}
+								>
 									Cerrar Sesion
 								</Typography>
 							</MenuItem>

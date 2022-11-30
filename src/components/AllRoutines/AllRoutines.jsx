@@ -2,7 +2,7 @@ import React from "react";
 import Routine from "../Routine/Routine";
 import style from "./AllRoutines.module.css";
 
-const AllRoutines = ({ routines, favFilter }) => {
+const AllRoutines = ({ routines, favFilter, role }) => {
   return (
     <div className={style.mainContainer}>
       {routines?.map((rutine, i) => (
@@ -20,6 +20,7 @@ const AllRoutines = ({ routines, favFilter }) => {
               ? rutine.User_Routine.favourite
               : rutine.favByUser
           }
+          role={role ? role : false}
         />
       ))}
     </div>

@@ -16,7 +16,8 @@ export const ApiQuery = createApi({
     { maxRetries: 1 }
   ),
   keepUnusedDataFor: 30,
-  tagTypes: ["Borrar"],
+  tagTypes: ["Borrar", "Img"],
+
   endpoints: (builder) => ({
     //************************************** */
     //********* G E T ' S ****************** */
@@ -34,9 +35,9 @@ export const ApiQuery = createApi({
 
     getSellProducts: builder.query({
       query: (data) => ({
-        url: "/products/filter/admin ",
+        url: "/membresies/admdashboard/monthsales ",
         method: "post",
-        body: { filters: {year: data} },
+        body: { filters: { year: data } },
       }),
     }),
 
@@ -54,10 +55,12 @@ export const ApiQuery = createApi({
 
     getAllClasses: builder.query({
       query: () => "/classes",
+
     }),
 
     getAllUsers: builder.query({
       query: () => "/users",
+      providesTags: ["Img"]
     }),
 
     getCategory: builder.query({
@@ -67,6 +70,12 @@ export const ApiQuery = createApi({
     getMuscles: builder.query({
       query: () => "/muscles",
     }),
+
+    getAllFeedbacks: builder.query({
+      query: () => "/feedbacks",
+    }),
+
+
     //************************************** */
     //********* P O S T ' S **************** */
     //************************************** */
@@ -87,6 +96,15 @@ export const ApiQuery = createApi({
       }),
     }),
 
+    addClass: builder.mutation({
+      query: (newClass) => ({
+        url: "/classes",
+        method: "post",
+        body: newClass,
+      }),
+    }),
+
+
     //************************************** */
     //************ PATCH ******************* */
     //************************************** */
@@ -99,6 +117,24 @@ export const ApiQuery = createApi({
       keepUnusedDataFor: 0,
     }),
 
+    setNewImg: builder.mutation({
+      query: (payload) => ({
+        url: `/users`,
+        method: "PATCH",
+        body: {
+          "newImage": payload
+        }
+      }),
+      keepUnusedDataFor: 0,
+      invalidatesTags: ["Img"],
+    }),
+    setNewRole: builder.mutation({
+      query: (payload) => ({
+        url: `/users?idUser=${payload.idUser}&newRole=${payload.newRole}`,
+        method: "PATCH",
+      }),
+      keepUnusedDataFor: 0,
+    }),
     //************************************** */
     //************** DELETE ******************* */
     //************************************** */
@@ -109,6 +145,26 @@ export const ApiQuery = createApi({
         method: "DELETE",
       }),
       invalidatesTags: ["Borrar"],
+    }),
+
+    putClasses: builder.mutation({
+      query({ payload, id }) {
+        return {
+          url: `/classes/${id}`,
+          method: "PUT",
+          body: payload,
+        };
+      },
+    }),
+
+    deleteClasses: builder.mutation({
+      query(id) {
+        return {
+          url: `/classes/${id}`,
+          method: "DELETE",
+        };
+      },
+
     }),
   }),
 });
@@ -124,7 +180,13 @@ export const {
   useGetMusclesQuery,
   useAddNewRoutinesMutation,
   useSetFavoritesMutation,
+  useSetNewImgMutation,
+  usePutClassesMutation,
   useDeleteRoutinesMutation,
+  useGetAllFeedbacksQuery,
   useAddFeedbackMutation,
   useGetAllStaffQuery,
+  useAddClassMutation,
+  useDeleteClassesMutation,
+  useSetNewRoleMutation,
 } = ApiQuery;

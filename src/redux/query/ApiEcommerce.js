@@ -1,5 +1,5 @@
-import { createApi, fetchBaseQuery, retry } from "@reduxjs/toolkit/query/react";
-import { getToken } from "../../services/cookies";
+import { createApi, fetchBaseQuery, retry } from '@reduxjs/toolkit/query/react';
+import { getToken } from '../../services/cookies';
 
 export const ApiEcommerce = createApi({
   reducerPath: "ecommerce",
@@ -37,8 +37,37 @@ export const ApiEcommerce = createApi({
         method: "get",
       }),
     }),
+    postProduct: builder.mutation({
+      query: (payload) => ({
+        url: `/products`,
+        method: "post",
+        body: payload
+      })
+    }),
+    deleteProduct: builder.mutation({
+      query: (id) => ({
+        url: `/products/${id}`,
+        method: "delete",
+      }),
+      invalidatesTag:["refresh"]
+    }),
+    putProduct: builder.mutation({
+      query: ({id,payload}) => ({
+        url: `/products/${id}`,
+        method: "put",
+        body: payload
+      }),
+      invalidatesTag:["refresh"]
+    }),
+    	getAllMembresies: builder.query({
+			query: () => '/membresies',
+		}),
+		getUserProfile: builder.query({
+			query: () => '/users/profile',
+		}),
   }),
 });
 
-export const { useGetAllProductsQuery, useGetFilteredByCategoryQuery, useGetProductByIdQuery } =
+export const { useGetAllProductsQuery, useGetFilteredByCategoryQuery, useGetProductByIdQuery, usePostProductMutation, useDeleteProductMutation, usePutProductMutation,useGetAllMembresiesQuery,
+	useGetUserProfileQuery, } =
   ApiEcommerce;

@@ -5,6 +5,8 @@ import NavBar from '../NavBar/NavBar';
 import Loading from '../Loading/Loading';
 import Calendarli from './Calendarli';
 import { useGetAllClassesQuery } from '../../redux/query/api';
+import { Button } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 export default function Calendar() {
 
@@ -28,6 +30,26 @@ export default function Calendar() {
 				<div>
 					<h2 className={styles.tittle}>Calendario</h2>
 					<hr className={styles.divisionline}></hr>
+					<Link to="/calendario/crear" >
+						<Button sx={{
+							paddingRight: '25px',
+							paddingLeft: '25px',
+							marginBottom: '10px',
+							marginRight: '0px',
+							marginTop: '10px',
+							width: 150,
+							color: 'white',
+							borderRadius: '6px',
+							background: 'var(--primary-color)',
+							alignItems: 'center',
+							'&:hover': {
+								backgroundColor: '#5151519c',
+								transition: '1s',
+							},
+						}}>
+							Crear
+						</Button>
+					</Link>
 				</div>
 
 				<div className={styles.calendar}>
@@ -35,7 +57,6 @@ export default function Calendar() {
 						<ul className={styles.weeklyByhour}>
 							{classes?.map((value, i) => (
 								<Calendarli
-
 									key={i}
 									name={value.name}
 									hour={value.hour}
