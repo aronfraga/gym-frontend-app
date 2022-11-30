@@ -128,6 +128,13 @@ export const ApiQuery = createApi({
       keepUnusedDataFor: 0,
       invalidatesTags: ["Img"],
     }),
+    setNewRole: builder.mutation({
+      query: (payload) => ({
+        url: `/users?idUser=${payload.idUser}&newRole=${payload.newRole}`,
+        method: "PATCH",
+      }),
+      keepUnusedDataFor: 0,
+    }),
     //************************************** */
     //************** DELETE ******************* */
     //************************************** */
@@ -181,4 +188,5 @@ export const {
   useGetAllStaffQuery,
   useAddClassMutation,
   useDeleteClassesMutation,
+  useSetNewRoleMutation,
 } = ApiQuery;
