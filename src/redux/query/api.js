@@ -17,7 +17,7 @@ export const ApiQuery = createApi({
   ),
   keepUnusedDataFor: 30,
 
-  
+
 
   tagTypes: ["Borrar"],
 
@@ -40,7 +40,7 @@ export const ApiQuery = createApi({
       query: (data) => ({
         url: "/products/filter/admin ",
         method: "post",
-        body: { filters: {year: data} },
+        body: { filters: { year: data } },
       }),
     }),
 
@@ -58,7 +58,7 @@ export const ApiQuery = createApi({
 
     getAllClasses: builder.query({
       query: () => "/classes",
-      
+
     }),
 
     getAllUsers: builder.query({
@@ -72,6 +72,12 @@ export const ApiQuery = createApi({
     getMuscles: builder.query({
       query: () => "/muscles",
     }),
+
+    getAllFeedbacks: builder.query({
+      query: () => "/feedbacks",
+    }),
+
+
     //************************************** */
     //********* P O S T ' S **************** */
     //************************************** */
@@ -142,7 +148,7 @@ export const ApiQuery = createApi({
           method: "DELETE",
         };
       },
-      
+
     }),
   }),
 });
@@ -162,7 +168,7 @@ export const {
   usePutClassesMutation,
 
   useDeleteRoutinesMutation,
-
+  useGetAllFeedbacksQuery,
   useAddFeedbackMutation,
   useGetAllStaffQuery,
   useAddClassMutation,
