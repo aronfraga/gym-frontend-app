@@ -14,6 +14,8 @@ import Shopping from './components/Shopping/Shopping';
 import Calendar from './components/Calendar/Calendar';
 import Dashboard from './components/Dashboard/Dashboard';
 import ProductsDetail from './components/ProductsDetail/ProductsDetail';
+import FormProducts from './components/FormProducts/FormProducts';
+import EditProduct from './components/FormProducts/EditProduct';
 import FormCalendar from './components/Calendar/FormCalendar';
 import Profile from './components/Profile/Profile';
 
@@ -39,6 +41,8 @@ function App() {
 				<Route path='/admdashboard' element={<Dashboard />} />
 				<Route path='/feedback' element={<FeedBack />} />
 				<Route path='/planes' element={<Planes />} />
+				<Route path='/admdashboard/products/:id' element={<EditProduct />} />
+				<Route path='/admdashboard/products' element={<FormProducts />} />
 				<Route path='/perfil' element={<Profile />} />
 			</Routes>
 		</BrowserRouter>

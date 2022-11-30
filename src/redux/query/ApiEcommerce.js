@@ -37,8 +37,30 @@ export const ApiEcommerce = createApi({
         method: "get",
       }),
     }),
+    postProduct: builder.mutation({
+      query: (payload) => ({
+        url: `/products`,
+        method: "post",
+        body: payload
+      })
+    }),
+    deleteProduct: builder.mutation({
+      query: (id) => ({
+        url: `/products/${id}`,
+        method: "delete",
+      }),
+      invalidatesTag:["refresh"]
+    }),
+    putProduct: builder.mutation({
+      query: ({id,payload}) => ({
+        url: `/products/${id}`,
+        method: "put",
+        body: payload
+      }),
+      invalidatesTag:["refresh"]
+    }),
   }),
 });
 
-export const { useGetAllProductsQuery, useGetFilteredByCategoryQuery, useGetProductByIdQuery } =
+export const { useGetAllProductsQuery, useGetFilteredByCategoryQuery, useGetProductByIdQuery, usePostProductMutation, useDeleteProductMutation, usePutProductMutation } =
   ApiEcommerce;
