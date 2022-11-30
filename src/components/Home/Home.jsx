@@ -20,6 +20,8 @@ const Home = () => {
   const { tokenIsValid } = useSelector((state) => state.tokenIsValid);
   const { alertDelivery } = useSelector((state) => state.alertDelivery);
 
+  console.log(alertDelivery)
+
   useEffect(() => {
     if (isAuthenticated) {
       if (!getToken() && tokenIsValid) {
@@ -34,7 +36,7 @@ const Home = () => {
       if (!tokenIsValid) logout();
     }
     if(alertDelivery) return handlerAlertSuccess();
-  }, [dispatch, isAuthenticated, tokenIsValid]);
+  }, [dispatch, isAuthenticated, tokenIsValid, alertDelivery]);
 
   const handlerAlertSuccess = () => {
 		toast.success('¡La compra se realizo con exito!', {
