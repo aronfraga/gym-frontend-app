@@ -23,6 +23,7 @@ const Routine = ({
   category,
   imgUrl,
   favFilter,
+  role,
 }) => {
   const [addToFavorite] = useSetFavoritesMutation();
   const [deleteRoutines] = useDeleteRoutinesMutation();
@@ -103,9 +104,13 @@ const Routine = ({
       <div className={style.iconDelete}>
         <IconButton
           onClick={handlerDelete}
-          sx={{
-            color: "var(--red-color)",
-          }}
+          sx={
+            role === "Admin" || role === "Staff"
+              ? {
+                  color: "var(--red-color)",
+                }
+              : { display: "none" }
+          }
         >
           <DeleteIcon />
         </IconButton>

@@ -1,64 +1,65 @@
-import React from 'react';
-import { seterItem } from '../../redux/actions/defaultAction';
-import { useDispatch } from 'react-redux';
-import { styled } from '@mui/material/styles';
-import Card from '@mui/material/Card';
-import CardMedia from '@mui/material/CardMedia';
-import CardActions from '@mui/material/CardActions';
-import { CardActionArea } from '@mui/material';
-import Collapse from '@mui/material/Collapse';
-import IconButton from '@mui/material/IconButton';
-import DeleteIcon from '@mui/icons-material/Delete';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { useState } from 'react';
-import style from './ProductCard.module.css';
-import { Link } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
+import React from "react";
+import { seterItem } from "../../redux/actions/defaultAction";
+import { useDispatch } from "react-redux";
+import { styled } from "@mui/material/styles";
+import Card from "@mui/material/Card";
+import CardMedia from "@mui/material/CardMedia";
+import CardActions from "@mui/material/CardActions";
+import { CardActionArea } from "@mui/material";
+import Collapse from "@mui/material/Collapse";
+import IconButton from "@mui/material/IconButton";
+import DeleteIcon from "@mui/icons-material/Delete";
+import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { useState } from "react";
+import style from "./ProductCard.module.css";
+import { Link } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
 
 const ExpandMore = styled((props) => {
-	const { expand, ...other } = props;
-	return <IconButton {...other} />;
+  const { expand, ...other } = props;
+  return <IconButton {...other} />;
 })(({ theme, expand }) => ({
-	transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
-	marginLeft: 'auto',
-	transition: theme.transitions.create('transform', {
-		duration: theme.transitions.duration.shortest,
-	}),
+  transform: !expand ? "rotate(0deg)" : "rotate(180deg)",
+  marginLeft: "auto",
+  transition: theme.transitions.create("transform", {
+    duration: theme.transitions.duration.shortest,
+  }),
 }));
 
 const ProductCard = ({
-	id,
-	title,
-	unit_price,
-	description,
-	picture_url,
-	stock,
-	quantity,
-	render,
-	handlerAlertSuccess,
-	handlerAlertError,
+  id,
+  title,
+  unit_price,
+  description,
+  picture_url,
+  stock,
+  quantity,
+  render,
+  handlerAlertSuccess,
+  handlerAlertError,
+  role,
 }) => {
-	const [expanded, setExpanded] = useState(false);
-	const dispatch = useDispatch();
-	const handleExpandClick = () => {
-		setExpanded(!expanded);
-	};
+  const [expanded, setExpanded] = useState(false);
+  const dispatch = useDispatch();
+  const handleExpandClick = () => {
+    setExpanded(!expanded);
+  };
 
-	const handlerAlertStockFull = () => {
-		toast.error('¡No hay stock suficiente!', {
-			position: 'bottom-left',
-			autoClose: 3000,
-			hideProgressBar: false,
-			closeOnClick: true,
-			pauseOnHover: true,
-			draggable: true,
-			progress: undefined,
-			theme: 'colored',
-		});
-	};
+  const handlerAlertStockFull = () => {
+    toast.error("¡No hay stock suficiente!", {
+      position: "bottom-left",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
+  };
 
 	const handlerSaveInCheckOut = (event) => {
 		event.preventDefault();
