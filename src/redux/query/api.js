@@ -16,7 +16,7 @@ export const ApiQuery = createApi({
     { maxRetries: 1 }
   ),
   keepUnusedDataFor: 30,
-  tagTypes: ["Borrar"],
+  tagTypes: ["Borrar", "Img"],
   endpoints: (builder) => ({
     //************************************** */
     //********* G E T ' S ****************** */
@@ -58,6 +58,7 @@ export const ApiQuery = createApi({
 
     getAllUsers: builder.query({
       query: () => "/users",
+      providesTags: ["Img"]
     }),
 
     getCategory: builder.query({
@@ -99,6 +100,17 @@ export const ApiQuery = createApi({
       keepUnusedDataFor: 0,
     }),
 
+    setNewImg: builder.mutation({
+      query: (payload) => ({
+        url: `/users`,
+        method: "PATCH",
+        body: {
+          "newImage": payload
+        }
+      }),
+      keepUnusedDataFor: 0,
+      invalidatesTags: ["Img"],
+    }),
     //************************************** */
     //************** DELETE ******************* */
     //************************************** */
@@ -124,6 +136,7 @@ export const {
   useGetMusclesQuery,
   useAddNewRoutinesMutation,
   useSetFavoritesMutation,
+  useSetNewImgMutation,
   useDeleteRoutinesMutation,
   useAddFeedbackMutation,
   useGetAllStaffQuery,
