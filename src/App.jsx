@@ -15,6 +15,7 @@ import Calendar from './components/Calendar/Calendar';
 import Dashboard from './components/Dashboard/Dashboard';
 import ProductsDetail from './components/ProductsDetail/ProductsDetail';
 import Profile from './components/Profile/Profile';
+import SelectPlan from './components/SelectPlan/SelectPlan';
 
 function App() {
 	return (
@@ -35,7 +36,7 @@ function App() {
 				<Route path='/calendario' element={<Calendar />} />
 				<Route path='/admdashboard' element={<Dashboard />} />
 				<Route path='/feedback' element={<FeedBack />} />
-				<Route path='/planes' element={<Planes />} />
+				<Route path='/planes' element={<SelectPlan />} />
 				<Route path='/perfil' element={<Profile />} />
 			</Routes>
 		</BrowserRouter>
