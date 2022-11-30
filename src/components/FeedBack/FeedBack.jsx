@@ -44,7 +44,7 @@ const labels = {
 	5: '',
 };
 
-const dataGym = ['Intalaciones', 'Maquinas', 'Servicios', 'Staff', 'Otros...'];
+const dataGym = ['Instalaciones', 'Maquinas', 'Servicios', 'Staff', 'Otros...'];
 
 
 function getStyles(name, infoGym, theme) {

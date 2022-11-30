@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./components/Home/Home";
@@ -18,6 +19,9 @@ import Profile from "./components/Profile/Profile";
 import { useAuth0 } from "@auth0/auth0-react";
 import { getToken } from "./services/cookies";
 import { ProtectedRoute } from "./components/ProtectedRoute";
+import FormProducts from './components/FormProducts/FormProducts';
+import EditProduct from './components/FormProducts/EditProduct';
+import FormCalendar from './components/Calendar/FormCalendar';
 
 function App() {
   const { isAuthenticated } = useAuth0();
@@ -28,7 +32,6 @@ function App() {
       else setRole("");
     }
   }, [isAuthenticated, getToken()]);
-  console.log(role);
   return (
     <BrowserRouter>
       <Routes>
@@ -48,6 +51,9 @@ function App() {
         <Route path="/feedback" element={<FeedBack />} />
         <Route path="/planes" element={<Planes />} />
         <Route path="/perfil" element={<Profile />} />
+        <Route path='/admdashboard/products/:id' element={<EditProduct />} />
+				<Route path='/admdashboard/products' element={<FormProducts />} />
+        <Route path='/calendario/crear' element={<FormCalendar />} />
         {/* </Route> */}
         {/* <Route
             element={
@@ -72,6 +78,7 @@ function App() {
       </Routes>
     </BrowserRouter>
   );
+
 }
 
 export default App;
