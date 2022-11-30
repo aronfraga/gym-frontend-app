@@ -1,21 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Rating } from '@mui/material';
-import { linkinimgurl } from '../Footer/Helpers';
-import Button from '@mui/material/Button';
 import Style from './CardStaff.module.css';
-import Ratingbystars from '../Ratingbystars/Ratingbystars';
 
-const CardStaff = ({ name, linkedin, rating, img, mail }) => {
-	const [isShown, setIsShown] = useState(false);
-
-	const handlerbutton = (event) => {
-		setIsShown((current) => !current);
-	};
+const CardStaff = ({ name, rating, img, mail }) => {
 
 	return (
 		<div className={Style.mainwrapper}>
@@ -30,9 +21,6 @@ const CardStaff = ({ name, linkedin, rating, img, mail }) => {
 					>
 						{name}
 						<Typography gutterBottom variant='h6' component='div'>
-							<a href={`${linkedin}`} target='_blank' rel='noreferrer'>
-								<img src={linkinimgurl} alt='img' width='30px' height='30px' />
-							</a>
 							<Rating
 								name='read-only'
 								value={rating}
@@ -41,23 +29,18 @@ const CardStaff = ({ name, linkedin, rating, img, mail }) => {
 							/>
 						</Typography>
 					</Typography>
-					<Typography
+					{/* <Typography
 						variant='body2'
 						color='text.secondary'
 						sx={{ color: '#2d2d2d' }}
 					>
 						Lizards are a widespread group of squamate reptiles, with over 6,000
 						species, ranging across all continents except Antarctica.
-					</Typography>
+					</Typography> */}
 					<Typography variant='body2' sx={{ color: '#42428c' }}>
-						Contact: {`${mail}`}
+						E-mail: {`${mail}`}
 					</Typography>
 				</CardContent>
-
-				{/* <CardActions>
-            <Button onClick={handlerbutton} size="small">Rate Staff</Button>
-            {isShown && <Ratingbystars/>}
-            </CardActions> */}
 			</Card>
 		</div>
 	);

@@ -15,6 +15,8 @@ import Calendar from './components/Calendar/Calendar';
 import Dashboard from './components/Dashboard/Dashboard';
 import ProductsDetail from './components/ProductsDetail/ProductsDetail';
 import FormCalendar from './components/Calendar/FormCalendar';
+import Profile from './components/Profile/Profile';
+
 
 function App() {
 	return (
@@ -37,6 +39,7 @@ function App() {
 				<Route path='/admdashboard' element={<Dashboard />} />
 				<Route path='/feedback' element={<FeedBack />} />
 				<Route path='/planes' element={<Planes />} />
+				<Route path='/perfil' element={<Profile />} />
 			</Routes>
 		</BrowserRouter>
 	);

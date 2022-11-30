@@ -1,6 +1,6 @@
 import React from 'react';
 import { seterItem } from '../../redux/actions/defaultAction';
-import { useDispatch } from 'react-redux';
+import { useDispatch } from "react-redux";
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import style from './ProductsInCar.module.css';
@@ -19,6 +19,7 @@ const ProductsInCar = ({
 	handlerAlertStock0,
 	handlerAlertStockFull,
 }) => {
+	
 	const dispatch = useDispatch();
 
 	const item = {
@@ -36,7 +37,7 @@ const ProductsInCar = ({
 		localStorage.removeItem(`item_${title}`);
 		dispatch(seterItem(localStorage));
 		render(`item_${title}`);
-	}
+	} 
 
 	return (
 		<div className={style.mainContainer}>
