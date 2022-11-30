@@ -16,8 +16,11 @@ import StarIcon from "@mui/icons-material/Star";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import { useFilter } from "./FiltersContex";
 import { useSelector } from "react-redux";
+import { getToken } from "../../services/cookies";
+import { Link } from "react-router-dom";
 
 const Routines = () => {
+  const role = getToken().userRole;
   const { routinesFilters, setRoutinesFilters } = useFilter();
   const [input, setInput] = useState({
     muscles: [],
@@ -246,19 +249,24 @@ const Routines = () => {
               <h1 className={style4.title}>Rutinas</h1>
               {/* <BtnFilter /> */}
               <div className={style3.mainContainer}>
-                <Button
-                  variant="contained"
-                  href="/rutinas/crear"
-                  sx={{
-                    background: "#0d0d6b",
-                    "&:hover": {
-                      backgroundColor: "#62629f",
-                      transition: "0.4s",
-                    },
-                  }}
-                >
-                  Nueva Rutina
-                </Button>
+                <Link to="/rutinas/crear" style={{ textDecoration: "none" }}>
+                  <Button
+                    variant="contained"
+                    sx={
+                      role === "Admin" || role === "Staff"
+                        ? {
+                            background: "#0d0d6b",
+                            "&:hover": {
+                              backgroundColor: "#62629f",
+                              transition: "0.4s",
+                            },
+                          }
+                        : { display: "none" }
+                    }
+                  >
+                    Nueva Rutina
+                  </Button>
+                </Link>
                 <Button
                   variant="contained"
                   sx={{
@@ -287,7 +295,11 @@ const Routines = () => {
             <hr />
           </div>
           {success && isSuccess && (
-            <AllRoutines routines={data} favFilter={input.favourite} />
+            <AllRoutines
+              routines={data}
+              favFilter={input.favourite}
+              role={role}
+            />
           )}
         </div>
       </div>
