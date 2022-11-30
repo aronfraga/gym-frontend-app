@@ -5,6 +5,12 @@
 	transition: all 0.4s ease-in-out;
 }
 
+.PhotoandEdit{
+	display: flex;
+	justify-content: center;
+    flex-direction: column;
+}
+
 .PhotoContainer{
     position: relative;
 	display: flex;
@@ -17,7 +23,7 @@
 }
 
 .InfoProfile{
-
+	background-color: white;
 }
 
 .ProfileWrapper{
