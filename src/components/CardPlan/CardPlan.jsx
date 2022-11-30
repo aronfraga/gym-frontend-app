@@ -24,7 +24,7 @@ const CardPLan = ({
 		unit_price: price,
 		quantity: 1,
 	};
-	console.log(id)
+
 	const handlerClickBuyPlan = () => {
 		const checkOut = {
 			items: [itemCheckOut],
