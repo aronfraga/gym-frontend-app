@@ -1,5 +1,5 @@
-import { createApi, fetchBaseQuery, retry } from "@reduxjs/toolkit/query/react";
-import { getToken } from "../../services/cookies";
+import { createApi, fetchBaseQuery, retry } from '@reduxjs/toolkit/query/react';
+import { getToken } from '../../services/cookies';
 
 export const ApiEcommerce = createApi({
   reducerPath: "ecommerce",
@@ -59,8 +59,15 @@ export const ApiEcommerce = createApi({
       }),
       invalidatesTag:["refresh"]
     }),
+    	getAllMembresies: builder.query({
+			query: () => '/membresies',
+		}),
+		getUserProfile: builder.query({
+			query: () => '/users/profile',
+		}),
   }),
 });
 
-export const { useGetAllProductsQuery, useGetFilteredByCategoryQuery, useGetProductByIdQuery, usePostProductMutation, useDeleteProductMutation, usePutProductMutation } =
+export const { useGetAllProductsQuery, useGetFilteredByCategoryQuery, useGetProductByIdQuery, usePostProductMutation, useDeleteProductMutation, usePutProductMutation,useGetAllMembresiesQuery,
+	useGetUserProfileQuery, } =
   ApiEcommerce;

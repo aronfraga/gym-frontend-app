@@ -61,143 +61,144 @@ const ProductCard = ({
     });
   };
 
-  const handlerSaveInCheckOut = (event) => {
-    event.preventDefault();
-    if (stock === 0) return handlerAlertStockFull();
-    if (!localStorage.getItem(`item_${title}`)) {
-      localStorage.setItem(
-        `item_${title}`,
-        JSON.stringify({
-          id: id,
-          title: title,
-          unit_price: unit_price,
-          description: description,
-          picture_url: picture_url,
-          stock: stock,
-          quantity: quantity,
-        })
-      );
-      dispatch(seterItem(localStorage));
-      render(`item_${title}`);
-      handlerAlertSuccess();
-    } else {
-      handlerAlertError();
-    }
-  };
+	const handlerSaveInCheckOut = (event) => {
+		event.preventDefault();
+		if (stock === 0) return handlerAlertStockFull();
+		if (!localStorage.getItem(`item_${title}`)) {
+			localStorage.setItem(
+				`item_${title}`,
+				JSON.stringify({
+					id: id,
+					title: title,
+					unit_price: unit_price,
+					description: description,
+					picture_url: picture_url,
+					stock: stock,
+					quantity: quantity,
+				})
+			);
+			dispatch(seterItem(localStorage));
+			render(`item_${title}`);
+			handlerAlertSuccess();
+		} else {
+			handlerAlertError();
+		}
+	};
 
-  return (
-    <div>
-      <Card
-        className={style.cardProduct}
-        sx={{
-          width: 250,
-          height: "fit-content",
-          position: "relative",
-          transition: "all 0.2s ease-out",
-        }}
-      >
-        <CardActionArea>
-          <Link to={`/tienda/producto/${id}`}>
-            <CardMedia
-              component="img"
-              image={picture_url}
-              alt="Paella dish"
-              sx={{ maxHeight: "200px", margin: "0px auto", width: "auto" }}
-            />
-            <hr className={style.line} />
-          </Link>
-        </CardActionArea>
-        <div className={style.delete}>
-          <IconButton
-            // onClick={handlerClickBack}
-            sx={
-              role === "Admin"
-                ? {
-                    color: "var(--red-color)",
-                  }
-                : { display: "none" }
-            }
-          >
-            <DeleteIcon />
-          </IconButton>
-        </div>
-        <div className={style.priceContainer}>
-          <h1>$ {unit_price}</h1>
-          <CardActions sx={{ padding: "0px" }}>
-            <Button
-              onClick={(event) => handlerSaveInCheckOut(event)}
-              variant="outlined"
-              startIcon={<ShoppingCartIcon />}
-              sx={{
-                padding: "5px 10px",
-                fontSize: "0.7rem",
-                "& .css-1d6wzja-MuiButton-startIcon": {
-                  marginRight: "6px",
-                  marginLeft: "0px",
-                },
-                "& .css-4tfxnd-MuiSvgIcon-root": {
-                  fontSize: "18px",
-                },
-                color: "var(--primary-color)",
-                borderColor: "var(--primary-color)",
-                "&:hover": {
-                  borderColor: "var(--primary-color)",
-                  backgroundColor: "var(--hover-outlined-button)",
-                  transition: "0.4s",
-                },
-              }}
-            >
-              Agregar
-            </Button>
-          </CardActions>
-        </div>
-        <div className={style.nameContainer}>
-          <h2>{title}</h2>
-          <CardActions sx={{ padding: "0px" }}>
-            <ExpandMore
-              sx={{
-                "&:hover": {
-                  borderColor: "var(--primary-color)",
-                  backgroundColor: "var(--hover-outlined-button)",
-                  transition: "0.4s ease-in-out",
-                },
-              }}
-              expand={expanded}
-              onClick={handleExpandClick}
-              aria-expanded={expanded}
-              aria-label="show more"
-            >
-              <ExpandMoreIcon
-                sx={{
-                  color: "var(--primary-color)",
-                }}
-              />
-            </ExpandMore>
-          </CardActions>
-        </div>
-        <Collapse in={expanded} timeout="auto" unmountOnExit>
-          <Typography
-            paragraph
-            sx={{ padding: "0px 12px 12px", marginBottom: "0px" }}
-          >
-            {description}
-          </Typography>
-        </Collapse>
-      </Card>
-      <ToastContainer
-        position="bottom-left"
-        autoClose={3000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover={false}
-        theme="colored"
-      />
-    </div>
-  );
+	const handlerClickBack = (event) => {
+		console.log(event.currentTarget.value); //usar event.currentTarget
+	};
+
+	return (
+		<div>
+			<Card
+				className={style.cardProduct}
+				sx={{
+					width: 250,
+					height: 'fit-content',
+					position: 'relative',
+					transition: 'all 0.2s ease-out',
+				}}
+			>
+				<CardActionArea>
+					<Link to={`/tienda/producto/${id}`}>
+						<CardMedia
+							component='img'
+							image={picture_url}
+							alt='Paella dish'
+							sx={{ maxHeight: '200px', margin: '0px auto', width: 'auto' }}
+						/>
+						<hr className={style.line} />
+					</Link>
+				</CardActionArea>
+				<div className={style.delete}>
+					<IconButton
+						onClick={handlerClickBack}
+						value={'hola'}
+						sx={{
+							color: 'var(--red-color)',
+						}}
+					>
+						<DeleteIcon />
+					</IconButton>
+				</div>
+				<div className={style.priceContainer}>
+					<h1>$ {unit_price}</h1>
+					<CardActions sx={{ padding: '0px' }}>
+						<Button
+							onClick={(event) => handlerSaveInCheckOut(event)}
+							variant='outlined'
+							startIcon={<ShoppingCartIcon />}
+							sx={{
+								padding: '5px 10px',
+								fontSize: '0.7rem',
+								'& .css-1d6wzja-MuiButton-startIcon': {
+									marginRight: '6px',
+									marginLeft: '0px',
+								},
+								'& .css-4tfxnd-MuiSvgIcon-root': {
+									fontSize: '18px',
+								},
+								color: 'var(--primary-color)',
+								borderColor: 'var(--primary-color)',
+								'&:hover': {
+									borderColor: 'var(--primary-color)',
+									backgroundColor: 'var(--hover-outlined-button)',
+									transition: '0.4s',
+								},
+							}}
+						>
+							Agregar
+						</Button>
+					</CardActions>
+				</div>
+				<div className={style.nameContainer}>
+					<h2>{title}</h2>
+					<CardActions sx={{ padding: '0px' }}>
+						<ExpandMore
+							sx={{
+								'&:hover': {
+									borderColor: 'var(--primary-color)',
+									backgroundColor: 'var(--hover-outlined-button)',
+									transition: '0.4s ease-in-out',
+								},
+							}}
+							expand={expanded}
+							onClick={handleExpandClick}
+							aria-expanded={expanded}
+							aria-label='show more'
+						>
+							<ExpandMoreIcon
+								sx={{
+									color: 'var(--primary-color)',
+								}}
+							/>
+						</ExpandMore>
+					</CardActions>
+				</div>
+				<Collapse in={expanded} timeout='auto' unmountOnExit>
+					<Typography
+						paragraph
+						sx={{ padding: '0px 12px 12px', marginBottom: '0px' }}
+					>
+						{description}
+					</Typography>
+				</Collapse>
+			</Card>
+			<ToastContainer
+				position='bottom-left'
+				autoClose={3000}
+				hideProgressBar={false}
+				newestOnTop={false}
+				closeOnClick
+				rtl={false}
+				pauseOnFocusLoss
+				draggable
+				pauseOnHover={false}
+				theme='colored'
+			/>
+		</div>
+	);
 };
 
 export default ProductCard;

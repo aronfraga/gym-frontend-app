@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./components/Home/Home";
@@ -22,6 +21,8 @@ import { ProtectedRoute } from "./components/ProtectedRoute";
 import FormProducts from './components/FormProducts/FormProducts';
 import EditProduct from './components/FormProducts/EditProduct';
 import FormCalendar from './components/Calendar/FormCalendar';
+import Profile from './components/Profile/Profile';
+import SelectPlan from './components/SelectPlan/SelectPlan';
 
 function App() {
   const { isAuthenticated } = useAuth0();
