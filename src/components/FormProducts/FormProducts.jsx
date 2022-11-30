@@ -67,7 +67,7 @@ export default function FormProducts(){
 
         alert("Producto Creado");
         
-        navigate("/admdashboard");
+        navigate("/tienda");
       };
 
       const handleInputChange = function (e) {
@@ -84,11 +84,6 @@ export default function FormProducts(){
         });
       };
 
-      const handleDelete = async (e) => {
-        await deleteProduct(e.id)
-        window.location.reload();
-      }
-
       if (isLoading) return <Loading />;
     
 
@@ -96,7 +91,7 @@ export default function FormProducts(){
       <div>
       <br></br>
       <div>
-          <Link to="/admdashboard">
+          <Link to="/tienda">
             <button type="button">Back</button>
           </Link>
       </div>
@@ -192,14 +187,6 @@ export default function FormProducts(){
     
     </div>
 
-    {data.products?.map( (e) => {
-      return(
-      <div key={e.id}>
-        <p>Nombre: {e.title} - Precio: {e.unit_price} - Descripcion: {e.description} - Stock: {e.stock} - Categoria: {e.category} - Imagen: {e.imgUrl}</p>
-        <Link to={`/admdashboard/products/${e.id}`}><button>Editar</button></Link>
-        <button onClick={() => handleDelete(e)}>Eliminar</button>
-        </div>)
-    })}
   </div>
     )
 }
