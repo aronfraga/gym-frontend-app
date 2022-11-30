@@ -46,7 +46,7 @@ export const ApiQuery = createApi({
     }),
 
     getAllStaff: builder.query({
-      query: () => `/users?role=Admin`,
+      query: () => `/users?role=Staff`,
     }),
 
     getRoutinesById: builder.query({
@@ -55,7 +55,11 @@ export const ApiQuery = createApi({
 
     getAllClasses: builder.query({
       query: () => "/classes",
+      keepUnusedDataFor: 1
+    }),
 
+    getClassesById: builder.query({
+      query: (id) => `/classes/${id}`,
     }),
 
     getAllUsers: builder.query({
@@ -148,10 +152,10 @@ export const ApiQuery = createApi({
     }),
 
     putClasses: builder.mutation({
-      query({ payload, id }) {
+      query({ id, payload }) {
         return {
           url: `/classes/${id}`,
-          method: "PUT",
+          method: "put",
           body: payload,
         };
       },
@@ -182,6 +186,7 @@ export const {
   useSetFavoritesMutation,
   useSetNewImgMutation,
   usePutClassesMutation,
+  useGetClassesByIdQuery,
   useDeleteRoutinesMutation,
   useGetAllFeedbacksQuery,
   useAddFeedbackMutation,
