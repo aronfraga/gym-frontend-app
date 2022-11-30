@@ -13,6 +13,7 @@ import Login from "../Login/Login";
 import Planes from "../Planes/Planes";
 import PrevRoutines from "../PrevRoutines/PrevRoutines";
 import { PrevShop } from '../PrevShop/PrevShop';
+import { seterItem } from "../../redux/actions/defaultAction";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -33,8 +34,9 @@ const Home = () => {
       }
       if (!tokenIsValid) logout();
     }
+    dispatch(seterItem(localStorage));
     if(alertDelivery) return handlerAlertSuccess();
-  }, [dispatch, isAuthenticated, tokenIsValid]);
+  }, [dispatch, isAuthenticated, tokenIsValid, alertDelivery]);
 
   const handlerAlertSuccess = () => {
 		toast.success('¡La compra se realizo con exito!', {

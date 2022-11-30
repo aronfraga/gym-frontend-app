@@ -30,7 +30,7 @@ export default function Calendarli({ name, hour, day, imgUrl, staff }) {
                     color: 'var(--white-color)',
                     fontSize: '14px',
                     fontWeight: '500',
-                    position: 'relative',
+                    position: 'static',
                     alignItems: 'center',
                     justifyContent: 'center',
                     // border: '1px solid black',

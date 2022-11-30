@@ -56,13 +56,13 @@ const Shopping = () => {
 
 	function handlerCheckOutBuy(event) {
 		event.preventDefault();
-		if(itemCheckOut.length===0) return swal("¡El carrito esta vacio!");
+		if (itemCheckOut.length === 0) return swal('¡El carrito esta vacio!');
 		const checkOut = {
 			items: itemCheckOut,
 			auto_return: 'approved',
 			notification_url: 'https://www.success.com/',
 			back_urls: {
-				success: "https://app-gym-frontend.vercel.app/tienda",
+				success: 'http://127.0.0.1:5173/tienda',
 				failure: 'http://www.facebook.com/',
 				pending: 'http://www.pending.com/',
 			},
@@ -79,7 +79,7 @@ const Shopping = () => {
 
 	function handlerClearCheckOut(event) {
 		event.preventDefault();
-		if(itemCheckOut.length===0) return swal("¡El carrito esta vacio!");
+		if (itemCheckOut.length === 0) return swal('¡El carrito esta vacio!');
 		swal({
 			title: 'Estás seguro?',
 			text: 'Una vez vaciado, no podras recuperar tus articulos',
@@ -101,14 +101,13 @@ const Shopping = () => {
 		});
 	}
 
-
 	function handlerClickBack() {
 		navigate(-1);
+	}
 
 	function handlerRender() {
-		if(itemCheckOut.length) {
-			return (
-			itemCheckOut.map((product) => (
+		if (itemCheckOut.length) {
+			return itemCheckOut.map((product) => (
 				<ProductsInCar
 					key={product.id}
 					id={product.id}
@@ -123,10 +122,9 @@ const Shopping = () => {
 					handlerAlertStock0={handlerAlertStock0}
 					handlerAlertStockFull={handlerAlertStockFull}
 				/>
-			))
-			)
+			));
 		} else {
-			return <h1>PERRO</h1>
+			return <h1>PERRO</h1>;
 		}
 	}
 
@@ -140,11 +138,6 @@ const Shopping = () => {
 							onClick={handlerClickBack}
 							sx={{
 								color: 'var(--black-color)',
-								'&:hover': {
-									borderColor: 'var(--black-color)',
-									backgroundColor: 'var(--hover-outlined-button)',
-									transition: '0.4s ease-in-out',
-								},
 							}}
 						>
 							<ArrowBackIcon />
@@ -212,5 +205,5 @@ const Shopping = () => {
 		</div>
 	);
 };
-};
+
 export default Shopping;

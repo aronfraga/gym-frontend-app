@@ -5,7 +5,14 @@ import style from './CardPlan.module.css';
 
 const tertiaryColor = '#62629f';
 
-const CardPLan = ({ monts, price, benefits1 }) => {
+const CardPLan = ({
+	monts,
+	price,
+	benefits1,
+	benefits2,
+	benefits3,
+	benefits4,
+}) => {
 	return (
 		<Card
 			className={style.cardPlan}
@@ -26,19 +33,17 @@ const CardPLan = ({ monts, price, benefits1 }) => {
 					</h2>
 
 					<div className={style.containerTextMons}>
-						<h2 className={style.textMons}>Plan de {monts} meses</h2>
+						<h2 className={style.textMons}>{monts}</h2>
 					</div>
 				</div>
 				<div className={style.containerBenefits}>
 					<h2>{benefits1}</h2>
 					<hr />
-					<h2>Beneficios por el plan</h2>
+					<h2>{benefits2}</h2>
 					<hr />
-					<h2>Beneficios por el plan</h2>
+					<h2>{benefits3}</h2>
 					<hr />
-					<h2>Beneficios por el plan</h2>
-					<hr />
-					<h2>Beneficios por el plan</h2>
+					<h2>{benefits4}</h2>
 				</div>
 			</CardActionArea>
 		</Card>

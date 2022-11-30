@@ -21,25 +21,27 @@ import {
 import style2 from "./Filters.module.css";
 import { useFilterShop } from "./FiltersShopContext";
 import { useNavigate } from "react-router-dom";
+import { getToken } from "../../services/cookies";
 
 const Shop = () => {
+  const role = getToken().userRole;
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [ renderShop, setRenderShop ] = useState("");
+  const [renderShop, setRenderShop] = useState("");
   const urlChanged = window.location.search;
   const urlParams = new URLSearchParams(urlChanged);
 
   const purchaseStatus = {
-    payed: urlParams.get("status")==="approved"?true:false,
+    payed: urlParams.get("status") === "approved" ? true : false,
     paymentMethod: urlParams.get("payment_type"),
     purchaseId: urlParams.get("preference_id"),
   };
-  
+
   useEffect(() => {
     dispatch(seterItem(localStorage));
-    if(purchaseStatus.payed) {
-      dispatch(setPurchase(purchaseStatus, localStorage));
-      navigate('/home');
+    if (purchaseStatus.payed) {
+      dispatch(setPurchase(purchaseStatus, localStorage))
+      .then(navigate("/home"));
     }
   }, []);
 
@@ -327,7 +329,11 @@ const Shop = () => {
         </div>
         <div className={style.cardsContainer}>
           <HeaderBtn title={"Tienda virtual"} />
-          <Products products={data.products} render={handerRenderShop} />
+          <Products
+            role={role}
+            products={data.products}
+            render={handerRenderShop}
+          />
         </div>
       </div>
       <div className={style.pagintionContainer}>
