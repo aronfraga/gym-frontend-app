@@ -17,6 +17,8 @@ import { useState } from "react";
 import style from "./ProductCard.module.css";
 import { Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
+import { useDeleteProductMutation } from "../../redux/query/ApiEcommerce";
+import ModeEditIcon from '@mui/icons-material/ModeEdit';
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -48,8 +50,23 @@ const ProductCard = ({
     setExpanded(!expanded);
   };
 
+  const [deleteProduct] = useDeleteProductMutation();
+
   const handlerAlertStockFull = () => {
     toast.error("¡No hay stock suficiente!", {
+      position: "bottom-left",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
+  };
+
+  const handlerDeleted = () => {
+    toast.error("¡Producto eliminado!", {
       position: "bottom-left",
       autoClose: 3000,
       hideProgressBar: false,
@@ -86,8 +103,18 @@ const ProductCard = ({
 	};
 
 	const handlerClickBack = (event) => {
-		console.log(event.currentTarget.value); //usar event.currentTarget
+		event.preventDefault();
+		deleteProduct(id)
+		handlerDeleted()
+		setTimeout(function(){
+			window.location.reload()
+		}, 2000) //usar event.currentTarget
+		
 	};
+
+	const handlerEdit = (event) => {
+		event.preventDefault();
+	}
 
 	return (
 		<div>
@@ -121,7 +148,15 @@ const ProductCard = ({
 					>
 						<DeleteIcon />
 					</IconButton>
-				</div>
+					<Link to={`/admdashboard/products/${id}`}>
+					<IconButton sx={{
+                                            color: 'var(--black-color)',
+                                        }}>
+                                            <ModeEditIcon />
+                                        </IconButton>
+					</Link>
+					</div>
+					
 				<div className={style.priceContainer}>
 					<h1>$ {unit_price}</h1>
 					<CardActions sx={{ padding: '0px' }}>

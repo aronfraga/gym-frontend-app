@@ -80,7 +80,7 @@ export default function EditProduct(){
 
         alert("Producto Modificado");
         
-        navigate("/admdashboard/products");
+        navigate("/tienda");
 
         window.location.reload();
       };
@@ -105,7 +105,7 @@ export default function EditProduct(){
       <div>
       <br></br>
       <div>
-          <Link to="/admdashboard">
+          <Link to="/tienda">
             <button type="button">Back</button>
           </Link>
       </div>
