@@ -21,18 +21,19 @@ import { ProtectedRoute } from "./components/ProtectedRoute";
 import FormProducts from './components/FormProducts/FormProducts';
 import EditProduct from './components/FormProducts/EditProduct';
 import FormCalendar from './components/Calendar/FormCalendar';
-import Profile from './components/Profile/Profile';
 import SelectPlan from './components/SelectPlan/SelectPlan';
 
 function App() {
   const { isAuthenticated } = useAuth0();
   const [role, setRole] = useState();
+
   useEffect(() => {
     if (isAuthenticated) {
       if (getToken()) setRole(getToken().userRole);
       else setRole("");
     }
   }, [isAuthenticated, getToken()]);
+
   return (
     <BrowserRouter>
       <Routes>
