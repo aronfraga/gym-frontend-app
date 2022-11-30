@@ -1,0 +1,13 @@
+.buttonsContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.titleContainer {
+  display: flex;
+}
+
+.dayContainer {
+  position: relative;
+  left: 250px;
+}
