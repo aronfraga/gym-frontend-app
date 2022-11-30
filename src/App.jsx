@@ -21,6 +21,7 @@ import { ProtectedRoute } from "./components/ProtectedRoute";
 import FormProducts from './components/FormProducts/FormProducts';
 import EditProduct from './components/FormProducts/EditProduct';
 import FormCalendar from './components/Calendar/FormCalendar';
+import GetFeedbacks from "./components/FeedBack/GetFeedbacks";
 import SelectPlan from './components/SelectPlan/SelectPlan';
 
 function App() {
@@ -54,7 +55,8 @@ function App() {
         <Route path="/planes" element={<Planes />} />
         <Route path="/perfil" element={<Profile />} />
         <Route path='/admdashboard/products/:id' element={<EditProduct />} />
-				<Route path='/admdashboard/products' element={<FormProducts />} />
+        <Route path='/admdashboard/products' element={<FormProducts />} />
+        <Route path='/admdashboard/feedbacks' element={<GetFeedbacks />} />
         <Route path='/calendario/crear' element={<FormCalendar />} />
         {/* </Route> */}
         {/* <Route

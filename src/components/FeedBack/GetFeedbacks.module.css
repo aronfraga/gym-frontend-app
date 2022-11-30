@@ -1,0 +1,55 @@
+.mainContainer {
+	max-width: 1440px;
+	/* height: 1000px; */
+	margin: 0px auto;
+	margin-top: 36px;
+	padding: 0px 36px;
+}
+
+.tittle {
+	margin: 0px;
+	font-size: 48px;
+	color: var(--secondary-color);
+}
+
+.divisionline {
+	margin: 0px;
+	border: 2px solid var(--secondary-color);
+	background-color: var(--secondary-color);
+	border-radius: 10px;
+	margin-bottom: 12px;
+}
+
+.cardsclasses{
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+    flex-wrap: wrap;
+    column-gap: 20px;
+    row-gap: 20px;
+   cursor: default; 
+}
+
+.cardPlan {
+	display: flex;
+	align-items: start;
+}
+
+.cardPlan:hover {
+	transition: all 0.2s ease-out;
+	transform: scale(1.02, 1.02);
+}
+
+.containerBenefits {
+	margin: 24px 0px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+    position: relative;  	
+}
+
+.containerBenefits h2 {
+	font-weight: 400;
+	color: #000000;
+	margin: 0px;
+}

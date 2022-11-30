@@ -93,7 +93,6 @@ export default function Calendar() {
 
 							<li className={styles.corner}></li>
 
-							{/* <li className={styles.lis}></li>
 							<li className={styles.lis}></li>
 							<li className={styles.lis}></li>
 							<li className={styles.lis}></li>
@@ -171,7 +170,8 @@ export default function Calendar() {
 							<li className={styles.lis}></li>
 							<li className={styles.lis}></li>
 							<li className={styles.lis}></li>
-							<li className={styles.lis}></li> */}
+							<li className={styles.lis}></li>
+							<li className={styles.lis}></li>
 						</ul>
 					</div>
 				</div>
