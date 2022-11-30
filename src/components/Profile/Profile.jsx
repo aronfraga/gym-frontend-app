@@ -52,7 +52,6 @@ const Profile = () => {
                     <p>Eres administrador, puedes acceder</p>
                     <p> a la siguiente funcionalidad</p>
                     <Link to={'/admdashboard'}><button>Dashboard</button></Link>
-                    <button>Crear Rutina</button>
                 </div>)
         }
     };
@@ -68,7 +67,6 @@ const Profile = () => {
     const handlerImage = async (e) => {
         e.preventDefault();
         const url = await uploadUserImage(e.target.files);
-        console.log(url);
         setInput({...input, ["imgUrl"]: url});
     };
 

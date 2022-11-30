@@ -35,7 +35,7 @@ export const ApiQuery = createApi({
 
     getSellProducts: builder.query({
       query: (data) => ({
-        url: "/products/filter/admin ",
+        url: "/membresies/admdashboard/monthsales ",
         method: "post",
         body: { filters: { year: data } },
       }),
