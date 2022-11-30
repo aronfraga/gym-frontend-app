@@ -1,0 +1,35 @@
+.cardsclasses{
+    width: fit-content;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    bottom: 0;
+    flex-wrap: wrap;
+    column-gap: 20px;
+    row-gap: 20px;
+    
+}
+
+.containerBenefits {
+	margin: 24px 0px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+    position: relative;   
+	
+}
+
+.containerBenefits h2 {
+	font-weight: 400;
+	color: #888888;
+	margin: 0px;
+}
+.cardPlan {
+	display: flex;
+	align-items: start;
+}
+
+.cardPlan:hover {
+	transition: all 0.2s ease-out;
+	transform: scale(1.02, 1.02);
+}

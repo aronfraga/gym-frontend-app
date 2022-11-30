@@ -11,7 +11,6 @@ import { Link } from 'react-router-dom';
 export default function Calendar() {
 
 	const { data: classes, isLoading } = useGetAllClassesQuery();
-	console.log(classes)
 	if (isLoading) {
 		return (
 			<>
@@ -28,15 +27,18 @@ export default function Calendar() {
 			<NavBar />
 			<div className={styles.mainContainer}>
 				<div>
-					<h2 className={styles.tittle}>Calendario</h2>
-					<hr className={styles.divisionline}></hr>
+					<h2 className={styles.tittle}>Agenda Semanal</h2>
 					<Link to="/calendario/crear" >
 						<Button sx={{
+							position: 'absolute',
+							top: 105,
+							right: 35,
 							paddingRight: '25px',
 							paddingLeft: '25px',
 							marginBottom: '10px',
 							marginRight: '0px',
 							marginTop: '10px',
+							fontSize: 13.5,
 							width: 150,
 							color: 'white',
 							borderRadius: '6px',
@@ -47,9 +49,11 @@ export default function Calendar() {
 								transition: '1s',
 							},
 						}}>
-							Crear
+							Crear Clases
 						</Button>
 					</Link>
+					<hr className={styles.divisionline}></hr>
+
 				</div>
 
 				<div className={styles.calendar}>
