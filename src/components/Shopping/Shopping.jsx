@@ -62,7 +62,7 @@ const Shopping = () => {
 			auto_return: 'approved',
 			notification_url: 'https://www.success.com/',
 			back_urls: {
-				success: 'https://appgymbackend-production.up.railway.app/tienda',
+				success: 'https://app-gym-frontend.vercel.app/tienda',
 				failure: 'http://www.facebook.com/',
 				pending: 'http://www.pending.com/',
 			},
