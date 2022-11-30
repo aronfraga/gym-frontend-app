@@ -17,6 +17,7 @@ const Profile = () => {
     const [isShown, setIsShown] = useState(false);
     const [input,setInput] = useState({ imgUrl: "" });
     const {data,isSuccess} =  useGetAllUsersQuery();
+    
     const mydata = () =>{
        if(isSuccess){
         let actual_user = data?.find(e => e.email === email);
