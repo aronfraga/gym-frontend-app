@@ -16,6 +16,7 @@ export const ApiQuery = createApi({
     { maxRetries: 1 }
   ),
   keepUnusedDataFor: 30,
+  tagTypes: ['DeleteClasses'],
   endpoints: (builder) => ({
     //************************************** */
     //********* G E T ' S ****************** */
@@ -44,6 +45,7 @@ export const ApiQuery = createApi({
 
     getAllClasses: builder.query({
       query: () => "/classes",
+      providesTags: ['DeleteClasses']
     }),
 
     getAllUsers: builder.query({
@@ -77,6 +79,15 @@ export const ApiQuery = createApi({
       }),
     }),
 
+    addClass: builder.mutation({
+      query: (newClass) => ({
+        url: "/classes",
+        method: "post",
+        body: newClass,
+      }),
+    }),
+
+
     //************************************** */
     //************ PATCH ******************* */
     //************************************** */
@@ -101,6 +112,26 @@ export const ApiQuery = createApi({
         };
       },
     }),
+
+    putClasses: builder.mutation({
+      query({ payload, id }) {
+        return {
+          url: `/classes/${id}`,
+          method: "PUT",
+          body: payload,
+        };
+      },
+    }),
+
+    deleteClasses: builder.mutation({
+      query(id) {
+        return {
+          url: `/classes/${id}`,
+          method: "DELETE",
+        };
+      },
+      invalidatesTags: ['DeleteClasses']
+    }),
   }),
 });
 
@@ -114,7 +145,9 @@ export const {
   useGetMusclesQuery,
   useAddNewRoutinesMutation,
   useSetFavoritesMutation,
-  usePutLoginMutation,
+  usePutClassesMutation,
   useAddFeedbackMutation,
   useGetAllStaffQuery,
+  useAddClassMutation,
+  useDeleteClassesMutation,
 } = ApiQuery;
