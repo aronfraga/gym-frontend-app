@@ -22,7 +22,7 @@ const Dashboard = () => {
         setState({ ...state, [property]: value });
     };
 
-    const { data } = useGetSellProductsQuery(state.year);
+    const { data, isLoading } = useGetSellProductsQuery(state.year);
 
     return (
         <div>
@@ -68,7 +68,7 @@ const Dashboard = () => {
                         <BarGraph mes={state.month}  año={state.year}/>
                     </div> */}
                     <div className={Style.ChartWrapper}>
-                        <LineGraph datos={data} año={state.year} />
+                        <LineGraph loading={isLoading} datos={data} año={state.year} />
                     </div>
                 </div>
                 <Link to='/admdashboard/roles'>
