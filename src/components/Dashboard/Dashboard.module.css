@@ -16,6 +16,16 @@
 	background-color: beige;
 	border-radius: 5px;
 	height: 450px;
+	border-radius: 10px;
+}
+
+.LineGraph{
+	height: 400px;
+	width: 400px;
+	padding-left: 5px;
+	padding-top: 5px;
+	background-color: beige;
+	border-radius: 10px;
 }
 
 .ChartWrapper {

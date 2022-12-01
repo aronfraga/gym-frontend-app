@@ -1,9 +1,13 @@
 import React, { useState } from "react";
-import { useGetSellProductsQuery } from "../../redux/query/api"
+import {    useGetSellProductsQuery, 
+            useGetSellMembresiesQuery,
+            useGetSellProductsMonthQuery} from "../../redux/query/api";
+import {useGetAllProductsQuery} from "../../redux/query/ApiEcommerce";
 import DoughnutGraph from "./DoughnutGraph";
 import PieGraph from "./PieGraph";
 import BarGraph from "./BarGraph";
 import LineGraph from "./LineGraph";
+import LineMembresies from "./LineMembresies";
 import Style from "./Dashboard.module.css";
 import NavBar from "../NavBar/NavBar";
 import { Button } from "@mui/material";
@@ -11,6 +15,7 @@ import { Link } from "react-router-dom";
 
 
 const Dashboard = () => {
+
     const [state, setState] = useState({
         year: 2022,
         month: 'Agosto',
@@ -22,8 +27,11 @@ const Dashboard = () => {
         setState({ ...state, [property]: value });
     };
 
-    const { data, isLoading } = useGetSellProductsQuery(state.year);
-
+    /* const { data: allproducts, isLoading: loadingAllPro} = useGetAllProductsQuery({data:{},page:0,size:5000});
+    const { data: monthlysales, isLoading: loadingMonthly} = useGetSellProductsMonthQuery(state.year); */
+    const { data: products, isLoading: loadingPro } = useGetSellProductsQuery(state.year);
+    const { data: membresies, isLoading: loadingMem} = useGetSellMembresiesQuery(state.year);
+    
     return (
         <div>
             <NavBar />
@@ -34,7 +42,7 @@ const Dashboard = () => {
             <div>
                 <p className={Style.subtittle}>Usa los selectores para ver distinta data</p>
                 <br></br>
-                <div className={Style.selectors}>
+                <div className={Style.selectors}>Año 
                     <select
                         name="year"
                         value={state.year}
@@ -49,6 +57,7 @@ const Dashboard = () => {
                         onChange={handlerChange}
                         >
                         <option hidden value="default">Mes</option>
+                        <option value="Junio">Junio</option>
                         <option value="Julio">Julio</option>
                         <option value="Agosto">Agosto</option>
                         <option value="Setiembre">Setiembre</option>
@@ -68,7 +77,10 @@ const Dashboard = () => {
                         <BarGraph mes={state.month}  año={state.year}/>
                     </div> */}
                     <div className={Style.ChartWrapper}>
-                        <LineGraph loading={isLoading} datos={data} año={state.year} />
+                        <LineGraph loading={loadingPro} datos={products} año={state.year} />
+                    </div>
+                    <div className={Style.ChartWrapper}>
+                        <LineMembresies loading={loadingMem} datos={membresies} año={state.year} />
                     </div>
                 </div>
                 <Link to='/admdashboard/roles'>
