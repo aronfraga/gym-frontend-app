@@ -1,3 +1,4 @@
+
 import React from 'react';
 import {
 	useGetAllUsersQuery,
@@ -48,7 +49,7 @@ export default function SwitchRoles() {
 		// setTimeout(function () {
 		// 	window.location.reload();
 		// }, 2000);
-		reload ? setReload(false) : setReload(true);
+		//reload ? setReload(false) : setReload(true);
 	};
 
 	console.log(reload);
