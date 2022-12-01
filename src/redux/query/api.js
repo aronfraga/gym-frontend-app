@@ -46,7 +46,7 @@ export const ApiQuery = createApi({
     }),
 
     getAllStaff: builder.query({
-      query: () => `/users?role=Admin`,
+      query: () => `/users?role=Staff`,
     }),
 
     getRoutinesById: builder.query({
@@ -55,12 +55,11 @@ export const ApiQuery = createApi({
 
     getAllClasses: builder.query({
       query: () => "/classes",
-
     }),
 
     getAllUsers: builder.query({
       query: () => "/users",
-      providesTags: ["Img"]
+      providesTags: ["Img"],
     }),
 
     getCategory: builder.query({
@@ -74,7 +73,6 @@ export const ApiQuery = createApi({
     getAllFeedbacks: builder.query({
       query: () => "/feedbacks",
     }),
-
 
     //************************************** */
     //********* P O S T ' S **************** */
@@ -104,7 +102,6 @@ export const ApiQuery = createApi({
       }),
     }),
 
-
     //************************************** */
     //************ PATCH ******************* */
     //************************************** */
@@ -122,8 +119,8 @@ export const ApiQuery = createApi({
         url: `/users`,
         method: "PATCH",
         body: {
-          "newImage": payload
-        }
+          newImage: payload,
+        },
       }),
       keepUnusedDataFor: 0,
       invalidatesTags: ["Img"],
@@ -164,7 +161,6 @@ export const ApiQuery = createApi({
           method: "DELETE",
         };
       },
-
     }),
   }),
 });
