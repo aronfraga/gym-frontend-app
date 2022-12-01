@@ -197,3 +197,19 @@ export const planToPay = (data) => {
 		return window.location.assign(`${response.data.init_point}`);
 	};
 };
+
+export const setNewPlan = (data) => {
+	return async (dispatch) => {
+		try {
+			const token = getToken().token;
+			//const response = await axios.put('http://localhost:3001/payment', data, {
+				await axios.put('https://appgymbackend-production.up.railway.app/subscription', data, {
+					headers: {
+						authorization: `Bearer ${token}`,
+					},
+				});
+		} catch (error) {
+			console.log(error);
+		}
+	}
+}
