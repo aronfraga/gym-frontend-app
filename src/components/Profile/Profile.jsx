@@ -15,6 +15,7 @@ import { Button } from '@mui/material';
 import { uploadUserImage } from './Helpers';
 import { useDispatch, useSelector } from 'react-redux';
 import { setNewPlan } from '../../redux/actions/defaultAction';
+import { ToastContainer, toast } from 'react-toastify';
 
 const Profile = () => {
 	const navigate = useNavigate();
@@ -46,6 +47,19 @@ const Profile = () => {
 		if (isLoading) return <p>Loading...</p>;
 		return <p>Tu plan vence el {fecha.toLocaleDateString()}</p>;
 	}
+
+	const handlerImgChanged = () => {
+		toast.success('¡Foto de perfil cambiada!', {
+			position: 'bottom-left',
+			autoClose: 3000,
+			hideProgressBar: false,
+			closeOnClick: true,
+			pauseOnHover: true,
+			draggable: true,
+			progress: undefined,
+			theme: 'colored',
+		});
+	};
 
 	function renderPlanExpired() {
 		if (isLoading) return <p>Loading...</p>;
@@ -131,7 +145,13 @@ const Profile = () => {
 	};
 
 	const handlerSaveButton = (event) => {
+		event.preventDefault()
 		setImg(input.imgUrl);
+		handlerImgChanged()
+		setTimeout(function(){
+			window.location.reload()
+		}, 1000);
+		
 	};
 
 	const handlerImage = async (e) => {
@@ -215,6 +235,18 @@ const Profile = () => {
 					</div>
 				</div>
 			</div>
+			<ToastContainer
+					position='bottom-left'
+					autoClose={3000}
+					hideProgressBar={false}
+					newestOnTop={false}
+					closeOnClick
+					rtl={false}
+					pauseOnFocusLoss
+					draggable
+					pauseOnHover={false}
+					theme='colored'
+				/>
 		</>
 	);
 };
