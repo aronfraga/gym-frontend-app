@@ -17,14 +17,14 @@ const CardPLan = ({
 	benefits4,
 }) => {
 	const dispatch = useDispatch();
-
+	
 	const itemCheckOut = {
 		id: id,
 		title: monts,
 		unit_price: price,
 		quantity: 1,
 	};
-
+  
 	const handlerClickBuyPlan = () => {
 		const checkOut = {
 			items: [itemCheckOut],

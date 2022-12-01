@@ -161,7 +161,6 @@ const ProductCard = ({
             </IconButton>
           </Link>
         </div>
-
         <div className={style.priceContainer}>
           <h1>$ {unit_price}</h1>
           <CardActions sx={{ padding: "0px" }}>
