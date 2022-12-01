@@ -61,6 +61,9 @@ const Facilities = () => {
 				swal('Poof! Hemos borrado la imagen seleccionada!', {
 					icon: 'success',
 				});
+				setTimeout(function () {
+					window.location.reload();
+				}, 1000);
 			} else {
 				swal('Tu imagen está a salvo!');
 			}

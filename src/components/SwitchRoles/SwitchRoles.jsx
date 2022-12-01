@@ -25,7 +25,7 @@ export default function SwitchRoles() {
 	if (isLoading) return <Loading />;
 
 	const handlerChanged = () => {
-		toast.error('¡Rol cambiado!', {
+		toast.success('¡Rol cambiado!', {
 			position: 'bottom-left',
 			autoClose: 3000,
 			hideProgressBar: false,
