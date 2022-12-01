@@ -1,16 +1,17 @@
-import React, { useState } from "react";
+import React from "react";
 import { useGetAllUsersQuery, useSetNewRoleMutation } from "../../redux/query/api";
 import { Link, useNavigate } from "react-router-dom";
-import { uploadImage } from "../FormRoutines/uploadImage.js";
 import Loading from '../Loading/Loading';
 import { ToastContainer, toast } from "react-toastify";
+import { Card, CardActionArea } from "@mui/material";
+import style from './SwitchRoles.module.css'
+import NavBar from "../NavBar/NavBar";
+import Button from "@mui/material/Button";
 
 
 export default function SwitchRoles(){
 
-    const navigate = useNavigate()
-
-    const {data,isLoading,isSuccess} = useGetAllUsersQuery();
+    const {data,isLoading} = useGetAllUsersQuery();
 
     const [setNewRole] = useSetNewRoleMutation()
 
@@ -32,14 +33,11 @@ export default function SwitchRoles(){
     const handleChangeRole = (event,id,role) => {
 
         event.preventDefault();
-
         const newRole = role === "Staff" ? "User" : "Staff"
-
         setNewRole({
             idUser: id,
             newRole: newRole
         })
-
         handlerChanged()
 		setTimeout(function(){
 			window.location.reload()
@@ -49,13 +47,52 @@ export default function SwitchRoles(){
 
     return (
       <div>
+        <NavBar />
+            <div className={style.mainContainer}>
+                <h2 className={style.tittle}>Usuarios</h2>
+                <hr className={style.divisionline}></hr>
+                <div className={style.cardsclasses} >
       {data?.map( (e,idx) => {
         return(
-        <div key={idx}>
-            <p>{e.name} - {e.email} - Role Actual: {e.role}</p> <button onClick={(event) => handleChangeRole(event,e.id,e.role)} hidden={e.role === "Admin"? true : false}>Cambiar role a {e.role === "Staff" ? "usuario" : "que tal"}</button>
-        </div>
+          <Card key={idx}
+                            className={style.cardPlan}
+                            sx={{
+                                display: 'flex',
+                                justifyContent: 'center',
+                                width: '100%',
+                                maxWidth: '400px',
+                                height: 'fit-content',
+                                border: '1px solid var(--tertiary-color) ',
+                                borderRadius: '10px',
+                                backgroundColor: 'white',
+                                transition: 'all 0.2s ease-out',
+                            }}
+                        >
+                            <div className={style.containerBenefits}>
+                                <h3>Nombre: {e.name}</h3>
+                                <h3>Email: {e.email}</h3>
+                                <h3>Role: {e.role}</h3>
+                                <Button
+                          onClick={(event) => handleChangeRole(event,e.id,e.role)}
+                        variant="contained"
+                        sx={
+                          e.role !== "Admin"? 
+                          {
+                            background: "#0d0d6b",
+                            "&:hover": {
+                            backgroundColor: "#62629f",
+                                transition: "0.4s",
+                            },
+                        }:
+                      {display:"none"}}
+                    >
+                        Cambiar role a {e.role === "Staff" ? "usuario" : "staff"}
+                    </Button>
+                            </div>
+                        </Card>
         )
       })}
+      </div>
       <ToastContainer
 				position='bottom-left'
 				autoClose={3000}
@@ -68,6 +105,7 @@ export default function SwitchRoles(){
 				pauseOnHover={false}
 				theme='colored'
 			/>
-  </div>
+      </div>
+    </div>
     )
 }
