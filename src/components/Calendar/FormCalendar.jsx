@@ -8,6 +8,7 @@ import FormControl from "@mui/material/FormControl";
 import swal from 'sweetalert';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
+import NavBar from "../NavBar/NavBar";
 import { TextField } from '@mui/material';
 import InputLabel from "@mui/material/InputLabel";
 import Button from "@mui/material/Button";
@@ -193,7 +194,7 @@ export default function FormCalendar() {
         swal({ title: "Hecho!", text: "Clase creada con exito", type: "success" }).then(
             (ok) => {
                 if (ok) {
-                    navigate("/calendario");
+                    navigate("/agenda");
                 }
             }
         );
@@ -245,7 +246,7 @@ export default function FormCalendar() {
 
     return (
         <>
-
+            <NavBar />
             <div className={style.mainContainer}>
                 <div className={style.mainContainerForm} >
                     <form onSubmit={HandleSubmit}>
@@ -379,7 +380,7 @@ export default function FormCalendar() {
                                     width: 150,
                                     color: 'white',
                                     borderRadius: '6px',
-                                    background: '#2779ff',
+                                    background: 'var(--primary-color)',
                                     alignItems: 'center',
                                     '&:hover': {
                                         backgroundColor: '#5151519c',
