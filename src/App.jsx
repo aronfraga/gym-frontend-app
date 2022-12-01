@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./components/Home/Home";
-import Planes from "./components/Planes/Planes";
 import PageNotFound from "./components/PageNotFound/PageNotFound";
 import Routines from "./components/Routines/Routines";
 import Staff from "./components/Staff/Staff";
@@ -34,9 +33,10 @@ function App() {
   useEffect(() => {
     if (isAuthenticated) {
       if (getToken()) setRole(getToken().userRole);
-      else setRole("");
+      else setRole("TimeOut");
+      if (role === "TimeOut") setRole("");
     }
-  }, [isAuthenticated, getToken()]);
+  }, [isAuthenticated, getToken(), role]);
   console.log(role);
   return (
     <BrowserRouter>
