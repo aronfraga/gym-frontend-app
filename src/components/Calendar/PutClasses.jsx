@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import style from './FormCalendar.module.css'
 import styles from './PutClasses.module.css'
+import NavBar from '../NavBar/NavBar';
 import Card from '@mui/material/Card';
 import { useNavigate } from "react-router-dom";
 import { useAddClassMutation, useGetAllStaffQuery, useGetAllClassesQuery, usePutClassesMutation, useDeleteClassesMutation, useGetClassesByIdQuery } from "../../redux/query/api";
@@ -45,16 +46,7 @@ const horas = [
     '23'
 ]
 
-const imagenes = [
-    "https://media.gettyimages.com/id/1292567082/es/foto/male-personal-trainer-sitting-on-weight-bench-after-training-client-finish-in-a-gym.jpg?s=2048x2048&w=gi&k=20&c=R9YVEJQyRcLTFX8sQsGpYwaOWzAcP1Z8D7iKv0Oxktc=",
-    "https://media.gettyimages.com/id/1265090289/es/foto/el-personal-que-usa-una-toallita-h%C3%BAmeda-y-un-desinfectante-azul-de-la-botella-para-limpiar-la.jpg?s=2048x2048&w=gi&k=20&c=PttbdoekEaLCLw0ADbi46TocS3xnu0coEnd-ikewXXk=",
-    "https://media.gettyimages.com/id/1319635095/es/foto/despu%C3%A9s-de-terminar-con-el-uso-de-equipos-de-ejercicio-en-el-gimnasio-moderno-el-atleta-y-el.jpg?s=2048x2048&w=gi&k=20&c=S_S2Q65ekxuy1mlmadVYawIm0VqABDTGlAh5mWdJKbo=",
-    "https://media.gettyimages.com/id/615883260/es/foto/dif%C3%ADcil-no-significa-imposible.jpg?s=1024x1024&w=gi&k=20&c=A4t-maeefZ_B0wDZH2AZxFaVW-cidudFpMCICIRByPI=",
-    "https://media.gettyimages.com/id/1311330212/es/foto/estoy-mejorando-d%C3%ADa-a-d%C3%ADa.jpg?s=1024x1024&w=gi&k=20&c=mv-7rC5VB8Ehy_8ucRs11jwhUDNRB_d_jXbMAe70vCw=",
-    "https://media.gettyimages.com/id/1084251084/es/foto/entrenamiento-personal-en-el-gimnasio.jpg?s=1024x1024&w=gi&k=20&c=aNQ7_4FwYLPd4RxFAO-_pWuOZDx1hGMYpQn9r1Rp8gk=",
-    "https://media.gettyimages.com/id/909416522/es/foto/hombre-mayor-activo-teniendo-fuerza-ejercicios-con-barra-en-un-gimnasio.jpg?s=1024x1024&w=gi&k=20&c=Ryxs9wzbVTy35mYc77vrZclg7GgccFO8fn2SRxQf13k=",
-    "https://media.gettyimages.com/id/1347836469/es/foto/foto-de-un-apuesto-hombre-maduro-de-pie-con-los-brazos-cruzados-despu%C3%A9s-de-su-entrenamiento-en.jpg?s=2048x2048&w=gi&k=20&c=RSR3O-mDycSua1jsu4ZnOimx4UDYa2px77xvA9feVn4=",
-]
+
 const days = [
     'mon',
     'tue',
@@ -62,16 +54,6 @@ const days = [
     'thu',
     'fri',
     'sat'
-]
-const staff = [
-    'Martin Galara',
-    'Agustin Reynoso',
-    'Manuel Casanueva',
-    'Jose Manrique',
-    'Alexsandro Gomez',
-    'Pablo Lospennato',
-    'Aron Fraga',
-    'Gaston Schmitz'
 ]
 
 
@@ -213,7 +195,7 @@ export default function PutClasses() {
         swal({ title: "Hecho!", text: "Cambio realizado con exito", type: "success" }).then(
             (ok) => {
                 if (ok) {
-                    navigate("/calendario");
+                    navigate("/agenda");
                 }
             }
         );
@@ -229,7 +211,7 @@ export default function PutClasses() {
 
     return (
         <>
-
+            <NavBar />
             <div className={style.mainContainer}>
                 <div className={style.mainContainerForm} >
                     <form onSubmit={HandleSubmit}>
@@ -336,7 +318,7 @@ export default function PutClasses() {
                                     width: 150,
                                     color: 'white',
                                     borderRadius: '6px',
-                                    background: '#2779ff',
+                                    background: 'var(--primary-color)',
                                     alignItems: 'center',
                                     '&:hover': {
                                         backgroundColor: '#5151519c',
@@ -385,7 +367,7 @@ export default function PutClasses() {
                                     width: 150,
                                     color: 'white',
                                     borderRadius: '6px',
-                                    background: '#2779ff',
+                                    background: 'var(--primary-color)',
                                     alignItems: 'center',
                                     '&:hover': {
                                         backgroundColor: '#5151519c',
@@ -399,14 +381,12 @@ export default function PutClasses() {
                 </div>
                 &nbsp;
 
-            </div>
-            <div className={styles.cardsclasses} >
-
                 <Card
                     className={styles.cardPlan}
                     sx={{
-                        width: '100%',
-                        maxWidth: '400px',
+                        width: 'fit-content',
+                        paddingRight: '25px',
+                        paddingLeft: '25px',
                         height: 'fit-content',
                         border: '1px solid var(--tertiary-color) ',
                         borderRadius: '10px',
@@ -417,12 +397,15 @@ export default function PutClasses() {
 
                     <div className={styles.containerBenefits}>
                         <h2>Clase: {getClassesById?.name}</h2>
-                        <h2>Dia: {getClassesById?.dia}</h2>
+                        <h2>Dia: {getClassesById?.day}</h2>
                         <h2>Horario: {getClassesById?.hour}</h2>
                     </div>
 
 
                 </Card>
+            </div>
+            <div className={styles.cardsclasses} >
+
             </div>
 
 

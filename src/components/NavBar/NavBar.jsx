@@ -24,7 +24,7 @@ const pages = [
 	'rutinas',
 	'instalaciones',
 	'staff',
-	'calendario',
+	'agenda',
 	'feedback',
 ];
 // const settings = [ 'tienda','seguimiento', 'clases',];
@@ -83,7 +83,9 @@ const NavBar = () => {
 				>
 					{/* <Link to={'/home'} style={{ textDecoration: 'none' }}> */}
 					<div className={styles.appGym}>
-						<img src={logo} alt='Logo' />
+						<Link to={'/home'} style={{ textDecoration: 'none' }}>
+							<img src={logo} alt='Logo' />
+						</Link>
 
 						<Box
 							sx={{

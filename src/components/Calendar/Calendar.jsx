@@ -26,13 +26,10 @@ export default function Calendar() {
 		<>
 			<NavBar />
 			<div className={styles.mainContainer}>
-				<div>
+				<div className={styles.barra} >
 					<h2 className={styles.tittle}>Agenda Semanal</h2>
-					<Link to="/calendario/crear" >
+					<Link style={{ textDecoration: 'none' }} to="/agenda/crear" >
 						<Button sx={{
-							position: 'absolute',
-							top: 105,
-							right: 35,
 							paddingRight: '25px',
 							paddingLeft: '25px',
 							marginBottom: '10px',
@@ -52,9 +49,9 @@ export default function Calendar() {
 							Crear Clases
 						</Button>
 					</Link>
-					<hr className={styles.divisionline}></hr>
 
 				</div>
+				<hr className={styles.divisionline}></hr>
 
 				<div className={styles.calendar}>
 					<div className={styles.container}>
