@@ -12,6 +12,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import swal from 'sweetalert';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
+import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantityLimits';
 
 const Shopping = () => {
 	let total = 0;
@@ -105,6 +106,10 @@ const Shopping = () => {
 		navigate(-1);
 	}
 
+	function handlerClickTienda() {
+		navigate('/tienda');
+	}
+
 	function handlerRender() {
 		if (itemCheckOut.length) {
 			return itemCheckOut.map((product) => (
@@ -124,7 +129,33 @@ const Shopping = () => {
 				/>
 			));
 		} else {
-			return <h1>PERRO</h1>;
+			return (
+				<>
+					<div className={style.emptyCart}>
+						<h1>¡Atención!</h1>
+						<ProductionQuantityLimitsIcon
+							sx={{ fontSize: 40, color: 'var(--secondary-color)' }}
+						/>
+						<h2>El carrito está vacío, ¡llenalo con productos!</h2>
+						<Button
+							onClick={handlerClickTienda}
+							variant='outlined'
+							sx={{
+								width: '300px',
+								color: 'var(--primary-color)',
+								borderColor: 'var(--primary-color)',
+								'&:hover': {
+									borderColor: 'var(--primary-color)',
+									backgroundColor: 'var(--hover-outlined-button)',
+									transition: '0.4s',
+								},
+							}}
+						>
+							Ir a la tienda
+						</Button>
+					</div>
+				</>
+			);
 		}
 	}
 
