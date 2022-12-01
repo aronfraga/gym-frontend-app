@@ -18,8 +18,10 @@ const Dashboard = () => {
 
     const [state, setState] = useState({
         year: 2022,
-        month: 'Agosto',
+        month: 12,
     });
+
+    
 
     const handlerChange = (event) => {
         const value = event.target.value;
@@ -31,6 +33,7 @@ const Dashboard = () => {
     const { data: monthlysales, isLoading: loadingMonthly} = useGetSellProductsMonthQuery(state.year); */
     const { data: products, isLoading: loadingPro } = useGetSellProductsQuery(state.year);
     const { data: membresies, isLoading: loadingMem} = useGetSellMembresiesQuery(state.year);
+    const { data: productsByMonth, isLoading: loadingInfo }  = useGetSellProductsMonthQuery(state)
     
     return (
         <div>
@@ -51,31 +54,37 @@ const Dashboard = () => {
                         <option>2021</option>
                         <option>2022</option>
                     </select>
-                    {/* <select 
-                        name="month" 
-                        value={state.month} 
-                        onChange={handlerChange}
-                        >
-                        <option hidden value="default">Mes</option>
-                        <option value="Junio">Junio</option>
-                        <option value="Julio">Julio</option>
-                        <option value="Agosto">Agosto</option>
-                        <option value="Setiembre">Setiembre</option>
-                        <option value="Octubre">Octubre</option>
-                        <option value="Noviembre">Noviembre</option>
-                        <option value="Diciembre">Diciembre</option>
-                    </select> */}
+                </div>
+                <div className={Style.selectors}>Mes 
+                    <select
+                        name="month"
+                        value={state.month}
+                        onChange={handlerChange}>
+                        <option hidden value="default">Año</option>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                        <option>7</option>
+                        <option>8</option>
+                        <option>9</option>
+                        <option>10</option>
+                        <option>11</option>
+                        <option>12</option>
+                    </select>
                 </div>
                 <div className={Style.AllChartsWrapper}>
                     {/* <div className={Style.ChartWrapper}>
                         <DoughnutGraph mes={state.month} año={state.year}/>
                     </div>
                     <div className={Style.ChartWrapper}>
-                        <PieGraph mes={state.month}  año={state.year}/>
-                    </div>
-                    <div className={Style.ChartWrapper}>
                         <BarGraph mes={state.month}  año={state.year}/>
                     </div> */}
+                     <div className={Style.ChartWrapper}>
+                        <PieGraph loading={loadingInfo} info={productsByMonth}/>
+                    </div>
                     <div className={Style.ChartWrapper}>
                         <LineGraph loading={loadingPro} datos={products} año={state.year} />
                     </div>
