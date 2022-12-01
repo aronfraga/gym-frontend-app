@@ -22,18 +22,19 @@ const Facilities = () => {
 	const dispatch = useDispatch();
 	const [image, setImage] = useState({ array: [] });
 
-  	const {user} = useAuth0();
+	const { user } = useAuth0();
 	const email = user?.email;
-  	const {facilitiesImages} = useSelector(state => state.facilitiesImages);
-  	const {isAdminLogged} = useSelector(state => state.isAdminLogged);
-  	const [input,setInput] = useState({ name_1: "" });
-    const [loading,setLoading] = useState("");
-    const [isShown, setIsShown] = useState(false);
-    const [activeUpload, setActiveUpload]= useState(false);
-  
-    useEffect(() => {dispatch(fetchGetImages())},[dispatch]);
-   	dispatch(fetchGetAdmins(email)); 
-	
+	const { facilitiesImages } = useSelector((state) => state.facilitiesImages);
+	const { isAdminLogged } = useSelector((state) => state.isAdminLogged);
+	const [input, setInput] = useState({ name_1: '' });
+	const [loading, setLoading] = useState('');
+	const [isShown, setIsShown] = useState(false);
+	const [activeUpload, setActiveUpload] = useState(false);
+
+	useEffect(() => {
+		dispatch(fetchGetImages());
+	}, [dispatch]);
+	dispatch(fetchGetAdmins(email));
 
 	const handlerbutton = (event) => {
 		setIsShown((current) => !current);
@@ -214,51 +215,48 @@ const Facilities = () => {
 							</div>
 						))
 					) : activeUpload ? (
-						<div>
-							<div className={Style.wrapperDropnInput}>
-								<div className={Style.wrapperDropandForm}>
-									<div className={Style.wrapperForm}>
-										<FormControl>
-											<InputLabel htmlFor='my-input'>Image Name</InputLabel>
-											<Input
-												id='my-input'
-												aria-describedby='my-helper-text'
-												name='name_1'
-												onChange={handlerInputChange}
-												value={input.name_1}
-											/>
-										</FormControl>
-										{!input.name_1 && (
-											<p className={Style.error}>
-												Ingresa el nombre de la imagen para poder usar el
-												Dropzone
-											</p>
-										)}
-									</div>
-									<div>
-										<Dropzone
-											disabled={!input.name_1}
-											classname={Style.dropzone}
-											onDrop={handlerDrop}
-											onChange={(e) => setImage(e.target.value)}
-											value={image}
-										>
-											{({ getRootProps, getInputProps }) => (
-												<section>
-													<div {...getRootProps({ className: Style.dropzone })}>
-														<input {...getInputProps()} />
-														<span className={Style.folder}>📁</span>
-														<p className={Style.textboxdrop}>
-															Arrastra o haz click para subir la imagen
-														</p>
-													</div>
-												</section>
-											)}
-										</Dropzone>
-									</div>
+						<div className={Style.wrapperDropnInput}>
+							<div className={Style.wrapperDropandForm}>
+								<div className={Style.wrapperForm}>
+									<FormControl>
+										<InputLabel htmlFor='my-input'>Image Name</InputLabel>
+										<Input
+											id='my-input'
+											aria-describedby='my-helper-text'
+											name='name_1'
+											onChange={handlerInputChange}
+											value={input.name_1}
+										/>
+									</FormControl>
+									{!input.name_1 && (
+										<p className={Style.error}>
+											Ingresa el nombre de la imagen para poder usar el Dropzone
+										</p>
+									)}
 								</div>
-								<div>{imagePreview()}</div>
+								<div>
+									<Dropzone
+										disabled={!input.name_1}
+										classname={Style.dropzone}
+										onDrop={handlerDrop}
+										onChange={(e) => setImage(e.target.value)}
+										value={image}
+									>
+										{({ getRootProps, getInputProps }) => (
+											<section>
+												<div {...getRootProps({ className: Style.dropzone })}>
+													<input {...getInputProps()} />
+													<span className={Style.folder}>📁</span>
+													<p className={Style.textboxdrop}>
+														Arrastra o haz click para subir la imagen
+													</p>
+												</div>
+											</section>
+										)}
+									</Dropzone>
+								</div>
 							</div>
+							<div>{imagePreview()}</div>
 						</div>
 					) : (
 						<Loading />
