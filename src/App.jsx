@@ -49,6 +49,7 @@ function App() {
         <Route path="/tienda/:status" element={<Shop />} />
         <Route path="/tienda/carrito" element={<Shopping />} />
         <Route path="/tienda/producto/:id" element={<ProductsDetail />} />
+        <Route path="/agenda/crear" element={<FormCalendar />} />
         <Route element={<ProtectedRoute isAllowed={!!role} />}>
           <Route path="/rutinas" element={<Routines />} />
           <Route path="/rutinas/:id" element={<DetailRoutine />} />
@@ -66,7 +67,6 @@ function App() {
             />
           }
         >
-          <Route path="/agenda/crear" element={<FormCalendar />} />
           <Route path="/classes/:id" element={<PutClasses />} />
           <Route path="/rutinas/crear" element={<FormRoutines />} />
         </Route>
