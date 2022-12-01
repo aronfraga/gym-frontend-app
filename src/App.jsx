@@ -37,7 +37,7 @@ function App() {
       if (role === "TimeOut") setRole("");
     }
   }, [isAuthenticated, getToken(), role]);
-  console.log(role);
+
   return (
     <BrowserRouter>
       <Routes>

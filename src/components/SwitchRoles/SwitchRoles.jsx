@@ -19,7 +19,6 @@ export default function SwitchRoles() {
 	const { data, isLoading } = useGetAllUsersQuery();
 	const [setNewRole] = useSetNewRoleMutation();
 	const navigate = useNavigate();
-	const [reload, setReload] = useState(false);
 
 	useEffect(() => {}, []);
 
@@ -46,13 +45,7 @@ export default function SwitchRoles() {
 			newRole: newRole,
 		});
 		handlerChanged();
-		// setTimeout(function () {
-		// 	window.location.reload();
-		// }, 2000);
-		//reload ? setReload(false) : setReload(true);
 	};
-
-	console.log(reload);
 
 	function handlerClickBack() {
 		navigate(-1);

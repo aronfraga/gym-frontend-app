@@ -215,7 +215,6 @@ export default function FormCalendar() {
             day: getClassesById?.day,
             id: getClassesById?.id,
         });
-        console.log(id)
     }
 
     const handlerDeleted = () => {

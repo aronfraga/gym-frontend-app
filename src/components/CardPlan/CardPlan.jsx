@@ -35,7 +35,7 @@ const CardPLan = ({
 			auto_return: 'approved',
 			notification_url: 'https://www.success.com/',
 			back_urls: {
-				success: 'http://127.0.0.1:5173/perfil',
+				success: 'https://app-gym-frontend.vercel.app/perfil',
 				failure: 'http://www.facebook.com/',
 				pending: 'http://www.pending.com/',
 			},

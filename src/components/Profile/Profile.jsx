@@ -47,8 +47,6 @@ const Profile = () => {
 		return <p>Tu plan vence el {fecha.toLocaleDateString()}</p>;
 	}
 
-	console.log(fecha.toLocaleDateString())
-
 	function renderPlanExpired() {
 		if (isLoading) return <p>Loading...</p>;
 		return (
