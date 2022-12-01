@@ -6,9 +6,15 @@
 	padding: 0px 36px;
 }
 
+.goBack {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+}
+
 .containerCard {
 	display: flex;
-	flex-direction: row; 	
+	flex-direction: row;
 }
 
 .tittle {
@@ -25,15 +31,15 @@
 	margin-bottom: 12px;
 }
 
-.cardsclasses{
-    display: flex;
+.cardsclasses {
+	display: flex;
 	flex-direction: row;
-    justify-content: center;
-    margin-top: 40px;
-    flex-wrap: wrap;
-    column-gap: 20px;
-    row-gap: 20px;
-   cursor: default; 
+	justify-content: center;
+	margin-top: 40px;
+	flex-wrap: wrap;
+	column-gap: 20px;
+	row-gap: 20px;
+	cursor: default;
 }
 
 .cardPlan {
@@ -52,7 +58,7 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-    position: relative;  	
+	position: relative;
 }
 
 .containerBenefits h2 {
