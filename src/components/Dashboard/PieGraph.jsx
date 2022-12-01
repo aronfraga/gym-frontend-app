@@ -1,34 +1,37 @@
 import React from "react";
 import { Pie } from "react-chartjs-2";
-import { ventas_anuales_tienda } from "./Data";
 import Style from "./Dashboard.module.css";
 import 'chart.js/auto';
+import Loading from "../Loading/Loading";
 
-const PieGraph = ({mes, año}) => {
+const PieGraph = ({info,loading}) => {
 
-    const products_names = (mes) => {
-        const product_names = ventas_anuales_tienda[mes].map(e => e.name);
-        return product_names;
-    };
+    const productos = {};
 
-    const qty_mensual_producto = (mes) => {
-        const total_qty_per_product = ventas_anuales_tienda[mes].map( e => e.qty_sell);
-        return total_qty_per_product;
-    };
+    info?.map(e => {
+        if(!productos[e.title]) productos[e.title] = e.quantity;
+        else productos[e.title] = productos[e.title] + e.quantity;
+    })
 
-    const total_qty = (mes)=>{
-        const aux_1 = qty_mensual_producto(mes);
-        const total_month_qty = aux_1.reduce( (a,b) => a + b, 0); 
-        return total_month_qty;
-    };
+    let total = 0;
 
-    const aux_2 = total_qty(mes);
+    for (const property in productos) {
+        total = total + productos[property];
+      }
+
+    const names = []
+    const quantities = []
+
+    for (const property in productos) {
+        names.push([property])
+        quantities.push(productos[property])
+      }
 
     const data = {
         type: 'pie',
-        labels: products_names(mes),
+        labels: names,
         datasets: [{
-            data: qty_mensual_producto(mes),
+            data: quantities,
             backgroundColor: [
                 'rgb(255, 99, 132)',
                 'rgb(54, 162, 235)',
@@ -48,11 +51,11 @@ const PieGraph = ({mes, año}) => {
         plugins: {
             title: {
                 display: true,
-                text: `UNIDADES VENDIDAS - ${mes.toUpperCase()} - ${año}` 
+                text: `UNIDADES VENDIDAS EN PERIODO SELECCIONADO` 
             },
             subtitle:{
                 display: true,
-                text: `TOTAL - ${aux_2} UNIDADES` 
+                text: `TOTAL - ${total} UNIDADES` 
             },
             tooltip: {
                 callbacks: {
@@ -66,9 +69,11 @@ const PieGraph = ({mes, año}) => {
 
 
     return (
-        <div className={Style.Pie}>
+        <div>{loading?(<Loading/>):
+        (<div className={Style.LineGraph}>
             <Pie data={data} options={opciones} />
-        </div>
+        </div>)}
+    </div>
   );
 };
 

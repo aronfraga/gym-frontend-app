@@ -45,7 +45,7 @@ export const ApiQuery = createApi({
       query: (data) => ({
         url: "/products/admdashboard/monthproducts",
         method: "post",
-        body: { filters: { year: data } },
+        body: { filters: { year: data.year, month: data.month } },
       }),
     }),
 
