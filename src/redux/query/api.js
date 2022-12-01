@@ -64,7 +64,7 @@ export const ApiQuery = createApi({
 
     getAllUsers: builder.query({
       query: () => "/users",
-      providesTags: ["Img"]
+      providesTags: ["Img"],
     }),
 
     getCategory: builder.query({
@@ -78,7 +78,6 @@ export const ApiQuery = createApi({
     getAllFeedbacks: builder.query({
       query: () => "/feedbacks",
     }),
-
 
     //************************************** */
     //********* P O S T ' S **************** */
@@ -108,7 +107,6 @@ export const ApiQuery = createApi({
       }),
     }),
 
-
     //************************************** */
     //************ PATCH ******************* */
     //************************************** */
@@ -126,8 +124,8 @@ export const ApiQuery = createApi({
         url: `/users`,
         method: "PATCH",
         body: {
-          "newImage": payload
-        }
+          newImage: payload,
+        },
       }),
       keepUnusedDataFor: 0,
       invalidatesTags: ["Img"],
@@ -168,7 +166,6 @@ export const ApiQuery = createApi({
           method: "DELETE",
         };
       },
-
     }),
   }),
 });
