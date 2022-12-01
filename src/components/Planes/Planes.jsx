@@ -17,8 +17,9 @@ export default function Planes() {
 			<div className={style.cardContainer}>
 				<CardPLan
 					id={planes[1].id}
+					days={planes[1].daysToAdd}
 					monts={planes[1]?.name}
-					price={Math.round(planes[1]?.totalCost / 3)}
+					price={planes[1]?.totalCost}
 					benefits1={`Con este plan te ahorras ${planes[1]?.saving} pesos`}
 					benefits2={`Acceso a todas nuestras instalaciones`}
 					benefits3={`Atención personalizada de nuestro staff`}
@@ -26,8 +27,9 @@ export default function Planes() {
 				/>
 				<CardPLan
 					id={planes[2].id}
+					days={planes[2].daysToAdd}
 					monts={planes[2]?.name}
-					price={Math.round(planes[2]?.totalCost / 6)}
+					price={planes[2]?.totalCost}
 					benefits1={`Con este plan te ahorras ${planes[2]?.saving} pesos`}
 					benefits2={`Acceso a todas nuestras instalaciones`}
 					benefits3={`Atención personalizada de nuestro staff`}
@@ -35,8 +37,9 @@ export default function Planes() {
 				/>
 				<CardPLan
 					id={planes[3].id}
+					days={planes[3].daysToAdd}
 					monts={planes[3]?.name}
-					price={Math.round(planes[3]?.totalCost / 12)}
+					price={planes[3]?.totalCost}
 					benefits1={`Con este plan te ahorras ${planes[3]?.saving} pesos`}
 					benefits2={`Acceso a todas nuestras instalaciones`}
 					benefits3={`Atención personalizada de nuestro staff`}
