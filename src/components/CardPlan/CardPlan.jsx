@@ -18,7 +18,7 @@ const CardPLan = ({
 	benefits4,
 }) => {
 	const dispatch = useDispatch();
-
+  
 	let meses = monts.split(' ');
 
 	const itemCheckOut = {
@@ -28,7 +28,7 @@ const CardPLan = ({
 		quantity: 1,
 		days: days,
 	};
-	console.log(itemCheckOut);
+
 	const handlerClickBuyPlan = () => {
 		const checkOut = {
 			items: [itemCheckOut],

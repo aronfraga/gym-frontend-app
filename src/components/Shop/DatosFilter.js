@@ -1,5 +1,5 @@
 export const Productos = {
-  title: "Productos",
+  title: "Categoria",
   name: "category",
   value: ["Indumentaria", "Entrenamiento", "Accesorios", "Suplementos"],
 };

@@ -1,22 +1,17 @@
 import React from "react";
 import { useState } from "react";
 import style from './FormCalendar.module.css'
+import styles from './PutClasses.module.css'
 import Card from '@mui/material/Card';
-import { CardActionArea, IconButton } from '@mui/material';
+import { useNavigate } from "react-router-dom";
 import { useAddClassMutation, useGetAllStaffQuery, useGetAllClassesQuery, usePutClassesMutation, useDeleteClassesMutation, useGetClassesByIdQuery } from "../../redux/query/api";
 import FormControl from "@mui/material/FormControl";
 import swal from 'sweetalert';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import { TextField } from '@mui/material';
-import InputLabel from "@mui/material/InputLabel";
 import Button from "@mui/material/Button";
-import Typography from '@mui/material/Typography';
-import DeleteIcon from '@mui/icons-material/Delete';
-import ModeEditIcon from '@mui/icons-material/ModeEdit';
-import { WindowSharp } from "@mui/icons-material";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import { toast } from "react-toastify";
+import { useParams } from "react-router-dom";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -81,7 +76,7 @@ const staff = [
 
 
 
-export default function FormCalendar() {
+export default function PutClasses() {
     function validate(input) {
         let errors = {};
         if (/[^a-zA-Z, ]/g.test(input.name)
@@ -99,11 +94,12 @@ export default function FormCalendar() {
     const { id } = useParams()
     const [deleteClasses] = useDeleteClassesMutation()
     const [putClasses] = usePutClassesMutation()
-    const { data: classes } = useGetAllClassesQuery();
-    const { data: getClassesById } = useGetClassesByIdQuery(id);
+    const { data: getClassesById, isSuccess } = useGetClassesByIdQuery(id);
+    const [flag, setFlag] = useState(false)
     const [addClass, { data }] = useAddClassMutation()
     const [errors, setErrors] = useState({});
     const { data: staff, isLoading } = useGetAllStaffQuery();
+
 
 
     const [hora, setHora] = useState({
@@ -116,10 +112,22 @@ export default function FormCalendar() {
         name: "",
         hour: "",
         day: "",
+        id: 0,
         staff: "",
         staffId: 0,
-
     })
+
+    if (isSuccess && flag === false) {
+
+        setInput({
+            name: getClassesById.name,
+            hour: getClassesById.hour,
+            day: getClassesById.day,
+            id: getClassesById.id,
+
+        })
+        setFlag(true)
+    }
 
     const handleChange = (event) => {
 
@@ -161,6 +169,16 @@ export default function FormCalendar() {
 
     }
 
+    const handleConfirmHour = (event) => {
+
+        if (hora.inicio !== "" && hora.final !== "") {
+            setInput({
+                ...input,
+                hour: `h${hora.inicio}/h${hora.final}`
+            })
+        }
+    }
+
 
     const handleChangeStaff = (event) => {
 
@@ -179,18 +197,20 @@ export default function FormCalendar() {
 
     const HandleSubmit = async (event) => {
         event.preventDefault()
-        await addClass({
-            name: input.name,
-            hour: `h${hora.inicio}/h${hora.final}`,
-            day: input.day,
-            staffId: input.staffId
+        await putClasses({
+            id, payload: {
+                name: input.name,
+                hour: input.hour,
+                day: input.day,
+                staffId: input.staffId,
+            }
         }).unwrap();
         setInput({
             name: "",
             hour: "",
             day: "",
         });
-        swal({ title: "Hecho!", text: "Clase creada con exito", type: "success" }).then(
+        swal({ title: "Hecho!", text: "Cambio realizado con exito", type: "success" }).then(
             (ok) => {
                 if (ok) {
                     navigate("/calendario");
@@ -199,48 +219,12 @@ export default function FormCalendar() {
         );
     }
 
-    const handlerClickEdit = async (event, id) => {
-        event.preventDefault()
-        await putClasses({
-            payload: {
-                name: input.name,
-                hour: input.hour,
-                day: input.day,
-            }, id
-        }).unwrap();
-        setInput({
-            name: getClassesById?.name,
-            hour: getClassesById?.hour,
-            day: getClassesById?.day,
-            id: getClassesById?.id,
-        });
-        console.log(id)
+
+
+    const handlerClickDelete = async (event) => {
+        await deleteClasses(event.currentTarget.value)
+        useGetAllClassesQuery()
     }
-
-    const handlerDeleted = () => {
-
-        toast.error("Clase eliminada!", {
-            position: "bottom-left",
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "colored",
-        });
-    }
-    const handlerClickDelete = (event) => {
-
-        event.preventDefault();
-        deleteClasses(event.currentTarget.value)
-        handlerDeleted()
-        setTimeout(function () {
-            window.location.reload()
-        }, 2000)
-    }
-
-
 
 
     return (
@@ -256,7 +240,7 @@ export default function FormCalendar() {
                                 required
                                 sx={{ width: 300 }}
                                 key="standard-name"
-                                label="Nombre de la Clase"
+                                label="clase"
                                 name="name"
                                 value={input.name}
                                 onChange={handleChange}
@@ -339,6 +323,28 @@ export default function FormCalendar() {
                                     </MenuItem>
                                 ))}
                             </Select>
+                            <Button onClick={handleConfirmHour}
+                                disabled={errors.inicio > errors.final}
+                                type='submit' sx={{
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    paddingRight: '25px',
+                                    paddingLeft: '25px',
+                                    marginBottom: '10px',
+                                    marginLeft: '73px',
+                                    marginTop: '10px',
+                                    width: 150,
+                                    color: 'white',
+                                    borderRadius: '6px',
+                                    background: '#2779ff',
+                                    alignItems: 'center',
+                                    '&:hover': {
+                                        backgroundColor: '#5151519c',
+                                        transition: '1s',
+                                    },
+                                }}>
+                                Confirmar
+                            </Button>
 
                             <p>Instructor:</p>
                             <Select
@@ -386,55 +392,37 @@ export default function FormCalendar() {
                                         transition: '1s',
                                     },
                                 }}>
-                                Submit
+                                Editar
                             </Button>
                         </FormControl>
                     </form>
                 </div>
                 &nbsp;
-                <div className={style.cardsclasses} >
-                    {classes?.map((value, i) => (
-                        <Card key={i}
-                            className={style.cardPlan}
-                            sx={{
-                                width: '100%',
-                                maxWidth: '400px',
-                                height: 'fit-content',
-                                border: '1px solid var(--tertiary-color) ',
-                                borderRadius: '10px',
-                                backgroundColor: 'white',
-                                transition: 'all 0.2s ease-out',
-                            }}
-                        >
-                            <CardActionArea>
-                                <div className={style.containerBenefits}>
-                                    <h2>Clase: {value.name}</h2>
-                                    <h2>Instructor:{value.user.name}</h2>
-                                    <h2>Dia: {value.day}</h2>
-                                    <h2>Horario: {value.hour}</h2>
-                                    <div className={style.botones}>
-                                        {/* <button value={value.id} onClick={handlerClickDelete} >
-                                            X
-                                        </button> */}
-                                        <IconButton value={value.id} onClick={handlerClickDelete} sx={{
-                                            color: 'var(--red-color)',
-                                        }}>
-                                            <DeleteIcon />
-                                        </IconButton>
-                                        <Link to={`/classes/${value.id}`}>
-                                            <IconButton sx={{
-                                                color: 'var(--black-color)',
-                                            }}>
-                                                <ModeEditIcon />
-                                            </IconButton>
-                                        </Link>
-                                    </div>
-                                </div>
 
-                            </CardActionArea>
-                        </Card>
-                    ))}
-                </div>
+            </div>
+            <div className={styles.cardsclasses} >
+
+                <Card
+                    className={styles.cardPlan}
+                    sx={{
+                        width: '100%',
+                        maxWidth: '400px',
+                        height: 'fit-content',
+                        border: '1px solid var(--tertiary-color) ',
+                        borderRadius: '10px',
+                        backgroundColor: 'white',
+                        transition: 'all 0.2s ease-out',
+                    }}
+                >
+
+                    <div className={styles.containerBenefits}>
+                        <h2>Clase: {getClassesById?.name}</h2>
+                        <h2>Dia: {getClassesById?.dia}</h2>
+                        <h2>Horario: {getClassesById?.hour}</h2>
+                    </div>
+
+
+                </Card>
             </div>
 
 

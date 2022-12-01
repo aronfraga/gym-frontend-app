@@ -1,23 +1,28 @@
 .mainContainer {
-	margin-bottom: 24px;
+  margin-bottom: 24px;
 }
 .mainContainer hr {
-	margin: 0px;
-	border: 2px solid var(--secondary-color);
-	background-color: var(--secondary-color);
-	border-radius: 10px;
+  margin: 0px;
+  border: 2px solid var(--secondary-color);
+  background-color: var(--secondary-color);
+  border-radius: 10px;
 }
 
 .infoContainer {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .title {
-	display: flex;
-	font-family: Roboto, 'Open Sans', sans-serif;
-	font-size: 48px;
-	margin: 0px;
-	color: var(--secondary-color);
+  display: flex;
+  font-family: Roboto, "Open Sans", sans-serif;
+  font-size: 48px;
+  margin: 0px;
+  color: var(--secondary-color);
+}
+
+.buttonsContainer {
+  display: flex;
+  gap: 12px;
 }

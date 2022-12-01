@@ -21,7 +21,9 @@ import { ProtectedRoute } from './components/ProtectedRoute';
 import FormProducts from './components/FormProducts/FormProducts';
 import EditProduct from './components/FormProducts/EditProduct';
 import FormCalendar from './components/Calendar/FormCalendar';
+import PutClasses from "./components/Calendar/PutClasses";
 import GetFeedbacks from './components/FeedBack/GetFeedbacks';
+
 import SelectPlan from './components/SelectPlan/SelectPlan';
 import SwitchRoles from './components/SwitchRoles/SwitchRoles';
 
@@ -35,6 +37,7 @@ function App() {
 			else setRole('');
 		}
 	}, [isAuthenticated, getToken()]);
+
 
 	return (
 		<BrowserRouter>
@@ -59,9 +62,11 @@ function App() {
 				<Route path='/admdashboard/products' element={<FormProducts />} />
 				<Route path='/admdashboard/feedbacks' element={<GetFeedbacks />} />
 				<Route path='/calendario/crear' element={<FormCalendar />} />
+        <Route path='/classes/:id' element={<PutClasses />} />
 				<Route path='/admdashboard/roles' element={<SwitchRoles />} />
 				{/* </Route> */}
 				{/* <Route
+
             element={
               <ProtectedRoute
                 isAllowed={!!role && (role === "Admin" || role === "Staff")}
