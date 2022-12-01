@@ -10,7 +10,7 @@ const LineMembresies = ({datos, año, loading}) => {
     const aux_arr = [0,0,0,0,0,0,0,0,0,0,0,0];
     
     let valores = datos?.map(e => {
-        aux_arr[e.month] = e.sum }
+        aux_arr[e.month-1] = e.sum }
     );
     
     valores = aux_arr;
