@@ -1,25 +1,45 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import NavBar from '../NavBar/NavBar';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
-import {
-	useGetAllUsersQuery,
-	useSetNewImgMutation,
-} from '../../redux/query/api';
+import { useGetAllUsersQuery, useSetNewImgMutation } from '../../redux/query/api';
+import { useGetUserProfileQuery } from '../../redux/query/ApiEcommerce';
 import Loading from '../Loading/Loading';
 import Style from './Profile.module.css';
 import { IconButton, FormLabel, FormControl } from '@mui/material';
 import { PhotoCamera } from '@mui/icons-material';
 import { Button } from '@mui/material';
 import { uploadUserImage } from './Helpers';
+import { useDispatch, useSelector } from 'react-redux';
+import { setNewPlan } from "../../redux/actions/defaultAction";
 
 const Profile = () => {
+	const navigate = useNavigate();
+	const dispatch = useDispatch();
 	const [setImg] = useSetNewImgMutation();
 	const { user } = useAuth0();
 	const email = user?.email;
 	const [isShown, setIsShown] = useState(false);
 	const [input, setInput] = useState({ imgUrl: '' });
 	const { data, isSuccess, isLoading } = useGetAllUsersQuery();
+	const { data: profile, isLoading: loading } = useGetUserProfileQuery();
+	const { alertDelivery } = useSelector((state) => state.alertDelivery);
+	const urlChanged = window.location.search;
+	const urlParams = new URLSearchParams(urlChanged);
+	const fecha = new Date(profile?.membresyExpDate);
+  
+	const purchaseStatus = {
+    payed: urlParams.get("status") === "approved" ? true : false,
+    paymentMethod: urlParams.get("payment_type"),
+    purchaseId: urlParams.get("preference_id"),
+  };
+
+	useEffect(() => {
+    if(purchaseStatus.payed) {
+			dispatch(setNewPlan(purchaseStatus))
+			navigate("/home")
+		}
+  },[]);
 
 	const mydata = () => {
 		if (isSuccess) {
@@ -31,6 +51,11 @@ const Profile = () => {
 	const datos = mydata();
 	let rol = datos?.role;
 
+	function renderPlan() {
+		if(loading) return <p>Loading...</p>
+		return <p>Tu plan vence el {fecha.toLocaleDateString()}</p> 
+	}
+
 	const funcionalidad = () => {
 		let date1 = new Date(datos?.membresyExpDate);
 		let date2 = Date.now();
@@ -39,7 +64,7 @@ const Profile = () => {
 			if (diff < 0) {
 				return (
 					<div>
-						<p>Tu plan se encuentra vencido, ¡renuévalo ahora!</p>
+						{renderPlan()}
 						<Link to='/planes' style={{ textDecoration: 'none' }}>
 							<Button
 								onClick={handlerSaveButton}
@@ -61,7 +86,7 @@ const Profile = () => {
 			} else {
 				return (
 					<div>
-						<p>Tu plan vence el InserteFechaAquiAlex</p>
+						{renderPlan()}
 						<Link to='/planes' style={{ textDecoration: 'none' }}>
 							<Button
 								onClick={handlerSaveButton}
@@ -86,9 +111,23 @@ const Profile = () => {
 				<div>
 					<p>Eres administrador, puedes acceder</p>
 					<p> a la siguiente funcionalidad</p>
-					<Link to={'/admdashboard'}>
-						<button>Dashboard</button>
-					</Link>
+					<Link to={'/admdashboard'} 
+								style={{ textDecoration: 'none' }}>
+                        <Button
+                            onClick={handlerSaveButton}
+                            variant='contained'
+                            sx={{
+                                width: '100%',
+                                background: '#0d0d6b',
+                                '&:hover': {
+                                    backgroundColor: '#62629f',
+                                    transition: '0.4s',
+                                },
+                            }}
+                        >
+                            Dashboard
+                        </Button>
+                    </Link>
 				</div>
 			);
 		}
