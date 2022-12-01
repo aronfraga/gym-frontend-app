@@ -19,7 +19,7 @@
 	border-radius: 10px;
 }
 
-.LineGraph{
+.LineGraph {
 	height: 400px;
 	width: 400px;
 	padding-left: 5px;
@@ -56,6 +56,23 @@
 	font-weight: 700;
 	font-size: 48px;
 	color: var(--secondary-color);
+}
+
+.header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.buttonsContainer {
+	display: flex;
+	gap: 12px;
+}
+
+.selectorsContainer {
+	display: flex;
+	justify-content: center;
+	gap: 24px;
 }
 
 .selectors {

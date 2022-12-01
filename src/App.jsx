@@ -44,11 +44,13 @@ function App() {
         <Route path="*" element={<PageNotFound />} />
         <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home />} />
+        <Route path="/perfil" element={<Profile />} />
+        <Route path="/tienda" element={<Shop />} />
+        <Route path="/tienda/:status" element={<Shop />} />
+        <Route path="/tienda/carrito" element={<Shopping />} />
+        <Route path="/tienda/producto/:id" element={<ProductsDetail />} />
+        <Route path="/agenda/crear" element={<FormCalendar />} />
         <Route element={<ProtectedRoute isAllowed={!!role} />}>
-          <Route path="/tienda" element={<Shop />} />
-          <Route path="/tienda/:status" element={<Shop />} />
-          <Route path="/tienda/carrito" element={<Shopping />} />
-          <Route path="/tienda/producto/:id" element={<ProductsDetail />} />
           <Route path="/rutinas" element={<Routines />} />
           <Route path="/rutinas/:id" element={<DetailRoutine />} />
           <Route path="/staff" element={<Staff />} />
@@ -56,7 +58,6 @@ function App() {
           <Route path="/agenda" element={<Calendar />} />
           <Route path="/feedback" element={<FeedBack />} />
           <Route path="/planes" element={<SelectPlan />} />
-          <Route path="/perfil" element={<Profile />} />
         </Route>
         <Route
           element={
@@ -66,7 +67,6 @@ function App() {
             />
           }
         >
-          <Route path="/agenda/crear" element={<FormCalendar />} />
           <Route path="/classes/:id" element={<PutClasses />} />
           <Route path="/rutinas/crear" element={<FormRoutines />} />
         </Route>
