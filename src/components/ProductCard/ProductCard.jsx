@@ -65,19 +65,6 @@ const ProductCard = ({
     });
   };
 
-  const handlerDeleted = () => {
-    toast.error("¡Producto eliminado!", {
-      position: "bottom-left",
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "colored",
-    });
-  };
-
 	const handlerSaveInCheckOut = (event) => {
 		event.preventDefault();
 		if (stock === 0) return handlerAlertStockFull();
@@ -104,12 +91,25 @@ const ProductCard = ({
 
 	const handlerDeleteProduct = (event) => {
 		event.preventDefault();
-		deleteProduct(id)
-		handlerDeleted()
-		setTimeout(function(){
-			window.location.reload()
-		}, 2000) //usar event.currentTarget
-		
+		swal({
+			title: 'Estás seguro?',
+			text: '¡Una vez eliminado, no podras recuperar el articulo!',
+			icon: 'warning',
+			buttons: true,
+			dangerMode: true,
+		}).then((willDelete) => {
+			if (willDelete) {
+				deleteProduct(id)
+				setTimeout(function(){
+					window.location.reload()
+				}, 2000);
+				swal('¡Poof! ¡El carrito ha sido vaciado!', {
+					icon: 'success',
+				});
+			} else {
+				swal('¡El producto no fue eliminado!');
+			}
+		});
 	};
 
 	return (
