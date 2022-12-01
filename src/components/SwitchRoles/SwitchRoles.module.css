@@ -12,6 +12,11 @@
 	gap: 12px;
 }
 
+.containerCard {
+	display: flex;
+	flex-direction: row;
+}
+
 .tittle {
 	margin: 0px;
 	font-size: 48px;
@@ -28,6 +33,7 @@
 
 .cardsclasses {
 	display: flex;
+	flex-direction: row;
 	justify-content: center;
 	margin-top: 40px;
 	flex-wrap: wrap;
@@ -39,6 +45,7 @@
 .cardPlan {
 	display: flex;
 	align-items: start;
+	margin-bottom: 20px;
 }
 
 .cardPlan:hover {

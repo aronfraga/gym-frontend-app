@@ -15,10 +15,8 @@ import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import logo from '../../Images/Logo.png';
 
 const pages = [
@@ -26,7 +24,7 @@ const pages = [
 	'rutinas',
 	'instalaciones',
 	'staff',
-	'calendario',
+	'agenda',
 	'feedback',
 ];
 // const settings = [ 'tienda','seguimiento', 'clases',];
@@ -56,7 +54,7 @@ const NavBar = () => {
 	const handleCloseNavMenu = () => {
 		setAnchorElNav();
 	};
-	//#fafafa
+
 	return (
 		<AppBar
 			sx={{
@@ -85,7 +83,9 @@ const NavBar = () => {
 				>
 					{/* <Link to={'/home'} style={{ textDecoration: 'none' }}> */}
 					<div className={styles.appGym}>
-						<img src={logo} alt='Logo' />
+						<Link to={'/home'} style={{ textDecoration: 'none' }}>
+							<img src={logo} alt='Logo' />
+						</Link>
 
 						<Box
 							sx={{
@@ -99,7 +99,7 @@ const NavBar = () => {
 								aria-controls='menu-appbar'
 								aria-haspopup='true'
 								onClick={handleOpenNavMenu}
-								sx={{ color: 'var(--tertiary-color)' }}
+								sx={{ color: 'var(--white-color)' }}
 							>
 								<MenuIcon />
 							</IconButton>
@@ -138,20 +138,6 @@ const NavBar = () => {
 					</div>
 					{/* </Link> */}
 
-					{/* <Typography
-						variant='h5'
-						noWrap
-						sx={{
-							mr: 2,
-							display: { xs: 'flex', md: 'none' },
-							flexGrow: 1,
-							fontWeight: 600,
-							fontSize: 30,
-							color: 'var(--primary-color)',
-						}}
-					>
-						GYM FIT
-					</Typography> */}
 					<Box
 						sx={{
 							flexGrow: 1,
@@ -242,7 +228,7 @@ const NavBar = () => {
 							</MenuItem>
 						</Menu>
 
-						<Link to='/planes' style={{ textDecoration: 'none' }}>
+						{/* <Link to='/planes' style={{ textDecoration: 'none' }}>
 							<Button
 								variant='outlined'
 								sx={{
@@ -262,7 +248,7 @@ const NavBar = () => {
 							>
 								Mi Plan
 							</Button>
-						</Link>
+						</Link> */}
 					</div>
 				</Toolbar>
 			</Container>

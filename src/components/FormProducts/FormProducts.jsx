@@ -1,22 +1,87 @@
 import React, { useState } from "react";
-import { useGetAllProductsQuery, usePostProductMutation, useDeleteProductMutation } from "../../redux/query/ApiEcommerce";
-import s from './FormProducts.module.css';
+import {
+  useGetAllProductsQuery,
+  usePostProductMutation,
+  useDeleteProductMutation,
+} from "../../redux/query/ApiEcommerce";
+import style from "./FormProducts.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import { uploadImage } from "../FormRoutines/uploadImage.js";
-import Loading from '../Loading/Loading';
+import Loading from "../Loading/Loading";
+import FormControl from "@mui/material/FormControl";
+import {
+  Chip,
+  InputLabel,
+  MenuItem,
+  OutlinedInput,
+  Select,
+  TextField,
+} from "@mui/material";
+import { FormLabel, IconButton } from "@mui/material";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import { PhotoCamera } from "@mui/icons-material";
+import Button from "@mui/material/Button";
+import NavBar from "../NavBar/NavBar";
+import { Box } from "@mui/system";
+import { useTheme } from "@mui/material/styles";
 
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const categorias = [
+  "Indumentaria",
+  "Entrenamiento",
+  "Accesorios",
+  "Suplementos",
+];
+const MenuProps = {
+  PaperProps: {
+    style: {
+      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+      width: 250,
+    },
+  },
+};
 
-export default function FormProducts(){
+export default function FormProducts() {
+  const navigate = useNavigate();
+  const theme = useTheme();
 
-    const navigate = useNavigate()
+  const [createProducts] = usePostProductMutation();
 
-    const [createProducts] = usePostProductMutation();
+  const [deleteProduct] = useDeleteProductMutation();
 
-    const [deleteProduct] = useDeleteProductMutation();
+  const { data, isLoading } = useGetAllProductsQuery({
+    data: {},
+    page: 0,
+    size: 5000,
+  });
 
-    const {data,isLoading} = useGetAllProductsQuery({data:{},page:0,size:5000});
+  const [input, setInput] = useState({
+    title: "",
+    unit_price: 0,
+    stock: 0,
+    category: "",
+    description: "",
+    imgUrl: "",
+  });
 
-    const [input, setInput] = useState({
+  function handlerClickBack() {
+    navigate(-1);
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    await createProducts({
+      title: input.title,
+      unit_price: input.unit_price,
+      stock: input.stock,
+      category: input.category,
+      description: input.description,
+      imgUrl: input.imgUrl,
+    }).unwrap();
+
+    setInput({
       title: "",
       unit_price: 0,
       stock: 0,
@@ -25,168 +90,190 @@ export default function FormProducts(){
       imgUrl: "",
     });
 
-    const [errors, setErrors] = useState({
-      title: "Debe ingresar nombre del producto",
-      unit_price: "El precio debe ser mayor que 0"
+    alert("Producto Creado");
+
+    navigate("/tienda");
+  };
+
+  const handleInputChange = function (e) {
+    setInput({ ...input, [e.target.name]: e.target.value });
+  };
+
+  const handlerImage = async (e) => {
+    e.preventDefault();
+    const url = await uploadImage(e.target.files);
+    setInput({
+      ...input,
+      imgUrl: url,
     });
+  };
 
-    function validate(input) {
-      let errors = {};
-      if (!input.title) errors.title = "Debe ingresar nombre del producto";
-      if (input.unit_price == 0) errors.unit_price = "El precio debe ser mayor que 0";
-      if(input.title){
-        data.products.map(el => {
-        const string1 = el.title
-        const string2 = input.title
-        if(string1 === string2) errors.title = "Producto ya existente";
-      })
-    }
-    return errors;
-    }  
+  if (isLoading) return <Loading />;
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+  return (
+    <>
+      <NavBar />
+      <div className={style.mainContainer}>
+        <div className={style.mainContainerForm}>
+          <div className={style.goBack}>
+            <IconButton
+              onClick={handlerClickBack}
+              sx={{
+                color: "var(--black-color)",
+                "&:hover": {
+                  borderColor: "var(--black-color)",
+                  backgroundColor: "var(--hover-outlined-button)",
+                  transition: "0.4s ease-in-out",
+                },
+              }}
+            >
+              <ArrowBackIcon />
+            </IconButton>
+          </div>
+          <form onSubmit={(e) => handleSubmit(e)}>
+            <div>
+              <FormControl>
+                <div className={style.textField}>
+                  <TextField
+                    required
+                    sx={{ width: 300 }}
+                    key="standard-name"
+                    label="Ingrese el nombre del producto"
+                    name="title"
+                    value={input.title}
+                    onChange={handleInputChange}
+                  />
+                </div>
 
-        await createProducts({
-          title: input.title,
-          unit_price: input.unit_price,
-          stock: input.stock,
-          category: input.category,
-          description: input.description,
-          imgUrl: input.imgUrl,
-        }).unwrap();
+                <div className={style.textField}>
+                  <TextField
+                    required
+                    sx={{ width: 300 }}
+                    key="standard-name"
+                    label="Ingrese valor del producto"
+                    name="unit_price"
+                    value={input.unit_price}
+                    onChange={handleInputChange}
+                    type="number"
+                    InputProps={{
+                      inputProps: { min: 0 },
+                    }}
+                  />
+                </div>
 
-        setInput({
-          title: "",
-          unit_price: 0,
-          stock: 0,
-          category: "",
-          description: "",
-          imgUrl: "",
-        });
+                <div className={style.textField}>
+                  <TextField
+                    required
+                    sx={{ width: 300 }}
+                    key="standard-name"
+                    label="Stock disponible"
+                    name="stock"
+                    min="0"
+                    value={input.stock}
+                    onChange={handleInputChange}
+                    type="number"
+                    InputProps={{
+                      inputProps: { min: 0 },
+                    }}
+                  />
+                </div>
 
-        alert("Producto Creado");
-        
-        navigate("/tienda");
-      };
+                <div className={style.selectContainer}>
+                  <InputLabel id="demo-multiple-chip-label">
+                    Selecciona una Categoria
+                  </InputLabel>
 
-      const handleInputChange = function (e) {
-          setInput({ ...input, [e.target.name]: e.target.value });
-          setErrors(validate({ ...input, [e.target.name]: e.target.value }));
-      };
+                  <Select
+                    sx={{ width: 300 }}
+                    className={style.select}
+                    required
+                    labelId="demo-multiple-chip-label"
+                    id="demo-multiple-chip"
+                    name="category"
+                    value={input.category}
+                    onChange={handleInputChange}
+                    input={<OutlinedInput label="Seleciona un apartado" />}
+                    renderValue={(value) => (
+                      <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
+                        <Chip key={value} label={value} />
+                      </Box>
+                    )}
+                    MenuProps={MenuProps}
+                  >
+                    {categorias.map((name) => (
+                      <MenuItem
+                        key={name}
+                        value={name}
+                        style={getStyles(name, input.category, theme)}
+                      >
+                        {name}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </div>
+                <div className={style.textField}>
+                  <TextField
+                    sx={{ width: 300 }}
+                    key="standard-name"
+                    label="Descripcion del producto"
+                    name="description"
+                    value={input.description}
+                    onChange={handleInputChange}
+                  />
+                </div>
 
-      const handlerImage = async (e) => {
-        e.preventDefault();
-        const url = await uploadImage(e.target.files);
-        setInput({
-          ...input,
-          imgUrl: url,
-        });
-      };
+                <div className={style.textField}>
+                  <IconButton
+                    color="primary"
+                    aria-label="upload picture"
+                    component="label"
+                  >
+                    <FormLabel id="img-label">Imagen</FormLabel>
+                    <input
+                      style={{ color: "var(--secondary-color)" }}
+                      accept="image/*"
+                      type="file"
+                      name="imgUrl"
+                      onChange={handlerImage}
+                    />
+                    <PhotoCamera sx={{ color: "var(--primary-color)" }} />
+                  </IconButton>
+                </div>
 
-      if (isLoading) return <Loading />;
-    
+                <div className={style.textField}>
+                  <Button
+                    type="submit"
+                    sx={{
+                      display: "flex",
+                      justifyContent: "center",
+                      color: "white",
+                      borderRadius: "6px",
+                      alignItems: "center",
 
-    return (
-      <div>
-      <br></br>
-      <div>
-          <Link to="/tienda">
-            <button type="button">Back</button>
-          </Link>
+                      width: 300,
+                      background: "#0d0d6b",
+                      "&:hover": {
+                        backgroundColor: "#62629f",
+                        transition: "0.4s",
+                      },
+                    }}
+                  >
+                    Crear producto
+                  </Button>
+                </div>
+              </FormControl>
+            </div>
+          </form>
+        </div>
       </div>
-      <div>
-      <form onSubmit={(e) => handleSubmit(e)}>
-      <div>
-        
-        <br/>
-  
-        <div>
-        <label>Nombre del producto:</label>
-        <input
-          type="text"
-          name="title"
-          placeholder="Ingrese el nombre del producto"
-          value={input.title}
-          onChange={handleInputChange}
-        />
-        {errors.title && <p className={s.errors}>{errors.title}</p>}
-        </div>
-
-        <div>
-        <label>Precio:</label>
-        <input
-          type="number"
-          name="unit_price"
-          min="0"
-          placeholder="Ingrese valor del producto"
-          value={input.unit_price}
-          onChange={handleInputChange}
-        />
-        <br></br>
-        {errors.unit_price && <p className={s.errors}>{errors.unit_price}</p>}
-        </div>
-
-        <div>
-        <label>Stock:</label>
-        <input
-          type="number"
-          name="stock"
-          min="0"
-          placeholder="Stock disponible"
-          value={input.stock}
-          onChange={handleInputChange}
-        />
-        <br></br>
-        </div>
-
-        <div>
-        <label>Categoria:</label>
-        <input
-          type="text"
-          name="category"
-          placeholder="Ingrese categoria"
-          value={input.category}
-          onChange={handleInputChange}
-        />
-        <br></br>
-        </div>
-
-        <div>
-        <label>Descripcion:</label>
-        <input
-          type="text"
-          name="description"
-          placeholder="Descripcion del producto"
-          value={input.description}
-          onChange={handleInputChange}
-        />
-        <br></br>
-        </div>
-
-        <div>
-        <label>Imagen:</label>
-        <input
-          type="file"
-          name="imgUrl"
-          accept="image/png, image/jpeg"
-          onChange={handlerImage}
-        />
-        <br></br>
-        </div>
-
-        <div>
-        <input
-          type="submit"
-          value="submit"
-          disabled={Object.entries(errors).length !== 0}
-        />
-        </div>
-      </div>
-    </form>
-    
-    </div>
-
-  </div>
-    )
+    </>
+  );
+}
+function getStyles(name, infoGym, theme) {
+  return {
+    fontWeight:
+      infoGym.indexOf(name) === -1
+        ? theme.typography.fontWeightRegular
+        : theme.typography.fontWeightMedium,
+  };
 }

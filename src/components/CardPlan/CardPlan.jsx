@@ -9,6 +9,7 @@ const tertiaryColor = '#62629f';
 
 const CardPLan = ({
 	id,
+	days,
 	monts,
 	price,
 	benefits1,
@@ -17,14 +18,17 @@ const CardPLan = ({
 	benefits4,
 }) => {
 	const dispatch = useDispatch();
+  
+	let meses = monts.split(' ');
 
 	const itemCheckOut = {
 		id: id,
 		title: monts,
 		unit_price: price,
 		quantity: 1,
+		days: days,
 	};
-	console.log(id)
+
 	const handlerClickBuyPlan = () => {
 		const checkOut = {
 			items: [itemCheckOut],
@@ -54,7 +58,7 @@ const CardPLan = ({
 			<CardActionArea onClick={handlerClickBuyPlan}>
 				<div className={style.containerText}>
 					<h2 className={style.textPrice}>
-						$<font size='7'>{price}</font>/mes
+						$<font size='7'>{Math.round(price / parseInt(meses[1]))}</font>/mes
 					</h2>
 
 					<div className={style.containerTextMons}>

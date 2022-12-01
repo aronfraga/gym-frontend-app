@@ -1,82 +1,82 @@
-import React from "react";
-import { seterItem } from "../../redux/actions/defaultAction";
-import { useDispatch } from "react-redux";
-import { styled } from "@mui/material/styles";
-import Card from "@mui/material/Card";
-import CardMedia from "@mui/material/CardMedia";
-import CardActions from "@mui/material/CardActions";
-import { CardActionArea } from "@mui/material";
-import Collapse from "@mui/material/Collapse";
-import IconButton from "@mui/material/IconButton";
-import DeleteIcon from "@mui/icons-material/Delete";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { useState } from "react";
-import style from "./ProductCard.module.css";
-import { Link } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
-import { useDeleteProductMutation } from "../../redux/query/ApiEcommerce";
+import React from 'react';
+import { seterItem } from '../../redux/actions/defaultAction';
+import { useDispatch } from 'react-redux';
+import { styled } from '@mui/material/styles';
+import Card from '@mui/material/Card';
+import CardMedia from '@mui/material/CardMedia';
+import CardActions from '@mui/material/CardActions';
+import { CardActionArea } from '@mui/material';
+import Collapse from '@mui/material/Collapse';
+import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { useState } from 'react';
+import style from './ProductCard.module.css';
+import { Link } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import { useDeleteProductMutation } from '../../redux/query/ApiEcommerce';
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
 
 const ExpandMore = styled((props) => {
-  const { expand, ...other } = props;
-  return <IconButton {...other} />;
+	const { expand, ...other } = props;
+	return <IconButton {...other} />;
 })(({ theme, expand }) => ({
-  transform: !expand ? "rotate(0deg)" : "rotate(180deg)",
-  marginLeft: "auto",
-  transition: theme.transitions.create("transform", {
-    duration: theme.transitions.duration.shortest,
-  }),
+	transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
+	marginLeft: 'auto',
+	transition: theme.transitions.create('transform', {
+		duration: theme.transitions.duration.shortest,
+	}),
 }));
 
 const ProductCard = ({
-  id,
-  title,
-  unit_price,
-  description,
-  picture_url,
-  stock,
-  quantity,
-  render,
-  handlerAlertSuccess,
-  handlerAlertError,
-  role,
+	id,
+	title,
+	unit_price,
+	description,
+	picture_url,
+	stock,
+	quantity,
+	render,
+	handlerAlertSuccess,
+	handlerAlertError,
+	role,
 }) => {
-  const [expanded, setExpanded] = useState(false);
-  const dispatch = useDispatch();
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
+	const [expanded, setExpanded] = useState(false);
+	const dispatch = useDispatch();
+	const handleExpandClick = () => {
+		setExpanded(!expanded);
+	};
 
-  const [deleteProduct] = useDeleteProductMutation();
+	const [deleteProduct] = useDeleteProductMutation();
 
-  const handlerAlertStockFull = () => {
-    toast.error("¡No hay stock suficiente!", {
-      position: "bottom-left",
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "colored",
-    });
-  };
+	const handlerAlertStockFull = () => {
+		toast.error('¡No hay stock suficiente!', {
+			position: 'bottom-left',
+			autoClose: 3000,
+			hideProgressBar: false,
+			closeOnClick: true,
+			pauseOnHover: true,
+			draggable: true,
+			progress: undefined,
+			theme: 'colored',
+		});
+	};
 
-  const handlerDeleted = () => {
-    toast.error("¡Producto eliminado!", {
-      position: "bottom-left",
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "colored",
-    });
-  };
+	const handlerDeleted = () => {
+		toast.error('¡Producto eliminado!', {
+			position: 'bottom-left',
+			autoClose: 3000,
+			hideProgressBar: false,
+			closeOnClick: true,
+			pauseOnHover: true,
+			draggable: true,
+			progress: undefined,
+			theme: 'colored',
+		});
+	};
 
 	const handlerSaveInCheckOut = (event) => {
 		event.preventDefault();
@@ -104,12 +104,31 @@ const ProductCard = ({
 
 	const handlerDeleteProduct = (event) => {
 		event.preventDefault();
-		deleteProduct(id)
-		handlerDeleted()
-		setTimeout(function(){
-			window.location.reload()
-		}, 2000) //usar event.currentTarget
-		
+		deleteProduct(id);
+		handlerDeleted();
+		setTimeout(function () {
+			window.location.reload();
+		}, 2000); //usar event.currentTarget
+
+		// swal({
+		// 	title: 'Estás seguro?',
+		// 	text: 'Una vez borrado, no recuperarás el producto!',
+		// 	icon: 'warning',
+		// 	buttons: true,
+		// 	dangerMode: true,
+		// }).then((willDelete) => {
+		// 	if (willDelete) {
+		// 		deleteProduct(id);
+		//     setTimeout(function () {
+		//       window.location.reload();
+		//     }, 2000);
+		// 		swal('Poof! Hemos borrado el producto seleccionado!', {
+		// 			icon: 'success',
+		// 		});
+		// 	} else {
+		// 		swal('Tu producto está a salvo!');
+		// 	}
+		// });
 	};
 
 	return (
@@ -138,21 +157,30 @@ const ProductCard = ({
 					<IconButton
 						onClick={handlerDeleteProduct}
 						value={'hola'}
-						sx={{
-							color: 'var(--red-color)',
-						}}
+						sx={
+							role === 'Admin'
+								? {
+										color: 'var(--red-color)',
+								  }
+								: { display: 'none' }
+						}
 					>
 						<DeleteIcon />
 					</IconButton>
 					<Link to={`/admdashboard/products/${id}`}>
-					<IconButton sx={{
-                                            color: 'var(--black-color)',
-                                        }}>
-                                            <ModeEditIcon />
-                                        </IconButton>
+						<IconButton
+							sx={
+								role === 'Admin'
+									? {
+											color: 'var(--black-color)',
+									  }
+									: { display: 'none' }
+							}
+						>
+							<ModeEditIcon />
+						</IconButton>
 					</Link>
-					</div>
-					
+				</div>
 				<div className={style.priceContainer}>
 					<h1>$ {unit_price}</h1>
 					<CardActions sx={{ padding: '0px' }}>

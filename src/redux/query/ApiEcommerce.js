@@ -59,11 +59,12 @@ export const ApiEcommerce = createApi({
       }),
       invalidatesTag:["refresh"]
     }),
-    	getAllMembresies: builder.query({
+    getAllMembresies: builder.query({
 			query: () => '/membresies',
 		}),
 		getUserProfile: builder.query({
 			query: () => '/users/profile',
+      keepUnusedDataFor: 0,
 		}),
   }),
 });

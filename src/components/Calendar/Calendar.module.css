@@ -9,6 +9,11 @@
 	margin-top: 36px;
 	padding: 0px 36px;
 }
+.barra{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between
+}
 
 .calendar {
 	display: grid;

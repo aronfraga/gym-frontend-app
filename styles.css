@@ -11,13 +11,11 @@
 	--white-gray: #f0f0f0;
 	--white-color: #fafafa;
 	--red-color: #e74646;
-	/* hover button outlined #62629f1b; */
-	/* --prueba-color: #0a1929; */
 	--hover-outlined-button: #acaccc64;
 }
 
 body {
-  margin: 0px;
-  background-color: var(--white-color);
-  font-family: Roboto, "Open Sans", sans-serif;
+	margin: 0px;
+	background-color: var(--white-color);
+	font-family: Roboto, 'Open Sans', sans-serif;
 }

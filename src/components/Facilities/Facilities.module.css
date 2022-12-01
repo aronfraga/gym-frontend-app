@@ -71,21 +71,19 @@
 	justify-content: center;
 	align-items: center;
 	padding: 6px;
-	/* width: 450px; */
-	/* height: 300px; */
-	/* overflow: hidden; */
+	width: 400px;
+	height: 280px;
+	overflow: hidden;
 }
 
 .photos1 {
-	width: 100%;
-	max-height: 300px;
+	width: 500px;
+	/* max-height: 300px; */
 }
 
 .photos2 {
-	width: 100%;
-	max-height: 300px;
-	/* width: auto;
-	max-height: 300px; */
+	width: 500px;
+	/* max-height: 300px; */
 }
 
 .facilitiename1 {
@@ -156,19 +154,19 @@
 .wrapperDropnInput {
 	display: flex;
 	flex-direction: row;
-	justify-content: space-around;
-	min-height: 528px;
-	/* align-items: center; */
+	/* justify-content: space-around; */
+	margin-top: 48px;
 }
+
 .wrapperDropandForm {
 	display: flex;
-	flex-direction: column;
-	padding-left: 50px;
-	padding-right: 50px;
+	flex-direction: row;
+	gap: 24px;
 }
 
 .wrapperForm {
 	margin-top: 50px;
+	max-width: 300px;
 	display: flex;
 	flex-direction: column;
 	justify-content: first baseline;

@@ -7,7 +7,7 @@ const FilterShopProvider = ({ children }) => {
     category: "",
     min: 0,
     max: 0,
-    size: 10,
+    size: 12,
     page: 1,
     letra: "",
   });

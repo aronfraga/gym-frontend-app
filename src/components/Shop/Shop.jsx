@@ -40,9 +40,10 @@ const Shop = () => {
   useEffect(() => {
     dispatch(seterItem(localStorage));
     if (purchaseStatus.payed) {
-      dispatch(setPurchase(purchaseStatus, localStorage))
-      .then(navigate("/home"));
-    }
+      dispatch(setPurchase(purchaseStatus, localStorage));
+        purchaseStatus.payed = false;
+        navigate("/home");
+      }
   }, []);
 
   function handerRenderShop(data) {
@@ -57,7 +58,7 @@ const Shop = () => {
     category: "",
     min: 0,
     max: 0,
-    size: 10,
+    size: 12,
     page: 1,
     letra: "",
   });
@@ -140,12 +141,6 @@ const Shop = () => {
   /*************PAGINADO**************/
   /***********************************/
 
-  const handlerSize = (e) => {
-    let size = parseInt(e.target.value);
-    let name = e.target.name;
-    setInput({ ...input, [name]: size });
-    setShopFilters({ ...shopFilters, [name]: size });
-  };
   const handlerPage = (e, p) => {
     setInput({ ...input, page: p });
     setShopFilters({ ...shopFilters, page: p });
@@ -171,13 +166,11 @@ const Shop = () => {
   };
 
   let page = 0;
-  let size = 0;
   input.page !== shopFilters.page
     ? (page = shopFilters.page - 1)
     : (page = input.page - 1);
-  input.size !== shopFilters.size
-    ? (size = shopFilters.size)
-    : (size = input.size);
+  const size = input.size;
+
   const { data, isLoading, isSuccess } = useGetAllProductsQuery({
     data: aux,
     page,
@@ -269,48 +262,6 @@ const Shop = () => {
                   />
                 ))}
               </RadioGroup>
-            </div>
-          </div>
-          <div className={style2.allContainer}>
-            {/* FILTRO DE SIZE*/}
-            <div className={style2.mainContainer}>
-              <div className={style2.titleContainer}>
-                <h3>{Size.title}</h3>
-              </div>
-              <div className={style2.checksContainer}>
-                <RadioGroup>
-                  {Size.value.map((checkboxes, i) => (
-                    <FormControlLabel
-                      key={i}
-                      control={
-                        <Radio
-                          sx={{
-                            padding: "6px",
-                            color: "#0d0d6b",
-                            "&.Mui-checked": {
-                              color: "#0d0d6b",
-                            },
-                          }}
-                          value={checkboxes}
-                          onChange={handlerSize}
-                        />
-                      }
-                      checked={
-                        input.size !== shopFilters.size
-                          ? shopFilters.size === checkboxes
-                          : input.size === checkboxes
-                      }
-                      label={Size.label[i]}
-                      name={Size.name}
-                      sx={{
-                        marginRight: "0px",
-                        marginLeft: "-10px",
-                        color: "#2d2d2d",
-                      }}
-                    />
-                  ))}
-                </RadioGroup>
-              </div>
             </div>
           </div>
           <Button
