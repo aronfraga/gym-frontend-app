@@ -16,7 +16,7 @@ export const ApiQuery = createApi({
     { maxRetries: 1 }
   ),
   keepUnusedDataFor: 30,
-  tagTypes: ["Borrar", "Img"],
+  tagTypes: ["Borrar", "Img", "Status"],
 
   endpoints: (builder) => ({
     //************************************** */
@@ -71,7 +71,7 @@ export const ApiQuery = createApi({
 
     getAllClasses: builder.query({
       query: () => "/classes",
-      keepUnusedDataFor: 1
+      keepUnusedDataFor: 1,
     }),
 
     getClassesById: builder.query({
@@ -80,7 +80,7 @@ export const ApiQuery = createApi({
 
     getAllUsers: builder.query({
       query: () => "/users",
-      providesTags: ["Img"],
+      providesTags: ["Img", "Status"],
     }),
 
     getCategory: builder.query({
@@ -152,6 +152,7 @@ export const ApiQuery = createApi({
         method: "PATCH",
       }),
       keepUnusedDataFor: 0,
+      invalidatesTags: ["Status"],
     }),
     //************************************** */
     //************** DELETE ******************* */
