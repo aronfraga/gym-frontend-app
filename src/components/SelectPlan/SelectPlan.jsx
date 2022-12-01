@@ -24,12 +24,12 @@ const SelectPlan = () => {
 					{/* <hr /> */}
 					{profile?.expiredMembresy ? (
 						<h2>
-							¡Hola {profile?.name}! tu membresía está vencida, puedes renovarla
-							ahora mismo seleccionando cualquiera de nuestros planes
+							¡Hola {profile?.name}! Tu plan se encuentra vencido, puedes
+							renovarlo ahora mismo seleccionando cualquiera de nuestros planes
 						</h2>
 					) : (
 						<h2>
-							¡Hola {profile?.name}! tu membresía está vigente hasta el{' '}
+							¡Hola {profile?.name}! tu plan está vigente hasta el{' '}
 							{fecha.toLocaleDateString()}
 						</h2>
 					)}

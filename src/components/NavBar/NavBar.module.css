@@ -12,7 +12,7 @@
 	display: flex;
 	align-items: center;
 	gap: 12px;
-	width: 170px;
+	width: fit-content;
 }
 
 .appGym img {
@@ -23,6 +23,6 @@
 	display: flex;
 	align-items: center;
 	justify-content: flex-end;
-	width: 170px;
+	width: 50px;
 	gap: 12px;
 }
