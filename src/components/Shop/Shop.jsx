@@ -40,10 +40,10 @@ const Shop = () => {
   useEffect(() => {
     dispatch(seterItem(localStorage));
     if (purchaseStatus.payed) {
-      dispatch(setPurchase(purchaseStatus, localStorage)).then(
-        navigate("/home")
-      );
-    }
+      dispatch(setPurchase(purchaseStatus, localStorage));
+        purchaseStatus.payed = false;
+        navigate("/home");
+      }
   }, []);
 
   function handerRenderShop(data) {

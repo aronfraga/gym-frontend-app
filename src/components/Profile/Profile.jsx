@@ -28,7 +28,7 @@ const Profile = () => {
 	const urlParams = new URLSearchParams(urlChanged);
 	const fecha = new Date(profile?.membresyExpDate);
 
-	const purchaseStatus = {
+	let purchaseStatus = {
 		payed: urlParams.get('status') === 'approved' ? true : false,
 		paymentMethod: urlParams.get('payment_type'),
 		purchaseId: urlParams.get('preference_id'),
@@ -37,6 +37,7 @@ const Profile = () => {
 	useEffect(() => {
 		if (purchaseStatus.payed) {
 			dispatch(setNewPlan(purchaseStatus));
+			purchaseStatus.payed = false;
 			navigate('/home');
 		}
 	}, []);
@@ -45,6 +46,8 @@ const Profile = () => {
 		if (isLoading) return <p>Loading...</p>;
 		return <p>Tu plan vence el {fecha.toLocaleDateString()}</p>;
 	}
+
+	console.log(fecha.toLocaleDateString())
 
 	function renderPlanExpired() {
 		if (isLoading) return <p>Loading...</p>;
