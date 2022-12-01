@@ -4,7 +4,7 @@ import Loading from "../Loading/Loading";
 import Style from "./Dashboard.module.css";
 import 'chart.js/auto';
 
-const LineGraph = ({datos, año, loading}) => {
+const LineMembresies = ({datos, año, loading}) => {
 
     const meses = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Setiembre","Octubre","Noviembre","Diciembre"];
     const aux_arr = [0,0,0,0,0,0,0,0,0,0,0,0];
@@ -22,7 +22,7 @@ const LineGraph = ({datos, año, loading}) => {
             label: `INGRESOS TOTALES (ARS) - ${año}`,
             data: valores,
             fill: false,
-            borderColor: 'rgb(75, 192, 192)',
+            borderColor: "rgb(255, 99, 132)",
             tension: 0.3
         }]
     };
@@ -33,7 +33,7 @@ const LineGraph = ({datos, año, loading}) => {
         plugins: {
             title: {
                 display: true,
-                text: 'PRODUCTOS'
+                text: 'MEMBRESIAS'
             },
             tooltip: {
                 callbacks: {
@@ -64,4 +64,4 @@ const LineGraph = ({datos, año, loading}) => {
   );
 };
 
-export default LineGraph;
+export default LineMembresies;

@@ -35,7 +35,23 @@ export const ApiQuery = createApi({
 
     getSellProducts: builder.query({
       query: (data) => ({
-        url: "/membresies/admdashboard/monthsales ",
+        url: "/products/admdashboard/monthsales",
+        method: "post",
+        body: { filters: { year: data } },
+      }),
+    }),
+
+    getSellProductsMonth: builder.query({
+      query: (data) => ({
+        url: "/products/admdashboard/monthproducts",
+        method: "post",
+        body: { filters: { year: data } },
+      }),
+    }),
+
+    getSellMembresies: builder.query({
+      query: (data) => ({
+        url: "/membresies/admdashboard/monthsales",
         method: "post",
         body: { filters: { year: data } },
       }),
@@ -173,6 +189,8 @@ export const ApiQuery = createApi({
 export const {
   useGetRoutinesQuery,
   useGetSellProductsQuery,
+  useGetSellProductsMonthQuery,
+  useGetSellMembresiesQuery,
   useGetFavoriteRoutinesQuery,
   useGetRoutinesByIdQuery,
   useGetAllClassesQuery,
