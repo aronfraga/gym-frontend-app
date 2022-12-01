@@ -7,10 +7,13 @@ import Calendarli from './Calendarli';
 import { useGetAllClassesQuery } from '../../redux/query/api';
 import { Button } from '@mui/material';
 import { Link } from 'react-router-dom';
+import { getToken } from '../../services/cookies';
 
 export default function Calendar() {
 
 	const { data: classes, isLoading } = useGetAllClassesQuery();
+	const role = getToken().userRole;
+
 	if (isLoading) {
 		return (
 			<>
@@ -29,14 +32,15 @@ export default function Calendar() {
 				<div className={styles.barra} >
 					<h2 className={styles.tittle}>Agenda Semanal</h2>
 					<Link style={{ textDecoration: 'none' }} to="/agenda/crear" >
-						<Button sx={{
+						<Button sx={
+							role==="Admin" || role==="Staff" ?
+							{
 							paddingRight: '25px',
 							paddingLeft: '25px',
 							marginBottom: '10px',
 							marginRight: '0px',
 							marginTop: '10px',
 							fontSize: 13.5,
-							width: 150,
 							color: 'white',
 							borderRadius: '6px',
 							background: 'var(--primary-color)',
@@ -45,7 +49,8 @@ export default function Calendar() {
 								backgroundColor: '#5151519c',
 								transition: '1s',
 							},
-						}}>
+						}:
+						{display: "none"}}>
 							Crear Clases
 						</Button>
 					</Link>

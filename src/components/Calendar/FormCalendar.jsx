@@ -194,7 +194,9 @@ export default function FormCalendar() {
         swal({ title: "Hecho!", text: "Clase creada con exito", type: "success" }).then(
             (ok) => {
                 if (ok) {
+                    
                     navigate("/agenda");
+                    window.location.reload()
                 }
             }
         );

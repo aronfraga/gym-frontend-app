@@ -42,17 +42,7 @@ const LineMembresies = ({datos, año, loading}) => {
                     }
                 }
             },
-        },
-        scales: {
-            y: {
-                max: 8000,
-                min: 0,
-                ticks: {
-                    stepSize: 1000,
-                },
-            }
-        },
-        
+        },        
     };
 
     return (
