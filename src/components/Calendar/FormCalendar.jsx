@@ -179,6 +179,7 @@ export default function FormCalendar() {
 		}).then((ok) => {
 			if (ok) {
 				navigate('/agenda');
+        window.location.reload();
 			}
 		});
 	};
@@ -409,7 +410,7 @@ export default function FormCalendar() {
 									<div className={style.botones}>
 										{/* <button value={value.id} onClick={handlerClickDelete} >
                                             X
-                                        </button> */}
+                                      </button> */}
 										<IconButton
 											value={value.id}
 											onClick={handlerClickDelete}

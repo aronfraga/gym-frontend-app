@@ -50,15 +50,15 @@ function App() {
         <Route path="/tienda/carrito" element={<Shopping />} />
         <Route path="/tienda/producto/:id" element={<ProductsDetail />} />
         <Route path="/agenda/crear" element={<FormCalendar />} />
-        <Route element={<ProtectedRoute isAllowed={!!role} />}>
-          <Route path="/rutinas" element={<Routines />} />
-          <Route path="/rutinas/:id" element={<DetailRoutine />} />
-          <Route path="/staff" element={<Staff />} />
-          <Route path="/instalaciones" element={<Facilities />} />
-          <Route path="/agenda" element={<Calendar />} />
-          <Route path="/feedback" element={<FeedBack />} />
-          <Route path="/planes" element={<SelectPlan />} />
-        </Route>
+        <Route path="/instalaciones" element={<Facilities />} />
+        <Route path="/agenda" element={<Calendar />} />
+
+        <Route path="/rutinas" element={<Routines />} />
+        <Route path="/rutinas/:id" element={<DetailRoutine />} />
+        <Route path="/staff" element={<Staff />} />
+        <Route path="/feedback" element={<FeedBack />} />
+        <Route path="/planes" element={<SelectPlan />} />
+
         <Route
           element={
             <ProtectedRoute

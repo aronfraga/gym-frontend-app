@@ -10,7 +10,7 @@ const LineMembresies = ({datos, año, loading}) => {
     const aux_arr = [0,0,0,0,0,0,0,0,0,0,0,0];
     
     let valores = datos?.map(e => {
-        aux_arr[e.month] = e.sum }
+        aux_arr[e.month-1] = e.sum }
     );
     
     valores = aux_arr;
@@ -42,17 +42,7 @@ const LineMembresies = ({datos, año, loading}) => {
                     }
                 }
             },
-        },
-        scales: {
-            y: {
-                max: 8000,
-                min: 0,
-                ticks: {
-                    stepSize: 1000,
-                },
-            }
-        },
-        
+        },        
     };
 
     return (
