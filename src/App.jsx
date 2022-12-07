@@ -52,13 +52,13 @@ function App() {
         <Route path="/agenda/crear" element={<FormCalendar />} />
         <Route path="/instalaciones" element={<Facilities />} />
         <Route path="/agenda" element={<Calendar />} />
-        <Route element={<ProtectedRoute isAllowed={!!role} />}>
-          <Route path="/rutinas" element={<Routines />} />
-          <Route path="/rutinas/:id" element={<DetailRoutine />} />
-          <Route path="/staff" element={<Staff />} />
-          <Route path="/feedback" element={<FeedBack />} />
-          <Route path="/planes" element={<SelectPlan />} />
-        </Route>
+
+        <Route path="/rutinas" element={<Routines />} />
+        <Route path="/rutinas/:id" element={<DetailRoutine />} />
+        <Route path="/staff" element={<Staff />} />
+        <Route path="/feedback" element={<FeedBack />} />
+        <Route path="/planes" element={<SelectPlan />} />
+
         <Route
           element={
             <ProtectedRoute

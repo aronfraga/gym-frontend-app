@@ -104,31 +104,31 @@ const ProductCard = ({
 
 	const handlerDeleteProduct = (event) => {
 		event.preventDefault();
-		deleteProduct(id);
-		handlerDeleted();
-		setTimeout(function () {
-			window.location.reload();
-		}, 2000); //usar event.currentTarget
+		// deleteProduct(id);
+		// handlerDeleted();
+		// setTimeout(function () {
+		// 	window.location.reload();
+		// }, 2000); //usar event.currentTarget
 
-		// swal({
-		// 	title: 'Estás seguro?',
-		// 	text: 'Una vez borrado, no recuperarás el producto!',
-		// 	icon: 'warning',
-		// 	buttons: true,
-		// 	dangerMode: true,
-		// }).then((willDelete) => {
-		// 	if (willDelete) {
-		// 		deleteProduct(id);
-		//     setTimeout(function () {
-		//       window.location.reload();
-		//     }, 2000);
-		// 		swal('Poof! Hemos borrado el producto seleccionado!', {
-		// 			icon: 'success',
-		// 		});
-		// 	} else {
-		// 		swal('Tu producto está a salvo!');
-		// 	}
-		// });
+		swal({
+			title: 'Estás seguro?',
+			text: 'Una vez borrado, no recuperarás el producto!',
+			icon: 'warning',
+			buttons: true,
+			dangerMode: true,
+		}).then((willDelete) => {
+			if (willDelete) {
+				deleteProduct(id);
+				setTimeout(function () {
+					window.location.reload();
+				}, 2000);
+				swal('Poof! Hemos borrado el producto seleccionado!', {
+					icon: 'success',
+				});
+			} else {
+				swal('Tu producto está a salvo!');
+			}
+		});
 	};
 
 	return (

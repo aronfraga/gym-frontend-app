@@ -1,0 +1,50 @@
+.mainContainer {
+	background-image: url('../../Images/landingImg.jpg');
+	background-position: center;
+	background-size: cover;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: absolute;
+	height: 100%;
+	width: 100%;
+}
+
+.infoContainer {
+	display: flex;
+	padding: 24px;
+	border-radius: 10px;
+	flex-direction: column;
+	gap: 24px;
+	align-items: center;
+	width: 40%;
+	/* ------------ */
+	background: rgba(255, 255, 255, 0.05);
+	backdrop-filter: blur(3px);
+	-webkit-backdrop-filter: blur(3px);
+	border-radius: 10px;
+}
+
+.titlesContainer {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+
+.title1 {
+	color: var(--white-color);
+	text-shadow: 1px 1px 2px rgb(0, 0, 0);
+	text-align: center;
+	margin: 0px;
+	font-size: 50px;
+}
+
+.divTypewriter {
+	display: flex;
+	justify-content: center;
+	color: var(--white-color);
+	margin: 0px;
+	text-shadow: 1px 1px 2px rgb(0, 0, 0);
+	font-weight: 400;
+	font-size: 36px;
+}

@@ -33,6 +33,7 @@
     "reactstrap": "^9.1.5",
     "styled-components": "^5.3.6",
     "sweetalert": "^2.1.2",
+    "typewriter-effect": "^2.19.0",
     "universal-cookie": "^4.0.4"
   },
   "devDependencies": {
