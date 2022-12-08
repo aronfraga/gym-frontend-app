@@ -186,7 +186,10 @@ export default function FormProducts() {
 								</div>
 
 								<div className={style.selectContainer}>
-									<InputLabel id='demo-multiple-chip-label'>
+									<InputLabel
+										className={style.inputSelect}
+										id='demo-multiple-chip-label'
+									>
 										Selecciona una Categoria
 									</InputLabel>
 
